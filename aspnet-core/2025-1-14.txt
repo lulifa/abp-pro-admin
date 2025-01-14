@@ -25,3 +25,16 @@ dotnet sln RuiChen.AbpPro.sln add modules/identity/RuiChen.AbpPro.Identity.Domai
 dotnet sln RuiChen.AbpPro.sln add modules/identity/RuiChen.AbpPro.Identity.EntityFrameworkCore
 dotnet sln RuiChen.AbpPro.sln add modules/identity/RuiChen.AbpPro.Identity.HttpApi
 dotnet sln RuiChen.AbpPro.sln add services/RuiChen.AbpPro.Admin.HttpApi.Host
+
+
+
+
+dotnet new classlib -o modules/openiddict/RuiChen.AbpPro.OpenIddict.Application
+dotnet new classlib -o modules/openiddict/RuiChen.AbpPro.OpenIddict.Application.Contracts
+dotnet new classlib -o modules/openiddict/RuiChen.AbpPro.OpenIddict.AspNetCore
+dotnet new classlib -o modules/openiddict/RuiChen.AbpPro.OpenIddict.HttpApi
+
+dotnet sln RuiChen.AbpPro.sln add modules/openiddict/RuiChen.AbpPro.OpenIddict.Application
+dotnet sln RuiChen.AbpPro.sln add modules/openiddict/RuiChen.AbpPro.OpenIddict.Application.Contracts
+dotnet sln RuiChen.AbpPro.sln add modules/openiddict/RuiChen.AbpPro.OpenIddict.AspNetCore
+dotnet sln RuiChen.AbpPro.sln add modules/openiddict/RuiChen.AbpPro.OpenIddict.HttpApi
