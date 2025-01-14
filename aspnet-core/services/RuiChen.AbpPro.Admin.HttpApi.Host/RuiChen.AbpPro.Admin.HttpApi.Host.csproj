@@ -13,6 +13,7 @@
     <PackageReference Include="Swashbuckle.AspNetCore" />
 
 
+    <PackageReference Include="Volo.Abp.AspNetCore.Authentication.JwtBearer" />
     <PackageReference Include="Volo.Abp.Autofac" />
     <PackageReference Include="Volo.Abp.AspNetCore" />
     <PackageReference Include="Volo.Abp.AspNetCore.Serilog" />

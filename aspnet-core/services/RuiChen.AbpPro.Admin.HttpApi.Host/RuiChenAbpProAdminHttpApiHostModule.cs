@@ -1,4 +1,5 @@
-﻿using Volo.Abp;
+﻿using Autofac.Core;
+using Volo.Abp;
 using Volo.Abp.Account;
 using Volo.Abp.Account.Web;
 using Volo.Abp.Application;
@@ -25,7 +26,7 @@ namespace RuiChen.AbpPro.Admin.HttpApi.Host
 
         typeof(AbpPermissionManagementApplicationModule),
         typeof(AbpPermissionManagementEntityFrameworkCoreModule),
-       
+
         typeof(AbpFeatureManagementApplicationModule),
         typeof(AbpFeatureManagementEntityFrameworkCoreModule),
 
@@ -48,8 +49,9 @@ namespace RuiChen.AbpPro.Admin.HttpApi.Host
 
         public override void ConfigureServices(ServiceConfigurationContext context)
         {
-            var hostingEnvironment = context.Services.GetHostingEnvironment();
-            var configuration = context.Services.GetConfiguration();
+            var services = context.Services;
+            var hostingEnvironment = services.GetHostingEnvironment();
+            var configuration = services.GetConfiguration();
 
             ConfigureDbContext();
 
@@ -61,11 +63,13 @@ namespace RuiChen.AbpPro.Admin.HttpApi.Host
 
             ConfigureAuthServer(configuration);
 
-            ConfigureSwagger(context.Services);
+            ConfigureSwagger(services);
 
             ConfigureMultiTenancy(configuration);
 
-            ConfigureCors(context.Services, configuration);
+            ConfigureCors(services, configuration);
+
+            ConfigureSecurity(services, configuration, hostingEnvironment.IsDevelopment());
 
         }
 

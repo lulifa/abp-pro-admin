@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Cors;
+﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Cors;
+using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.Server.Kestrel.Core;
 using Microsoft.OpenApi.Models;
 using OpenIddict.Server.AspNetCore;
@@ -161,6 +163,36 @@ namespace RuiChen.AbpPro.Admin.HttpApi.Host
                         .AllowCredentials();
                 });
             });
+        }
+
+        private void ConfigureSecurity(IServiceCollection services, IConfiguration configuration, bool isDevelopment = false)
+        {
+            services.AddAuthentication()
+                    .AddJwtBearer(options =>
+                    {
+                        options.Authority = configuration["AuthServer:Authority"];
+                        options.RequireHttpsMetadata = false;
+                        options.Audience = configuration["AuthServer:Scope"];
+                        options.Events = new JwtBearerEvents
+                        {
+                            OnMessageReceived = context =>
+                            {
+                                var accessToken = context.Request.Query["access_token"];
+                                var path = context.HttpContext.Request.Path;
+                                if (!string.IsNullOrEmpty(accessToken) &&
+                                    (path.StartsWithSegments("/api/files")))
+                                {
+                                    context.Token = accessToken;
+                                }
+                                return Task.CompletedTask;
+                            }
+                        };
+                    });
+
+            if (isDevelopment)
+            {
+                services.AddAlwaysAllowAuthorization();
+            }
         }
 
     }
