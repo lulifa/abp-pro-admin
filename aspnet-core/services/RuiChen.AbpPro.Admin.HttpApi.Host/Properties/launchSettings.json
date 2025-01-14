@@ -9,7 +9,7 @@
     }
   },
   "profiles": {
-    "RuiChen.AbpPro.Admin.HttpApi.Host": {
+    "RuiChenAdmin": {
       "commandName": "Project",
       "dotnetRunMessages": true,
       "launchBrowser": true,

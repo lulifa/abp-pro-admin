@@ -1,6 +1,4 @@
 using Serilog;
-using Volo.Abp.IO;
-using Volo.Abp.Modularity.PlugIns;
 
 namespace RuiChen.AbpPro.Admin.HttpApi.Host
 {
@@ -10,8 +8,8 @@ namespace RuiChen.AbpPro.Admin.HttpApi.Host
         {
             try
             {
-                Console.Title = "RuiChenAdmin.AbpPro.Admin.HttpApi.Host";
-                Log.Information("Starting RuiChenAdmin.AbpPro.Admin.HttpApi.Host.");
+                Console.Title = "RuiChenAdmin";
+                Log.Information("Starting RuiChen.AbpPro.Admin.HttpApi.Host.");
 
                 var builder = WebApplication.CreateBuilder(args);
                 builder.Host.AddAppSettingsSecretsJson()
