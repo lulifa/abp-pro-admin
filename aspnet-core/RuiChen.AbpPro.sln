@@ -44,6 +44,16 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "0.Solution Items", "0.Solut
 		..\NuGet.Config = ..\NuGet.Config
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "openiddict", "openiddict", "{72138F6B-03E0-492F-B465-E28D32083BC0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RuiChen.AbpPro.OpenIddict.Application", "modules\openiddict\RuiChen.AbpPro.OpenIddict.Application\RuiChen.AbpPro.OpenIddict.Application.csproj", "{50691AAF-A917-460C-92C9-A7A5DC2A6149}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RuiChen.AbpPro.OpenIddict.Application.Contracts", "modules\openiddict\RuiChen.AbpPro.OpenIddict.Application.Contracts\RuiChen.AbpPro.OpenIddict.Application.Contracts.csproj", "{9B5B7AC9-5B8D-4642-99E2-1DE9F6984E13}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RuiChen.AbpPro.OpenIddict.AspNetCore", "modules\openiddict\RuiChen.AbpPro.OpenIddict.AspNetCore\RuiChen.AbpPro.OpenIddict.AspNetCore.csproj", "{6517204B-B993-4B54-A4CA-41BC8D1C56BB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RuiChen.AbpPro.OpenIddict.HttpApi", "modules\openiddict\RuiChen.AbpPro.OpenIddict.HttpApi\RuiChen.AbpPro.OpenIddict.HttpApi.csproj", "{89F6C448-73F7-4A68-90E8-EF981A8C9CEE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -90,6 +100,22 @@ Global
 		{9BA5A9FF-D9ED-45CD-BEDA-A4924064528F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9BA5A9FF-D9ED-45CD-BEDA-A4924064528F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9BA5A9FF-D9ED-45CD-BEDA-A4924064528F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{50691AAF-A917-460C-92C9-A7A5DC2A6149}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{50691AAF-A917-460C-92C9-A7A5DC2A6149}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{50691AAF-A917-460C-92C9-A7A5DC2A6149}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{50691AAF-A917-460C-92C9-A7A5DC2A6149}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9B5B7AC9-5B8D-4642-99E2-1DE9F6984E13}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9B5B7AC9-5B8D-4642-99E2-1DE9F6984E13}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9B5B7AC9-5B8D-4642-99E2-1DE9F6984E13}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9B5B7AC9-5B8D-4642-99E2-1DE9F6984E13}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6517204B-B993-4B54-A4CA-41BC8D1C56BB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6517204B-B993-4B54-A4CA-41BC8D1C56BB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6517204B-B993-4B54-A4CA-41BC8D1C56BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6517204B-B993-4B54-A4CA-41BC8D1C56BB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{89F6C448-73F7-4A68-90E8-EF981A8C9CEE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{89F6C448-73F7-4A68-90E8-EF981A8C9CEE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{89F6C448-73F7-4A68-90E8-EF981A8C9CEE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{89F6C448-73F7-4A68-90E8-EF981A8C9CEE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -107,5 +133,10 @@ Global
 		{0EE7B85A-6EE9-4AFB-8F94-E3E21CD34FED} = {E3F7459B-8FCE-46F5-B74A-25769A8C304C}
 		{AF33B2EF-18C0-443F-8547-D620AA299F00} = {E3F7459B-8FCE-46F5-B74A-25769A8C304C}
 		{9BA5A9FF-D9ED-45CD-BEDA-A4924064528F} = {93943D72-3C0B-44D0-984C-41D7CE75391B}
+		{72138F6B-03E0-492F-B465-E28D32083BC0} = {D46B5DB7-EF85-45B6-9369-B0F87DB6EDC1}
+		{50691AAF-A917-460C-92C9-A7A5DC2A6149} = {72138F6B-03E0-492F-B465-E28D32083BC0}
+		{9B5B7AC9-5B8D-4642-99E2-1DE9F6984E13} = {72138F6B-03E0-492F-B465-E28D32083BC0}
+		{6517204B-B993-4B54-A4CA-41BC8D1C56BB} = {72138F6B-03E0-492F-B465-E28D32083BC0}
+		{89F6C448-73F7-4A68-90E8-EF981A8C9CEE} = {72138F6B-03E0-492F-B465-E28D32083BC0}
 	EndGlobalSection
 EndGlobal
