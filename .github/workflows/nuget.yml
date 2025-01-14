@@ -22,4 +22,5 @@ jobs:
       - name: Pack
         run: dotnet pack aspnet-core/RuiChen.AbpPro.sln  --include-source --include-symbols /p:Configuration=Release -p:PackageVersion=${GITHUB_REF:10} --output nupkgs
       - name: Push
+        if: startsWith(github.ref, 'refs/tags/v')
         run: dotnet nuget push nupkgs/*.symbols.nupkg -k ${{secrets.NUGET_KEY}} -s https://api.nuget.org/v3/index.json
