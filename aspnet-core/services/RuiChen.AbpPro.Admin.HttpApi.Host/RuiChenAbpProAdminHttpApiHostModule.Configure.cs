@@ -111,12 +111,12 @@ namespace RuiChen.AbpPro.Admin.HttpApi.Host
                     }
 
                     // 定义 Bearer 认证方案
-                    options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+                    options.AddSecurityDefinition(JwtBearerDefaults.AuthenticationScheme, new OpenApiSecurityScheme
                     {
-                        Description = "JWT Authorization header using the Bearer scheme. Example: \"Authorization: Bearer {token}\"",
+                        Description = "直接在下框输入JWT生成的Token",
                         Name = "Authorization",
                         In = ParameterLocation.Header,
-                        Scheme = "bearer",
+                        Scheme = JwtBearerDefaults.AuthenticationScheme,
                         Type = SecuritySchemeType.Http,
                         BearerFormat = "JWT"
                     });
