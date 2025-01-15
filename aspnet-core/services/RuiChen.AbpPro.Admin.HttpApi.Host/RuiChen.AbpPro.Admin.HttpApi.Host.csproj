@@ -32,4 +32,13 @@
 
   </ItemGroup>
 
+
+  <ItemGroup>
+
+    <PackageReference Include="Volo.Abp.OpenIddict.EntityFrameworkCore" />
+    <ProjectReference Include="..\..\modules\openIddict\RuiChen.AbpPro.OpenIddict.Application\RuiChen.AbpPro.OpenIddict.Application.csproj" />
+    <ProjectReference Include="..\..\modules\openIddict\RuiChen.AbpPro.OpenIddict.HttpApi\RuiChen.AbpPro.OpenIddict.HttpApi.csproj" />
+    
+  </ItemGroup>
+
 </Project>
