@@ -79,38 +79,29 @@ namespace RuiChen.AbpPro.Admin.HttpApi.Host
 
         private void ConfigureSwagger(IServiceCollection services)
         {
-            // Swagger
             services.AddSwaggerGen(
                 options =>
                 {
-                    // 设置 Swagger 文档的名称和版本
                     options.SwaggerDoc("v1", new OpenApiInfo { Title = "Admin API", Version = "v1" });
 
-                    // 文档包含谓词的过滤器，总是返回 true，意味着包含所有文档
                     options.DocInclusionPredicate((docName, description) => true);
 
-                    // 自定义模式 ID 生成规则，使用类型的全名作为模式 ID
                     options.CustomSchemaIds(type => type.FullName);
 
                     var assemblies = AppDomain.CurrentDomain.GetAssemblies().Where(item => item.FullName.Contains("RuiChen")).ToArray();
 
-                    // 遍历当前程序集中加载的所有模块
                     foreach (var assembly in assemblies)
                     {
-                        // 根据程序集名称生成 XML 文件名
                         var xmlFile = $"{assembly.GetName().Name}.xml";
 
-                        // 生成 XML 文件的完整路径
                         var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
 
-                        // 检查 XML 文件是否存在，存在则添加到 Swagger 配置中
                         if (File.Exists(xmlPath))
                         {
                             options.IncludeXmlComments(xmlPath, true);
                         }
                     }
 
-                    // 定义 Bearer 认证方案
                     options.AddSecurityDefinition(JwtBearerDefaults.AuthenticationScheme, new OpenApiSecurityScheme
                     {
                         Description = "直接在下框输入JWT生成的Token",
@@ -121,7 +112,6 @@ namespace RuiChen.AbpPro.Admin.HttpApi.Host
                         BearerFormat = "JWT"
                     });
 
-                    // 添加安全要求到 Swagger 文档，要求所有请求都需要 Bearer 认证
                     options.AddSecurityRequirement(new OpenApiSecurityRequirement
                     {
                         {
@@ -193,6 +183,9 @@ namespace RuiChen.AbpPro.Admin.HttpApi.Host
             {
                 services.AddAlwaysAllowAuthorization();
             }
+
+            services.AddSameSiteCookiePolicy();
+
         }
 
     }

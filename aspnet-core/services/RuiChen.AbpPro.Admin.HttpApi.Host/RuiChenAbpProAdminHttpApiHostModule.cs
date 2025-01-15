@@ -83,6 +83,8 @@ namespace RuiChen.AbpPro.Admin.HttpApi.Host
 
             app.UseForwardedHeaders();
 
+            app.UseCookiePolicy();
+
             app.UseAbpRequestLocalization();
 
             app.UseCorrelationId();
