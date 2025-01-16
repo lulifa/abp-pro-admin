@@ -6,6 +6,7 @@ using Volo.Abp.Account.Web;
 using Volo.Abp.Application;
 using Volo.Abp.AspNetCore.Serilog;
 using Volo.Abp.Autofac;
+using Volo.Abp.Caching;
 using Volo.Abp.FeatureManagement;
 using Volo.Abp.FeatureManagement.EntityFrameworkCore;
 using Volo.Abp.Identity;
@@ -39,6 +40,7 @@ namespace RuiChen.AbpPro.Admin.HttpApi.Host
         typeof(AbpSettingManagementApplicationModule),
         typeof(AbpSettingManagementEntityFrameworkCoreModule),
 
+        typeof(AbpCachingModule),
         typeof(AbpAspNetCoreSerilogModule),
         typeof(AbpAutofacModule)
     )]
