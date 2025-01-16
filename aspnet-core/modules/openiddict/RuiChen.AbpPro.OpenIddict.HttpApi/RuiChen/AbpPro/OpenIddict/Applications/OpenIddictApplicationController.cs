@@ -1,8 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Asp.Versioning;
+using Microsoft.AspNetCore.Mvc;
 using Volo.Abp.Application.Dtos;
 
 namespace RuiChen.AbpPro.OpenIddict
 {
+    [ControllerName("Openiddict-Application")]
     [Route("api/openiddict/applications")]
     public class OpenIddictApplicationController : OpenIddictControllerBase, IOpenIddictApplicationAppService
     {

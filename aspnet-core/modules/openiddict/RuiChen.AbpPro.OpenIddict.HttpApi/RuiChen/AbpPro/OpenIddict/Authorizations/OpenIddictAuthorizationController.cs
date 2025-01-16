@@ -1,9 +1,10 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using Asp.Versioning;
 using Microsoft.AspNetCore.Mvc;
 using Volo.Abp.Application.Dtos;
 
 namespace RuiChen.AbpPro.OpenIddict
 {
+    [ControllerName("Openiddict-Authorization")]
     [Route("api/openiddict/authorizations")]
     public class OpenIddictAuthorizationController : OpenIddictControllerBase, IOpenIddictAuthorizationAppService
     {

@@ -1,9 +1,11 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using Asp.Versioning;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Volo.Abp.Application.Dtos;
 
 namespace RuiChen.AbpPro.Saas
 {
+    [ControllerName("Saas-Tenant")]
     [Route("api/saas/tenants")]
     public class TenantController : AbpSaasControllerBase, ITenantAppService
     {
