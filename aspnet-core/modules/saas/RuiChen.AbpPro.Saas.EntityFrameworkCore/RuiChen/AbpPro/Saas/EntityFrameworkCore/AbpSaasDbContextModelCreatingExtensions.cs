@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Volo.Abp;
 using Volo.Abp.EntityFrameworkCore.Modeling;
+using Volo.Abp.GlobalFeatures;
 
 namespace RuiChen.AbpPro.Saas
 {
@@ -16,20 +17,28 @@ namespace RuiChen.AbpPro.Saas
                 return;
             }
 
-            builder.Entity<Edition>(b =>
+            if (GlobalFeatureManager.Instance.IsEnabled<EditionFeature>())
             {
-                b.ToTable(AbpSaasDbProperties.DbTablePrefix + "Editions", AbpSaasDbProperties.DbSchema);
 
-                b.ConfigureByConvention();
+                builder.Entity<Edition>(b =>
+                {
+                    b.ToTable(AbpSaasDbProperties.DbTablePrefix + "Editions", AbpSaasDbProperties.DbSchema);
 
-                b.Property(t => t.DisplayName)
-                    .HasMaxLength(EditionConsts.MaxDisplayNameLength)
-                    .IsRequired();
+                    b.ConfigureByConvention();
 
-                b.HasIndex(u => u.DisplayName);
+                    b.Property(t => t.DisplayName)
+                        .HasMaxLength(EditionConsts.MaxDisplayNameLength)
+                        .IsRequired();
 
-                b.ApplyObjectExtensionMappings();
-            });
+                    b.HasIndex(u => u.DisplayName);
+
+                    b.ApplyObjectExtensionMappings();
+                });
+            }
+            else
+            {
+                builder.Ignore<Edition>();
+            }
 
             builder.Entity<Tenant>(b =>
             {

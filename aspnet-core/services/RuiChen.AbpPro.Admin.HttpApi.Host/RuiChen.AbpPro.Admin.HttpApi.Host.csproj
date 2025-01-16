@@ -38,6 +38,14 @@
     <PackageReference Include="Volo.Abp.OpenIddict.EntityFrameworkCore" />
     <ProjectReference Include="..\..\modules\openIddict\RuiChen.AbpPro.OpenIddict.Application\RuiChen.AbpPro.OpenIddict.Application.csproj" />
     <ProjectReference Include="..\..\modules\openIddict\RuiChen.AbpPro.OpenIddict.HttpApi\RuiChen.AbpPro.OpenIddict.HttpApi.csproj" />
+
+
+    <ProjectReference Include="..\..\modules\saas\RuiChen.AbpPro.Saas.Application.Contracts\RuiChen.AbpPro.Saas.Application.Contracts.csproj" />
+    <ProjectReference Include="..\..\modules\saas\RuiChen.AbpPro.Saas.Domain.Shared\RuiChen.AbpPro.Saas.Domain.Shared.csproj" />
+    <ProjectReference Include="..\..\modules\saas\RuiChen.AbpPro.Saas.Domain\RuiChen.AbpPro.Saas.Domain.csproj" />
+    <ProjectReference Include="..\..\modules\saas\RuiChen.AbpPro.Saas.Application\RuiChen.AbpPro.Saas.Application.csproj" />
+    <ProjectReference Include="..\..\modules\saas\RuiChen.AbpPro.Saas.EntityFrameworkCore\RuiChen.AbpPro.Saas.EntityFrameworkCore.csproj" />
+    <ProjectReference Include="..\..\modules\saas\RuiChen.AbpPro.Saas.HttpApi\RuiChen.AbpPro.Saas.HttpApi.csproj" />
     
   </ItemGroup>
 

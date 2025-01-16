@@ -1,5 +1,6 @@
 ﻿using Autofac.Core;
 using RuiChen.AbpPro.OpenIddict;
+using RuiChen.AbpPro.Saas;
 using Volo.Abp;
 using Volo.Abp.Account;
 using Volo.Abp.Account.Web;
@@ -36,6 +37,10 @@ namespace RuiChen.AbpPro.Admin.HttpApi.Host
 
         typeof(AbpFeatureManagementApplicationModule),
         typeof(AbpFeatureManagementEntityFrameworkCoreModule),
+
+        typeof(AbpSaasHttpApiModule),
+        typeof(AbpSaasApplicationModule),
+        typeof(AbpSaasEntityFrameworkCoreModule),
 
         typeof(AbpSettingManagementApplicationModule),
         typeof(AbpSettingManagementEntityFrameworkCoreModule),

@@ -6,11 +6,11 @@ namespace RuiChen.AbpPro.Saas
     {
         public const string ModuleName = "Saas";
 
-        public EditionsFeature Editions => GetFeature<EditionsFeature>();
+        public EditionFeature Editions => GetFeature<EditionFeature>();
 
         public GlobalSaasFeatures(GlobalFeatureManager featureManager) : base(featureManager)
         {
-            AddFeature(new EditionsFeature(this));
+            AddFeature(new EditionFeature(this));
         }
     }
 }

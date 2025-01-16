@@ -3,11 +3,11 @@
 namespace RuiChen.AbpPro.Saas
 {
     [GlobalFeatureName(Name)]
-    public class EditionsFeature : GlobalFeature
+    public class EditionFeature : GlobalFeature
     {
         public const string Name = "Saas.Editions";
 
-        internal EditionsFeature(GlobalSaasFeatures module) : base(module)
+        internal EditionFeature(GlobalSaasFeatures module) : base(module)
         {
         }
     }

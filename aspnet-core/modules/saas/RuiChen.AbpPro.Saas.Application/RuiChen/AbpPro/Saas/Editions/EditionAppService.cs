@@ -1,10 +1,12 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Volo.Abp.Application.Dtos;
 using Volo.Abp.Data;
+using Volo.Abp.GlobalFeatures;
 using Volo.Abp.ObjectExtending;
 
 namespace RuiChen.AbpPro.Saas
 {
+    [RequiresGlobalFeature(typeof(EditionFeature))]
     [Authorize(AbpSaasPermissions.Editions.Default)]
     public class EditionAppService : AbpSaasAppServiceBase, IEditionAppService
     {
