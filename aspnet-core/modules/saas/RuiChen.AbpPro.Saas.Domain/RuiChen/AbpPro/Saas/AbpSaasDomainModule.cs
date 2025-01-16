@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Volo.Abp.AutoMapper;
+using Volo.Abp.Caching;
 using Volo.Abp.Domain;
 using Volo.Abp.Domain.Entities.Events.Distributed;
 using Volo.Abp.Modularity;
@@ -12,6 +13,7 @@ namespace RuiChen.AbpPro.Saas
     [DependsOn(
         typeof(AbpAutoMapperModule),
         typeof(AbpDddDomainModule),
+        typeof(AbpCachingModule),
         typeof(AbpMultiTenancyModule),
         typeof(AbpSaasDomainSharedModule)
         )]
