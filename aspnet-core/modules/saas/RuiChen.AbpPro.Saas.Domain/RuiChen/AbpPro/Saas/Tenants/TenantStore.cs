@@ -10,13 +10,13 @@ namespace RuiChen.AbpPro.Saas
     public class TenantStore : ITenantStore, ITransientDependency
     {
         protected ITenantRepository TenantRepository { get; }
-        protected IObjectMapper<AbpProSaasDomainModule> ObjectMapper { get; }
+        protected IObjectMapper<AbpSaasDomainModule> ObjectMapper { get; }
         protected ICurrentTenant CurrentTenant { get; }
         protected IDistributedCache<TenantCacheItem> Cache { get; }
 
         public TenantStore(
             ITenantRepository tenantRepository,
-            IObjectMapper<AbpProSaasDomainModule> objectMapper,
+            IObjectMapper<AbpSaasDomainModule> objectMapper,
             ICurrentTenant currentTenant,
             IDistributedCache<TenantCacheItem> cache)
         {

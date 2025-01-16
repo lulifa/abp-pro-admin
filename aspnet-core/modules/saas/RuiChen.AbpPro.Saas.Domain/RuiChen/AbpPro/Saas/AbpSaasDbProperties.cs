@@ -7,7 +7,7 @@ using Volo.Abp.Data;
 
 namespace RuiChen.AbpPro.Saas
 {
-    public class AbpProSaasDbProperties
+    public class AbpSaasDbProperties
     {
         public static string DbTablePrefix { get; set; } = AbpCommonDbProperties.DbTablePrefix;
 

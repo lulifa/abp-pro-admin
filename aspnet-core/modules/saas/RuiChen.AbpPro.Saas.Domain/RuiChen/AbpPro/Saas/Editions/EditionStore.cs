@@ -9,13 +9,13 @@ namespace RuiChen.AbpPro.Saas
     public class EditionStore : IEditionStore, ITransientDependency
     {
         protected IEditionRepository EditionRepository { get; }
-        protected IObjectMapper<AbpProSaasDomainModule> ObjectMapper { get; }
+        protected IObjectMapper<AbpSaasDomainModule> ObjectMapper { get; }
         protected ICurrentTenant CurrentTenant { get; }
         protected IDistributedCache<EditionCacheItem> Cache { get; }
 
         public EditionStore(
             IEditionRepository editionRepository,
-            IObjectMapper<AbpProSaasDomainModule> objectMapper,
+            IObjectMapper<AbpSaasDomainModule> objectMapper,
             ICurrentTenant currentTenant,
             IDistributedCache<EditionCacheItem> cache)
         {

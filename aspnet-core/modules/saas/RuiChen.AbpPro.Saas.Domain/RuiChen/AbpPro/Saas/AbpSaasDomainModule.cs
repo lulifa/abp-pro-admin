@@ -15,17 +15,17 @@ namespace RuiChen.AbpPro.Saas
         typeof(AbpMultiTenancyModule),
         typeof(AbpSaasDomainSharedModule)
         )]
-    public class AbpProSaasDomainModule : AbpModule
+    public class AbpSaasDomainModule : AbpModule
     {
         private static readonly OneTimeRunner OneTimeRunner = new();
 
         public override void ConfigureServices(ServiceConfigurationContext context)
         {
-            context.Services.AddAutoMapperObjectMapper<AbpProSaasDomainModule>();
+            context.Services.AddAutoMapperObjectMapper<AbpSaasDomainModule>();
 
             Configure<AbpAutoMapperOptions>(options =>
             {
-                options.AddProfile<AbpProSaasDomainMapperProfile>(validate: true);
+                options.AddProfile<AbpSaasDomainMapperProfile>(validate: true);
             });
 
             Configure<AbpDistributedEntityEventOptions>(options =>
