@@ -6,7 +6,7 @@ using Volo.Abp.GlobalFeatures;
 
 namespace RuiChen.AbpPro.Saas
 {
-    //[RequiresFeature(SaasFeatures.Edition.Enable)]
+    [RequiresFeature(SaasFeatures.Edition.Enable)]
     [RequiresGlobalFeature(typeof(EditionFeature))]
     [Route("api/saas/editions")]
     [ControllerName("SaasEdition")]

@@ -1,4 +1,6 @@
 ﻿using Volo.Abp.Auditing;
+using Volo.Abp.Features;
+using Volo.Abp.GlobalFeatures;
 using Volo.Abp.Localization;
 using Volo.Abp.Localization.ExceptionHandling;
 using Volo.Abp.Modularity;
@@ -9,7 +11,9 @@ namespace RuiChen.AbpPro.Saas
 {
     [DependsOn(
         typeof(AbpValidationModule),
-        typeof(AbpAuditingContractsModule)
+        typeof(AbpAuditingContractsModule),
+        typeof(AbpFeaturesModule),
+        typeof(AbpGlobalFeaturesModule)
         )]
     public class AbpSaasDomainSharedModule : AbpModule
     {
