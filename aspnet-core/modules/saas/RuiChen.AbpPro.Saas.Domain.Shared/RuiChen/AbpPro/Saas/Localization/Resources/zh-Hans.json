@@ -39,6 +39,8 @@
     "Permission:ManageFeatures": "管理功能",
     "DisplayName:AdminEmailAddress": "管理员电子邮件地址",
     "DisplayName:AdminPassword": "管理员密码",
+    "Features:EditionEnable": "启用版本",
+    "Features:EditionEnableDesc": "当启用版本后, 允许使用版本相关功能",
     "Features:RecycleStrategy": "资源回收策略",
     "Features:RecycleStrategyDesc": "设定租户超过宽限过期时间后的资源回收策略",
     "Features:ExpirationReminderDays": "过期预警天数",

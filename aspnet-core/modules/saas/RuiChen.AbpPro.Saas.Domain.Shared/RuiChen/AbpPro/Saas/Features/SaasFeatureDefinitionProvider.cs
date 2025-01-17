@@ -12,6 +12,15 @@ namespace RuiChen.AbpPro.Saas
             var group = context.AddGroup(SaasFeatures.GroupName, L("Features:Saas"));
 
             group.AddFeature(
+                name: SaasFeatures.Edition.Enable,
+                defaultValue: "false",
+                displayName: L("Features:EditionEnable"),
+                description: L("Features:EditionEnableDesc"),
+                valueType: new ToggleStringValueType(),
+                isAvailableToHost: false
+            );
+
+            group.AddFeature(
                 name: SaasFeatures.Tenant.RecycleStrategy,
                 defaultValue: $"{RecycleStrategy.Reserve}",
                 displayName: L("Features:RecycleStrategy"),

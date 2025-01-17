@@ -5,6 +5,7 @@ using Volo.Abp;
 using Volo.Abp.Account;
 using Volo.Abp.Account.Web;
 using Volo.Abp.Application;
+using Volo.Abp.AspNetCore.Mvc.UI.Theme.Basic;
 using Volo.Abp.AspNetCore.Serilog;
 using Volo.Abp.Autofac;
 using Volo.Abp.Caching;
@@ -45,6 +46,7 @@ namespace RuiChen.AbpPro.Admin.HttpApi.Host
         typeof(AbpSettingManagementApplicationModule),
         typeof(AbpSettingManagementEntityFrameworkCoreModule),
 
+        //typeof(AbpAspNetCoreMvcUiBasicThemeModule),
         typeof(AbpCachingModule),
         typeof(AbpAspNetCoreSerilogModule),
         typeof(AbpAutofacModule)
@@ -69,6 +71,8 @@ namespace RuiChen.AbpPro.Admin.HttpApi.Host
             var configuration = services.GetConfiguration();
 
             ConfigureDbContext();
+
+            ConfigureMvcUiTheme();
 
             ConfigureLocalization();
 

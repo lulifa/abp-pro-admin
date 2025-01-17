@@ -39,6 +39,8 @@
     "Permission:ManageFeatures": "Manage features",
     "DisplayName:AdminEmailAddress": "Admin Email Address",
     "DisplayName:AdminPassword": "Admin Password",
+    "Features:EditionEnable": "Edition Enable",
+    "Features:EditionEnableDesc": "When the edition is enabled, it allows the use of edition-related features.",
     "Features:RecycleStrategy": "Recycle Strategy",
     "Features:RecycleStrategyDesc": "This section describes how to set the resource reclamation policy for tenants after the grace period expires",
     "Features:ExpirationReminderDays": "Expired warning days",

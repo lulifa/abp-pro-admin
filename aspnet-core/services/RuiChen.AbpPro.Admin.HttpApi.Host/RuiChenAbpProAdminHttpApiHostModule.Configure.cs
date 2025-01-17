@@ -6,6 +6,10 @@ using Microsoft.OpenApi.Models;
 using OpenIddict.Server.AspNetCore;
 using RuiChen.AbpPro.Saas;
 using Volo.Abp;
+using Volo.Abp.AspNetCore.Mvc.UI.Bundling;
+using Volo.Abp.AspNetCore.Mvc.UI.Theme.Basic;
+using Volo.Abp.AspNetCore.Mvc.UI.Theme.Basic.Bundling;
+using Volo.Abp.AspNetCore.Mvc.UI.Theming;
 using Volo.Abp.EntityFrameworkCore;
 using Volo.Abp.GlobalFeatures;
 using Volo.Abp.Localization;
@@ -49,6 +53,20 @@ namespace RuiChen.AbpPro.Admin.HttpApi.Host
             Configure<AbpDbContextOptions>(options =>
             {
                 options.UseMySQL();
+            });
+        }
+
+        private void ConfigureMvcUiTheme()
+        {
+            Configure<AbpBundlingOptions>(options =>
+            {
+                options.StyleBundles.Configure(
+                    BasicThemeBundles.Styles.Global,
+                    bundle =>
+                    {
+                        bundle.AddFiles("/global-styles.css");
+                    }
+                );
             });
         }
 

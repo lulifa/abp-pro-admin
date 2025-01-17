@@ -1,10 +1,12 @@
 ﻿using Asp.Versioning;
 using Microsoft.AspNetCore.Mvc;
 using Volo.Abp.Application.Dtos;
+using Volo.Abp.Features;
 using Volo.Abp.GlobalFeatures;
 
 namespace RuiChen.AbpPro.Saas
 {
+    //[RequiresFeature(SaasFeatures.Edition.Enable)]
     [RequiresGlobalFeature(typeof(EditionFeature))]
     [Route("api/saas/editions")]
     [ControllerName("SaasEdition")]
