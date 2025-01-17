@@ -4,8 +4,8 @@ using Volo.Abp.Application.Dtos;
 
 namespace RuiChen.AbpPro.OpenIddict
 {
-    [ControllerName("Openiddict-Application")]
     [Route("api/openiddict/applications")]
+    [ControllerName("OpeniddictApplication")]
     public class OpenIddictApplicationController : OpenIddictControllerBase, IOpenIddictApplicationAppService
     {
         private readonly IOpenIddictApplicationAppService service;

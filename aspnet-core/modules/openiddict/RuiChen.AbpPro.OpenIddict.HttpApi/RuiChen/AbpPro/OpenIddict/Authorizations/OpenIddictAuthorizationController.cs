@@ -4,8 +4,8 @@ using Volo.Abp.Application.Dtos;
 
 namespace RuiChen.AbpPro.OpenIddict
 {
-    [ControllerName("Openiddict-Authorization")]
     [Route("api/openiddict/authorizations")]
+    [ControllerName("OpeniddictAuthorization")]
     public class OpenIddictAuthorizationController : OpenIddictControllerBase, IOpenIddictAuthorizationAppService
     {
         private readonly IOpenIddictAuthorizationAppService service;

@@ -1,6 +1,6 @@
 ﻿namespace RuiChen.AbpPro.OpenIddict
 {
-    public class AbpProOpenIddictPermissions
+    public class AbpOpenIddictPermissions
     {
         public const string GroupName = "AbpOpenIddict";
 

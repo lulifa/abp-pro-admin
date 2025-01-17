@@ -1,12 +1,13 @@
 ﻿using Asp.Versioning;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Volo.Abp.Application.Dtos;
+using Volo.Abp.GlobalFeatures;
 
 namespace RuiChen.AbpPro.Saas
 {
-    [ControllerName("Saas-Edition")]
+    [RequiresGlobalFeature(typeof(EditionFeature))]
     [Route("api/saas/editions")]
+    [ControllerName("SaasEdition")]
     public class EditionController : AbpSaasControllerBase, IEditionAppService
     {
         private readonly IEditionAppService editionAppService;
@@ -17,7 +18,6 @@ namespace RuiChen.AbpPro.Saas
         }
 
         [HttpPost]
-        [Authorize(AbpSaasPermissions.Editions.Create)]
         public virtual Task<EditionDto> CreateAsync(EditionCreateDto input)
         {
             return editionAppService.CreateAsync(input);
@@ -25,7 +25,6 @@ namespace RuiChen.AbpPro.Saas
 
         [HttpDelete]
         [Route("{id}")]
-        [Authorize(AbpSaasPermissions.Editions.Delete)]
         public virtual Task DeleteAsync(Guid id)
         {
             return editionAppService.DeleteAsync(id);
@@ -46,7 +45,6 @@ namespace RuiChen.AbpPro.Saas
 
         [HttpPut]
         [Route("{id}")]
-        [Authorize(AbpSaasPermissions.Editions.Update)]
         public virtual Task<EditionDto> UpdateAsync(Guid id, EditionUpdateDto input)
         {
             return editionAppService.UpdateAsync(id, input);

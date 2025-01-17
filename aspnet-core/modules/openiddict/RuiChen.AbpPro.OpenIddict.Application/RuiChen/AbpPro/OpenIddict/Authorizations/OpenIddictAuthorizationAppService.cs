@@ -8,6 +8,7 @@ using Volo.Abp.OpenIddict.Authorizations;
 
 namespace RuiChen.AbpPro.OpenIddict
 {
+    [Authorize(AbpOpenIddictPermissions.Authorizations.Default)]
     public class OpenIddictAuthorizationAppService : OpenIddictApplicationServiceBase, IOpenIddictAuthorizationAppService
     {
         private readonly IOpenIddictAuthorizationManager authorizationManager;
@@ -21,7 +22,7 @@ namespace RuiChen.AbpPro.OpenIddict
             this.identifierConverter = identifierConverter;
         }
 
-        [Authorize(AbpProOpenIddictPermissions.Authorizations.Delete)]
+        [Authorize(AbpOpenIddictPermissions.Authorizations.Delete)]
         public async virtual Task DeleteAsync(Guid id)
         {
             var authorization = await authorizationManager.FindByIdAsync(identifierConverter.ToString(id));
@@ -30,7 +31,7 @@ namespace RuiChen.AbpPro.OpenIddict
 
         }
 
-        [Authorize(AbpProOpenIddictPermissions.Authorizations.Default)]
+        [Authorize(AbpOpenIddictPermissions.Authorizations.Default)]
         public async virtual Task<OpenIddictAuthorizationDto> GetAsync(Guid id)
         {
             var authorization = await authorizationRepository.GetAsync(id);
@@ -39,7 +40,6 @@ namespace RuiChen.AbpPro.OpenIddict
 
         }
 
-        [Authorize(AbpProOpenIddictPermissions.Authorizations.Default)]
         public async virtual Task<PagedResultDto<OpenIddictAuthorizationDto>> GetListAsync(OpenIddictAuthorizationGetListInput input)
         {
             var queryable = await authorizationRepository.GetQueryableAsync();

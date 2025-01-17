@@ -8,6 +8,7 @@ using Volo.Abp.OpenIddict.Scopes;
 
 namespace RuiChen.AbpPro.OpenIddict
 {
+    [Authorize(AbpOpenIddictPermissions.Scopes.Default)]
     public class OpenIddictScopeAppService : OpenIddictApplicationServiceBase, IOpenIddictScopeAppService
     {
         private readonly IOpenIddictScopeManager scopeManager;
@@ -21,7 +22,7 @@ namespace RuiChen.AbpPro.OpenIddict
             this.identifierConverter = identifierConverter;
         }
 
-        [Authorize(AbpProOpenIddictPermissions.Scopes.Create)]
+        [Authorize(AbpOpenIddictPermissions.Scopes.Create)]
         public async virtual Task<OpenIddictScopeDto> CreateAsync(OpenIddictScopeCreateDto input)
         {
             if (await scopeManager.FindByNameAsync(input.Name) != null)
@@ -42,7 +43,7 @@ namespace RuiChen.AbpPro.OpenIddict
 
         }
 
-        [Authorize(AbpProOpenIddictPermissions.Scopes.Delete)]
+        [Authorize(AbpOpenIddictPermissions.Scopes.Delete)]
         public async virtual Task DeleteAsync(Guid id)
         {
             var scope = await scopeManager.FindByIdAsync(identifierConverter.ToString(id));
@@ -51,7 +52,7 @@ namespace RuiChen.AbpPro.OpenIddict
 
         }
 
-        [Authorize(AbpProOpenIddictPermissions.Scopes.Update)]
+        [Authorize(AbpOpenIddictPermissions.Scopes.Update)]
         public async virtual Task<OpenIddictScopeDto> UpdateAsync(Guid id, OpenIddictScopeUpdateDto input)
         {
             var scope = await scopeRepository.GetAsync(id);
@@ -74,7 +75,6 @@ namespace RuiChen.AbpPro.OpenIddict
 
         }
 
-        [Authorize(AbpProOpenIddictPermissions.Scopes.Default)]
         public async virtual Task<OpenIddictScopeDto> GetAsync(Guid id)
         {
             var scope = await scopeRepository.GetAsync(id);
@@ -82,7 +82,6 @@ namespace RuiChen.AbpPro.OpenIddict
             return scope.ToDto(JsonSerializer);
         }
 
-        [Authorize(AbpProOpenIddictPermissions.Scopes.Default)]
         public async virtual Task<PagedResultDto<OpenIddictScopeDto>> GetListAsync(OpenIddictScopeGetListInput input)
         {
             var totalCount = await scopeRepository.GetCountAsync(input.Filter);

@@ -9,70 +9,70 @@ namespace RuiChen.AbpPro.OpenIddict
     {
         public override void Define(IPermissionDefinitionContext context)
         {
-            var openiddictGroup = context.GetGroupOrNull(AbpProOpenIddictPermissions.GroupName);
+            var openiddictGroup = context.GetGroupOrNull(AbpOpenIddictPermissions.GroupName);
 
             if (openiddictGroup == null)
             {
-                openiddictGroup = context.AddGroup(AbpProOpenIddictPermissions.GroupName, L("Permissions:OpenIddict"));
+                openiddictGroup = context.AddGroup(AbpOpenIddictPermissions.GroupName, L("Permissions:OpenIddict"));
             }
 
             var applications = openiddictGroup.AddPermission(
-                AbpProOpenIddictPermissions.Applications.Default,
+                AbpOpenIddictPermissions.Applications.Default,
                 L("Permissions:Applications"),
                 MultiTenancySides.Host);
             applications.AddChild(
-                AbpProOpenIddictPermissions.Applications.Create,
+                AbpOpenIddictPermissions.Applications.Create,
                 L("Permissions:Create"),
                 MultiTenancySides.Host);
             applications.AddChild(
-                AbpProOpenIddictPermissions.Applications.Update,
+                AbpOpenIddictPermissions.Applications.Update,
                 L("Permissions:Update"),
                 MultiTenancySides.Host);
             applications.AddChild(
-                AbpProOpenIddictPermissions.Applications.Delete,
+                AbpOpenIddictPermissions.Applications.Delete,
                 L("Permissions:Delete"),
                 MultiTenancySides.Host);
             applications.AddChild(
-                AbpProOpenIddictPermissions.Applications.ManagePermissions,
+                AbpOpenIddictPermissions.Applications.ManagePermissions,
                 L("Permissions:ManagePermissions"),
                 MultiTenancySides.Host);
             applications.AddChild(
-                AbpProOpenIddictPermissions.Applications.ManageSecret,
+                AbpOpenIddictPermissions.Applications.ManageSecret,
                 L("Permissions:ManageSecret"),
                 MultiTenancySides.Host);
 
             var authorizations = openiddictGroup.AddPermission(
-                AbpProOpenIddictPermissions.Authorizations.Default,
+                AbpOpenIddictPermissions.Authorizations.Default,
                 L("Permissions:Authorizations"),
                 MultiTenancySides.Host);
             authorizations.AddChild(
-                AbpProOpenIddictPermissions.Authorizations.Delete,
+                AbpOpenIddictPermissions.Authorizations.Delete,
                 L("Permissions:Delete"),
                 MultiTenancySides.Host);
 
             var scopes = openiddictGroup.AddPermission(
-                AbpProOpenIddictPermissions.Scopes.Default,
+                AbpOpenIddictPermissions.Scopes.Default,
                 L("Permissions:Scopes"),
                 MultiTenancySides.Host);
             scopes.AddChild(
-                AbpProOpenIddictPermissions.Scopes.Create,
+                AbpOpenIddictPermissions.Scopes.Create,
                 L("Permissions:Create"),
                 MultiTenancySides.Host);
             scopes.AddChild(
-                AbpProOpenIddictPermissions.Scopes.Update,
+                AbpOpenIddictPermissions.Scopes.Update,
                 L("Permissions:Update"),
                 MultiTenancySides.Host);
             scopes.AddChild(
-                AbpProOpenIddictPermissions.Scopes.Delete,
+                AbpOpenIddictPermissions.Scopes.Delete,
                 L("Permissions:Delete"),
                 MultiTenancySides.Host);
 
             var tokens = openiddictGroup.AddPermission(
-                AbpProOpenIddictPermissions.Tokens.Default,
+                AbpOpenIddictPermissions.Tokens.Default,
                 L("Permissions:Tokens"),
                 MultiTenancySides.Host);
             tokens.AddChild(
-                AbpProOpenIddictPermissions.Tokens.Delete,
+                AbpOpenIddictPermissions.Tokens.Delete,
                 L("Permissions:Delete"),
                 MultiTenancySides.Host);
         }

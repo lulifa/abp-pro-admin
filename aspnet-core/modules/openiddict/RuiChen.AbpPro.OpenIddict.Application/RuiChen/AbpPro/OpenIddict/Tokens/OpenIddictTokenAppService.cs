@@ -8,6 +8,7 @@ using Volo.Abp.OpenIddict.Tokens;
 
 namespace RuiChen.AbpPro.OpenIddict
 {
+    [Authorize(AbpOpenIddictPermissions.Tokens.Default)]
     public class OpenIddictTokenAppService : OpenIddictApplicationServiceBase, IOpenIddictTokenAppService
     {
         private readonly IOpenIddictTokenManager tokenManager;
@@ -21,7 +22,7 @@ namespace RuiChen.AbpPro.OpenIddict
             this.identifierConverter = identifierConverter;
         }
 
-        [Authorize(AbpProOpenIddictPermissions.Tokens.Delete)]
+        [Authorize(AbpOpenIddictPermissions.Tokens.Delete)]
         public async virtual Task DeleteAsync(Guid id)
         {
             var token = await tokenManager.FindByIdAsync(identifierConverter.ToString(id));
@@ -30,7 +31,6 @@ namespace RuiChen.AbpPro.OpenIddict
 
         }
 
-        [Authorize(AbpProOpenIddictPermissions.Tokens.Default)]
         public async virtual Task<OpenIddictTokenDto> GetAsync(Guid id)
         {
             var token = await tokenRepository.GetAsync(id);
@@ -38,7 +38,6 @@ namespace RuiChen.AbpPro.OpenIddict
             return token.ToDto();
         }
 
-        [Authorize(AbpProOpenIddictPermissions.Tokens.Default)]
         public async virtual Task<PagedResultDto<OpenIddictTokenDto>> GetListAsync(OpenIddictTokenGetListInput input)
         {
             var queryable = await tokenRepository.GetQueryableAsync();

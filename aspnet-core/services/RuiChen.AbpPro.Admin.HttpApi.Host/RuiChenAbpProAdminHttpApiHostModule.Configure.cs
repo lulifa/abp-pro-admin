@@ -4,8 +4,10 @@ using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.Server.Kestrel.Core;
 using Microsoft.OpenApi.Models;
 using OpenIddict.Server.AspNetCore;
+using RuiChen.AbpPro.Saas;
 using Volo.Abp;
 using Volo.Abp.EntityFrameworkCore;
+using Volo.Abp.GlobalFeatures;
 using Volo.Abp.Localization;
 using Volo.Abp.MultiTenancy;
 using Volo.Abp.Threading;
@@ -19,6 +21,15 @@ namespace RuiChen.AbpPro.Admin.HttpApi.Host
         public static string ApplicationName = "RuiChen";
 
         private static readonly OneTimeRunner OneTimeRunner = new();
+
+
+        private void PreConfigureFeature()
+        {
+            OneTimeRunner.Run(() =>
+            {
+                GlobalFeatureManager.Instance.Modules.Saas().Editions.Enable();
+            });
+        }
 
         private void PreConfigureAuthServer(IConfiguration configuration)
         {

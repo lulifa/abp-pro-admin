@@ -57,6 +57,8 @@ namespace RuiChen.AbpPro.Admin.HttpApi.Host
             var configuration = context.Services.GetConfiguration();
             var hostingEnvironment = context.Services.GetHostingEnvironment();
 
+            PreConfigureFeature();
+
             PreConfigureAuthServer(configuration);
         }
 

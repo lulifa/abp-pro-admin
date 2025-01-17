@@ -1,12 +1,11 @@
 ﻿using Asp.Versioning;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Volo.Abp.Application.Dtos;
 
 namespace RuiChen.AbpPro.Saas
 {
-    [ControllerName("Saas-Tenant")]
     [Route("api/saas/tenants")]
+    [ControllerName("SaasTenant")]
     public class TenantController : AbpSaasControllerBase, ITenantAppService
     {
         private readonly ITenantAppService tenantAppService;
@@ -37,7 +36,6 @@ namespace RuiChen.AbpPro.Saas
         }
 
         [HttpPost]
-        [Authorize(AbpSaasPermissions.Tenants.Create)]
         public virtual Task<TenantDto> CreateAsync(TenantCreateDto input)
         {
             return tenantAppService.CreateAsync(input);
@@ -45,7 +43,6 @@ namespace RuiChen.AbpPro.Saas
 
         [HttpPut]
         [Route("{id}")]
-        [Authorize(AbpSaasPermissions.Tenants.Update)]
         public virtual Task<TenantDto> UpdateAsync(Guid id, TenantUpdateDto input)
         {
             return tenantAppService.UpdateAsync(id, input);
@@ -53,7 +50,6 @@ namespace RuiChen.AbpPro.Saas
 
         [HttpDelete]
         [Route("{id}")]
-        [Authorize(AbpSaasPermissions.Tenants.Delete)]
         public virtual Task DeleteAsync(Guid id)
         {
             return tenantAppService.DeleteAsync(id);
@@ -61,7 +57,6 @@ namespace RuiChen.AbpPro.Saas
 
         [HttpGet]
         [Route("{id}/connection-string/{name}")]
-        [Authorize(AbpSaasPermissions.Tenants.ManageConnectionStrings)]
         public virtual Task<TenantConnectionStringDto> GetConnectionStringAsync(Guid id, string name)
         {
             return tenantAppService.GetConnectionStringAsync(id, name);
@@ -69,7 +64,6 @@ namespace RuiChen.AbpPro.Saas
 
         [HttpGet]
         [Route("{id}/connection-string")]
-        [Authorize(AbpSaasPermissions.Tenants.ManageConnectionStrings)]
         public virtual Task<ListResultDto<TenantConnectionStringDto>> GetConnectionStringAsync(Guid id)
         {
             return tenantAppService.GetConnectionStringAsync(id);
@@ -77,7 +71,6 @@ namespace RuiChen.AbpPro.Saas
 
         [HttpPut]
         [Route("{id}/connection-string")]
-        [Authorize(AbpSaasPermissions.Tenants.ManageConnectionStrings)]
         public virtual Task<TenantConnectionStringDto> SetConnectionStringAsync(Guid id, TenantConnectionStringCreateOrUpdate input)
         {
             return tenantAppService.SetConnectionStringAsync(id, input);
@@ -85,7 +78,6 @@ namespace RuiChen.AbpPro.Saas
 
         [HttpDelete]
         [Route("{id}/connection-string/{name}")]
-        [Authorize(AbpSaasPermissions.Tenants.ManageConnectionStrings)]
         public virtual Task DeleteConnectionStringAsync(Guid id, string name)
         {
             return tenantAppService.DeleteConnectionStringAsync(id, name);

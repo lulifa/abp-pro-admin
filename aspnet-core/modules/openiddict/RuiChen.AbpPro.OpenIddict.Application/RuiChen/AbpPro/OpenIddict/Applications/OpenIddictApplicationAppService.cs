@@ -7,6 +7,7 @@ using Volo.Abp.OpenIddict.Applications;
 
 namespace RuiChen.AbpPro.OpenIddict
 {
+    [Authorize(AbpOpenIddictPermissions.Applications.Default)]
     public class OpenIddictApplicationAppService : OpenIddictApplicationServiceBase, IOpenIddictApplicationAppService
     {
         private readonly IAbpApplicationManager applicationManager;
@@ -20,7 +21,7 @@ namespace RuiChen.AbpPro.OpenIddict
             this.identifierConverter = identifierConverter;
         }
 
-        [Authorize(AbpProOpenIddictPermissions.Applications.Create)]
+        [Authorize(AbpOpenIddictPermissions.Applications.Create)]
         public async virtual Task<OpenIddictApplicationDto> CreateAsync(OpenIddictApplicationCreateDto input)
         {
             if (await applicationManager.FindByClientIdAsync(input.ClientId) != null)
@@ -44,7 +45,7 @@ namespace RuiChen.AbpPro.OpenIddict
 
         }
 
-        [Authorize(AbpProOpenIddictPermissions.Applications.Delete)]
+        [Authorize(AbpOpenIddictPermissions.Applications.Delete)]
         public async virtual Task DeleteAsync(Guid id)
         {
             var application = await applicationManager.FindByIdAsync(identifierConverter.ToString(id));
@@ -52,7 +53,7 @@ namespace RuiChen.AbpPro.OpenIddict
             await applicationManager.DeleteAsync(application);
         }
 
-        [Authorize(AbpProOpenIddictPermissions.Applications.Update)]
+        [Authorize(AbpOpenIddictPermissions.Applications.Update)]
         public async virtual Task<OpenIddictApplicationDto> UpdateAsync(Guid id, OpenIddictApplicationUpdateDto input)
         {
             var application = await applicationRepository.GetAsync(id);
@@ -76,7 +77,6 @@ namespace RuiChen.AbpPro.OpenIddict
 
         }
 
-        [Authorize(AbpProOpenIddictPermissions.Applications.Default)]
         public async virtual Task<OpenIddictApplicationDto> GetAsync(Guid id)
         {
             var application = await applicationRepository.GetAsync(id);
@@ -84,7 +84,6 @@ namespace RuiChen.AbpPro.OpenIddict
             return application.ToDto(JsonSerializer);
         }
 
-        [Authorize(AbpProOpenIddictPermissions.Applications.Default)]
         public async virtual Task<PagedResultDto<OpenIddictApplicationDto>> GetListAsync(OpenIddictApplicationGetListInput input)
         {
             var totalCount = await applicationRepository.GetCountAsync(input.Filter);
