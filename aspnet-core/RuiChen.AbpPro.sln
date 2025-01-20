@@ -72,6 +72,16 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RuiChen.AbpPro.Saas.AspNetc
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RuiChen.AbpPro.Identity.AspNetCore", "modules\identity\RuiChen.AbpPro.Identity.AspNetCore\RuiChen.AbpPro.Identity.AspNetCore.csproj", "{62A75045-65E9-489C-8BBA-A32EA72A8C14}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "account", "account", "{61EB634A-D81D-4C67-A1BE-96D1AC6E5CAE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RuiChen.AbpPro.Account.Application", "modules\account\RuiChen.AbpPro.Account.Application\RuiChen.AbpPro.Account.Application.csproj", "{446F3CF7-CEAE-4AF2-8659-B20BAD8604FD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RuiChen.AbpPro.Account.Application.Contracts", "modules\account\RuiChen.AbpPro.Account.Application.Contracts\RuiChen.AbpPro.Account.Application.Contracts.csproj", "{EC80CF9A-F142-47A1-B121-61F9D1018E64}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RuiChen.AbpPro.Account.HttpApi", "modules\account\RuiChen.AbpPro.Account.HttpApi\RuiChen.AbpPro.Account.HttpApi.csproj", "{2763ED45-E349-40AE-9EA6-EBD1A9F1EFFC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RuiChen.AbpPro.Account.Templates", "modules\account\RuiChen.AbpPro.Account.Templates\RuiChen.AbpPro.Account.Templates.csproj", "{26CA4651-83EF-46CF-BAEB-8AC04166EAA4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -166,6 +176,22 @@ Global
 		{62A75045-65E9-489C-8BBA-A32EA72A8C14}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{62A75045-65E9-489C-8BBA-A32EA72A8C14}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{62A75045-65E9-489C-8BBA-A32EA72A8C14}.Release|Any CPU.Build.0 = Release|Any CPU
+		{446F3CF7-CEAE-4AF2-8659-B20BAD8604FD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{446F3CF7-CEAE-4AF2-8659-B20BAD8604FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{446F3CF7-CEAE-4AF2-8659-B20BAD8604FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{446F3CF7-CEAE-4AF2-8659-B20BAD8604FD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EC80CF9A-F142-47A1-B121-61F9D1018E64}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EC80CF9A-F142-47A1-B121-61F9D1018E64}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EC80CF9A-F142-47A1-B121-61F9D1018E64}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EC80CF9A-F142-47A1-B121-61F9D1018E64}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2763ED45-E349-40AE-9EA6-EBD1A9F1EFFC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2763ED45-E349-40AE-9EA6-EBD1A9F1EFFC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2763ED45-E349-40AE-9EA6-EBD1A9F1EFFC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2763ED45-E349-40AE-9EA6-EBD1A9F1EFFC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{26CA4651-83EF-46CF-BAEB-8AC04166EAA4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{26CA4651-83EF-46CF-BAEB-8AC04166EAA4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{26CA4651-83EF-46CF-BAEB-8AC04166EAA4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{26CA4651-83EF-46CF-BAEB-8AC04166EAA4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -197,5 +223,10 @@ Global
 		{D1F4C1F2-C3E6-4C7E-817B-6C1260C8F5BD} = {F85A53C5-0EF2-41A7-916C-886D41C3AC9B}
 		{F4EA2BDB-28DA-4FCE-92CB-AB0E7122102D} = {F85A53C5-0EF2-41A7-916C-886D41C3AC9B}
 		{62A75045-65E9-489C-8BBA-A32EA72A8C14} = {E3F7459B-8FCE-46F5-B74A-25769A8C304C}
+		{61EB634A-D81D-4C67-A1BE-96D1AC6E5CAE} = {D46B5DB7-EF85-45B6-9369-B0F87DB6EDC1}
+		{446F3CF7-CEAE-4AF2-8659-B20BAD8604FD} = {61EB634A-D81D-4C67-A1BE-96D1AC6E5CAE}
+		{EC80CF9A-F142-47A1-B121-61F9D1018E64} = {61EB634A-D81D-4C67-A1BE-96D1AC6E5CAE}
+		{2763ED45-E349-40AE-9EA6-EBD1A9F1EFFC} = {61EB634A-D81D-4C67-A1BE-96D1AC6E5CAE}
+		{26CA4651-83EF-46CF-BAEB-8AC04166EAA4} = {61EB634A-D81D-4C67-A1BE-96D1AC6E5CAE}
 	EndGlobalSection
 EndGlobal
