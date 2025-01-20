@@ -19,7 +19,6 @@
     <PackageReference Include="Volo.Abp.AspNetCore.Serilog" />
     <PackageReference Include="Volo.Abp.Account.Web.OpenIddict"/>
     <PackageReference Include="Volo.Abp.Account.Application"/>
-    <PackageReference Include="Volo.Abp.Identity.EntityFrameworkCore" />
     <PackageReference Include="Volo.Abp.PermissionManagement.EntityFrameworkCore" />
     <PackageReference Include="Volo.Abp.SettingManagement.EntityFrameworkCore" />
     <PackageReference Include="Volo.Abp.FeatureManagement.EntityFrameworkCore" />
@@ -30,24 +29,31 @@
     <PackageReference Include="Volo.Abp.FeatureManagement.Application" />
     <PackageReference Include="Volo.Abp.SettingManagement.Application" />
 
-    <PackageReference Include="Volo.Abp.AspNetCore.Mvc.UI.Theme.Basic" />
+    
 
   </ItemGroup>
 
 
   <ItemGroup>
 
-    <PackageReference Include="Volo.Abp.OpenIddict.EntityFrameworkCore" />
-    <ProjectReference Include="..\..\modules\openIddict\RuiChen.AbpPro.OpenIddict.Application\RuiChen.AbpPro.OpenIddict.Application.csproj" />
+    <PackageReference Include="Volo.Abp.Account.Application"/>
+    <PackageReference Include="Volo.Abp.Account.Web.OpenIddict"/>
+    <PackageReference Include="Volo.Abp.AspNetCore.Mvc.UI.Theme.Basic" />
+
+    <ProjectReference Include="..\..\modules\identity\RuiChen.AbpPro.Identity.HttpApi\RuiChen.AbpPro.Identity.HttpApi.csproj" />
+    <ProjectReference Include="..\..\modules\identity\RuiChen.AbpPro.Identity.Application\RuiChen.AbpPro.Identity.Application.csproj" />
+    <ProjectReference Include="..\..\modules\identity\RuiChen.AbpPro.Identity.EntityFrameworkCore\RuiChen.AbpPro.Identity.EntityFrameworkCore.csproj" />
+    
+  
     <ProjectReference Include="..\..\modules\openIddict\RuiChen.AbpPro.OpenIddict.HttpApi\RuiChen.AbpPro.OpenIddict.HttpApi.csproj" />
+    <ProjectReference Include="..\..\modules\openIddict\RuiChen.AbpPro.OpenIddict.Application\RuiChen.AbpPro.OpenIddict.Application.csproj" />
+    <PackageReference Include="Volo.Abp.OpenIddict.EntityFrameworkCore" />
+    
 
-
-    <ProjectReference Include="..\..\modules\saas\RuiChen.AbpPro.Saas.Application.Contracts\RuiChen.AbpPro.Saas.Application.Contracts.csproj" />
-    <ProjectReference Include="..\..\modules\saas\RuiChen.AbpPro.Saas.Domain.Shared\RuiChen.AbpPro.Saas.Domain.Shared.csproj" />
-    <ProjectReference Include="..\..\modules\saas\RuiChen.AbpPro.Saas.Domain\RuiChen.AbpPro.Saas.Domain.csproj" />
+    <ProjectReference Include="..\..\modules\saas\RuiChen.AbpPro.Saas.HttpApi\RuiChen.AbpPro.Saas.HttpApi.csproj" />
     <ProjectReference Include="..\..\modules\saas\RuiChen.AbpPro.Saas.Application\RuiChen.AbpPro.Saas.Application.csproj" />
     <ProjectReference Include="..\..\modules\saas\RuiChen.AbpPro.Saas.EntityFrameworkCore\RuiChen.AbpPro.Saas.EntityFrameworkCore.csproj" />
-    <ProjectReference Include="..\..\modules\saas\RuiChen.AbpPro.Saas.HttpApi\RuiChen.AbpPro.Saas.HttpApi.csproj" />
+    
     
   </ItemGroup>
 
