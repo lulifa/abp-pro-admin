@@ -1,20 +1,20 @@
 ﻿using RuiChen.AbpPro.Account;
+using RuiChen.AbpPro.FeatureManagement;
 using RuiChen.AbpPro.Identity;
 using RuiChen.AbpPro.OpenIddict;
 using RuiChen.AbpPro.Saas;
+using RuiChen.AbpPro.SettingManagement;
 using Volo.Abp;
 using Volo.Abp.Account.Web;
 using Volo.Abp.AspNetCore.Mvc.UI.Theme.Basic;
 using Volo.Abp.AspNetCore.Serilog;
 using Volo.Abp.Autofac;
 using Volo.Abp.Caching;
-using Volo.Abp.FeatureManagement;
 using Volo.Abp.FeatureManagement.EntityFrameworkCore;
 using Volo.Abp.Modularity;
 using Volo.Abp.OpenIddict.EntityFrameworkCore;
 using Volo.Abp.PermissionManagement;
 using Volo.Abp.PermissionManagement.EntityFrameworkCore;
-using Volo.Abp.SettingManagement;
 using Volo.Abp.SettingManagement.EntityFrameworkCore;
 
 namespace RuiChen.AbpPro.Admin.HttpApi.Host
@@ -23,7 +23,11 @@ namespace RuiChen.AbpPro.Admin.HttpApi.Host
         typeof(AbpAccountHttpApiModule),
         typeof(AbpAccountApplicationModule),
         typeof(AbpAccountWebOpenIddictModule),
-        
+
+        typeof(AbpFeatureManagementHttpApiModule),
+        typeof(AbpFeatureManagementApplicationModule),
+        typeof(AbpFeatureManagementEntityFrameworkCoreModule),
+
 
         typeof(AbpIdentityHttpApiModule),
         typeof(AbpIdentityApplicationModule),
@@ -40,20 +44,16 @@ namespace RuiChen.AbpPro.Admin.HttpApi.Host
         typeof(AbpSaasEntityFrameworkCoreModule),
 
 
+        typeof(AbpSettingManagementHttpApiModule),
+        typeof(AbpSettingManagementApplicationModule),
+        typeof(AbpSettingManagementEntityFrameworkCoreModule),
+
+
         typeof(AbpAspNetCoreMvcUiBasicThemeModule),
 
 
         typeof(AbpPermissionManagementApplicationModule),
         typeof(AbpPermissionManagementEntityFrameworkCoreModule),
-       
-
-        typeof(AbpFeatureManagementApplicationModule),
-        typeof(AbpFeatureManagementEntityFrameworkCoreModule),
-
-        
-
-        typeof(AbpSettingManagementApplicationModule),
-        typeof(AbpSettingManagementEntityFrameworkCoreModule),
 
 
         typeof(AbpCachingModule),
