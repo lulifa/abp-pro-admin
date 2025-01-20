@@ -1,13 +1,12 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using Asp.Versioning;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Volo.Abp.Application.Dtos;
 
 namespace RuiChen.AbpPro.FeatureManagement
 {
-    /// <summary>
-    /// 特性分组
-    /// </summary>
     [Route("api/feature-management/definitions/groups")]
+    [ControllerName("FeatureGroupDefinition")]
     public class FeatureGroupDefinitionController : FeatureManagementControllerBase, IFeatureGroupDefinitionAppService
     {
         private readonly IFeatureGroupDefinitionAppService service;
@@ -18,7 +17,6 @@ namespace RuiChen.AbpPro.FeatureManagement
         }
 
         [HttpPost]
-        [Authorize(FeatureManagementPermissionNames.GroupDefinition.Create)]
         public virtual Task<FeatureGroupDefinitionDto> CreateAsync(FeatureGroupDefinitionCreateDto input)
         {
             return service.CreateAsync(input);
@@ -26,7 +24,6 @@ namespace RuiChen.AbpPro.FeatureManagement
 
         [HttpDelete]
         [Route("{name}")]
-        [Authorize(FeatureManagementPermissionNames.GroupDefinition.Delete)]
         public virtual Task DeleteAsync(string name)
         {
             return service.DeleteAsync(name);
@@ -34,7 +31,6 @@ namespace RuiChen.AbpPro.FeatureManagement
 
         [HttpGet]
         [Route("{name}")]
-        [Authorize(FeatureManagementPermissionNames.GroupDefinition.Delete)]
         public virtual Task<FeatureGroupDefinitionDto> GetAsync(string name)
         {
             return service.GetAsync(name);
@@ -48,7 +44,6 @@ namespace RuiChen.AbpPro.FeatureManagement
 
         [HttpPut]
         [Route("{name}")]
-        [Authorize(FeatureManagementPermissionNames.GroupDefinition.Update)]
         public virtual Task<FeatureGroupDefinitionDto> UpdateAsync(string name, FeatureGroupDefinitionUpdateDto input)
         {
             return service.UpdateAsync(name, input);

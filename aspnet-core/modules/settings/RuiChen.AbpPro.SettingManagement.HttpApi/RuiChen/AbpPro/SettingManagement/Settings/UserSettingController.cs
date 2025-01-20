@@ -2,9 +2,6 @@
 
 namespace RuiChen.AbpPro.SettingManagement
 {
-    /// <summary>
-    /// 用户设置
-    /// </summary>
     [Route("api/setting-management/settings")]
     public class UserSettingController : AbpSettingControllerBase, IUserSettingAppService
     {

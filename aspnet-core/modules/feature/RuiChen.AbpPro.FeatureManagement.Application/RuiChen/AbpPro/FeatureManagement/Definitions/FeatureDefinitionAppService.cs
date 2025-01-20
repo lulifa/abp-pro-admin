@@ -12,6 +12,7 @@ using Volo.Abp.Validation;
 
 namespace RuiChen.AbpPro.FeatureManagement
 {
+    [Authorize(FeatureManagementPermissionNames.Definition.Default)]
     public class FeatureDefinitionAppService : FeatureManagementAppServiceBase, IFeatureDefinitionAppService
     {
         private readonly StringValueTypeSerializer stringValueTypeSerializer;

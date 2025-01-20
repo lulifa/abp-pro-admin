@@ -4,9 +4,6 @@ using Volo.Abp.Application.Dtos;
 
 namespace RuiChen.AbpPro.SettingManagement
 {
-    /// <summary>
-    /// 设置定义
-    /// </summary>
     [Route("api/setting-management/settings/definitions")]
     public class SettingDefinitionController : AbpSettingControllerBase, ISettingDefinitionAppService
     {

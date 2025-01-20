@@ -3,9 +3,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace RuiChen.AbpPro.SettingManagement
 {
-    /// <summary>
-    /// 系统设置
-    /// </summary>
     [Route("api/setting-management/settings")]
     public class SettingController : AbpSettingControllerBase, ISettingAppService, ISettingTestAppService
     {
