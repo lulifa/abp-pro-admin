@@ -20,17 +20,28 @@ using Volo.Abp.SettingManagement.EntityFrameworkCore;
 namespace RuiChen.AbpPro.Admin.HttpApi.Host
 {
     [DependsOn(
+        typeof(AbpAccountHttpApiModule),
         typeof(AbpAccountApplicationModule),
         typeof(AbpAccountWebOpenIddictModule),
-        typeof(AbpAspNetCoreMvcUiBasicThemeModule),
+        
 
         typeof(AbpIdentityHttpApiModule),
         typeof(AbpIdentityApplicationModule),
         typeof(AbpIdentityEntityFrameworkCoreModule),
 
+
         typeof(AbpOpenIddictHttpApiModule),
         typeof(AbpOpenIddictApplicationModule),
         typeof(AbpOpenIddictEntityFrameworkCoreModule),
+
+
+        typeof(AbpSaasHttpApiModule),
+        typeof(AbpSaasApplicationModule),
+        typeof(AbpSaasEntityFrameworkCoreModule),
+
+
+        typeof(AbpAspNetCoreMvcUiBasicThemeModule),
+
 
         typeof(AbpPermissionManagementApplicationModule),
         typeof(AbpPermissionManagementEntityFrameworkCoreModule),
@@ -39,9 +50,7 @@ namespace RuiChen.AbpPro.Admin.HttpApi.Host
         typeof(AbpFeatureManagementApplicationModule),
         typeof(AbpFeatureManagementEntityFrameworkCoreModule),
 
-        typeof(AbpSaasHttpApiModule),
-        typeof(AbpSaasApplicationModule),
-        typeof(AbpSaasEntityFrameworkCoreModule),
+        
 
         typeof(AbpSettingManagementApplicationModule),
         typeof(AbpSettingManagementEntityFrameworkCoreModule),
