@@ -3,3 +3,47 @@
 dotnet new classlib -o modules/identity/RuiChen.AbpPro.Identity.AspNetCore
 
 dotnet sln RuiChen.AbpPro.sln add modules/identity/RuiChen.AbpPro.Identity.AspNetCore
+
+
+dotnet new classlib -o modules/account/RuiChen.AbpPro.Account.Application
+dotnet new classlib -o modules/account/RuiChen.AbpPro.Account.Application.Contracts
+dotnet new classlib -o modules/account/RuiChen.AbpPro.Account.HttpApi
+dotnet new classlib -o modules/account/RuiChen.AbpPro.Account.Templates
+
+dotnet sln RuiChen.AbpPro.sln add modules/account/RuiChen.AbpPro.Account.Application
+dotnet sln RuiChen.AbpPro.sln add modules/account/RuiChen.AbpPro.Account.Application.Contracts
+dotnet sln RuiChen.AbpPro.sln add modules/account/RuiChen.AbpPro.Account.HttpApi
+dotnet sln RuiChen.AbpPro.sln add modules/account/RuiChen.AbpPro.Account.Templates
+
+dotnet new classlib -o modules/feature/RuiChen.AbpPro.FeatureManagement.Application
+dotnet new classlib -o modules/feature/RuiChen.AbpPro.FeatureManagement.Application.Contracts
+dotnet new classlib -o modules/feature/RuiChen.AbpPro.FeatureManagement.HttpApi
+
+dotnet sln RuiChen.AbpPro.sln add modules/feature/RuiChen.AbpPro.FeatureManagement.Application
+dotnet sln RuiChen.AbpPro.sln add modules/feature/RuiChen.AbpPro.FeatureManagement.Application.Contracts
+dotnet sln RuiChen.AbpPro.sln add modules/feature/RuiChen.AbpPro.FeatureManagement.HttpApi
+
+
+dotnet new classlib -o modules/settings/RuiChen.AbpPro.SettingManagement.Application
+dotnet new classlib -o modules/settings/RuiChen.AbpPro.SettingManagement.Application.Contracts
+dotnet new classlib -o modules/settings/RuiChen.AbpPro.SettingManagement.HttpApi
+
+dotnet sln RuiChen.AbpPro.sln add modules/settings/RuiChen.AbpPro.SettingManagement.Application
+dotnet sln RuiChen.AbpPro.sln add modules/settings/RuiChen.AbpPro.SettingManagement.Application.Contracts
+dotnet sln RuiChen.AbpPro.sln add modules/settings/RuiChen.AbpPro.SettingManagement.HttpApi
+
+
+
+dotnet new classlib -o modules/permission/RuiChen.AbpPro.PermissionManagement.Application
+dotnet new classlib -o modules/permission/RuiChen.AbpPro.PermissionManagement.Application.Contracts
+dotnet new classlib -o modules/permission/RuiChen.AbpPro.PermissionManagement.Domain.OrganizationUnits
+dotnet new classlib -o modules/permission/RuiChen.AbpPro.PermissionManagement.HttpApi
+
+dotnet sln RuiChen.AbpPro.sln add modules/permission/RuiChen.AbpPro.PermissionManagement.Application
+dotnet sln RuiChen.AbpPro.sln add modules/permission/RuiChen.AbpPro.PermissionManagement.Application.Contracts
+dotnet sln RuiChen.AbpPro.sln add modules/permission/RuiChen.AbpPro.PermissionManagement.Domain.OrganizationUnits
+dotnet sln RuiChen.AbpPro.sln add modules/permission/RuiChen.AbpPro.PermissionManagement.HttpApi
+
+dotnet new classlib -o framework/authorization/RuiChen.AbpPro.Authorization.OrganizationUnits
+
+dotnet sln RuiChen.AbpPro.sln add framework/authorization/RuiChen.AbpPro.Authorization.OrganizationUnits
