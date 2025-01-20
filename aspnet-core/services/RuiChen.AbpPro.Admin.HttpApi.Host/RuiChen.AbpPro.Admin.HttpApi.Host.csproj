@@ -2,8 +2,8 @@
 
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
-    <Nullable>disable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>disable</Nullable>
     <RootNamespace>RuiChen.AbpPro.Admin.HttpApi.Host</RootNamespace>
   </PropertyGroup>
 
@@ -17,13 +17,10 @@
     <PackageReference Include="Volo.Abp.Autofac" />
     <PackageReference Include="Volo.Abp.AspNetCore" />
     <PackageReference Include="Volo.Abp.AspNetCore.Serilog" />
-    <PackageReference Include="Volo.Abp.Account.Web.OpenIddict"/>
-    <PackageReference Include="Volo.Abp.Account.Application"/>
     <PackageReference Include="Volo.Abp.PermissionManagement.EntityFrameworkCore" />
     <PackageReference Include="Volo.Abp.SettingManagement.EntityFrameworkCore" />
     <PackageReference Include="Volo.Abp.FeatureManagement.EntityFrameworkCore" />
     <PackageReference Include="Volo.Abp.EntityFrameworkCore.MySQL" />
-    <PackageReference Include="Volo.Abp.OpenIddict.EntityFrameworkCore" />
 
     <PackageReference Include="Volo.Abp.PermissionManagement.Application"  />
     <PackageReference Include="Volo.Abp.FeatureManagement.Application" />
@@ -38,8 +35,8 @@
 
   <ItemGroup>
 
-    <PackageReference Include="Volo.Abp.Account.HttpApi" />
-    <PackageReference Include="Volo.Abp.Account.Application"/>
+    <ProjectReference Include="..\..\modules\account\RuiChen.AbpPro.Account.Application\RuiChen.AbpPro.Account.Application.csproj" />
+    <ProjectReference Include="..\..\modules\account\RuiChen.AbpPro.Account.HttpApi\RuiChen.AbpPro.Account.HttpApi.csproj" />
     <PackageReference Include="Volo.Abp.Account.Web.OpenIddict"/>
     
 

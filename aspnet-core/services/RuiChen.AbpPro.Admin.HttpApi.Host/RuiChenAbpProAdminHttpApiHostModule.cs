@@ -1,8 +1,8 @@
-﻿using RuiChen.AbpPro.Identity;
+﻿using RuiChen.AbpPro.Account;
+using RuiChen.AbpPro.Identity;
 using RuiChen.AbpPro.OpenIddict;
 using RuiChen.AbpPro.Saas;
 using Volo.Abp;
-using Volo.Abp.Account;
 using Volo.Abp.Account.Web;
 using Volo.Abp.AspNetCore.Mvc.UI.Theme.Basic;
 using Volo.Abp.AspNetCore.Serilog;
