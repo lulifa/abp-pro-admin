@@ -82,6 +82,22 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RuiChen.AbpPro.Account.Http
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RuiChen.AbpPro.Account.Templates", "modules\account\RuiChen.AbpPro.Account.Templates\RuiChen.AbpPro.Account.Templates.csproj", "{26CA4651-83EF-46CF-BAEB-8AC04166EAA4}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "feature", "feature", "{CA7DE770-860D-4197-BC5F-6FC3D4BD4C17}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RuiChen.AbpPro.FeatureManagement.Application", "modules\feature\RuiChen.AbpPro.FeatureManagement.Application\RuiChen.AbpPro.FeatureManagement.Application.csproj", "{6AC46B14-8721-4E30-AC79-B55085D86927}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RuiChen.AbpPro.FeatureManagement.Application.Contracts", "modules\feature\RuiChen.AbpPro.FeatureManagement.Application.Contracts\RuiChen.AbpPro.FeatureManagement.Application.Contracts.csproj", "{DE00DB6D-54B2-431F-9A1A-E06E291FC586}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RuiChen.AbpPro.FeatureManagement.HttpApi", "modules\feature\RuiChen.AbpPro.FeatureManagement.HttpApi\RuiChen.AbpPro.FeatureManagement.HttpApi.csproj", "{DB161F6C-CED5-4021-A9DD-9A60A4C7BBB3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "settings", "settings", "{58333C57-EE6A-4BE1-A150-5B34F9F7C11C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RuiChen.AbpPro.SettingManagement.Application", "modules\settings\RuiChen.AbpPro.SettingManagement.Application\RuiChen.AbpPro.SettingManagement.Application.csproj", "{95A51E25-FA72-4766-8FB1-F3CFA7B12FCC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RuiChen.AbpPro.SettingManagement.Application.Contracts", "modules\settings\RuiChen.AbpPro.SettingManagement.Application.Contracts\RuiChen.AbpPro.SettingManagement.Application.Contracts.csproj", "{AD092FA9-543F-49D2-8C81-8E2C6880B552}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RuiChen.AbpPro.SettingManagement.HttpApi", "modules\settings\RuiChen.AbpPro.SettingManagement.HttpApi\RuiChen.AbpPro.SettingManagement.HttpApi.csproj", "{EB5008AA-DA04-4599-B10E-F5C9F3E2D55D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -192,6 +208,30 @@ Global
 		{26CA4651-83EF-46CF-BAEB-8AC04166EAA4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{26CA4651-83EF-46CF-BAEB-8AC04166EAA4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{26CA4651-83EF-46CF-BAEB-8AC04166EAA4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6AC46B14-8721-4E30-AC79-B55085D86927}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6AC46B14-8721-4E30-AC79-B55085D86927}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6AC46B14-8721-4E30-AC79-B55085D86927}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6AC46B14-8721-4E30-AC79-B55085D86927}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DE00DB6D-54B2-431F-9A1A-E06E291FC586}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DE00DB6D-54B2-431F-9A1A-E06E291FC586}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DE00DB6D-54B2-431F-9A1A-E06E291FC586}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DE00DB6D-54B2-431F-9A1A-E06E291FC586}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DB161F6C-CED5-4021-A9DD-9A60A4C7BBB3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DB161F6C-CED5-4021-A9DD-9A60A4C7BBB3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DB161F6C-CED5-4021-A9DD-9A60A4C7BBB3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DB161F6C-CED5-4021-A9DD-9A60A4C7BBB3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{95A51E25-FA72-4766-8FB1-F3CFA7B12FCC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{95A51E25-FA72-4766-8FB1-F3CFA7B12FCC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{95A51E25-FA72-4766-8FB1-F3CFA7B12FCC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{95A51E25-FA72-4766-8FB1-F3CFA7B12FCC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AD092FA9-543F-49D2-8C81-8E2C6880B552}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AD092FA9-543F-49D2-8C81-8E2C6880B552}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AD092FA9-543F-49D2-8C81-8E2C6880B552}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AD092FA9-543F-49D2-8C81-8E2C6880B552}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EB5008AA-DA04-4599-B10E-F5C9F3E2D55D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EB5008AA-DA04-4599-B10E-F5C9F3E2D55D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EB5008AA-DA04-4599-B10E-F5C9F3E2D55D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EB5008AA-DA04-4599-B10E-F5C9F3E2D55D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -228,5 +268,13 @@ Global
 		{EC80CF9A-F142-47A1-B121-61F9D1018E64} = {61EB634A-D81D-4C67-A1BE-96D1AC6E5CAE}
 		{2763ED45-E349-40AE-9EA6-EBD1A9F1EFFC} = {61EB634A-D81D-4C67-A1BE-96D1AC6E5CAE}
 		{26CA4651-83EF-46CF-BAEB-8AC04166EAA4} = {61EB634A-D81D-4C67-A1BE-96D1AC6E5CAE}
+		{CA7DE770-860D-4197-BC5F-6FC3D4BD4C17} = {D46B5DB7-EF85-45B6-9369-B0F87DB6EDC1}
+		{6AC46B14-8721-4E30-AC79-B55085D86927} = {CA7DE770-860D-4197-BC5F-6FC3D4BD4C17}
+		{DE00DB6D-54B2-431F-9A1A-E06E291FC586} = {CA7DE770-860D-4197-BC5F-6FC3D4BD4C17}
+		{DB161F6C-CED5-4021-A9DD-9A60A4C7BBB3} = {CA7DE770-860D-4197-BC5F-6FC3D4BD4C17}
+		{58333C57-EE6A-4BE1-A150-5B34F9F7C11C} = {D46B5DB7-EF85-45B6-9369-B0F87DB6EDC1}
+		{95A51E25-FA72-4766-8FB1-F3CFA7B12FCC} = {58333C57-EE6A-4BE1-A150-5B34F9F7C11C}
+		{AD092FA9-543F-49D2-8C81-8E2C6880B552} = {58333C57-EE6A-4BE1-A150-5B34F9F7C11C}
+		{EB5008AA-DA04-4599-B10E-F5C9F3E2D55D} = {58333C57-EE6A-4BE1-A150-5B34F9F7C11C}
 	EndGlobalSection
 EndGlobal
