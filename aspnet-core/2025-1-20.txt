@@ -1,0 +1,5 @@
+
+
+dotnet new classlib -o modules/identity/RuiChen.AbpPro.Identity.AspNetCore
+
+dotnet sln RuiChen.AbpPro.sln add modules/identity/RuiChen.AbpPro.Identity.AspNetCore
