@@ -151,7 +151,7 @@ namespace RuiChen.AbpPro.Admin.HttpApi.Host
 
             app.UseSwaggerUI(options =>
             {
-                options.SwaggerEndpoint("/swagger/v1/swagger.json", "RuiChenAdmin.AbpPro.Admin API");
+                options.SwaggerEndpoint("/swagger/v1/swagger.json", "RuiChenAdmin API");
             });
 
             app.UseAuditing();

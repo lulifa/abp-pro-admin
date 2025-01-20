@@ -171,6 +171,11 @@ namespace RuiChen.AbpPro.Admin.HttpApi.Host
                             new string[] { }
                         }
                     });
+
+                    options.OperationFilter<TenantHeaderParameter>();
+
+                    options.OperationFilter<LanguageHeaderParameter>();
+
                 });
         }
 
