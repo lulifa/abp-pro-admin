@@ -1,10 +1,12 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using Asp.Versioning;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Volo.Abp.Application.Dtos;
 
 namespace RuiChen.AbpPro.SettingManagement
 {
     [Route("api/setting-management/settings/definitions")]
+    [ControllerName("SettingDefinition")]
     public class SettingDefinitionController : AbpSettingControllerBase, ISettingDefinitionAppService
     {
         private readonly ISettingDefinitionAppService _service;

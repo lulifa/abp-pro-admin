@@ -1,10 +1,11 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using Asp.Versioning;
 using Microsoft.AspNetCore.Mvc;
 using Volo.Abp.Application.Dtos;
 
 namespace RuiChen.AbpPro.PermissionManagement
 {
     [Route("api/permission-management/definitions")]
+    [ControllerName("PermissionDefinition")]
     public class PermissionDefinitionController : PermissionManagementControllerBase, IPermissionDefinitionAppService
     {
         private readonly IPermissionDefinitionAppService service;

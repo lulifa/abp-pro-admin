@@ -1,9 +1,11 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using Asp.Versioning;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace RuiChen.AbpPro.SettingManagement
 {
     [Route("api/setting-management/settings")]
+    [ControllerName("Setting")]
     public class SettingController : AbpSettingControllerBase, ISettingAppService, ISettingTestAppService
     {
         private readonly ISettingAppService _settingAppService;

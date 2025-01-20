@@ -17,16 +17,7 @@
     <PackageReference Include="Volo.Abp.Autofac" />
     <PackageReference Include="Volo.Abp.AspNetCore" />
     <PackageReference Include="Volo.Abp.AspNetCore.Serilog" />
-    <PackageReference Include="Volo.Abp.PermissionManagement.EntityFrameworkCore" />
-
-
     <PackageReference Include="Volo.Abp.EntityFrameworkCore.MySQL" />
-
-    <PackageReference Include="Volo.Abp.PermissionManagement.Application"  />
-
-
-
-
 
   </ItemGroup>
 
@@ -50,6 +41,11 @@
     <ProjectReference Include="..\..\modules\openIddict\RuiChen.AbpPro.OpenIddict.HttpApi\RuiChen.AbpPro.OpenIddict.HttpApi.csproj" />
     <ProjectReference Include="..\..\modules\openIddict\RuiChen.AbpPro.OpenIddict.Application\RuiChen.AbpPro.OpenIddict.Application.csproj" />
     <PackageReference Include="Volo.Abp.OpenIddict.EntityFrameworkCore" />
+    
+
+    <ProjectReference Include="..\..\modules\permission\RuiChen.AbpPro.PermissionManagement.HttpApi\RuiChen.AbpPro.PermissionManagement.HttpApi.csproj" />
+    <ProjectReference Include="..\..\modules\permission\RuiChen.AbpPro.PermissionManagement.Application\RuiChen.AbpPro.PermissionManagement.Application.csproj" />
+    <PackageReference Include="Volo.Abp.PermissionManagement.EntityFrameworkCore" />
 
 
     <ProjectReference Include="..\..\modules\saas\RuiChen.AbpPro.Saas.HttpApi\RuiChen.AbpPro.Saas.HttpApi.csproj" />

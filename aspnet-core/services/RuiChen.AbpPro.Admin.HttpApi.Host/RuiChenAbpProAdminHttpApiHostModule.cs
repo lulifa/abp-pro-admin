@@ -2,6 +2,7 @@
 using RuiChen.AbpPro.FeatureManagement;
 using RuiChen.AbpPro.Identity;
 using RuiChen.AbpPro.OpenIddict;
+using RuiChen.AbpPro.PermissionManagement;
 using RuiChen.AbpPro.Saas;
 using RuiChen.AbpPro.SettingManagement;
 using Volo.Abp;
@@ -13,7 +14,6 @@ using Volo.Abp.Caching;
 using Volo.Abp.FeatureManagement.EntityFrameworkCore;
 using Volo.Abp.Modularity;
 using Volo.Abp.OpenIddict.EntityFrameworkCore;
-using Volo.Abp.PermissionManagement;
 using Volo.Abp.PermissionManagement.EntityFrameworkCore;
 using Volo.Abp.SettingManagement.EntityFrameworkCore;
 
@@ -39,6 +39,11 @@ namespace RuiChen.AbpPro.Admin.HttpApi.Host
         typeof(AbpOpenIddictEntityFrameworkCoreModule),
 
 
+        typeof(AbpPermissionManagementHttpApiModule),
+        typeof(AbpPermissionManagementApplicationModule),
+        typeof(AbpPermissionManagementEntityFrameworkCoreModule),
+
+
         typeof(AbpSaasHttpApiModule),
         typeof(AbpSaasApplicationModule),
         typeof(AbpSaasEntityFrameworkCoreModule),
@@ -50,10 +55,6 @@ namespace RuiChen.AbpPro.Admin.HttpApi.Host
 
 
         typeof(AbpAspNetCoreMvcUiBasicThemeModule),
-
-
-        typeof(AbpPermissionManagementApplicationModule),
-        typeof(AbpPermissionManagementEntityFrameworkCoreModule),
 
 
         typeof(AbpCachingModule),
