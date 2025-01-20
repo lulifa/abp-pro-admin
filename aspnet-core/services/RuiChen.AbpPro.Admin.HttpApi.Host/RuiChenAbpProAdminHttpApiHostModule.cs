@@ -3,7 +3,6 @@ using RuiChen.AbpPro.Saas;
 using Volo.Abp;
 using Volo.Abp.Account;
 using Volo.Abp.Account.Web;
-using Volo.Abp.AspNetCore.Mvc.UI.MultiTenancy;
 using Volo.Abp.AspNetCore.Mvc.UI.Theme.Basic;
 using Volo.Abp.AspNetCore.Serilog;
 using Volo.Abp.Autofac;
@@ -35,6 +34,8 @@ namespace RuiChen.AbpPro.Admin.HttpApi.Host
         typeof(AbpPermissionManagementApplicationModule),
         typeof(AbpPermissionManagementEntityFrameworkCoreModule),
 
+        typeof(AbpAspNetCoreMvcUiBasicThemeModule),
+
         typeof(AbpFeatureManagementApplicationModule),
         typeof(AbpFeatureManagementEntityFrameworkCoreModule),
 
@@ -45,8 +46,7 @@ namespace RuiChen.AbpPro.Admin.HttpApi.Host
         typeof(AbpSettingManagementApplicationModule),
         typeof(AbpSettingManagementEntityFrameworkCoreModule),
 
-        typeof(AbpAspNetCoreMvcUiMultiTenancyModule),
-        typeof(AbpAspNetCoreMvcUiBasicThemeModule),
+        
         typeof(AbpCachingModule),
         typeof(AbpAspNetCoreSerilogModule),
         typeof(AbpAutofacModule)
