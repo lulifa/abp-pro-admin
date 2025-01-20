@@ -3,11 +3,23 @@ using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Server.Kestrel.Core;
 using Microsoft.OpenApi.Models;
 using OpenIddict.Server.AspNetCore;
+using RuiChen.AbpPro.OpenIddict;
 using RuiChen.AbpPro.Saas;
+using RuiChen.AbpPro.Wrapper;
+using System.Text.Encodings.Web;
+using System.Text.Unicode;
+using Volo.Abp.Auditing;
+using Volo.Abp.Authorization.Permissions;
 using Volo.Abp.EntityFrameworkCore;
+using Volo.Abp.FeatureManagement;
+using Volo.Abp.Features;
 using Volo.Abp.GlobalFeatures;
+using Volo.Abp.Json.SystemTextJson;
+using Volo.Abp.Json;
 using Volo.Abp.Localization;
 using Volo.Abp.MultiTenancy;
+using Volo.Abp.PermissionManagement;
+using Volo.Abp.SettingManagement;
 using Volo.Abp.Threading;
 using Volo.Abp.VirtualFileSystem;
 
@@ -39,6 +51,34 @@ namespace RuiChen.AbpPro.Admin.HttpApi.Host
                     options.UseLocalServer();
                     options.UseAspNetCore();
                 });
+            });
+        }
+
+        private void ConfigureWrapper()
+        {
+            Configure<AbpWrapperOptions>(options =>
+            {
+                options.IsEnabled = true;
+            });
+        }
+
+        private void ConfigureAuditing(IConfiguration configuration)
+        {
+            Configure<AbpAuditingOptions>(options =>
+            {
+                // 启用对 GET 请求的审计
+                options.IsEnabledForGetRequests = true;
+
+                // 设置应用程序名称
+                options.ApplicationName = ApplicationName;
+
+                var allEntitiesSelectorIsEnabled = configuration["Auditing:AllEntitiesSelector"];
+                if (allEntitiesSelectorIsEnabled.IsNullOrWhiteSpace() ||
+                    (bool.TryParse(allEntitiesSelectorIsEnabled, out var enabled) && enabled))
+                {
+                    // 启用对所有实体的历史记录
+                    options.EntityHistorySelectors.AddAllEntities();
+                }
             });
         }
 
@@ -142,6 +182,68 @@ namespace RuiChen.AbpPro.Admin.HttpApi.Host
             });
         }
 
+        private void ConfigureJsonSerializer(IConfiguration configuration)
+        {
+            // 统一时间日期格式
+            Configure<AbpJsonOptions>(options =>
+            {
+                var jsonConfiguration = configuration.GetSection("Json");
+                if (jsonConfiguration.Exists())
+                {
+                    jsonConfiguration.Bind(options);
+                }
+            });
+            // 中文序列化的编码问题
+            Configure<AbpSystemTextJsonSerializerOptions>(options =>
+            {
+                options.JsonSerializerOptions.Encoder = JavaScriptEncoder.Create(UnicodeRanges.All);
+            });
+        }
+
+        private void ConfigureFeatureManagement(IConfiguration configuration)
+        {
+            if (configuration.GetValue<bool>("FeatureManagement:IsDynamicStoreEnabled"))
+            {
+                Configure<FeatureManagementOptions>(options =>
+                {
+                    options.IsDynamicFeatureStoreEnabled = true;
+                });
+            }
+            Configure<FeatureManagementOptions>(options =>
+            {
+                options.ProviderPolicies[EditionFeatureValueProvider.ProviderName] = AbpSaasPermissions.Editions.ManageFeatures;
+                options.ProviderPolicies[TenantFeatureValueProvider.ProviderName] = AbpSaasPermissions.Tenants.ManageFeatures;
+            });
+        }
+
+        private void ConfigureSettingManagement(IConfiguration configuration)
+        {
+            if (configuration.GetValue<bool>("SettingManagement:IsDynamicStoreEnabled"))
+            {
+                Configure<SettingManagementOptions>(options =>
+                {
+                    options.IsDynamicSettingStoreEnabled = true;
+                });
+            }
+        }
+
+        private void ConfigurePermissionManagement(IConfiguration configuration)
+        {
+            if (configuration.GetValue<bool>("PermissionManagement:IsDynamicStoreEnabled"))
+            {
+                Configure<PermissionManagementOptions>(options =>
+                {
+                    options.IsDynamicPermissionStoreEnabled = true;
+                });
+            }
+            Configure<PermissionManagementOptions>(options =>
+            {
+                // Rename IdentityServer.Client.ManagePermissions
+                // See https://github.com/abpframework/abp/blob/dev/modules/identityserver/src/Volo.Abp.PermissionManagement.Domain.IdentityServer/Volo/Abp/PermissionManagement/IdentityServer/AbpPermissionManagementDomainIdentityServerModule.cs
+                options.ProviderPolicies[ClientPermissionValueProvider.ProviderName] = AbpOpenIddictPermissions.Applications.ManagePermissions;
+            });
+        }
+
         private void ConfigureCors(IServiceCollection services, IConfiguration configuration)
         {
             services.AddCors(options =>
@@ -156,6 +258,7 @@ namespace RuiChen.AbpPro.Admin.HttpApi.Host
                                 .ToArray()
                         )
                         .WithAbpExposedHeaders()
+                        .WithAbpWrapExposedHeaders()
                         .SetIsOriginAllowedToAllowWildcardSubdomains()
                         .AllowAnyHeader()
                         .AllowAnyMethod()

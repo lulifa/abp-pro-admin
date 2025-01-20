@@ -112,6 +112,16 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "authorization", "authorizat
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RuiChen.AbpPro.Authorization.OrganizationUnits", "framework\authorization\RuiChen.AbpPro.Authorization.OrganizationUnits\RuiChen.AbpPro.Authorization.OrganizationUnits.csproj", "{24D413AB-F0F2-4923-89B4-E320C6A99230}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "wrap", "wrap", "{C77979E9-D7F6-47FC-B630-09FB4801898D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RuiChen.AbpPro.AspNetCore.Mvc.Wrapper", "framework\wrap\RuiChen.AbpPro.AspNetCore.Mvc.Wrapper\RuiChen.AbpPro.AspNetCore.Mvc.Wrapper.csproj", "{83150F26-180C-43F1-A065-941C8EC99FB0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RuiChen.AbpPro.AspNetCore.Wrapper", "framework\wrap\RuiChen.AbpPro.AspNetCore.Wrapper\RuiChen.AbpPro.AspNetCore.Wrapper.csproj", "{CD6992B4-8A1D-41BC-8FC0-37B7BEA3D1C4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RuiChen.AbpPro.Wrapper", "framework\wrap\RuiChen.AbpPro.Wrapper\RuiChen.AbpPro.Wrapper.csproj", "{7A4B074A-E09C-4CB6-8B61-90C456D32ED0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RuiChen.AbpPro.AspNetCore.HttpOverrides", "framework\common\RuiChen.AbpPro.AspNetCore.HttpOverrides\RuiChen.AbpPro.AspNetCore.HttpOverrides.csproj", "{02859197-2CF0-46F9-B52D-6FE40A88101B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -266,6 +276,22 @@ Global
 		{24D413AB-F0F2-4923-89B4-E320C6A99230}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{24D413AB-F0F2-4923-89B4-E320C6A99230}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{24D413AB-F0F2-4923-89B4-E320C6A99230}.Release|Any CPU.Build.0 = Release|Any CPU
+		{83150F26-180C-43F1-A065-941C8EC99FB0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{83150F26-180C-43F1-A065-941C8EC99FB0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{83150F26-180C-43F1-A065-941C8EC99FB0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{83150F26-180C-43F1-A065-941C8EC99FB0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CD6992B4-8A1D-41BC-8FC0-37B7BEA3D1C4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CD6992B4-8A1D-41BC-8FC0-37B7BEA3D1C4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CD6992B4-8A1D-41BC-8FC0-37B7BEA3D1C4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CD6992B4-8A1D-41BC-8FC0-37B7BEA3D1C4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7A4B074A-E09C-4CB6-8B61-90C456D32ED0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7A4B074A-E09C-4CB6-8B61-90C456D32ED0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7A4B074A-E09C-4CB6-8B61-90C456D32ED0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7A4B074A-E09C-4CB6-8B61-90C456D32ED0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{02859197-2CF0-46F9-B52D-6FE40A88101B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{02859197-2CF0-46F9-B52D-6FE40A88101B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{02859197-2CF0-46F9-B52D-6FE40A88101B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{02859197-2CF0-46F9-B52D-6FE40A88101B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -317,5 +343,10 @@ Global
 		{77DF17F5-52D2-442D-AC7C-33EA506216F1} = {C9DC38C5-17EA-44C7-8A8B-594016695838}
 		{982DEF13-7060-4611-9985-FE7FF3334EC2} = {0BB834A0-9CB7-4E0E-89F4-5FDE8CB9BD87}
 		{24D413AB-F0F2-4923-89B4-E320C6A99230} = {982DEF13-7060-4611-9985-FE7FF3334EC2}
+		{C77979E9-D7F6-47FC-B630-09FB4801898D} = {0BB834A0-9CB7-4E0E-89F4-5FDE8CB9BD87}
+		{83150F26-180C-43F1-A065-941C8EC99FB0} = {C77979E9-D7F6-47FC-B630-09FB4801898D}
+		{CD6992B4-8A1D-41BC-8FC0-37B7BEA3D1C4} = {C77979E9-D7F6-47FC-B630-09FB4801898D}
+		{7A4B074A-E09C-4CB6-8B61-90C456D32ED0} = {C77979E9-D7F6-47FC-B630-09FB4801898D}
+		{02859197-2CF0-46F9-B52D-6FE40A88101B} = {49469916-6EAF-4F48-B67D-3239DC1D3B29}
 	EndGlobalSection
 EndGlobal

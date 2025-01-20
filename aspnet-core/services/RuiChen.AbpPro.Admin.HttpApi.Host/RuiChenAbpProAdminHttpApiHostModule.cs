@@ -1,4 +1,6 @@
 ﻿using RuiChen.AbpPro.Account;
+using RuiChen.AbpPro.AspNetCore.HttpOverrides;
+using RuiChen.AbpPro.AspNetCore.Mvc.Wrapper;
 using RuiChen.AbpPro.FeatureManagement;
 using RuiChen.AbpPro.Identity;
 using RuiChen.AbpPro.OpenIddict;
@@ -54,6 +56,8 @@ namespace RuiChen.AbpPro.Admin.HttpApi.Host
         typeof(AbpSettingManagementEntityFrameworkCoreModule),
 
 
+        typeof(AbpAspNetCoreMvcWrapperModule),
+        typeof(AbpAspNetCoreHttpOverridesModule),
         typeof(AbpAspNetCoreMvcUiBasicThemeModule),
 
 
@@ -80,6 +84,10 @@ namespace RuiChen.AbpPro.Admin.HttpApi.Host
             var hostingEnvironment = services.GetHostingEnvironment();
             var configuration = services.GetConfiguration();
 
+            ConfigureWrapper();
+
+            ConfigureAuditing(configuration);
+
             ConfigureDbContext();
 
             ConfigureLocalization();
@@ -93,6 +101,14 @@ namespace RuiChen.AbpPro.Admin.HttpApi.Host
             ConfigureSwagger(services);
 
             ConfigureMultiTenancy(configuration);
+
+            ConfigureJsonSerializer(configuration);
+
+            ConfigureFeatureManagement(configuration);
+
+            ConfigureSettingManagement(configuration);
+
+            ConfigurePermissionManagement(configuration);
 
             ConfigureCors(services, configuration);
 

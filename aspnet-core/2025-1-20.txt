@@ -47,3 +47,17 @@ dotnet sln RuiChen.AbpPro.sln add modules/permission/RuiChen.AbpPro.PermissionMa
 dotnet new classlib -o framework/authorization/RuiChen.AbpPro.Authorization.OrganizationUnits
 
 dotnet sln RuiChen.AbpPro.sln add framework/authorization/RuiChen.AbpPro.Authorization.OrganizationUnits
+
+
+
+dotnet new classlib -o framework/wrap/RuiChen.AbpPro.AspNetCore.Mvc.Wrapper
+dotnet new classlib -o framework/wrap/RuiChen.AbpPro.AspNetCore.Wrapper
+dotnet new classlib -o framework/wrap/RuiChen.AbpPro.Wrapper
+
+dotnet sln RuiChen.AbpPro.sln add framework/wrap/RuiChen.AbpPro.AspNetCore.Mvc.Wrapper
+dotnet sln RuiChen.AbpPro.sln add framework/wrap/RuiChen.AbpPro.AspNetCore.Wrapper
+dotnet sln RuiChen.AbpPro.sln add framework/wrap/RuiChen.AbpPro.Wrapper
+
+dotnet new classlib -o framework/common/RuiChen.AbpPro.AspNetCore.HttpOverrides
+
+dotnet sln RuiChen.AbpPro.sln add framework/common/RuiChen.AbpPro.AspNetCore.HttpOverrides
