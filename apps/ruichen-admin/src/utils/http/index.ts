@@ -11,13 +11,14 @@ import type {
 } from "./types.d";
 import { stringify } from "qs";
 import NProgress from "../progress";
-import { getToken, formatToken } from "@/utils/auth";
 import { useUserStoreHook } from "@/store/modules/user";
+import { getToken, formatToken } from "@/utils/auth";
+import { ResultEnum } from "@/enums/httpEnum";
 
 // 相关配置请参考：www.axios-js.com/zh-cn/docs/#axios-request-config-1
 const defaultConfig: AxiosRequestConfig = {
   // 请求超时时间
-  timeout: 10000,
+  timeout: 30 * 1000,
   headers: {
     Accept: "application/json, text/plain, */*",
     "Content-Type": "application/json",
@@ -26,7 +27,32 @@ const defaultConfig: AxiosRequestConfig = {
   // 数组格式参数序列化（https://github.com/axios/axios/issues/5142）
   paramsSerializer: {
     serialize: stringify as unknown as CustomParamsSerializer
-  }
+  },
+  xsrfCookieName: "XSRF-TOKEN",
+  // ASP.NET Core
+  xsrfHeaderName: "RequestVerificationToken",
+  // Wrap
+  transformResponse: [
+    (data: any, headers: any) => {
+      debugger;
+      // 如果返回的是空字符串或者空数据，处理为 null
+      if (!data || data === "") {
+        return null; // 可以根据业务需要返回 null 或空对象
+      }
+      let parseData = JSON.parse(data);
+      // 检查 ABP 包装结果标记
+      if (headers["_abpwrapresult"] === "true") {
+        const { code, result } = parseData;
+        const hasSuccess =
+          data && Reflect.has(parseData, "code") && code === ResultEnum.CODE;
+
+        if (hasSuccess) {
+          return result; // 成功则返回结果
+        }
+      }
+      return parseData; // 默认返回解析后的数据
+    }
+  ]
 };
 
 class PureHttp {
@@ -73,14 +99,13 @@ class PureHttp {
           return config;
         }
         /** 请求白名单，放置一些不需要`token`的接口（通过设置请求白名单，防止`token`过期后再请求造成的死循环问题） */
-        const whiteList = ["/refresh-token", "/login"];
+        const whiteList = ["connect/token"];
         return whiteList.some(url => config.url.endsWith(url))
           ? config
           : new Promise(resolve => {
               const data = getToken();
               if (data) {
-                const now = new Date().getTime();
-                const expired = parseInt(data.expires) - now <= 0;
+                const expired = parseInt(data.expires) - Date.now() <= 0;
                 if (expired) {
                   if (!PureHttp.isRefreshing) {
                     PureHttp.isRefreshing = true;
@@ -88,7 +113,7 @@ class PureHttp {
                     useUserStoreHook()
                       .handRefreshToken({ refreshToken: data.refreshToken })
                       .then(res => {
-                        const token = res.data.accessToken;
+                        const token = res.access_token;
                         config.headers["Authorization"] = formatToken(token);
                         PureHttp.requests.forEach(cb => cb(token));
                         PureHttp.requests = [];

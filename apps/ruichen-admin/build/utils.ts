@@ -51,12 +51,21 @@ const __APP_INFO__ = {
 const wrapperEnv = (envConf: Recordable): ViteEnv => {
   // 默认值
   const ret: ViteEnv = {
-    VITE_PORT: 8848,
+    VITE_PORT: 3100,
     VITE_PUBLIC_PATH: "",
     VITE_ROUTER_HISTORY: "",
     VITE_CDN: false,
     VITE_HIDE_HOME: "false",
-    VITE_COMPRESSION: "none"
+    VITE_COMPRESSION: "none",
+    VITE_CLIENT_ID: "vue-admin-client",
+    VITE_CLIENT_SECRET: "1q2w3e*",
+    VITE_SCOPE:
+      "openid email address phone profile offline_access ruichen-abppro-application",
+    VITE_GRANT_TYPE_PASSWORD: "password",
+    VITE_GRANT_TYPE_PHONE: "phone_verify",
+    VITE_GRANT_TYPE_PORTAL: "portal",
+    VITE_GRANT_TYPE_REFRESH: "refresh_token",
+    VITE_API: "http://127.0.0.1:44385"
   };
 
   for (const envName of Object.keys(envConf)) {

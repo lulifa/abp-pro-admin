@@ -18,7 +18,6 @@ import {
 } from "@pureadmin/utils";
 import { getConfig } from "@/config";
 import { buildHierarchyTree } from "@/utils/tree";
-import { userKey, type DataInfo } from "@/utils/auth";
 import { type menuType, routerArrays } from "@/layout/types";
 import { useMultiTagsStoreHook } from "@/store/modules/multiTags";
 import { usePermissionStoreHook } from "@/store/modules/permission";
@@ -27,7 +26,8 @@ const IFrame = () => import("@/layout/frame.vue");
 const modulesRoutes = import.meta.glob("/src/views/**/*.{vue,tsx}");
 
 // 动态路由
-import { getAsyncRoutes } from "@/api/routes";
+import { getAsyncRoutes } from "@/api/system/system-menu/index";
+import { useUserStoreHook } from "@/store/modules/user";
 
 function handRank(routeInfo: any) {
   const { name, path, parentId, meta } = routeInfo;
@@ -83,8 +83,7 @@ function isOneOfArray(a: Array<string>, b: Array<string>) {
 
 /** 从localStorage里取出当前登录用户的角色roles，过滤无权限的菜单 */
 function filterNoPermissionTree(data: RouteComponent[]) {
-  const currentRoles =
-    storageLocal().getItem<DataInfo<number>>(userKey)?.roles ?? [];
+  const currentRoles = useUserStoreHook().getRoles ?? [];
   const newTree = cloneDeep(data).filter((v: any) =>
     isOneOfArray(v.meta?.roles, currentRoles)
   );
@@ -149,6 +148,15 @@ function addPathMatch() {
   }
 }
 
+function generateMenuTree(array: any, id = null, parentIdKey = "parentId") {
+  return array
+    .filter((item: any) => item[parentIdKey] === id)
+    .map((item: any) => ({
+      ...item,
+      children: generateMenuTree(array, item.id)
+    }));
+}
+
 /** 处理动态路由（后端返回的路由） */
 function handleAsyncRoutes(routeList) {
   if (routeList.length === 0) {
@@ -176,6 +184,7 @@ function handleAsyncRoutes(routeList) {
         }
       }
     );
+    debugger;
     usePermissionStoreHook().handleWholeMenus(routeList);
   }
   if (!useMultiTagsStoreHook().getMultiTagsCache) {
@@ -202,7 +211,8 @@ function initRouter() {
       });
     } else {
       return new Promise(resolve => {
-        getAsyncRoutes().then(({ data }) => {
+        getAsyncRoutes().then(res => {
+          const data = generateMenuTree(res.items);
           handleAsyncRoutes(cloneDeep(data));
           storageLocal().setItem(key, data);
           resolve(router);
@@ -211,10 +221,14 @@ function initRouter() {
     }
   } else {
     return new Promise(resolve => {
-      getAsyncRoutes().then(({ data }) => {
-        handleAsyncRoutes(cloneDeep(data));
-        resolve(router);
-      });
+      // getAsyncRoutes().then(res => {
+      //   const data = generateMenuTree(res.items);
+      //   handleAsyncRoutes(cloneDeep(data));
+      //   resolve(router);
+      // });
+      const data = generateMenuTree([]);
+      handleAsyncRoutes(cloneDeep(data));
+      resolve(router);
     });
   }
 }
@@ -320,6 +334,10 @@ function addAsyncRoutes(arrRoutes: Array<RouteRecordRaw>) {
         : modulesRoutesKeys.findIndex(ev => ev.includes(v.path));
       v.component = modulesRoutes[modulesRoutesKeys[index]];
     }
+    // TODO后续这地方要处理下
+    v.meta.icon = "ep:menu";
+    v.meta.showLink = true;
+    v.meta.roles = ["admin"];
     if (v?.children && v.children.length) {
       addAsyncRoutes(v.children);
     }

@@ -28,6 +28,7 @@ defineOptions({
 });
 const router = useRouter();
 const loading = ref(false);
+const disabled = ref(false);
 const ruleFormRef = ref<FormInstance>();
 
 const { initStorage } = useLayout();
@@ -46,27 +47,36 @@ const ruleForm = reactive({
 
 const onLogin = async (formEl: FormInstance | undefined) => {
   if (!formEl) return;
-  await formEl.validate((valid, fields) => {
+
+  // 先验证表单
+  await formEl.validate(async (valid, fields) => {
     if (valid) {
       loading.value = true;
-      useUserStoreHook()
-        .loginByUsername({
+      try {
+        const res = await useUserStoreHook().loginApi({
           username: ruleForm.username,
           password: ruleForm.password
-        })
-        .then(res => {
-          if (res.success) {
-            // 获取后端路由
-            return initRouter().then(() => {
-              router.push(getTopMenu(true).path).then(() => {
-                message(t("login.pureLoginSuccess"), { type: "success" });
-              });
-            });
-          } else {
-            message(t("login.pureLoginFail"), { type: "error" });
-          }
-        })
-        .finally(() => (loading.value = false));
+        });
+        if (res.access_token && res.refresh_token) {
+          // 初始化路由
+          await initRouter();
+
+          disabled.value = true;
+
+          const targetPath = getTopMenu(true).path;
+
+          await router.push(targetPath);
+
+          message(t("login.pureLoginSuccess"), { type: "success" });
+
+          disabled.value = false;
+        } else {
+          message(t("login.pureLoginFail"), { type: "error" });
+        }
+      } finally {
+        // 无论成功与否，恢复 loading 状态
+        loading.value = false;
+      }
     }
   });
 };
@@ -187,6 +197,7 @@ onBeforeUnmount(() => {
                 size="default"
                 type="primary"
                 :loading="loading"
+                :disabled="disabled"
                 @click="onLogin(ruleFormRef)"
               >
                 {{ t("login.pureLogin") }}

@@ -1,5 +1,7 @@
 import type { RouteRecordName } from "vue-router";
 
+import type { GetUserInfoModel } from "@/api/system/system-user/model";
+
 export type cacheType = {
   mode: string;
   name?: RouteRecordName;
@@ -20,6 +22,7 @@ export type appType = {
   layout: string;
   device: string;
   viewportSize: { width: number; height: number };
+  sortSwap: boolean;
 };
 
 export type multiType = {
@@ -37,11 +40,19 @@ export type setType = {
 };
 
 export type userType = {
-  avatar?: string;
-  username?: string;
-  nickname?: string;
+  userInfo: Nullable<GetUserInfoModel>;
+  /** sso标记,用于后台退出 */
+  sso?: boolean;
   roles?: Array<string>;
   permissions?: Array<string>;
+  verifyCode?: string;
+  currentPage?: number;
   isRemembered?: boolean;
   loginDay?: number;
+};
+
+export type tokenType = {
+  accessToken: string;
+  refreshToken: string;
+  expires: number;
 };

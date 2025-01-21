@@ -12,6 +12,8 @@ import { injectResponsiveStorage } from "@/utils/responsive";
 import Table from "@pureadmin/table";
 import PureDescriptions from "@pureadmin/descriptions";
 
+import { useAbpStore } from "@/store/modules/abp";
+
 // 引入重置样式
 import "./style/reset.scss";
 // 导入公共样式
@@ -58,6 +60,10 @@ getPlatformConfig(app).then(async config => {
   app.use(router);
   await router.isReady();
   injectResponsiveStorage(app, config);
+
+  // abp默认初始化配置加载
+  await useAbpStore().initlizeAbpApplication();
+  await useAbpStore().initlizaAbpApiDefinition();
 
   app
     .use(MotionPlugin)
