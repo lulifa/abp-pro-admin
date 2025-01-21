@@ -22,6 +22,7 @@ using Volo.Abp.PermissionManagement;
 using Volo.Abp.SettingManagement;
 using Volo.Abp.Threading;
 using Volo.Abp.VirtualFileSystem;
+using Volo.Abp.Timing;
 
 namespace RuiChen.AbpPro.Admin.HttpApi.Host
 {
@@ -59,6 +60,14 @@ namespace RuiChen.AbpPro.Admin.HttpApi.Host
             Configure<AbpWrapperOptions>(options =>
             {
                 options.IsEnabled = true;
+            });
+        }
+
+        private void ConfigureClock(IConfiguration configuration)
+        {
+            Configure<AbpClockOptions>(options =>
+            {
+                configuration.GetSection("Clock").Bind(options);
             });
         }
 

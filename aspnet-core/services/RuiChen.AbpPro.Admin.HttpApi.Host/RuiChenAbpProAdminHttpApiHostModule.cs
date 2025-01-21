@@ -86,6 +86,8 @@ namespace RuiChen.AbpPro.Admin.HttpApi.Host
 
             ConfigureWrapper();
 
+            ConfigureClock(configuration);
+
             ConfigureAuditing(configuration);
 
             ConfigureDbContext();
