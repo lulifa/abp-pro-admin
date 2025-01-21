@@ -66,17 +66,14 @@ namespace RuiChen.AbpPro.Admin.HttpApi.Host
         {
             Configure<AbpAuditingOptions>(options =>
             {
-                // 启用对 GET 请求的审计
                 options.IsEnabledForGetRequests = true;
 
-                // 设置应用程序名称
                 options.ApplicationName = ApplicationName;
 
                 var allEntitiesSelectorIsEnabled = configuration["Auditing:AllEntitiesSelector"];
                 if (allEntitiesSelectorIsEnabled.IsNullOrWhiteSpace() ||
                     (bool.TryParse(allEntitiesSelectorIsEnabled, out var enabled) && enabled))
                 {
-                    // 启用对所有实体的历史记录
                     options.EntityHistorySelectors.AddAllEntities();
                 }
             });
