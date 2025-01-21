@@ -226,6 +226,7 @@ function initRouter() {
       //   handleAsyncRoutes(cloneDeep(data));
       //   resolve(router);
       // });
+      // TODO: 这里是模拟数据，后续需要删除
       const data = generateMenuTree([]);
       handleAsyncRoutes(cloneDeep(data));
       resolve(router);

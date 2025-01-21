@@ -88,4 +88,4 @@ login:
   pureLoginFail: Login Fail
   pureUsernameReg: Please enter username
   purePassWordReg: Please enter password
-  purePassWordRuleReg: The password format should be any combination of 8-18 digits
+  purePassWordRuleReg: The password format should be any combination of 6-18 digits

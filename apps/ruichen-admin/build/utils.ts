@@ -50,7 +50,7 @@ const __APP_INFO__ = {
 /** 处理环境变量 */
 const wrapperEnv = (envConf: Recordable): ViteEnv => {
   // 默认值
-  const ret: ViteEnv = {
+  const defaultEnv: ViteEnv = {
     VITE_PORT: 3100,
     VITE_PUBLIC_PATH: "",
     VITE_ROUTER_HISTORY: "",
@@ -65,8 +65,10 @@ const wrapperEnv = (envConf: Recordable): ViteEnv => {
     VITE_GRANT_TYPE_PHONE: "phone_verify",
     VITE_GRANT_TYPE_PORTAL: "portal",
     VITE_GRANT_TYPE_REFRESH: "refresh_token",
-    VITE_API: "http://127.0.0.1:44385"
+    VITE_API: ""
   };
+
+  const ret: ViteEnv = { ...defaultEnv };
 
   for (const envName of Object.keys(envConf)) {
     let realName = envConf[envName].replace(/\\n/g, "\n");
@@ -83,6 +85,13 @@ const wrapperEnv = (envConf: Recordable): ViteEnv => {
       process.env[envName] = JSON.stringify(realName);
     }
   }
+
+  for (const key of Object.keys(defaultEnv)) {
+    if (process.env[key] === undefined) {
+      process.env[key] = String(ret[key]);
+    }
+  }
+
   return ret;
 };
 
