@@ -184,7 +184,6 @@ function handleAsyncRoutes(routeList) {
         }
       }
     );
-    debugger;
     usePermissionStoreHook().handleWholeMenus(routeList);
   }
   if (!useMultiTagsStoreHook().getMultiTagsCache) {

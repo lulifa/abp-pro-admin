@@ -19,7 +19,7 @@ export interface TenantConnectionStringCreateOrUpdate {
 }
 
 export interface TenantDto extends ExtensibleAuditedEntityDto<string> {
-  name?: string;
+  name: string;
   editionId?: string;
   editionName?: string;
   isActive?: boolean;

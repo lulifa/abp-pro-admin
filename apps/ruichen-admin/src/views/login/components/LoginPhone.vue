@@ -30,7 +30,6 @@ const onLogin = async (formEl: FormInstance | undefined) => {
     if (valid) {
       loading.value = true;
       try {
-        debugger;
         // 模拟登录请求，需根据实际开发进行修改
         const res = await loginPhoneApi({
           phoneNumber: ruleForm.phone,

@@ -34,7 +34,6 @@ const defaultConfig: AxiosRequestConfig = {
   // Wrap
   transformResponse: [
     (data: any, headers: any) => {
-      debugger;
       // 如果返回的是空字符串或者空数据，处理为 null
       if (!data || data === "") {
         return null; // 可以根据业务需要返回 null 或空对象

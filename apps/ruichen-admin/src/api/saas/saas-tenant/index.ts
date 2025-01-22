@@ -25,7 +25,7 @@ export const GetListAsyncByInput = (input: TenantGetListInput) => {
 };
 
 export const CreateAsyncByInput = (input: TenantCreateDto) => {
-  return http.post<TenantDto>(baseUrlApi(`/api/saas/tenants`), {
+  return http.post<TenantDto>(baseUrlApi(`saas/tenants`), {
     data: input
   });
 };
