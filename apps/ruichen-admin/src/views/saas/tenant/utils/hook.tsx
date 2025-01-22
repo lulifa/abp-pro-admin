@@ -38,7 +38,9 @@ export function useSaasTenant() {
   });
 
   const formRef = ref();
+
   const dataList = ref([]);
+
   const loading = ref(true);
 
   const columns: TableColumnList = [
