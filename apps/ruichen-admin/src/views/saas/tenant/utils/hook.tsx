@@ -161,7 +161,7 @@ export function useSaasTenant() {
         name: "",
         editionId: null,
         isActive: true,
-        enableTime: `${new Date()}`,
+        enableTime: new Date().toISOString(),
         disableTime: null,
         concurrencyStamp: null,
         useSharedDatabase: true
@@ -183,10 +183,8 @@ export function useSaasTenant() {
         props.formInline.disableTime = res.disableTime;
         props.formInline.concurrencyStamp = res.concurrencyStamp;
       }
-      // 编辑只有基本信息
-      props.menuTypeOptions = props.menuTypeOptions.filter(
-        item => item.value === 0
-      );
+      // 编辑不需要tab页
+      props.menuTypeOptions = [];
     }
     return props;
   }

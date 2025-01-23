@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.Extensions.Logging;
 using Volo.Abp;
 using Volo.Abp.Application.Dtos;
 using Volo.Abp.Data;
@@ -15,15 +16,18 @@ namespace RuiChen.AbpPro.Saas
         private readonly ITenantRepository tenantRepository;
         private readonly ITenantManager tenantManager;
         private readonly IDistributedEventBus eventBus;
+        private readonly IConnectionStringChecker connectionStringChecker;
 
         public TenantAppService(
             ITenantRepository tenantRepository,
             ITenantManager tenantManager,
-            IDistributedEventBus eventBus)
+            IDistributedEventBus eventBus,
+            IConnectionStringChecker connectionStringChecker)
         {
             this.tenantRepository = tenantRepository;
             this.tenantManager = tenantManager;
             this.eventBus = eventBus;
+            this.connectionStringChecker = connectionStringChecker;
         }
 
 
@@ -32,7 +36,8 @@ namespace RuiChen.AbpPro.Saas
             var tenant = await tenantRepository.FindAsync(id);
             if (tenant == null)
             {
-                throw new UserFriendlyException(L["TenantNotFoundById", id]);
+                throw new BusinessException(AbpSaasErrorCodes.TenantIdOrNameNotFound)
+                .WithData("Tenant", id);
             }
 
             return ObjectMapper.Map<Tenant, TenantDto>(tenant);
@@ -43,7 +48,8 @@ namespace RuiChen.AbpPro.Saas
             var tenant = await tenantRepository.FindByNameAsync(name);
             if (tenant == null)
             {
-                throw new UserFriendlyException(L["TenantNotFoundByName", name]);
+                throw new BusinessException(AbpSaasErrorCodes.TenantIdOrNameNotFound)
+                .WithData("Tenant", name);
             }
             return ObjectMapper.Map<Tenant, TenantDto>(tenant);
         }
@@ -76,6 +82,7 @@ namespace RuiChen.AbpPro.Saas
 
             if (!input.UseSharedDatabase && !input.DefaultConnectionString.IsNullOrWhiteSpace())
             {
+                await CheckConnectionString(input.DefaultConnectionString);
                 tenant.SetDefaultConnectionString(input.DefaultConnectionString);
             }
 
@@ -83,6 +90,7 @@ namespace RuiChen.AbpPro.Saas
             {
                 foreach (var connectionString in input.ConnectionStrings)
                 {
+                    await CheckConnectionString(connectionString.Value, connectionString.Key);
                     tenant.SetConnectionString(connectionString.Key, connectionString.Value);
                 }
             }
@@ -153,12 +161,17 @@ namespace RuiChen.AbpPro.Saas
             }
 
             // 租户删除时查询会失效, 在删除前确认
-            var strategy = await FeatureChecker.GetAsync(SaasFeatures.Tenant.RecycleStrategy, RecycleStrategy.Recycle);
+            var recycleStrategy = RecycleStrategy.Recycle;
+            var strategySet = await FeatureChecker.GetOrNullAsync(SaasFeatures.Tenant.RecycleStrategy);
+            if (!strategySet.IsNullOrWhiteSpace() && Enum.TryParse<RecycleStrategy>(strategySet, out var strategy))
+            {
+                recycleStrategy = strategy;
+            }
             var eto = new TenantDeletedEto
             {
                 Id = tenant.Id,
                 Name = tenant.Name,
-                Strategy = strategy,
+                Strategy = recycleStrategy,
                 EntityVersion = tenant.EntityVersion,
                 DefaultConnectionString = tenant.FindDefaultConnectionString(),
             };
@@ -198,6 +211,8 @@ namespace RuiChen.AbpPro.Saas
         [Authorize(AbpSaasPermissions.Tenants.ManageConnectionStrings)]
         public async virtual Task<TenantConnectionStringDto> SetConnectionStringAsync(Guid id, TenantConnectionStringCreateOrUpdate input)
         {
+            await CheckConnectionString(input.Value, input.Name);
+
             var tenant = await tenantRepository.GetAsync(id);
 
             var oldConnectionString = tenant.FindConnectionString(input.Name);
@@ -254,6 +269,36 @@ namespace RuiChen.AbpPro.Saas
             await tenantRepository.UpdateAsync(tenant);
 
             await CurrentUnitOfWork.SaveChangesAsync();
+        }
+
+        protected async virtual Task CheckConnectionString(string connectionString, string name = null)
+        {
+            try
+            {
+                var checkResult = await connectionStringChecker.CheckAsync(connectionString);
+                // 检查连接是否可用
+                if (!checkResult.Connected)
+                {
+                    throw name.IsNullOrWhiteSpace()
+                        ? new BusinessException(AbpSaasErrorCodes.InvalidDefaultConnectionString)
+                        : new BusinessException(AbpSaasErrorCodes.InvalidConnectionString)
+                            .WithData("Name", name);
+                }
+                // 默认连接字符串改变不能影响到现有数据库
+                if (checkResult.DatabaseExists && name.IsNullOrWhiteSpace())
+                {
+                    throw new BusinessException(AbpSaasErrorCodes.DefaultConnectionStringDatabaseExists);
+                }
+            }
+            catch (Exception e)
+            {
+                Logger.LogWarning("An error occurred while checking the validity of the connection string");
+                Logger.LogWarning(e.Message);
+                throw name.IsNullOrWhiteSpace()
+                    ? new BusinessException(AbpSaasErrorCodes.InvalidDefaultConnectionString)
+                    : new BusinessException(AbpSaasErrorCodes.InvalidConnectionString)
+                        .WithData("Name", name);
+            }
         }
 
     }

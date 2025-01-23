@@ -33,7 +33,7 @@ namespace RuiChen.AbpPro.Saas
             {
                 options.MapCodeNamespace(AbpSaasErrorCodes.Namespace, typeof(AbpSaasResource));
                 // 见租户管理模块
-                options.MapCodeNamespace(AbpSaasErrorCodes.NamespaceMultiTenancy, typeof(AbpSaasResource));
+                options.MapCodeNamespace("Volo.AbpIo.MultiTenancy", typeof(AbpSaasResource));
             });
 
         }

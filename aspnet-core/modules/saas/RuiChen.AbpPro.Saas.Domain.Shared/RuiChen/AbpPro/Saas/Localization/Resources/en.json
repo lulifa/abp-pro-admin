@@ -4,7 +4,10 @@
     "Saas:010001": "Unable to create duplicate editions {DisplayName}!",
     "Saas:010002": "Tried to delete the edition in use: {DisplayName}!",
     "Saas:020001": "Unable to create duplicate tenants {Name}!",
-    "Saas:020002": "The database string that cannot be connected!",
+    "Saas:020002": "Tenant: {Tenant} not found!",
+    "Saas:020101": "The default connection string cannot open a connection to the database!",
+    "Saas:020102": "The database pointed to by the default connection string already exists!",
+    "Saas:020103": "Unable to open the database connection pointed to by {Name}!",
     "Volo.AbpIo.MultiTenancy:010001": "The tenant is unavailable or restricted!",
     "Volo.AbpIo.MultiTenancy:010002": "Tenant unavailable!",
     "Menu:Saas": "Saas",
@@ -39,16 +42,14 @@
     "Permission:ManageFeatures": "Manage features",
     "DisplayName:AdminEmailAddress": "Admin Email Address",
     "DisplayName:AdminPassword": "Admin Password",
-    "Features:EditionEnable": "Edition Enable",
-    "Features:EditionEnableDesc": "When the edition is enabled, it allows the use of edition-related features.",
     "Features:RecycleStrategy": "Recycle Strategy",
     "Features:RecycleStrategyDesc": "This section describes how to set the resource reclamation policy for tenants after the grace period expires",
     "Features:ExpirationReminderDays": "Expired warning days",
     "Features:ExpirationReminderDaysDesc": "Send a reminder to the administrator when the resource has how many days left to expire",
     "Features:ExpiredRecoveryTime": "Expired Recovery Time",
     "Features:ExpiredRecoveryTimeDesc": "If the resource expiration is not handled for a long time, tenant resources will be reclaimed",
-    "TenantNotFoundById": "Tenant: {0} not found!",
-    "TenantNotFoundByName": "Tenant: {0} not found!",
-    "UnActived": "UnActived"
+    "UnActived": "UnActived",
+    "RecycleStrategy:Reserve": "Reserve",
+    "RecycleStrategy:Recycle": "Recycle"
   }
 }

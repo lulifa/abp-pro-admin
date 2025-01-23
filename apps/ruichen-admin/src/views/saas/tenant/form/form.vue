@@ -26,7 +26,7 @@ defineExpose({ getRef });
     label-width="82px"
   >
     <el-row :gutter="30">
-      <re-col>
+      <re-col v-if="!newFormInline.id">
         <Segmented
           v-model="newFormInline.menuType"
           :options="props.menuTypeOptions"
@@ -85,6 +85,7 @@ defineExpose({ getRef });
               class="!w-full"
               type="date"
               placeholder="请选择"
+              value-format="YYYY-MM-DD"
               :shortcuts="props.shortcutsOptions"
             />
           </el-form-item>
@@ -100,6 +101,7 @@ defineExpose({ getRef });
               class="!w-full"
               type="date"
               placeholder="请选择"
+              value-format="YYYY-MM-DD"
               :shortcuts="props.shortcutsOptions"
             />
           </el-form-item>
