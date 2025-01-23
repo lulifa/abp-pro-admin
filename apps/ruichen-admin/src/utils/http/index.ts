@@ -1,7 +1,8 @@
 import Axios, {
   type AxiosInstance,
   type AxiosRequestConfig,
-  type CustomParamsSerializer
+  type CustomParamsSerializer,
+  HttpStatusCode
 } from "axios";
 import type {
   PureHttpError,
@@ -11,6 +12,7 @@ import type {
 } from "./types.d";
 import { stringify } from "qs";
 import NProgress from "../progress";
+import { message } from "@/utils/message";
 import { useUserStoreHook } from "@/store/modules/user";
 import { getToken, formatToken } from "@/utils/auth";
 import { ResultEnum } from "@/enums/httpEnum";
@@ -38,16 +40,19 @@ const defaultConfig: AxiosRequestConfig = {
       if (!data || data === "") {
         return null; // 可以根据业务需要返回 null 或空对象
       }
+      debugger;
       let parseData = JSON.parse(data);
       // 检查 ABP 包装结果标记
       if (headers["_abpwrapresult"] === "true") {
-        const { code, result } = parseData;
+        const { code, result, message, details } = parseData;
         const hasSuccess =
           data && Reflect.has(parseData, "code") && code === ResultEnum.CODE;
 
         if (hasSuccess) {
           return result; // 成功则返回结果
         }
+        const content = details ? details : message;
+        throw new Error(content);
       }
       return parseData; // 默认返回解析后的数据
     }
@@ -160,6 +165,50 @@ class PureHttp {
       },
       (error: PureHttpError) => {
         const $error = error;
+        const { response } = $error;
+        const requestUrl = response?.request?.responseURL || "";
+        if (response && response.status) {
+          const data = response.data as any;
+          const errorMessage = data?.error?.message || $error.message;
+          const errorDetails = data?.error?.details || "";
+          const fullMessage = `${errorMessage}\r\n${errorDetails}\r\n${requestUrl}`;
+
+          switch (response.status) {
+            case HttpStatusCode.Unauthorized:
+              message(`未授权，请登录。\r\n ${fullMessage}`, {
+                type: "error"
+              });
+              useUserStoreHook().logOut();
+              break;
+            case HttpStatusCode.Forbidden:
+              message(`拒绝访问。\r\n ${fullMessage}`, {
+                type: "error"
+              });
+              break;
+            case HttpStatusCode.BadRequest:
+              message(`请求错误。\r\n ${fullMessage}`, {
+                type: "error"
+              });
+              break;
+            case HttpStatusCode.InternalServerError:
+              message(`服务器内部错误。\r\n ${fullMessage}`, {
+                type: "error"
+              });
+              break;
+            default:
+              message(
+                `接口异常，请反馈详细复现流程给管理员。\r\n ${fullMessage}`,
+                {
+                  type: "error"
+                }
+              );
+          }
+        } else {
+          message($error.message, {
+            type: "error"
+          });
+        }
+
         $error.isCancelRequest = Axios.isCancel($error);
         // 关闭进度条动画
         NProgress.done();
