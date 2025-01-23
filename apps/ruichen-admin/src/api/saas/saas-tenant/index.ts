@@ -10,52 +10,49 @@ import type {
   TenantConnectionStringCreateOrUpdate
 } from "./model";
 
-export const GetAsyncById = (id: string) => {
+export const GetTenant = (id: string) => {
   return http.get<TenantDto>(baseUrlApi(`saas/tenants/${id}`));
 };
 
-export const GetAsyncByName = (name: string) => {
+export const GetTenantByName = (name: string) => {
   return http.get<TenantDto>(baseUrlApi(`saas/tenants/by-name/${name}`));
 };
 
-export const GetListAsyncByInput = (input: TenantGetListInput) => {
+export const GetTenantList = (input: TenantGetListInput) => {
   return http.get<PagedResultDto<TenantDto>>(baseUrlApi(`saas/tenants`), {
     params: input
   });
 };
 
-export const CreateAsyncByInput = (input: TenantCreateDto) => {
+export const CreateTenant = (input: TenantCreateDto) => {
   return http.post<TenantDto>(baseUrlApi(`saas/tenants`), {
     data: input
   });
 };
 
-export const UpdateAsyncByIdAndInput = (id: string, input: TenantUpdateDto) => {
+export const UpdateTenant = (id: string, input: TenantUpdateDto) => {
   return http.put<TenantDto>(baseUrlApi(`saas/tenants/${id}`), {
     data: input
   });
 };
 
-export const DeleteAsyncById = (id: string) => {
+export const DeleteTenant = (id: string) => {
   return http.delete(baseUrlApi(`saas/tenants/${id}`));
 };
 
-export const GetConnectionStringAsyncByIdAndName = (
-  id: string,
-  name: string
-) => {
+export const GetTenantConnectionStringByName = (id: string, name: string) => {
   return http.get<TenantConnectionStringDto>(
     baseUrlApi(`saas/tenants/${id}/connection-string/${name}`)
   );
 };
 
-export const GetConnectionStringAsyncById = (id: string) => {
+export const GetTenantConnectionString = (id: string) => {
   return http.get<ListResultDto<TenantConnectionStringDto>>(
     baseUrlApi(`saas/tenants/${id}/connection-string`)
   );
 };
 
-export const SetConnectionStringAsyncByIdAndInput = (
+export const UpdateTenantConnectionString = (
   id: string,
   input: TenantConnectionStringCreateOrUpdate
 ) => {
@@ -65,10 +62,7 @@ export const SetConnectionStringAsyncByIdAndInput = (
   );
 };
 
-export const DeleteConnectionStringAsyncByIdAndName = (
-  id: string,
-  name: string
-) => {
+export const DeleteTenantConnectionString = (id: string, name: string) => {
   return http.delete(
     baseUrlApi(`saas/tenants/${id}/connection-string/${name}`)
   );

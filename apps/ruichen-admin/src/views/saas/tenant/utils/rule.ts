@@ -10,6 +10,30 @@ export const formRules = computed(() => {
         required: true,
         trigger: "blur"
       }
+    ],
+    isActive: [
+      {
+        required: true,
+        trigger: "blur"
+      }
+    ],
+    adminEmailAddress: [
+      {
+        required: true,
+        trigger: "blur"
+      }
+    ],
+    adminPassword: [
+      {
+        required: true,
+        trigger: "blur"
+      }
+    ],
+    defaultConnectionString: [
+      {
+        required: true,
+        trigger: "blur"
+      }
     ]
   });
   return rules;
