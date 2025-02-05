@@ -30,12 +30,12 @@ namespace RuiChen.AbpPro.Saas
                     ItemSource = new StaticSelectionStringValueItemSource(
                     new LocalizableSelectionStringValueItem
                     {
-                        Value = RecycleStrategy.Reserve.ToString(),
+                        Value = $"{(int)RecycleStrategy.Reserve}",
                         DisplayText = new LocalizableStringInfo(LocalizationResourceNameAttribute.GetName(typeof(AbpSaasResource)), "RecycleStrategy:Reserve")
                     },
                     new LocalizableSelectionStringValueItem
                     {
-                        Value = RecycleStrategy.Recycle.ToString(),
+                        Value = $"{(int)RecycleStrategy.Recycle}",
                         DisplayText = new LocalizableStringInfo(LocalizationResourceNameAttribute.GetName(typeof(AbpSaasResource)), "RecycleStrategy:Recycle")
                     })
                 },
