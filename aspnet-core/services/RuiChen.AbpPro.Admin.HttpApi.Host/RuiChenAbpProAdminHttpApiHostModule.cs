@@ -13,6 +13,7 @@ using Volo.Abp.AspNetCore.MultiTenancy;
 using Volo.Abp.AspNetCore.Mvc.UI.Theme.Basic;
 using Volo.Abp.AspNetCore.Serilog;
 using Volo.Abp.Autofac;
+using Volo.Abp.EntityFrameworkCore.MySQL;
 using Volo.Abp.FeatureManagement.EntityFrameworkCore;
 using Volo.Abp.Modularity;
 using Volo.Abp.OpenIddict.EntityFrameworkCore;
@@ -62,6 +63,7 @@ namespace RuiChen.AbpPro.Admin.HttpApi.Host
 
 
         typeof(AbpAspNetCoreMultiTenancyModule),
+        typeof(AbpEntityFrameworkCoreMySQLModule),
         typeof(AbpAspNetCoreSerilogModule),
         typeof(AbpAutofacModule)
     )]
