@@ -240,7 +240,7 @@ export function useSaasTenant() {
 
   async function openDialogConnection(row?: FormItemProps) {
     let props = await propsFormInlineConnection(row);
-    const dialogTitle = `连接字符串${selectedRow?.value?.name ? ` - ${selectedRow?.value?.name}` : ""}`;
+    const dialogTitle = `租户${selectedRow?.value?.name ? ` - ${selectedRow?.value?.name}` : ""}`;
     addDialog({
       title: dialogTitle,
       props: props,
@@ -283,7 +283,7 @@ export function useSaasTenant() {
 
   async function openDialogConnectionAdd() {
     let props = await propsFormInlineConnectionAdd();
-    const dialogTitle = `连接字符串${selectedRow?.value?.name ? ` - ${selectedRow?.value?.name}` : ""}`;
+    const dialogTitle = `连接字符串`;
     addDialog({
       title: dialogTitle,
       props: props,

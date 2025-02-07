@@ -38,3 +38,21 @@ export const formRules = computed(() => {
   });
   return rules;
 });
+
+export const formRulesConnection = computed(() => {
+  const rules = reactive(<FormRules>{
+    name: [
+      {
+        required: true,
+        trigger: "blur"
+      }
+    ],
+    value: [
+      {
+        required: true,
+        trigger: "blur"
+      }
+    ]
+  });
+  return rules;
+});

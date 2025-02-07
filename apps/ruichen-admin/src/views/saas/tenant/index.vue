@@ -11,6 +11,7 @@ import Refresh from "@iconify-icons/ep/refresh";
 import Menu from "@iconify-icons/ep/menu";
 import AddFill from "@iconify-icons/ri/add-circle-line";
 import More from "@iconify-icons/ep/more-filled";
+import Database from "@iconify-icons/ri/database-2-fill";
 
 defineOptions({
   name: "SaasTenant"
@@ -154,7 +155,7 @@ const {
                       link
                       type="primary"
                       :size="size"
-                      :icon="useRenderIcon(Menu)"
+                      :icon="useRenderIcon(Database)"
                       @click="openDialogConnection(row)"
                     >
                       连接字符串

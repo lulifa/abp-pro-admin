@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import ReCol from "@/components/ReCol";
-import { formRules } from "../utils/rule";
+import { formRulesConnection } from "../utils/rule";
 import { FormPropsConnectionAdd } from "../utils/types";
 
 const props = withDefaults(defineProps<FormPropsConnectionAdd>(), {});
@@ -23,7 +23,7 @@ defineExpose({ getRef });
   <el-form
     ref="ruleFormRef"
     :model="newFormInline"
-    :rules="formRules"
+    :rules="formRulesConnection"
     label-width="82px"
   >
     <el-row :gutter="30">
