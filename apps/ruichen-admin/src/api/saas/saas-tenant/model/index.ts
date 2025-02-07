@@ -1,5 +1,6 @@
 export interface TenantGetListInput extends PagedAndSortedResultRequestDto {
   filter?: string;
+  isPaged?: boolean;
 }
 
 export interface TenantCreateDto extends TenantCreateOrUpdateBase {

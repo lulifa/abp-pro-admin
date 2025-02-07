@@ -154,7 +154,7 @@ namespace RuiChen.AbpPro.Saas
 
         public async virtual Task<List<Tenant>> GetListAsync(
             string sorting = null,
-            int maxResultCount = int.MaxValue,
+            int maxResultCount = 10,
             int skipCount = 0,
             string filter = null,
             bool includeDetails = false,

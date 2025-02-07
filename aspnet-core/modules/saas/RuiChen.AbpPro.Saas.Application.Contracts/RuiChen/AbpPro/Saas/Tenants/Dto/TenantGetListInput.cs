@@ -5,5 +5,8 @@ namespace RuiChen.AbpPro.Saas
     public class TenantGetListInput : PagedAndSortedResultRequestDto
     {
         public string Filter { get; set; }
+
+        public bool IsPaged { get; set; } = true;
+
     }
 }

@@ -198,11 +198,4 @@ declare global {
       touched?: boolean;
     };
   }
-
-  declare type NameValue<T = any> = {
-    id?: string;
-    name?: string;
-    text?: string;
-    value?: T;
-  };
 }

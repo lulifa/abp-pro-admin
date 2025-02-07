@@ -18,7 +18,7 @@ namespace RuiChen.AbpPro.Saas
 
         Task<List<Edition>> GetListAsync(
             string sorting = null,
-            int maxResultCount = 10,
+            int maxResultCount = int.MaxValue,
             int skipCount = 0,
             string filter = null,
             CancellationToken cancellationToken = default);

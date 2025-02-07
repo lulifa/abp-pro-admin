@@ -28,8 +28,10 @@ import {
   UpdateTenantConnectionString,
   DeleteTenantConnectionString
 } from "@/api/saas/saas-tenant";
+import { GetEditionList } from "@/api/saas/saas-edition";
 
 import type { TenantGetListInput } from "@/api/saas/saas-tenant/model";
+import type { EditionGetListInput } from "@/api/saas/saas-edition/model";
 
 export function useSaasTenant() {
   // 租户
@@ -52,6 +54,8 @@ export function useSaasTenant() {
   const formRef = ref();
 
   const dataList = ref([]);
+
+  const editionOptions = ref([]);
 
   const loading = ref(true);
 
@@ -215,7 +219,7 @@ export function useSaasTenant() {
       },
       formOther: {
         menuTypeOptions: menuTypeOptions,
-        editionOptions: [],
+        editionOptions: editionOptions.value,
         activeOptions: activeOptions,
         shortcutsOptions: shortcutsOptions
       }
@@ -343,6 +347,16 @@ export function useSaasTenant() {
     onSearchConnection();
   }
 
+  async function loadEditionOptions() {
+    let params: EditionGetListInput = {
+      isPaged: false
+    };
+    const res = await GetEditionList(params);
+    if (res) {
+      editionOptions.value = res.items;
+    }
+  }
+
   function handleSizeChange(val: number) {
     pagination.pageSize = val;
     onSearch();
@@ -357,8 +371,13 @@ export function useSaasTenant() {
     console.log(val);
   }
 
+  async function loadOptions() {
+    await loadEditionOptions();
+  }
+
   onMounted(() => {
     onSearch();
+    loadOptions();
   });
 
   return {

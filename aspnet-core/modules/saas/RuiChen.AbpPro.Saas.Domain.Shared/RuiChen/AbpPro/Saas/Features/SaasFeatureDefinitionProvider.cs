@@ -13,7 +13,7 @@ namespace RuiChen.AbpPro.Saas
 
             group.AddFeature(
                 name: SaasFeatures.Edition.Enable,
-                defaultValue: "false",
+                defaultValue: "true",
                 displayName: L("Features:EditionEnable"),
                 description: L("Features:EditionEnableDesc"),
                 valueType: new ToggleStringValueType(),

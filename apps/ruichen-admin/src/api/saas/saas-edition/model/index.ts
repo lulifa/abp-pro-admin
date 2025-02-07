@@ -2,6 +2,7 @@ export interface EditionCreateDto extends EditionCreateOrUpdateBase {}
 
 export interface EditionGetListInput extends PagedAndSortedResultRequestDto {
   filter?: string;
+  isPaged?: boolean;
 }
 
 export interface EditionUpdateDto extends EditionCreateOrUpdateBase {
@@ -9,7 +10,7 @@ export interface EditionUpdateDto extends EditionCreateOrUpdateBase {
 }
 
 export interface EditionCreateOrUpdateBase extends ExtensibleObject {
-  displayName: string;
+  displayName?: string;
 }
 
 export interface EditionDto extends ExtensibleAuditedEntityDto<string> {

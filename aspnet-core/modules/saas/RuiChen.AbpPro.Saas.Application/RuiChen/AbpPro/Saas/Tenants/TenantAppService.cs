@@ -56,12 +56,16 @@ namespace RuiChen.AbpPro.Saas
 
         public async virtual Task<PagedResultDto<TenantDto>> GetListAsync(TenantGetListInput input)
         {
+            var maxResultCount = input.IsPaged ? input.MaxResultCount : int.MaxValue;
+
             var count = await tenantRepository.GetCountAsync(input.Filter);
+
             var list = await tenantRepository.GetListAsync(
                 input.Sorting,
-                input.MaxResultCount,
+                maxResultCount,
                 input.SkipCount,
-                input.Filter
+                input.Filter,
+                true
             );
 
             return new PagedResultDto<TenantDto>(
