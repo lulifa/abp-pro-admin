@@ -103,7 +103,8 @@ export function useSaasTenant() {
   const columnsConnection: TableColumnList = [
     {
       label: "名称",
-      prop: "name"
+      prop: "name",
+      width: 150
     },
     {
       label: "值",
@@ -111,8 +112,10 @@ export function useSaasTenant() {
     },
     {
       label: "操作",
+      headerAlign: "center",
+      align: "center",
       fixed: "right",
-      width: 200,
+      width: 150,
       slot: "operation"
     }
   ];
@@ -160,7 +163,7 @@ export function useSaasTenant() {
     addDialog({
       title: dialogTitle,
       props: props,
-      width: "40%",
+      width: "50%",
       sureBtnLoading: true,
       draggable: true,
       fullscreen: deviceDetection(),
@@ -237,10 +240,11 @@ export function useSaasTenant() {
 
   async function openDialogConnection(row?: FormItemProps) {
     let props = await propsFormInlineConnection(row);
+    const dialogTitle = `连接字符串${selectedRow?.value?.name ? ` - ${selectedRow?.value?.name}` : ""}`;
     addDialog({
-      title: "连接字符串",
+      title: dialogTitle,
       props: props,
-      width: "40%",
+      width: "50%",
       draggable: true,
       hideFooter: true,
       closeOnClickModal: false,
@@ -278,13 +282,12 @@ export function useSaasTenant() {
   }
 
   async function openDialogConnectionAdd() {
-    debugger;
     let props = await propsFormInlineConnectionAdd();
-    const dialogTitle = `租户${selectedRow?.value?.name ? ` - ${selectedRow?.value?.name}` : ""}`;
+    const dialogTitle = `连接字符串${selectedRow?.value?.name ? ` - ${selectedRow?.value?.name}` : ""}`;
     addDialog({
       title: dialogTitle,
       props: props,
-      width: "40%",
+      width: "50%",
       sureBtnLoading: true,
       draggable: true,
       fullscreen: deviceDetection(),
