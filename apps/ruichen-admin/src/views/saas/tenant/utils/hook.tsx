@@ -1,11 +1,20 @@
 import dayjs from "dayjs";
 import editForm from "../form/form.vue";
+import editFormConnection from "../form/formconnection.vue";
+import indexConnection from "../indexConnection.vue";
 import { transformI18n } from "@/plugins/i18n";
 import { addDialog } from "@/components/ReDialog";
 import type { PaginationProps } from "@pureadmin/table";
 import { deviceDetection } from "@pureadmin/utils";
 import { reactive, ref, onMounted, toRaw, computed, h } from "vue";
-import type { FormProps, FormItemProps } from "../utils/types";
+import type {
+  FormProps,
+  FormItemProps,
+  FormItemPropsConnection,
+  FormPropsConnection,
+  FormItemPropsConnectionAdd,
+  FormPropsConnectionAdd
+} from "../utils/types";
 import { activeOptions, menuTypeOptions, shortcutsOptions } from "./enums";
 
 import {
@@ -13,16 +22,17 @@ import {
   GetTenantList,
   CreateTenant,
   UpdateTenant,
-  DeleteTenant
+  DeleteTenant,
   // GetTenantConnectionStringByName,
-  // GetTenantConnectionString,
-  // UpdateTenantConnectionString,
-  // DeleteTenantConnectionString
+  GetTenantConnectionString,
+  UpdateTenantConnectionString,
+  DeleteTenantConnectionString
 } from "@/api/saas/saas-tenant";
 
 import type { TenantGetListInput } from "@/api/saas/saas-tenant/model";
 
 export function useSaasTenant() {
+  // 租户
   const pagination = reactive<PaginationProps>({
     total: 0,
     pageSize: 10,
@@ -79,6 +89,34 @@ export function useSaasTenant() {
     }
   ];
 
+  // 租户连接字符串
+  const selectedRow = ref<FormItemProps>(null);
+
+  const formRefConnection = ref();
+
+  const formRefConnectionAdd = ref();
+
+  const loadingConnection = ref(true);
+
+  const dataListConnection = ref([]);
+
+  const columnsConnection: TableColumnList = [
+    {
+      label: "名称",
+      prop: "name"
+    },
+    {
+      label: "值",
+      prop: "value"
+    },
+    {
+      label: "操作",
+      fixed: "right",
+      width: 200,
+      slot: "operation"
+    }
+  ];
+
   const buttonClass = computed(() => {
     return [
       "!h-[20px]",
@@ -106,6 +144,16 @@ export function useSaasTenant() {
     }
   }
 
+  async function onSearchConnection() {
+    loadingConnection.value = true;
+    try {
+      const data = await GetTenantConnectionString(selectedRow?.value?.id);
+      dataListConnection.value = data.items;
+    } finally {
+      loadingConnection.value = false;
+    }
+  }
+
   async function openDialog(title = "新增", row?: FormItemProps) {
     let props = await propsFormInline(title, row);
     const dialogTitle = `${title}租户${row?.name ? ` - ${row.name}` : ""}`;
@@ -120,12 +168,7 @@ export function useSaasTenant() {
       closeOnClickModal: false,
       contentRenderer: () =>
         h(editForm, {
-          ref: formRef,
-          formInline: props.formInline,
-          menuTypeOptions: props.menuTypeOptions,
-          editionOptions: props.editionOptions,
-          activeOptions: props.activeOptions,
-          shortcutsOptions: props.shortcutsOptions
+          ref: formRef
         }),
       beforeSure: (done, { options, closeLoading }) => {
         try {
@@ -149,7 +192,8 @@ export function useSaasTenant() {
         } finally {
           closeLoading();
         }
-      }
+      },
+      closeCallBack: () => {}
     });
   }
 
@@ -166,10 +210,12 @@ export function useSaasTenant() {
         concurrencyStamp: null,
         useSharedDatabase: true
       },
-      menuTypeOptions: menuTypeOptions,
-      editionOptions: [],
-      activeOptions: activeOptions,
-      shortcutsOptions: shortcutsOptions
+      formOther: {
+        menuTypeOptions: menuTypeOptions,
+        editionOptions: [],
+        activeOptions: activeOptions,
+        shortcutsOptions: shortcutsOptions
+      }
     };
 
     if (title !== "新增") {
@@ -184,14 +230,114 @@ export function useSaasTenant() {
         props.formInline.concurrencyStamp = res.concurrencyStamp;
       }
       // 编辑不需要tab页
-      props.menuTypeOptions = [];
+      props.formOther.menuTypeOptions = [];
     }
+    return props;
+  }
+
+  async function openDialogConnection(row?: FormItemProps) {
+    let props = await propsFormInlineConnection(row);
+    addDialog({
+      title: "连接字符串",
+      props: props,
+      width: "40%",
+      draggable: true,
+      hideFooter: true,
+      closeOnClickModal: false,
+      contentRenderer: () =>
+        h(indexConnection, {
+          ref: formRefConnection
+        }),
+      closeCallBack: () => {
+        selectedRow.value = null;
+      }
+    });
+  }
+
+  async function propsFormInlineConnection(row?: FormItemProps) {
+    // 组装参数
+    selectedRow.value = row;
+
+    await onSearchConnection();
+
+    let props: FormPropsConnection = {
+      formInline: {
+        id: selectedRow?.value?.id,
+        name: "",
+        value: ""
+      },
+      formOther: {
+        loading: loadingConnection,
+        dataList: dataListConnection,
+        columns: columnsConnection,
+        addClick: openDialogConnectionAdd,
+        deleteClick: handleDeleteConnection
+      }
+    };
+    return props;
+  }
+
+  async function openDialogConnectionAdd() {
+    debugger;
+    let props = await propsFormInlineConnectionAdd();
+    const dialogTitle = `租户${selectedRow?.value?.name ? ` - ${selectedRow?.value?.name}` : ""}`;
+    addDialog({
+      title: dialogTitle,
+      props: props,
+      width: "40%",
+      sureBtnLoading: true,
+      draggable: true,
+      fullscreen: deviceDetection(),
+      fullscreenIcon: false,
+      closeOnClickModal: false,
+      contentRenderer: () =>
+        h(editFormConnection, {
+          ref: formRefConnectionAdd,
+          formInline: props.formInline
+        }),
+      beforeSure: (done, { options, closeLoading }) => {
+        try {
+          const FormRef = formRefConnectionAdd.value.getRef();
+          const curData = options.props
+            .formInline as FormItemPropsConnectionAdd;
+
+          function chores() {
+            done();
+            onSearchConnection();
+          }
+          FormRef.validate(async valid => {
+            if (valid) {
+              await UpdateTenantConnectionString(curData.id, curData);
+              chores();
+            }
+          });
+        } finally {
+          closeLoading();
+        }
+      },
+      closeCallBack: () => {}
+    });
+  }
+
+  async function propsFormInlineConnectionAdd() {
+    let props: FormPropsConnectionAdd = {
+      formInline: {
+        id: selectedRow?.value?.id,
+        name: "",
+        value: ""
+      }
+    };
     return props;
   }
 
   async function handleDelete(row?: FormItemProps) {
     await DeleteTenant(row?.id);
     onSearch();
+  }
+
+  async function handleDeleteConnection(row?: FormItemPropsConnection) {
+    await DeleteTenantConnectionString(selectedRow?.value?.id, row?.name);
+    onSearchConnection();
   }
 
   function handleSizeChange(val: number) {
@@ -208,7 +354,7 @@ export function useSaasTenant() {
     console.log(val);
   }
 
-  onMounted(async () => {
+  onMounted(() => {
     onSearch();
   });
 
@@ -222,6 +368,7 @@ export function useSaasTenant() {
     onSearch,
     resetForm,
     openDialog,
+    openDialogConnection,
     handleDelete,
     transformI18n,
     handleSizeChange,

@@ -40,7 +40,6 @@ const defaultConfig: AxiosRequestConfig = {
       if (!data || data === "") {
         return null; // 可以根据业务需要返回 null 或空对象
       }
-      debugger;
       let parseData = JSON.parse(data);
       // 检查 ABP 包装结果标记
       if (headers["_abpwrapresult"] === "true") {

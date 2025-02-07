@@ -29,6 +29,7 @@ const {
   onSearch,
   resetForm,
   openDialog,
+  openDialogConnection,
   handleDelete,
   transformI18n,
   handleSizeChange,
@@ -154,6 +155,7 @@ const {
                       type="primary"
                       :size="size"
                       :icon="useRenderIcon(Menu)"
+                      @click="openDialogConnection(row)"
                     >
                       连接字符串
                     </el-button>

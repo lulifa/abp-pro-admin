@@ -11,6 +11,8 @@ const ruleFormRef = ref();
 
 const newFormInline = ref(props.formInline);
 
+const newFormOther = ref(props.formOther);
+
 function getRef() {
   return ruleFormRef.value;
 }
@@ -29,7 +31,7 @@ defineExpose({ getRef });
       <re-col v-if="!newFormInline.id">
         <Segmented
           v-model="newFormInline.menuType"
-          :options="props.menuTypeOptions"
+          :options="props.formOther.menuTypeOptions"
           block
           class="!w-full"
         />
@@ -43,7 +45,7 @@ defineExpose({ getRef });
               placeholder="请选择"
             >
               <el-option
-                v-for="item in activeOptions"
+                v-for="item in newFormOther.activeOptions"
                 :key="item.value"
                 :label="item.text"
                 :value="item.value"
@@ -70,7 +72,7 @@ defineExpose({ getRef });
               clearable
             >
               <el-option
-                v-for="item in props.editionOptions"
+                v-for="item in newFormOther.editionOptions"
                 :key="item.id"
                 :label="item.displayName"
                 :value="item.id"
@@ -86,7 +88,7 @@ defineExpose({ getRef });
               type="date"
               placeholder="请选择"
               value-format="YYYY-MM-DD"
-              :shortcuts="props.shortcutsOptions"
+              :shortcuts="newFormOther.shortcutsOptions"
             />
           </el-form-item>
         </re-col>
@@ -102,7 +104,7 @@ defineExpose({ getRef });
               type="date"
               placeholder="请选择"
               value-format="YYYY-MM-DD"
-              :shortcuts="props.shortcutsOptions"
+              :shortcuts="newFormOther.shortcutsOptions"
             />
           </el-form-item>
         </re-col>
