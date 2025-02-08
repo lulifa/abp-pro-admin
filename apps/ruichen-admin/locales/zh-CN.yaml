@@ -197,6 +197,8 @@ status:
   pureNoNotify: 暂无通知
   pureNoTodo: 暂无待办
 login:
+  pureTenant: 租户
+  pureSwitch: 切换
   pureUsername: 账号
   purePassword: 密码
   pureVerifyCode: 验证码

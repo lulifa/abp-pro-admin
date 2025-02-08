@@ -18,6 +18,7 @@ import LoginRegistPhone from "./components/LoginRegistPhone.vue";
 import LoginUpdate from "./components/LoginUpdate.vue";
 import LoginQrCode from "./components/LoginQrCode.vue";
 import { useUserStoreHook } from "@/store/modules/user";
+import { useAbpStore } from "@/store/modules/abp";
 import { initRouter, getTopMenu } from "@/router/utils";
 import { bg, avatar, illustration } from "./utils/static";
 import { ReImageVerify } from "@/components/ReImageVerify";
@@ -33,6 +34,7 @@ import Lock from "@iconify-icons/ri/lock-fill";
 import Check from "@iconify-icons/ep/check";
 import User from "@iconify-icons/ri/user-3-fill";
 import Info from "@iconify-icons/ri/information-line";
+import Tenant from "@iconify-icons/ri/home-gear-line";
 
 defineOptions({
   name: "Login"
@@ -47,6 +49,15 @@ const disabled = ref(false);
 const ruleFormRef = ref<FormInstance>();
 const currentPage = computed(() => {
   return useUserStoreHook().currentPage;
+});
+
+const multiTenancyEnabled = computed(() => {
+  const abpStore = useAbpStore();
+  return abpStore.getApplication.multiTenancy.isEnabled;
+});
+const currentTenant = computed(() => {
+  const abpStore = useAbpStore();
+  return abpStore.getApplication.currentTenant;
 });
 
 const { t } = useI18n();
@@ -185,6 +196,25 @@ watch(loginDay, value => {
             </h2>
           </Motion>
 
+          <div v-if="multiTenancyEnabled">
+            <Motion :delay="50">
+              <el-form-item size="large">
+                <el-input
+                  readonly
+                  :placeholder="t('login.pureTenant')"
+                  :prefix-icon="useRenderIcon(Tenant)"
+                  :value="currentTenant.name"
+                >
+                  <template v-slot:append>
+                    <el-button link class="w-28">
+                      {{ t("login.pureSwitch") }}
+                    </el-button>
+                  </template>
+                </el-input>
+              </el-form-item>
+            </Motion>
+          </div>
+
           <el-form
             v-if="currentPage === 0"
             ref="ruleFormRef"
@@ -271,7 +301,7 @@ watch(loginDay, value => {
                   <el-button
                     link
                     type="primary"
-                    @click="useUserStoreHook().setCurrentPage(4)"
+                    @click="useUserStoreHook().setCurrentPage(5)"
                   >
                     {{ t("login.pureForget") }}
                   </el-button>
@@ -330,12 +360,12 @@ watch(loginDay, value => {
           </Motion>
           <!-- 手机号登录 -->
           <LoginPhone v-if="currentPage === 1" />
-          <!-- 二维码登录 -->
-          <LoginQrCode v-if="currentPage === 2" />
           <!-- 注册 -->
-          <LoginRegist v-if="currentPage === 3" />
+          <LoginRegist v-if="currentPage === 2" />
           <!-- 手机注册 -->
-          <LoginRegistPhone v-if="currentPage === 4" />
+          <LoginRegistPhone v-if="currentPage === 3" />
+          <!-- 二维码登录 -->
+          <LoginQrCode v-if="currentPage === 4" />
           <!-- 忘记密码 -->
           <LoginUpdate v-if="currentPage === 5" />
         </div>
@@ -363,6 +393,7 @@ watch(loginDay, value => {
 <style lang="scss" scoped>
 :deep(.el-input-group__append, .el-input-group__prepend) {
   padding: 0;
+  color: #409eff;
 }
 
 .translation {

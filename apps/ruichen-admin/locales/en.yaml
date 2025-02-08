@@ -197,6 +197,8 @@ status:
   pureNoNotify: No Notify
   pureNoTodo: No Todo
 login:
+  pureTenant: Tenant
+  pureSwitch: Switch
   pureUsername: Username
   purePassword: Password
   pureVerifyCode: VerifyCode
