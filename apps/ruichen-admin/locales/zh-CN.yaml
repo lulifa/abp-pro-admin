@@ -209,6 +209,7 @@ login:
   purePhoneLogin: 手机登录
   pureQRCodeLogin: 二维码登录
   pureRegister: 注册
+  pureRegisterPhone : 手机注册
   pureWeChatLogin: 微信登录
   pureAlipayLogin: 支付宝登录
   pureQQLogin: QQ登录

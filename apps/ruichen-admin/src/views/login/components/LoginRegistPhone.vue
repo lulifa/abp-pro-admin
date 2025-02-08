@@ -5,10 +5,12 @@ import Motion from "../utils/motion";
 import { message } from "@/utils/message";
 import { updateRules } from "../utils/rule";
 import type { FormInstance } from "element-plus";
+import { useVerifyCode } from "../utils/verifyCode";
 import { $t, transformI18n } from "@/plugins/i18n";
 import { useUserStoreHook } from "@/store/modules/user";
 import { useRenderIcon } from "@/components/ReIcon/src/hooks";
 import Lock from "@iconify-icons/ri/lock-fill";
+import Iphone from "@iconify-icons/ep/iphone";
 import User from "@iconify-icons/ri/user-3-fill";
 
 const { t } = useI18n();
@@ -22,6 +24,7 @@ const ruleForm = reactive({
   repeatPassword: ""
 });
 const ruleFormRef = ref<FormInstance>();
+const { isDisabled, text } = useVerifyCode();
 const repeatPasswordRule = [
   {
     validator: (rule, value, callback) => {
@@ -65,6 +68,7 @@ const onUpdate = async (formEl: FormInstance | undefined) => {
 };
 
 function onBack() {
+  useVerifyCode().end();
   useUserStoreHook().setCurrentPage(0);
 }
 </script>
@@ -93,6 +97,41 @@ function onBack() {
           :placeholder="t('login.pureUsername')"
           :prefix-icon="useRenderIcon(User)"
         />
+      </el-form-item>
+    </Motion>
+
+    <Motion :delay="100">
+      <el-form-item prop="phone">
+        <el-input
+          v-model="ruleForm.phone"
+          clearable
+          :placeholder="t('login.purePhone')"
+          :prefix-icon="useRenderIcon(Iphone)"
+        />
+      </el-form-item>
+    </Motion>
+
+    <Motion :delay="150">
+      <el-form-item prop="verifyCode">
+        <div class="w-full flex justify-between">
+          <el-input
+            v-model="ruleForm.verifyCode"
+            clearable
+            :placeholder="t('login.pureSmsVerifyCode')"
+            :prefix-icon="useRenderIcon('ri:shield-keyhole-line')"
+          />
+          <el-button
+            :disabled="isDisabled"
+            class="ml-2"
+            @click="useVerifyCode().start(ruleFormRef, 'phone')"
+          >
+            {{
+              text.length > 0
+                ? text + t("login.pureInfo")
+                : t("login.pureGetVerifyCode")
+            }}
+          </el-button>
+        </div>
       </el-form-item>
     </Motion>
 

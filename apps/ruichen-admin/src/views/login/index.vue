@@ -14,6 +14,7 @@ import { operates, thirdParty } from "./utils/enums";
 import { useLayout } from "@/layout/hooks/useLayout";
 import LoginPhone from "./components/LoginPhone.vue";
 import LoginRegist from "./components/LoginRegist.vue";
+import LoginRegistPhone from "./components/LoginRegistPhone.vue";
 import LoginUpdate from "./components/LoginUpdate.vue";
 import LoginQrCode from "./components/LoginQrCode.vue";
 import { useUserStoreHook } from "@/store/modules/user";
@@ -333,8 +334,10 @@ watch(loginDay, value => {
           <LoginQrCode v-if="currentPage === 2" />
           <!-- 注册 -->
           <LoginRegist v-if="currentPage === 3" />
+          <!-- 手机注册 -->
+          <LoginRegistPhone v-if="currentPage === 4" />
           <!-- 忘记密码 -->
-          <LoginUpdate v-if="currentPage === 4" />
+          <LoginUpdate v-if="currentPage === 5" />
         </div>
       </div>
     </div>
