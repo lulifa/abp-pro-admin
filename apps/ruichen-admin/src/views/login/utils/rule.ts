@@ -1,4 +1,4 @@
-import { reactive } from "vue";
+import { computed, reactive } from "vue";
 import { isPhone } from "@pureadmin/utils";
 import type { FormRules } from "element-plus";
 import { $t, transformI18n } from "@/plugins/i18n";
@@ -123,4 +123,16 @@ const updateRules = reactive<FormRules>({
   ]
 });
 
-export { loginRules, phoneRules, updateRules };
+const tenantRules = computed(() => {
+  const rules = reactive(<FormRules>{
+    name: [
+      {
+        required: false,
+        trigger: "blur"
+      }
+    ]
+  });
+  return rules;
+});
+
+export { loginRules, phoneRules, updateRules, tenantRules };

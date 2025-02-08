@@ -52,42 +52,47 @@ export const useAbpStore = defineStore("abp", {
       ls.removeItem(ABP_API_KEY);
     },
     mergeLocaleMessage(localization: ApplicationLocalizationConfigurationDto) {
-      const { languagesMap, currentCulture, values } = localization;
-      const pureAdminUi = languagesMap["pure-admin-ui"];
-      if (!pureAdminUi) return;
-
-      const transferCulture = pureAdminUi.find(
-        x => x.value === currentCulture.cultureName
-      );
-      const transformAbpLocaleMessageDicToI18n = abpLocaleMessageDic => {
-        return Object.fromEntries(
-          Object.entries(abpLocaleMessageDic).map(([vKey, mValue]) => [
-            vKey,
-            Object.fromEntries(
-              Object.entries(mValue).map(([mKey, msgValue]) => [
-                mKey.endsWith(".") ? mKey.slice(0, -1) : mKey,
-                msgValue
-              ])
-            )
-          ])
-        );
-      };
-      const targetCultureName = transferCulture
-        ? transferCulture.name
-        : currentCulture.cultureName;
-
-      i18n.global.mergeLocaleMessage(
-        targetCultureName,
-        transformAbpLocaleMessageDicToI18n(values)
-      );
+      debugger;
+      if (localization.languagesMap["pure-admin-ui"]) {
+        const transferCulture = localization.languagesMap[
+          "pure-admin-ui"
+        ].filter(x => x.value === localization.currentCulture.cultureName);
+        function transformAbpLocaleMessageDicToI18n(abpLocaleMessageDic) {
+          const i18nLocaleMessageDic = {};
+          Object.keys(abpLocaleMessageDic).forEach(vKey => {
+            i18nLocaleMessageDic[vKey] = {};
+            Object.keys(abpLocaleMessageDic[vKey]).forEach(mKey => {
+              let msgKey = mKey;
+              // 处理最后一个字符以适配 i18n
+              if (msgKey.endsWith(".")) {
+                msgKey = msgKey.substring(0, msgKey.length - 1);
+              }
+              i18nLocaleMessageDic[vKey][msgKey] =
+                abpLocaleMessageDic[vKey][mKey];
+            });
+          });
+          return i18nLocaleMessageDic;
+        }
+        if (transferCulture && transferCulture.length > 0) {
+          i18n.global.mergeLocaleMessage(
+            transferCulture[0].name,
+            transformAbpLocaleMessageDicToI18n(localization.values)
+          );
+        } else {
+          i18n.global.mergeLocaleMessage(
+            localization.currentCulture.cultureName,
+            transformAbpLocaleMessageDicToI18n(localization.values)
+          );
+        }
+      }
     },
     async initlizeAbpApplication() {
       const application = await getApplicationConfiguration();
       this.setApplication(application);
 
       // 多语言合并设置 TO  多语言提示要怎么兼容下
-      // const { localization } = application;
-      // this.mergeLocaleMessage(localization);
+      const { localization } = application;
+      this.mergeLocaleMessage(localization);
     },
     async initlizaAbpApiDefinition() {
       const apidefinition = await getApiDefinition();

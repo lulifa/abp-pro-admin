@@ -5,7 +5,7 @@ import { useRouter } from "vue-router";
 import { message } from "@/utils/message";
 import { loginRules } from "./utils/rule";
 import TypeIt from "@/components/ReTypeit";
-import { debounce } from "@pureadmin/utils";
+import { debounce, deviceDetection } from "@pureadmin/utils";
 import { useNav } from "@/layout/hooks/useNav";
 import { useEventListener } from "@vueuse/core";
 import type { FormInstance } from "element-plus";
@@ -22,10 +22,15 @@ import { useAbpStore } from "@/store/modules/abp";
 import { initRouter, getTopMenu } from "@/router/utils";
 import { bg, avatar, illustration } from "./utils/static";
 import { ReImageVerify } from "@/components/ReImageVerify";
-import { ref, toRaw, reactive, watch, computed } from "vue";
+import { ref, toRaw, reactive, watch, computed, h } from "vue";
 import { useRenderIcon } from "@/components/ReIcon/src/hooks";
 import { useTranslationLang } from "@/layout/hooks/useTranslationLang";
 import { useDataThemeChange } from "@/layout/hooks/useDataThemeChange";
+import { addDialog } from "@/components/ReDialog";
+import editFormTenant from "./form/formTenant.vue";
+import type { FormPropsTenant, FormItemPropsTenant } from "./utils/types";
+import Cookies from "js-cookie";
+import { ABP_TENANT_KEY } from "@/enums/cacheEnum";
 
 import dayIcon from "@/assets/svg/day.svg?component";
 import darkIcon from "@/assets/svg/dark.svg?component";
@@ -35,6 +40,7 @@ import Check from "@iconify-icons/ep/check";
 import User from "@iconify-icons/ri/user-3-fill";
 import Info from "@iconify-icons/ri/information-line";
 import Tenant from "@iconify-icons/ri/home-gear-line";
+import { findTenantByName } from "@/api/abp/abp-multitenancy";
 
 defineOptions({
   name: "Login"
@@ -51,6 +57,8 @@ const currentPage = computed(() => {
   return useUserStoreHook().currentPage;
 });
 
+const formRefTenant = ref();
+
 const multiTenancyEnabled = computed(() => {
   const abpStore = useAbpStore();
   return abpStore.getApplication.multiTenancy.isEnabled;
@@ -59,6 +67,73 @@ const currentTenant = computed(() => {
   const abpStore = useAbpStore();
   return abpStore.getApplication.currentTenant;
 });
+const switchTenant = async () => {
+  let props = await propsFormInline();
+  const dialogTitle = `切换租户`;
+  addDialog({
+    title: dialogTitle,
+    props: props,
+    width: "30%",
+    sureBtnLoading: true,
+    draggable: true,
+    fullscreen: deviceDetection(),
+    fullscreenIcon: false,
+    closeOnClickModal: false,
+    contentRenderer: () =>
+      h(editFormTenant, {
+        ref: formRefTenant,
+        formInline: props.formInline
+      }),
+    beforeSure: (done, { options, closeLoading }) => {
+      debugger;
+      try {
+        const FormRef = formRefTenant.value.getRef();
+        const curData = options.props.formInline as FormItemPropsTenant;
+
+        function chores() {
+          done();
+        }
+        FormRef.validate(async valid => {
+          if (valid) {
+            if (curData.name) {
+              findTenantByName(curData.name).then(result => {
+                if (!result.success || !result.tenantId) {
+                  message("给定的租户不存在", { type: "warning" });
+                  return;
+                }
+                if (!result.isActive) {
+                  message("给定的租户不可用", { type: "warning" });
+                  return;
+                }
+                Cookies.set(ABP_TENANT_KEY, result.tenantId);
+                chores();
+              });
+            } else {
+              Cookies.remove(ABP_TENANT_KEY);
+              chores();
+            }
+          }
+        });
+      } finally {
+        setTimeout(() => {
+          const abpStore = useAbpStore();
+          abpStore.initlizeAbpApplication();
+        }, 100);
+        closeLoading();
+      }
+    },
+    closeCallBack: () => {}
+  });
+};
+const propsFormInline = async () => {
+  let props: FormPropsTenant = {
+    formInline: {
+      name: currentTenant.value.name
+    },
+    formOther: {}
+  };
+  return props;
+};
 
 const { t } = useI18n();
 const { initStorage } = useLayout();
@@ -206,7 +281,7 @@ watch(loginDay, value => {
                   :value="currentTenant.name"
                 >
                   <template v-slot:append>
-                    <el-button link class="w-28">
+                    <el-button link class="w-28" @click="switchTenant">
                       {{ t("login.pureSwitch") }}
                     </el-button>
                   </template>

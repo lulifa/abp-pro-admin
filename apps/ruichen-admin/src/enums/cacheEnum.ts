@@ -1,4 +1,4 @@
-export const ABP_TENANT_KEY = "ABP_TENANT_";
+export const ABP_TENANT_KEY = "__tenant";
 
 export const ABP_APP_KEY = "ABP_APP_";
 

@@ -60,6 +60,9 @@
     <ProjectReference Include="..\..\framework\wrap\RuiChen.AbpPro.AspNetCore.Mvc.Wrapper\RuiChen.AbpPro.AspNetCore.Mvc.Wrapper.csproj" />
     <ProjectReference Include="..\..\framework\common\RuiChen.AbpPro.AspNetCore.HttpOverrides\RuiChen.AbpPro.AspNetCore.HttpOverrides.csproj" />
 
+    <!--后续做多语言模块改掉直接引用多语言模块-->
+    <ProjectReference Include="..\..\framework\localization\RuiChen.AbpPro.Localization.CultureMap\RuiChen.AbpPro.Localization.CultureMap.csproj" />
+
 
   </ItemGroup>
 

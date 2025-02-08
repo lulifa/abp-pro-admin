@@ -23,6 +23,8 @@ using Volo.Abp.SettingManagement;
 using Volo.Abp.Threading;
 using Volo.Abp.VirtualFileSystem;
 using Volo.Abp.Timing;
+using Volo.Abp;
+using RuiChen.AbpPro.Localization;
 
 namespace RuiChen.AbpPro.Admin.HttpApi.Host
 {
@@ -103,6 +105,35 @@ namespace RuiChen.AbpPro.Admin.HttpApi.Host
                 options.Languages.Add(new LanguageInfo("zh-Hans", "zh-Hans", "简体中文"));
                 options.Languages.Add(new LanguageInfo("en", "en", "English", "gb"));
 
+                var nameValues = new List<NameValue>
+                {
+                    new NameValue("zh-CN","zh-Hans")
+                };
+                var languageMap = new Dictionary<string, NameValue[]>
+                {
+                    { "pure-admin-ui", nameValues.ToArray() },
+                    { "vben-admin-ui", nameValues.ToArray() }
+                };
+
+                foreach (var (app, mappings) in languageMap)
+                {
+                    options.AddLanguagesMapOrUpdate(app, mappings);
+                };
+
+            });
+
+
+            Configure<AbpLocalizationCultureMapOptions>(options =>
+            {
+                var zhHansCultureMapInfo = new CultureMapInfo
+                {
+                    TargetCulture = "zh-Hans",
+                    SourceCultures = ["zh-CN", "zh-HK", "zh-MO", "zh-TW"]
+                };
+
+                // 添加文化映射信息
+                options.CulturesMaps.Add(zhHansCultureMapInfo);
+                options.UiCulturesMaps.Add(zhHansCultureMapInfo);
             });
         }
 

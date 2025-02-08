@@ -163,12 +163,14 @@ class PureHttp {
         return response.data;
       },
       (error: PureHttpError) => {
+        debugger;
         const $error = error;
         const { response } = $error;
         const requestUrl = response?.request?.responseURL || "";
         if (response && response.status) {
           const data = response.data as any;
-          const errorMessage = data?.error?.message || $error.message;
+          const errorMessage =
+            data?.error?.message || data?.error_description || $error.message;
           const errorDetails = data?.error?.details || "";
           const fullMessage = `${errorMessage}\r\n${errorDetails}\r\n${requestUrl}`;
 

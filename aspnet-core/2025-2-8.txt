@@ -1,0 +1,5 @@
+
+
+dotnet new classlib -o framework/localization/RuiChen.AbpPro.Localization.CultureMap
+
+dotnet sln RuiChen.AbpPro.sln add framework/localization/RuiChen.AbpPro.Localization.CultureMap

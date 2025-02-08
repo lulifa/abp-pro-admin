@@ -3,6 +3,7 @@ using RuiChen.AbpPro.AspNetCore.HttpOverrides;
 using RuiChen.AbpPro.AspNetCore.Mvc.Wrapper;
 using RuiChen.AbpPro.FeatureManagement;
 using RuiChen.AbpPro.Identity;
+using RuiChen.AbpPro.Localization;
 using RuiChen.AbpPro.OpenIddict;
 using RuiChen.AbpPro.PermissionManagement;
 using RuiChen.AbpPro.Saas;
@@ -61,7 +62,7 @@ namespace RuiChen.AbpPro.Admin.HttpApi.Host
         typeof(AbpAspNetCoreHttpOverridesModule),
         typeof(AbpAspNetCoreMvcUiBasicThemeModule),
 
-
+        typeof(AbpLocalizationCultureMapModule),
         typeof(AbpAspNetCoreMultiTenancyModule),
         typeof(AbpEntityFrameworkCoreMySQLModule),
         typeof(AbpAspNetCoreSerilogModule),

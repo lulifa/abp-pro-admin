@@ -127,7 +127,8 @@ export const useUserStore = defineStore("pure-user", {
           return res;
         }
       } catch (error) {
-        throw error;
+        // 报错提醒还是需要优化下
+        return Promise.reject(error);
       }
     },
 
