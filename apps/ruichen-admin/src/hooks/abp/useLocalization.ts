@@ -1,30 +1,7 @@
 import { computed } from "vue";
 import { merge } from "lodash-es";
+import { format } from "../utils/string";
 import { useAbpStoreHook } from "@/store/modules/abp";
-
-export function format(formatted: string, args: object | any[]) {
-  if (Array.isArray(args)) {
-    for (let i = 0; i < args.length; i++) {
-      const regexp = new RegExp("\\{" + i + "\\}", "gi");
-      formatted = formatted.replace(regexp, args[i]);
-    }
-  } else if (typeof args === "object") {
-    Object.keys(args).forEach(key => {
-      const regexp = new RegExp("\\{" + key + "\\}", "gi");
-      formatted = formatted.replace(regexp, args[key]);
-    });
-  }
-  return formatted;
-}
-
-interface IStringLocalizer {
-  L(key: string, args?: Recordable | any[] | undefined): string;
-  Lr(
-    resource: string,
-    key: string,
-    args?: Recordable | any[] | undefined
-  ): string;
-}
 
 export function useLocalization(resourceNames?: string | string[]) {
   const getResource = computed(() => {

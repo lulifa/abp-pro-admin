@@ -87,4 +87,14 @@ type NameValue<T = any> = {
   text?: string;
   value?: T;
 };
-declare type Dictionary<TKey = any, KValue = any> = { [key: TKey]: KValue };
+
+type Dictionary<TKey = any, KValue = any> = { [key: TKey]: KValue };
+
+interface IStringLocalizer {
+  L(key: string, args?: any[] | Record<string, any> | undefined): string;
+  Lr(
+    resource: string,
+    key: string,
+    args?: any[] | Record<string, any> | undefined
+  ): string;
+}

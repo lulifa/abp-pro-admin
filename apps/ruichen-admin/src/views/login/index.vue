@@ -76,7 +76,7 @@ const onLogin = async (formEl: FormInstance | undefined) => {
           username: ruleForm.username,
           password: ruleForm.password
         });
-        if (res.access_token && res.refresh_token) {
+        if (res?.access_token && res?.refresh_token) {
           // 初始化路由
           await initRouter();
 
@@ -89,8 +89,6 @@ const onLogin = async (formEl: FormInstance | undefined) => {
           message(t("login.pureLoginSuccess"), { type: "success" });
 
           disabled.value = false;
-        } else {
-          message(t("login.pureLoginFail"), { type: "error" });
         }
       } finally {
         // 无论成功与否，恢复 loading 状态

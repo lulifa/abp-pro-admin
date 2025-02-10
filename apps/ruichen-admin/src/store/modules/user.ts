@@ -115,7 +115,7 @@ export const useUserStore = defineStore("pure-user", {
     async loginApi(params: LoginParams): Promise<LoginResultModel> {
       try {
         const res = await loginApi(params);
-        if (res.access_token && res.refresh_token) {
+        if (res?.access_token && res?.refresh_token) {
           const openiddictToken = {
             accessToken: res.access_token,
             refreshToken: res.refresh_token,
@@ -128,7 +128,7 @@ export const useUserStore = defineStore("pure-user", {
         }
       } catch (error) {
         // 报错提醒还是需要优化下
-        return Promise.reject(error);
+        throw error;
       }
     },
 

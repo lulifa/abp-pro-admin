@@ -46,8 +46,6 @@ const onLogin = async (formEl: FormInstance | undefined) => {
           message(transformI18n($t("login.pureLoginSuccess")), {
             type: "success"
           });
-        } else {
-          message(t("login.pureLoginFail"), { type: "error" });
         }
       } finally {
         // 无论成功与否，恢复 loading 状态

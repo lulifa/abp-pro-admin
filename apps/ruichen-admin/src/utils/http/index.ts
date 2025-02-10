@@ -16,6 +16,7 @@ import { message } from "@/utils/message";
 import { useUserStoreHook } from "@/store/modules/user";
 import { getToken, formatToken } from "@/utils/auth";
 import { ResultEnum } from "@/enums/httpEnum";
+import { useOAuthError } from "@/hooks/abp/useOAuthError";
 
 // 相关配置请参考：www.axios-js.com/zh-cn/docs/#axios-request-config-1
 const defaultConfig: AxiosRequestConfig = {
@@ -145,8 +146,7 @@ class PureHttp {
 
   /** 响应拦截 */
   private httpInterceptorsResponse(): void {
-    const instance = PureHttp.axiosInstance;
-    instance.interceptors.response.use(
+    PureHttp.axiosInstance.interceptors.response.use(
       (response: PureHttpResponse) => {
         const $config = response.config;
         // 关闭进度条动画
@@ -163,51 +163,18 @@ class PureHttp {
         return response.data;
       },
       (error: PureHttpError) => {
-        debugger;
         const $error = error;
-        const { response } = $error;
-        const requestUrl = response?.request?.responseURL || "";
-        if (response && response.status) {
-          const data = response.data as any;
-          const errorMessage =
-            data?.error?.message || data?.error_description || $error.message;
-          const errorDetails = data?.error?.details || "";
-          const fullMessage = `${errorMessage}\r\n${errorDetails}\r\n${requestUrl}`;
+        const responseData = $error?.response?.data as any;
+        const msg = $error?.message;
 
-          switch (response.status) {
-            case HttpStatusCode.Unauthorized:
-              message(`未授权，请登录。\r\n ${fullMessage}`, {
-                type: "error"
-              });
-              useUserStoreHook().logOut();
-              break;
-            case HttpStatusCode.Forbidden:
-              message(`拒绝访问。\r\n ${fullMessage}`, {
-                type: "error"
-              });
-              break;
-            case HttpStatusCode.BadRequest:
-              message(`请求错误。\r\n ${fullMessage}`, {
-                type: "error"
-              });
-              break;
-            case HttpStatusCode.InternalServerError:
-              message(`服务器内部错误。\r\n ${fullMessage}`, {
-                type: "error"
-              });
-              break;
-            default:
-              message(
-                `接口异常，请反馈详细复现流程给管理员。\r\n ${fullMessage}`,
-                {
-                  type: "error"
-                }
-              );
-          }
-        } else {
-          message($error.message, {
+        if (responseData.error_description) {
+          message(useOAuthError().formatErrorOAuth(responseData) || msg, {
             type: "error"
           });
+        } else {
+          const errorMessage =
+            responseData?.error ?? responseData?.message ?? "";
+          message(errorMessage || msg, { type: "error" });
         }
 
         $error.isCancelRequest = Axios.isCancel($error);

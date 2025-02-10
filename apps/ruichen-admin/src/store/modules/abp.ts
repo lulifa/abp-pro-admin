@@ -52,7 +52,6 @@ export const useAbpStore = defineStore("abp", {
       ls.removeItem(ABP_API_KEY);
     },
     mergeLocaleMessage(localization: ApplicationLocalizationConfigurationDto) {
-      debugger;
       if (localization.languagesMap["pure-admin-ui"]) {
         const transferCulture = localization.languagesMap[
           "pure-admin-ui"
