@@ -13,7 +13,7 @@ import { injectResponsiveStorage } from "@/utils/responsive";
 import Table from "@pureadmin/table";
 import PureDescriptions from "@pureadmin/descriptions";
 
-import { useAbpStore } from "@/store/modules/abp";
+import { useAbpStoreHook } from "@/store/modules/abp";
 
 // 引入重置样式
 import "./style/reset.scss";
@@ -63,8 +63,8 @@ getPlatformConfig(app).then(async config => {
   injectResponsiveStorage(app, config);
 
   // abp默认初始化配置加载
-  await useAbpStore().initlizeAbpApplication();
-  await useAbpStore().initlizaAbpApiDefinition();
+  useAbpStoreHook().initlizeAbpApplication();
+  useAbpStoreHook().initlizaAbpApiDefinition();
 
   app
     .use(MotionPlugin)

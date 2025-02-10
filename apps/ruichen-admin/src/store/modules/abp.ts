@@ -101,6 +101,6 @@ export const useAbpStore = defineStore("abp", {
   }
 });
 
-export function useAbpStoreWithOut() {
+export function useAbpStoreHook() {
   return useAbpStore(store);
 }

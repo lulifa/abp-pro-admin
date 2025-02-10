@@ -87,3 +87,4 @@ type NameValue<T = any> = {
   text?: string;
   value?: T;
 };
+declare type Dictionary<TKey = any, KValue = any> = { [key: TKey]: KValue };

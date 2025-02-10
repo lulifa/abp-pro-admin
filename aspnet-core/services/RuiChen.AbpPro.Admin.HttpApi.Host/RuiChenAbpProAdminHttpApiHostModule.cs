@@ -1,4 +1,5 @@
-﻿using RuiChen.AbpPro.Account;
+﻿using Microsoft.AspNetCore.Localization;
+using RuiChen.AbpPro.Account;
 using RuiChen.AbpPro.AspNetCore.HttpOverrides;
 using RuiChen.AbpPro.AspNetCore.Mvc.Wrapper;
 using RuiChen.AbpPro.FeatureManagement;
@@ -130,7 +131,10 @@ namespace RuiChen.AbpPro.Admin.HttpApi.Host
 
             app.UseCookiePolicy();
 
-            app.UseAbpRequestLocalization();
+            app.UseMapRequestLocalization(options =>
+            {
+                options.RequestCultureProviders.Insert(1, new AcceptLanguageHeaderRequestCultureProvider());
+            });
 
             app.UseCorrelationId();
 

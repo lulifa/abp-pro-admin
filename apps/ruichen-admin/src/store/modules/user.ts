@@ -1,6 +1,6 @@
 import { defineStore } from "pinia";
 import { USER_INFO_KEY, ROLES_KEY, PERMISSIONS_KEY } from "@/enums/cacheEnum";
-import { useAbpStoreWithOut } from "./abp";
+import { useAbpStoreHook } from "./abp";
 
 import {
   type userType,
@@ -27,7 +27,7 @@ import { useMultiTagsStoreHook } from "./multiTags";
 import { setToken, removeToken } from "@/utils/auth";
 
 const ls = storageLocal();
-const abpStore = useAbpStoreWithOut();
+const abpStore = useAbpStoreHook();
 
 export const useUserStore = defineStore("pure-user", {
   state: (): userType => ({
@@ -176,7 +176,7 @@ export const useUserStore = defineStore("pure-user", {
       const userInfo = await getUserInfoApi();
 
       // 获取abpStore 初始化abp相关代码
-      const abpStore = useAbpStoreWithOut();
+      const abpStore = useAbpStoreHook();
       let currentUser = abpStore.getApplication.currentUser;
 
       //  避免多次请求接口

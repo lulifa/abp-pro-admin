@@ -1,4 +1,5 @@
-﻿using RuiChen.AbpPro.Localization;
+﻿using Microsoft.AspNetCore.Localization;
+using RuiChen.AbpPro.Localization;
 
 namespace Microsoft.AspNetCore.Builder
 {
