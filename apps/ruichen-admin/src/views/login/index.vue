@@ -104,11 +104,13 @@ const immediateDebounce: any = debounce(
   true
 );
 
-useEventListener(document, "keydown", ({ code }) => {
+useEventListener(document, "keydown", event => {
+  const { code, target } = event;
   if (
     ["Enter", "NumpadEnter"].includes(code) &&
     !disabled.value &&
-    !loading.value
+    !loading.value &&
+    ruleFormRef.value?.$el?.contains(target)
   )
     immediateDebounce(ruleFormRef.value);
 });

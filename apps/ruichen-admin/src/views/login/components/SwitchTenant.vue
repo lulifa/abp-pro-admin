@@ -2,7 +2,7 @@
 import Cookies from "js-cookie";
 import { useI18n } from "vue-i18n";
 import { message } from "@/utils/message";
-import { ref, computed, h } from "vue";
+import { ref, computed, h, onMounted, watch } from "vue";
 import { deviceDetection } from "@pureadmin/utils";
 import { useRenderIcon } from "@/components/ReIcon/src/hooks";
 
@@ -29,11 +29,17 @@ const formRefTenant = ref();
 
 const multiTenancyEnabled = computed(() => {
   const abpStore = useAbpStoreHook();
-  return abpStore.getApplication.multiTenancy.isEnabled;
+  return abpStore.getApplication.multiTenancy?.isEnabled;
 });
+
 const currentTenant = computed(() => {
   const abpStore = useAbpStoreHook();
   return abpStore.getApplication.currentTenant;
+});
+
+const loading = computed(() => {
+  const abpStore = useAbpStoreHook();
+  return !abpStore.getApplication;
 });
 
 const switchTenant = async () => {
@@ -109,7 +115,7 @@ const propsFormInline = async () => {
 </script>
 
 <template>
-  <div v-if="multiTenancyEnabled">
+  <div v-if="multiTenancyEnabled" v-loading="loading">
     <Motion :delay="50">
       <el-form-item size="large">
         <el-input
