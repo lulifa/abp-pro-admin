@@ -49,8 +49,8 @@ function draw(dom: HTMLCanvasElement, width: number, height: number) {
 
   // 背景色优化：加深背景色，增强对比度
   const gradient = ctx.createLinearGradient(0, 0, width, height);
-  gradient.addColorStop(0, "#8e9fff"); // 深蓝色
-  gradient.addColorStop(1, "#6db2ff"); // 深青色
+  gradient.addColorStop(0, "#b3c9ff"); // 浅蓝色
+  gradient.addColorStop(1, "#8cc9ff"); // 浅青色
   ctx.fillStyle = gradient;
   ctx.fillRect(0, 0, width, height);
 
@@ -81,10 +81,6 @@ function draw(dom: HTMLCanvasElement, width: number, height: number) {
       ctx.save();
       ctx.translate(25 * i + 15, height / 2);
       ctx.rotate((deg * Math.PI) / 180);
-      // 增加字符加粗效果
-      ctx.lineWidth = 3;
-      ctx.strokeStyle = randomColor(0, 100); // 加深的轮廓色
-      ctx.strokeText(text, -10, 0); // 描边
       ctx.fillText(text, -10, 0); // 填充
       ctx.restore();
     }
@@ -112,10 +108,6 @@ function draw(dom: HTMLCanvasElement, width: number, height: number) {
     ctx.font = `${fontSize}px Arial, sans-serif`;
     ctx.textBaseline = "middle";
     ctx.fillStyle = randomColor(0, 100); // 更深色的字符
-    // 描边并加粗
-    ctx.lineWidth = 2;
-    ctx.strokeStyle = randomColor(0, 100); // 加深的轮廓色
-    ctx.strokeText(text, 10, height / 2);
     ctx.fillText(text, 10, height / 2);
   }
 
