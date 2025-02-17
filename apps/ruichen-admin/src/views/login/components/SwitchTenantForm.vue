@@ -36,6 +36,7 @@ defineExpose({ getRef });
           <el-input
             v-model="newFormInline.name"
             class="!w-full"
+            size="large"
             clearable
             placeholder="请输入"
           />
