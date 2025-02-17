@@ -57,6 +57,7 @@ const wrapperEnv = (envConf: Recordable): ViteEnv => {
     VITE_CDN: false,
     VITE_HIDE_HOME: "false",
     VITE_COMPRESSION: "none",
+    VITE_APP_SHORT_NAME: "vue_pure_admin",
     VITE_CLIENT_ID: "vue-admin-client",
     VITE_CLIENT_SECRET: "1q2w3e*",
     VITE_SCOPE:

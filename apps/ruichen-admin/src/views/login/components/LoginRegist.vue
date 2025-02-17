@@ -11,15 +11,19 @@ import { useRenderIcon } from "@/components/ReIcon/src/hooks";
 import Lock from "@iconify-icons/ri/lock-fill";
 import User from "@iconify-icons/ri/user-3-fill";
 
+const { VITE_APP_SHORT_NAME } = import.meta.env;
+import { passwordRegister } from "@/api/account/account-base";
+
 const { t } = useI18n();
 const checked = ref(false);
 const loading = ref(false);
 const ruleForm = reactive({
-  username: "",
-  phone: "",
+  userName: "",
+  emailAddress: "",
   verifyCode: "",
   password: "",
-  repeatPassword: ""
+  repeatPassword: "",
+  appName: VITE_APP_SHORT_NAME
 });
 const ruleFormRef = ref<FormInstance>();
 const repeatPasswordRule = [
@@ -45,13 +49,13 @@ const onUpdate = async (formEl: FormInstance | undefined) => {
   await formEl.validate(valid => {
     if (valid) {
       if (checked.value) {
-        // 模拟请求，需根据实际开发进行修改
-        setTimeout(() => {
+        passwordRegister(ruleForm).then(() => {
           message(transformI18n($t("login.pureRegisterSuccess")), {
             type: "success"
           });
           loading.value = false;
-        }, 2000);
+          onBack();
+        });
       } else {
         loading.value = false;
         message(transformI18n($t("login.pureTickPrivacy")), {
@@ -85,12 +89,32 @@ function onBack() {
             trigger: 'blur'
           }
         ]"
-        prop="username"
+        prop="userName"
       >
         <el-input
-          v-model="ruleForm.username"
+          v-model="ruleForm.userName"
           clearable
           :placeholder="t('login.pureUsername')"
+          :prefix-icon="useRenderIcon(User)"
+        />
+      </el-form-item>
+    </Motion>
+
+    <Motion :delay="150">
+      <el-form-item
+        :rules="[
+          {
+            required: true,
+            message: transformI18n($t('login.pureEmailAddressReg')),
+            trigger: 'blur'
+          }
+        ]"
+        prop="emailAddress"
+      >
+        <el-input
+          v-model="ruleForm.emailAddress"
+          clearable
+          :placeholder="t('login.pureEmailAddressReg')"
           :prefix-icon="useRenderIcon(User)"
         />
       </el-form-item>

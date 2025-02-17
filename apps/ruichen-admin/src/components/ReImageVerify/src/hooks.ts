@@ -86,8 +86,8 @@ function draw(dom: HTMLCanvasElement, width: number, height: number) {
     }
   } else if (type === "math") {
     // 算术验证码
-    const num1 = randomNum(1, 10);
-    const num2 = randomNum(1, 10);
+    let num1 = randomNum(1, 10);
+    let num2 = randomNum(1, 10);
     const operator = ["+", "-", "×"][randomNum(0, 3)];
     let result = 0;
     switch (operator) {
@@ -95,6 +95,9 @@ function draw(dom: HTMLCanvasElement, width: number, height: number) {
         result = num1 + num2;
         break;
       case "-":
+        if (num1 < num2) {
+          [num1, num2] = [num2, num1];
+        }
         result = num1 - num2;
         break;
       case "×":

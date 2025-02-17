@@ -63,8 +63,8 @@ getPlatformConfig(app).then(async config => {
   injectResponsiveStorage(app, config);
 
   // abp默认初始化配置加载
-  useAbpStoreHook().initlizeAbpApplication();
-  useAbpStoreHook().initlizaAbpApiDefinition();
+  await useAbpStoreHook().initlizeAbpApplication();
+  await useAbpStoreHook().initlizaAbpApiDefinition();
 
   app
     .use(MotionPlugin)

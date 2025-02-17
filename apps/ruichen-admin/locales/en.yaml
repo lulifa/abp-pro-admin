@@ -201,6 +201,7 @@ login:
   pureSwitch: Switch
   pureUsername: Username
   purePassword: Password
+  pureEmailAddress: EmailAddress
   pureVerifyCode: VerifyCode
   pureRemember: days no need to login
   pureRememberInfo: After checking and logging in, will automatically log in to the system without entering your username and password within the specified number of days.
@@ -237,6 +238,8 @@ login:
   pureVerifyCodeSixReg: Please enter a 6-digit verify code
   purePhoneReg: Please enter the phone
   purePhoneCorrectReg: Please enter the correct phone number format
+  pureEmailAddressReg: Please enter the email address
+  pureEmailAddressCorrectReg: Please enter the correct email address format
   purePassWordRuleReg: The password format should be any combination of 6-18 digits
   purePassWordSureReg: Please enter confirm password
   purePassWordDifferentReg: The two passwords do not match!

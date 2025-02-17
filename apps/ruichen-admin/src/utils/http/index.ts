@@ -163,17 +163,17 @@ class PureHttp {
         return response.data;
       },
       (error: PureHttpError) => {
+        debugger;
         const $error = error;
         const responseData = $error?.response?.data as any;
         const msg = $error?.message;
-
-        if (responseData.error_description) {
+        if (responseData?.error_description) {
           message(useOAuthError().formatErrorOAuth(responseData) || msg, {
             type: "error"
           });
         } else {
           const errorMessage =
-            responseData?.error ?? responseData?.message ?? "";
+            responseData?.error?.details ?? responseData?.error?.message ?? "";
           message(errorMessage || msg, { type: "error" });
         }
 

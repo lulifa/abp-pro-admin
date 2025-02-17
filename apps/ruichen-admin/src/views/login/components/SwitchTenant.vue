@@ -61,7 +61,6 @@ const switchTenant = async () => {
 
         function chores() {
           done();
-          window.location.reload();
         }
         FormRef.validate(async valid => {
           if (valid) {
@@ -86,13 +85,13 @@ const switchTenant = async () => {
               Cookies.remove(ABP_TENANT_KEY);
               chores();
             }
+            setTimeout(async () => {
+              const abpStore = useAbpStoreHook();
+              await abpStore.initlizeAbpApplication();
+            }, 100);
           }
         });
       } finally {
-        setTimeout(() => {
-          const abpStore = useAbpStoreHook();
-          abpStore.initlizeAbpApplication();
-        }, 100);
         closeLoading();
       }
     },

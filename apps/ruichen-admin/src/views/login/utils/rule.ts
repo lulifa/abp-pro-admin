@@ -1,5 +1,5 @@
 import { computed, reactive } from "vue";
-import { isPhone } from "@pureadmin/utils";
+import { isEmail, isPhone } from "@pureadmin/utils";
 import type { FormRules } from "element-plus";
 import { $t, transformI18n } from "@/plugins/i18n";
 import { useUserStoreHook } from "@/store/modules/user";
@@ -32,7 +32,9 @@ const loginRules = reactive<FormRules>({
       validator: (rule, value, callback) => {
         if (value === "") {
           callback(new Error(transformI18n($t("login.pureVerifyCodeReg"))));
-        } else if (useUserStoreHook().verifyCode !== value) {
+        } else if (
+          useUserStoreHook().verifyCode?.toLowerCase() !== value?.toLowerCase()
+        ) {
           callback(
             new Error(transformI18n($t("login.pureVerifyCodeCorrectReg")))
           );
@@ -86,6 +88,22 @@ const updateRules = reactive<FormRules>({
           callback(new Error(transformI18n($t("login.purePhoneReg"))));
         } else if (!isPhone(value)) {
           callback(new Error(transformI18n($t("login.purePhoneCorrectReg"))));
+        } else {
+          callback();
+        }
+      },
+      trigger: "blur"
+    }
+  ],
+  emailAddress: [
+    {
+      validator: (rule, value, callback) => {
+        if (value === "") {
+          callback(new Error(transformI18n($t("login.pureEmailAddress"))));
+        } else if (!isEmail(value)) {
+          callback(
+            new Error(transformI18n($t("login.pureEmailAddressCorrectReg")))
+          );
         } else {
           callback();
         }

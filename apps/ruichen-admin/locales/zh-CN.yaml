@@ -201,6 +201,7 @@ login:
   pureSwitch: 切换
   pureUsername: 账号
   purePassword: 密码
+  pureEmailAddress: 电子邮件
   pureVerifyCode: 验证码
   pureRemember: 天内免登录
   pureRememberInfo: 勾选并登录后，规定天数内无需输入用户名和密码会自动登入系统
@@ -237,6 +238,8 @@ login:
   pureVerifyCodeSixReg: 请输入6位数字验证码
   purePhoneReg: 请输入手机号码
   purePhoneCorrectReg: 请输入正确的手机号码格式
+  pureEmailAddressReg: 请输入电子邮件
+  pureEmailAddressCorrectReg: 请输入正确的电子邮件格式
   purePassWordRuleReg: 密码格式应为6-18位数字、字母、符号的任意两种组合
   purePassWordSureReg: 请输入确认密码
   purePassWordDifferentReg: 两次密码不一致!
