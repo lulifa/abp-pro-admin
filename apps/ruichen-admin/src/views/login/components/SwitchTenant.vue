@@ -86,8 +86,7 @@ const switchTenant = async () => {
               chores();
             }
             setTimeout(async () => {
-              const abpStore = useAbpStoreHook();
-              await abpStore.initlizeAbpApplication();
+              await useAbpStoreHook().initlizeAbpApplication();
             }, 100);
           }
         });
