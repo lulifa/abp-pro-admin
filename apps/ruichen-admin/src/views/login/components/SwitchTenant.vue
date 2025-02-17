@@ -37,11 +37,6 @@ const currentTenant = computed(() => {
   return abpStore.getApplication.currentTenant;
 });
 
-const loading = computed(() => {
-  const abpStore = useAbpStoreHook();
-  return !abpStore.getApplication;
-});
-
 const switchTenant = async () => {
   let props = await propsFormInline();
   const dialogTitle = `切换租户`;
@@ -66,6 +61,7 @@ const switchTenant = async () => {
 
         function chores() {
           done();
+          window.location.reload();
         }
         FormRef.validate(async valid => {
           if (valid) {
@@ -115,7 +111,7 @@ const propsFormInline = async () => {
 </script>
 
 <template>
-  <div v-if="multiTenancyEnabled" v-loading="loading">
+  <div v-if="multiTenancyEnabled">
     <Motion :delay="50">
       <el-form-item size="large">
         <el-input

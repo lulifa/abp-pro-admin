@@ -131,10 +131,7 @@ namespace RuiChen.AbpPro.Admin.HttpApi.Host
 
             app.UseCookiePolicy();
 
-            app.UseMapRequestLocalization(options =>
-            {
-                options.RequestCultureProviders.Insert(1, new AcceptLanguageHeaderRequestCultureProvider());
-            });
+            app.UseMapRequestLocalization();
 
             app.UseCorrelationId();
 
