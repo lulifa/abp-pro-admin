@@ -1,0 +1,5 @@
+
+
+dotnet new classlib -o framework/authentication/RuiChen.AbpPro.Authentication.GitHub
+
+dotnet sln RuiChen.AbpPro.sln add framework/authentication/RuiChen.AbpPro.Authentication.GitHub
