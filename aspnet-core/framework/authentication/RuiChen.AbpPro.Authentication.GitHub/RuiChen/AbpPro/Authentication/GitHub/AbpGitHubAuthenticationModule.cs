@@ -13,11 +13,10 @@ namespace RuiChen.AbpPro.Authentication.GitHub
                             {
                                 var configuration = context.Services.GetConfiguration();
 
-                                options.ClientId = configuration["Authentication:GitHub:ClientId"] ?? string.Empty;
+                                options.ClientId = configuration["Authentication:GitHub:ClientId"];
 
-                                options.ClientSecret = configuration["Authentication:GitHub:ClientSecret"] ?? string.Empty;
+                                options.ClientSecret = configuration["Authentication:GitHub:ClientSecret"];
 
-                                options.Scope.Add("user:email");
                             });
         }
 
