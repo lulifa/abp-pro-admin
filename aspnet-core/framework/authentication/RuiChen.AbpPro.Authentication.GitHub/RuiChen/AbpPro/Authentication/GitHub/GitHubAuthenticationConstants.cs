@@ -1,10 +1,11 @@
-﻿namespace RuiChen.AbpPro.Authentication.GitHub;
-
-public class GitHubAuthenticationConstants
+﻿namespace RuiChen.AbpPro.Authentication.GitHub
 {
-    public static class Claims
+    public class GitHubAuthenticationConstants
     {
-        public const string Name = "urn:github:name";
-        public const string Url = "urn:github:url";
+        public static class Claims
+        {
+            public const string Name = "urn:github:name";
+            public const string Url = "urn:github:url";
+        }
     }
 }

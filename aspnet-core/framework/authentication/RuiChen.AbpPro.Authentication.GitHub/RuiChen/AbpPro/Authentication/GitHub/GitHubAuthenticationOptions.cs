@@ -25,5 +25,9 @@ namespace RuiChen.AbpPro.Authentication.GitHub
             ClaimActions.MapJsonKey(Claims.Name, "name");
             ClaimActions.MapJsonKey(Claims.Url, "url");
         }
+
+        public string EnterpriseDomain { get; set; }
+
+        public string UserEmailsEndpoint { get; set; } = GitHubAuthenticationDefaults.UserEmailsEndpoint;
     }
 }

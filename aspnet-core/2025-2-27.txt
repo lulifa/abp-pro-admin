@@ -1,0 +1,5 @@
+
+
+dotnet new classlib -o framework/authentication/RuiChen.AbpPro.Authentication.Gitee
+
+dotnet sln RuiChen.AbpPro.sln add framework/authentication/RuiChen.AbpPro.Authentication.Gitee

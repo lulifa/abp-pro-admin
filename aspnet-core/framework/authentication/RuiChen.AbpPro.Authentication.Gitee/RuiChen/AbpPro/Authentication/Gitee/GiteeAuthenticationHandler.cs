@@ -7,11 +7,14 @@ using System.Security.Claims;
 using System.Text.Encodings.Web;
 using System.Text.Json;
 
-namespace RuiChen.AbpPro.Authentication.GitHub
+namespace RuiChen.AbpPro.Authentication.Gitee
 {
-    public partial class GitHubAuthenticationHandler : OAuthHandler<GitHubAuthenticationOptions>
+    public partial class GiteeAuthenticationHandler : OAuthHandler<GiteeAuthenticationOptions>
     {
-        public GitHubAuthenticationHandler(IOptionsMonitor<GitHubAuthenticationOptions> options, ILoggerFactory logger, UrlEncoder encoder)
+        public GiteeAuthenticationHandler(
+            IOptionsMonitor<GiteeAuthenticationOptions> options,
+            ILoggerFactory logger,
+            UrlEncoder encoder)
             : base(options, logger, encoder)
         {
         }
@@ -38,7 +41,7 @@ namespace RuiChen.AbpPro.Authentication.GitHub
             // the emails endpoint if the user:email scope is specified.
             if (!string.IsNullOrEmpty(Options.UserEmailsEndpoint) &&
                 !identity.HasClaim(claim => claim.Type == ClaimTypes.Email) &&
-                Options.Scope.Contains("user:email"))
+                Options.Scope.Contains("emails"))
             {
                 var address = await GetEmailAsync(tokens);
 
@@ -52,7 +55,7 @@ namespace RuiChen.AbpPro.Authentication.GitHub
             return new AuthenticationTicket(context.Principal!, context.Properties, Scheme.Name);
         }
 
-        protected virtual async Task<string> GetEmailAsync(OAuthTokenResponse tokens)
+        protected async Task<string> GetEmailAsync(OAuthTokenResponse tokens)
         {
             using var request = new HttpRequestMessage(HttpMethod.Get, Options.UserEmailsEndpoint);
             request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
@@ -67,9 +70,8 @@ namespace RuiChen.AbpPro.Authentication.GitHub
             using var payload = JsonDocument.Parse(await response.Content.ReadAsStringAsync(Context.RequestAborted));
 
             return (from address in payload.RootElement.EnumerateArray()
-                    where address.GetProperty("primary").GetBoolean()
                     select address.GetString("email")).FirstOrDefault();
         }
-
     }
+
 }

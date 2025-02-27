@@ -17,6 +17,8 @@ namespace RuiChen.AbpPro.Authentication.GitHub
 
                                 options.ClientSecret = configuration["Authentication:GitHub:ClientSecret"];
 
+                                options.EnterpriseDomain = configuration["Authentication:GitHub:EnterpriseDomain"];
+
                             });
         }
 
