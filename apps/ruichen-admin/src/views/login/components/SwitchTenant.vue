@@ -2,14 +2,13 @@
 import Cookies from "js-cookie";
 import { useI18n } from "vue-i18n";
 import { message } from "@/utils/message";
-import { ref, computed, h, onMounted, watch } from "vue";
+import { ref, h, watch } from "vue";
 import { deviceDetection } from "@pureadmin/utils";
 import { useRenderIcon } from "@/components/ReIcon/src/hooks";
 
 import { ABP_TENANT_KEY } from "@/enums/cacheEnum";
 import { addDialog } from "@/components/ReDialog";
 import { useAbpStoreHook } from "@/store/modules/abp";
-import { findTenantByName } from "@/api/abp/abp-multitenancy";
 import { GetTenantByName } from "@/api/saas/saas-tenant";
 import { useLocalization } from "@/hooks/abp/useLocalization";
 
