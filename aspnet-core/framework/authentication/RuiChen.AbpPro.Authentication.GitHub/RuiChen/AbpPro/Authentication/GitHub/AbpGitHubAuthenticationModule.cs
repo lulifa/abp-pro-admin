@@ -13,6 +13,8 @@ namespace RuiChen.AbpPro.Authentication.GitHub
                             {
                                 var configuration = context.Services.GetConfiguration();
 
+                                //后续配置放到settings中 是否启用后再配置获取
+
                                 options.ClientId = configuration["Authentication:GitHub:ClientId"];
 
                                 options.ClientSecret = configuration["Authentication:GitHub:ClientSecret"];

@@ -80,6 +80,7 @@
     "mitt": "^3.0.1",
     "mqtt": "4.3.7",
     "nprogress": "^0.2.0",
+    "oidc-client-ts": "^3.1.0",
     "path-browserify": "^1.0.1",
     "pinia": "^2.3.0",
     "pinyin-pro": "^3.26.0",
