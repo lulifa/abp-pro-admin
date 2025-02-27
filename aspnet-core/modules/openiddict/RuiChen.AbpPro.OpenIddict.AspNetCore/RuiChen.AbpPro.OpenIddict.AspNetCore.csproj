@@ -3,8 +3,17 @@
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
+    <Nullable>disable</Nullable>
     <RootNamespace />
   </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Volo.Abp.OpenIddict.AspNetCore" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\framework\authentication\RuiChen.AbpPro.Authentication.Gitee\RuiChen.AbpPro.Authentication.Gitee.csproj" />
+    <ProjectReference Include="..\..\..\framework\authentication\RuiChen.AbpPro.Authentication.GitHub\RuiChen.AbpPro.Authentication.GitHub.csproj" />
+  </ItemGroup>
 
 </Project>

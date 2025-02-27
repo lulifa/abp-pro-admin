@@ -1,5 +1,6 @@
 ﻿using Localization.Resources.AbpUi;
 using Microsoft.Extensions.DependencyInjection;
+using RuiChen.AbpPro.OpenIddict.AspNetCore;
 using Volo.Abp.AspNetCore.Mvc;
 using Volo.Abp.AspNetCore.Mvc.Localization;
 using Volo.Abp.Localization;
@@ -10,7 +11,8 @@ namespace RuiChen.AbpPro.OpenIddict
 {
     [DependsOn(
         typeof(AbpAspNetCoreMvcModule),
-        typeof(AbpOpenIddictApplicationContractsModule)
+        typeof(AbpOpenIddictApplicationContractsModule),
+        typeof(AbpOpenIddictAspNetCoreModule)
         )]
     public class AbpOpenIddictHttpApiModule : AbpModule
     {
