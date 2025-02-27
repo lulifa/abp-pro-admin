@@ -52,6 +52,7 @@ app.component("Perms", Perms);
 import "tippy.js/dist/tippy.css";
 import "tippy.js/themes/light.css";
 import VueTippy from "vue-tippy";
+import { useAbpStoreHook } from "./store/modules/abp";
 app.use(VueTippy);
 
 getPlatformConfig(app).then(async config => {
@@ -59,6 +60,10 @@ getPlatformConfig(app).then(async config => {
   app.use(router);
   await router.isReady();
   injectResponsiveStorage(app, config);
+
+  // abp默认初始化配置加载
+  await useAbpStoreHook().initlizeAbpApplication();
+  await useAbpStoreHook().initlizaAbpApiDefinition();
 
   app
     .use(MotionPlugin)

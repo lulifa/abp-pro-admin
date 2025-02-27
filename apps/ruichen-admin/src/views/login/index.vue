@@ -34,7 +34,6 @@ import Lock from "@iconify-icons/ri/lock-fill";
 import Check from "@iconify-icons/ep/check";
 import User from "@iconify-icons/ri/user-3-fill";
 import Info from "@iconify-icons/ri/information-line";
-import { useAbpStoreHook } from "@/store/modules/abp";
 
 defineOptions({
   name: "Login"
@@ -86,10 +85,6 @@ const onLogin = async (formEl: FormInstance | undefined) => {
           const targetPath = getTopMenu(true).path;
 
           await router.push(targetPath);
-
-          // abp默认初始化配置加载
-          await useAbpStoreHook().initlizeAbpApplication();
-          await useAbpStoreHook().initlizaAbpApiDefinition();
 
           message(t("login.pureLoginSuccess"), { type: "success" });
 

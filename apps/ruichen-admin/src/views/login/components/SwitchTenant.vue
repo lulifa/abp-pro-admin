@@ -10,6 +10,7 @@ import { ABP_TENANT_KEY } from "@/enums/cacheEnum";
 import { addDialog } from "@/components/ReDialog";
 import { useAbpStoreHook } from "@/store/modules/abp";
 import { findTenantByName } from "@/api/abp/abp-multitenancy";
+import { GetTenantByName } from "@/api/saas/saas-tenant";
 import { useLocalization } from "@/hooks/abp/useLocalization";
 
 import Motion from "../utils/motion";
@@ -27,15 +28,17 @@ const { L } = useLocalization("AbpUiMultiTenancy");
 
 const formRefTenant = ref();
 
-const multiTenancyEnabled = computed(() => {
-  const abpStore = useAbpStoreHook();
-  return abpStore.getApplication.multiTenancy?.isEnabled;
-});
+const multiTenancyEnabled = ref(false);
+const currentTenant = ref<CurrentTenant>();
 
-const currentTenant = computed(() => {
-  const abpStore = useAbpStoreHook();
-  return abpStore.getApplication.currentTenant;
-});
+watch(
+  () => useAbpStoreHook().getApplication,
+  newApp => {
+    multiTenancyEnabled.value = newApp?.multiTenancy?.isEnabled;
+    currentTenant.value = newApp?.currentTenant;
+  },
+  { deep: true, immediate: true }
+);
 
 const switchTenant = async () => {
   let props = await propsFormInline();
@@ -56,17 +59,18 @@ const switchTenant = async () => {
       }),
     beforeSure: (done, { options, closeLoading }) => {
       try {
+        debugger;
         const FormRef = formRefTenant.value.getRef();
         const curData = options.props.formInline as FormItemPropsTenant;
 
         function chores() {
           done();
         }
-        FormRef.validate(async valid => {
+        FormRef.validate(valid => {
           if (valid) {
             if (curData.name) {
-              findTenantByName(curData.name).then(result => {
-                if (!result.success || !result.tenantId) {
+              GetTenantByName(curData.name).then(result => {
+                if (!result.id) {
                   message(L("GivenTenantIsNotExist", [curData.name]), {
                     type: "warning"
                   });
@@ -78,7 +82,7 @@ const switchTenant = async () => {
                   });
                   return;
                 }
-                Cookies.set(ABP_TENANT_KEY, result.tenantId);
+                Cookies.set(ABP_TENANT_KEY, result.id);
                 chores();
               });
             } else {

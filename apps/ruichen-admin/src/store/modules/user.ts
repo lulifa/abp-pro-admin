@@ -122,6 +122,7 @@ export const useUserStore = defineStore("pure-user", {
             expires: res.expires_in
           };
           setToken(openiddictToken);
+
           await this.getUserInfoAction();
 
           return res;
@@ -177,6 +178,7 @@ export const useUserStore = defineStore("pure-user", {
 
       // 获取abpStore 初始化abp相关代码
       const abpStore = useAbpStoreHook();
+
       let currentUser = abpStore.getApplication.currentUser;
 
       //  避免多次请求接口
