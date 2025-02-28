@@ -62,6 +62,7 @@ export function useOpenIddictAuthorization() {
     },
     {
       label: "操作",
+      align: "center",
       fixed: "right",
       width: 240,
       slot: "operation"

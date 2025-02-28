@@ -84,7 +84,6 @@ const {
       <template v-slot="{ size, dynamicColumns }">
         <pure-table
           ref="tableRef"
-          align-whole="center"
           showOverflowTooltip
           table-layout="auto"
           :loading="loading"

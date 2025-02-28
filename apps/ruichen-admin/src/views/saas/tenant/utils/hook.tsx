@@ -86,6 +86,7 @@ export function useSaasTenant() {
     },
     {
       label: "操作",
+      align: "center",
       fixed: "right",
       width: 200,
       slot: "operation"
