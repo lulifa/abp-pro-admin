@@ -5,6 +5,13 @@ import type { PaginationProps } from "@pureadmin/table";
 import { deviceDetection } from "@pureadmin/utils";
 import { reactive, ref, onMounted, toRaw, computed, h } from "vue";
 import type { FormProps, FormItemProps } from "../utils/types";
+import {
+  applicationTypeOptions,
+  clientTypeOptions,
+  consentTypeOptions,
+  endpointOptions,
+  menuTypeOptions
+} from "./enums";
 
 import {
   GetOpenIddictApplication,
@@ -150,16 +157,24 @@ export function useOpenIddictApplication() {
   async function propsFormInline(title, row?: FormItemProps) {
     let props: FormProps = {
       formInline: {
-        displayName: ""
+        menuType: 0,
+        applicationType: "Web",
+        clientType: "public",
+        consentType: "explicit"
       },
-      formOther: {}
+      formOther: {
+        menuTypeOptions: menuTypeOptions,
+        applicationTypeOptions: applicationTypeOptions,
+        clientTypeOptions: clientTypeOptions,
+        consentTypeOptions: consentTypeOptions,
+        endpointOptions: endpointOptions
+      }
     };
 
     if (title !== "新增") {
       const res = await GetOpenIddictApplication(row?.id);
       if (res) {
-        props.formInline.id = res.id;
-        props.formInline.displayName = res.displayName;
+        props.formInline = { ...props.formInline, ...res };
       }
     }
     return props;

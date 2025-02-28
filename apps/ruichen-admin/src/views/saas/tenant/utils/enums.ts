@@ -3,12 +3,10 @@ import type { OptionsType } from "@/components/ReSegmented";
 export const menuTypeOptions: Array<OptionsType> = [
   {
     label: "基本信息",
-    icon: "ep:menu",
     value: 0
   },
   {
     label: "连接字符串",
-    icon: "ri:database-2-fill",
     value: 1
   }
 ];

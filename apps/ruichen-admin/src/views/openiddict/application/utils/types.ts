@@ -5,11 +5,19 @@ import type {
 
 interface FormItemProps
   extends OpenIddictApplicationDto,
-    OpenIddictApplicationCreateDto {}
+    OpenIddictApplicationCreateDto {
+  menuType: number;
+}
 
 interface FormProps {
   formInline?: Partial<FormItemProps>;
-  formOther?: {};
+  formOther?: {
+    menuTypeOptions: any[];
+    applicationTypeOptions: any[];
+    clientTypeOptions: any[];
+    consentTypeOptions: any[];
+    endpointOptions: any[];
+  };
 }
 
 export type { FormItemProps, FormProps };
