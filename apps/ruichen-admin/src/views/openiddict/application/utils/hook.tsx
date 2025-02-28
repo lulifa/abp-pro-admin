@@ -7,16 +7,16 @@ import { reactive, ref, onMounted, toRaw, computed, h } from "vue";
 import type { FormProps, FormItemProps } from "../utils/types";
 
 import {
-  GetEdition,
-  GetEditionList,
-  CreateEdition,
-  UpdateEdition,
-  DeleteEdition
-} from "@/api/saas/saas-edition";
+  GetOpenIddictApplication,
+  GetOpenIddictApplicationList,
+  CreateOpenIddictApplication,
+  UpdateOpenIddictApplication,
+  DeleteOpenIddictApplication
+} from "@/api/openiddict/openiddict-application";
 
-import type { EditionGetListInput } from "@/api/saas/saas-edition/model";
+import type { OpenIddictApplicationGetListInput } from "@/api/openiddict/openiddict-application/model";
 
-export function useSaasEdition() {
+export function useOpenIddictApplication() {
   const pagination = reactive<PaginationProps>({
     total: 0,
     pageSize: 10,
@@ -24,7 +24,7 @@ export function useSaasEdition() {
     background: true
   });
 
-  const form = reactive<Partial<EditionGetListInput>>({
+  const form = reactive<Partial<OpenIddictApplicationGetListInput>>({
     get skipCount() {
       return (pagination.currentPage - 1) * pagination.pageSize;
     },
@@ -41,8 +41,32 @@ export function useSaasEdition() {
 
   const columns: TableColumnList = [
     {
-      label: "版本名称",
+      label: "客户端标识",
+      prop: "clientId"
+    },
+    {
+      label: "显示名称",
       prop: "displayName"
+    },
+    {
+      label: "同意类型",
+      prop: "consentType"
+    },
+    {
+      label: "客户端类型",
+      prop: "clientType"
+    },
+    {
+      label: "应用类型",
+      prop: "applicationType"
+    },
+    {
+      label: "客户端Uri",
+      prop: "clientUri"
+    },
+    {
+      label: "客户端Logo",
+      prop: "logoUri"
     },
     {
       label: "操作",
@@ -71,7 +95,7 @@ export function useSaasEdition() {
   async function onSearch() {
     loading.value = true;
     try {
-      const data = await GetEditionList(toRaw(form));
+      const data = await GetOpenIddictApplicationList(toRaw(form));
       dataList.value = data.items;
       pagination.total = data.totalCount;
     } finally {
@@ -81,7 +105,7 @@ export function useSaasEdition() {
 
   async function openDialog(title = "新增", row?: FormItemProps) {
     let props = await propsFormInline(title, row);
-    const dialogTitle = `${title}版本${row?.displayName ? ` - ${row.displayName}` : ""}`;
+    const dialogTitle = `${title}应用${row?.displayName ? ` - ${row.displayName}` : ""}`;
     addDialog({
       title: dialogTitle,
       props: props,
@@ -107,9 +131,9 @@ export function useSaasEdition() {
           FormRef.validate(async valid => {
             if (valid) {
               if (title === "新增") {
-                await CreateEdition(curData);
+                await CreateOpenIddictApplication(curData);
               } else {
-                await UpdateEdition(curData.id, curData);
+                await UpdateOpenIddictApplication(curData.id, curData);
               }
               chores();
             }
@@ -131,18 +155,17 @@ export function useSaasEdition() {
     };
 
     if (title !== "新增") {
-      const res = await GetEdition(row?.id);
+      const res = await GetOpenIddictApplication(row?.id);
       if (res) {
         props.formInline.id = res.id;
         props.formInline.displayName = res.displayName;
-        props.formInline.concurrencyStamp = res.concurrencyStamp;
       }
     }
     return props;
   }
 
   async function handleDelete(row?: FormItemProps) {
-    await DeleteEdition(row?.id);
+    await DeleteOpenIddictApplication(row?.id);
     onSearch();
   }
 

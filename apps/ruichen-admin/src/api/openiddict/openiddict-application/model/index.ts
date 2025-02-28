@@ -1,67 +1,75 @@
-interface Profile extends ExtensibleObject, IHasConcurrencyStamp {
-  userName: string;
-  email: string;
-  name?: string;
-  surname?: string;
-  phoneNumber?: string;
+export interface OpenIddictApplicationFeaturesDto {
+  requirePkce?: boolean;
 }
 
-export interface MyProfile extends Profile {
-  isExternal: boolean;
-  hasPassword: boolean;
+export interface OpenIddictApplicationRequirementsDto {
+  features: OpenIddictApplicationFeaturesDto;
 }
 
-export type UpdateMyProfile = Profile;
-
-export interface ChangePassword {
-  currentPassword: string;
-  newPassword: string;
+export interface OpenIddictApplicationTokenLifetimesDto {
+  accessToken?: number;
+  authorizationCode?: number;
+  deviceCode?: number;
+  identityToken?: number;
+  refreshToken?: number;
+  userCode?: number;
 }
 
-export interface ChangePhoneNumber {
-  newPhoneNumber: string;
-  code: string;
+export interface OpenIddictApplicationSettingsDto {
+  tokenLifetime: OpenIddictApplicationTokenLifetimesDto;
 }
 
-export interface TwoFactorEnabled {
-  enabled: boolean;
+export interface OpenIddictApplicationGetListInput
+  extends PagedAndSortedResultRequestDto {
+  filter?: string;
 }
 
-export interface SendEmailConfirmCode {
-  email: string;
-  appName: string;
-  returnUrl?: string;
-  returnUrlHash?: string;
+export interface OpenIddictApplicationCreateOrUpdateDto
+  extends ExtensibleObject {
+  applicationType?: string;
+  clientId: string;
+  clientSecret?: string;
+  clientType?: string;
+  clientUri?: string;
+  consentType?: string;
+  displayName?: string;
+  displayNames?: Dictionary<string, string>;
+  endpoints?: string[];
+  grantTypes?: string[];
+  logoUri?: string;
+  postLogoutRedirectUris?: string[];
+  properties?: Dictionary<string, string>;
+  redirectUris?: string[];
+  requirements: OpenIddictApplicationRequirementsDto;
+  responseTypes?: string[];
+  scopes?: string[];
+  settings: OpenIddictApplicationSettingsDto;
 }
 
-export interface ConfirmEmailInput {
-  userId?: string;
-  confirmToken: string;
-}
+export type OpenIddictApplicationCreateDto =
+  OpenIddictApplicationCreateOrUpdateDto;
 
-export interface SendChangePhoneNumberCodeInput {
-  newPhoneNumber: string;
-}
+export type OpenIddictApplicationUpdateDto =
+  OpenIddictApplicationCreateOrUpdateDto;
 
-export interface TwoFactorEnabledInput {
-  enabled: boolean;
-}
-
-export interface AuthenticatorDto {
-  isAuthenticated?: boolean;
-  sharedKey?: string;
-  authenticatorUri?: string;
-}
-
-export interface AuthenticatorRecoveryCodeDto {
-  recoveryCodes: string[];
-}
-
-export interface VerifyAuthenticatorCodeInput {
-  authenticatorCode: string;
-}
-
-export interface GetUserSessionsInput extends PagedAndSortedResultRequestDto {
-  device?: string;
-  clientId?: string;
+export interface OpenIddictApplicationDto
+  extends ExtensibleAuditedEntityDto<string> {
+  applicationType?: string;
+  clientId: string;
+  clientSecret?: string;
+  clientType?: string;
+  clientUri?: string;
+  consentType?: string;
+  displayName?: string;
+  displayNames?: Dictionary<string, string>;
+  endpoints?: string[];
+  grantTypes?: string[];
+  logoUri?: string;
+  postLogoutRedirectUris?: string[];
+  properties?: Dictionary<string, string>;
+  redirectUris?: string[];
+  requirements: OpenIddictApplicationRequirementsDto;
+  responseTypes?: string[];
+  scopes?: string[];
+  settings: OpenIddictApplicationSettingsDto;
 }

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useSaasTenant } from "./utils/hook";
+import { useOpenIddictApplication } from "./utils/hook";
 import { ref } from "vue";
 import { PureTableBar } from "@/components/RePureTableBar";
 import { useRenderIcon } from "@/components/ReIcon/src/hooks";
@@ -11,10 +11,9 @@ import Refresh from "@iconify-icons/ep/refresh";
 import Menu from "@iconify-icons/ep/menu";
 import AddFill from "@iconify-icons/ri/add-circle-line";
 import More from "@iconify-icons/ep/more-filled";
-import Database from "@iconify-icons/ri/database-2-fill";
 
 defineOptions({
-  name: "SaasTenant"
+  name: "OpenIddictApplication"
 });
 
 const formRef = ref();
@@ -30,13 +29,12 @@ const {
   onSearch,
   resetForm,
   openDialog,
-  openDialogConnection,
   handleDelete,
   transformI18n,
   handleSizeChange,
   handleCurrentChange,
   handleSelectionChange
-} = useSaasTenant();
+} = useOpenIddictApplication();
 </script>
 
 <template>
@@ -78,7 +76,7 @@ const {
           :icon="useRenderIcon(AddFill)"
           @click="openDialog()"
         >
-          新增租户
+          新增应用
         </el-button>
       </template>
       <template v-slot="{ size, dynamicColumns }">
@@ -146,7 +144,7 @@ const {
                       :size="size"
                       :icon="useRenderIcon(Menu)"
                     >
-                      管理特性
+                      生成密钥
                     </el-button>
                   </el-dropdown-item>
                   <el-dropdown-item>
@@ -155,10 +153,20 @@ const {
                       link
                       type="primary"
                       :size="size"
-                      :icon="useRenderIcon(Database)"
-                      @click="openDialogConnection(row)"
+                      :icon="useRenderIcon(Menu)"
                     >
-                      连接字符串
+                      管理权限
+                    </el-button>
+                  </el-dropdown-item>
+                  <el-dropdown-item>
+                    <el-button
+                      :class="buttonClass"
+                      link
+                      type="primary"
+                      :size="size"
+                      :icon="useRenderIcon(Menu)"
+                    >
+                      实体变更
                     </el-button>
                   </el-dropdown-item>
                 </el-dropdown-menu>

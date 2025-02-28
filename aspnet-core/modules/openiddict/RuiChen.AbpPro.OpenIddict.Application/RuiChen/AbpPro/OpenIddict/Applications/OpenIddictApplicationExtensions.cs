@@ -1,4 +1,5 @@
 ﻿using OpenIddict.Abstractions;
+using System.Globalization;
 using Volo.Abp;
 using Volo.Abp.Json;
 using Volo.Abp.OpenIddict.Applications;
@@ -23,17 +24,8 @@ namespace RuiChen.AbpPro.OpenIddict
             entity.ClientType = dto.ClientType;
             entity.LogoUri = dto.LogoUri;
 
-            var requirements = new List<string>();
-            requirements.AddRange(
-                dto.Requirements.Select(requirement =>
-                {
-                    if (!requirement.StartsWith(OpenIddictConstants.Requirements.Prefixes.Feature))
-                    {
-                        return OpenIddictConstants.Requirements.Prefixes.Feature + requirement;
-                    }
-                    return requirement;
-                }));
-            entity.Requirements = jsonSerializer.Serialize(requirements);
+            TrySetSettings(jsonSerializer, dto, entity);
+            TrySetRequirements(jsonSerializer, dto, entity);
 
             var permissions = new List<string>();
             permissions.AddRange(
@@ -46,14 +38,14 @@ namespace RuiChen.AbpPro.OpenIddict
                     return endpoint;
                 }));
             permissions.AddRange(
-            dto.GrantTypes.Select(grantType =>
-            {
-                if (!grantType.StartsWith(OpenIddictConstants.Permissions.Prefixes.GrantType))
+                dto.GrantTypes.Select(grantType =>
                 {
-                    return OpenIddictConstants.Permissions.Prefixes.GrantType + grantType;
-                }
-                return grantType;
-            }));
+                    if (!grantType.StartsWith(OpenIddictConstants.Permissions.Prefixes.GrantType))
+                    {
+                        return OpenIddictConstants.Permissions.Prefixes.GrantType + grantType;
+                    }
+                    return grantType;
+                }));
             permissions.AddRange(
                 dto.ResponseTypes.Select(responseType =>
                 {
@@ -81,7 +73,6 @@ namespace RuiChen.AbpPro.OpenIddict
             }
 
             return entity;
-
         }
 
         public static OpenIddictApplicationDto ToDto(this OpenIddictApplication entity, IJsonSerializer jsonSerializer)
@@ -109,29 +100,37 @@ namespace RuiChen.AbpPro.OpenIddict
                 ApplicationType = entity.ApplicationType,
                 ClientUri = entity.ClientUri,
                 LogoUri = entity.LogoUri,
-                Settings = entity.Settings,
                 JsonWebKeySet = entity.JsonWebKeySet,
                 ConcurrencyStamp = entity.ConcurrencyStamp,
             };
 
+            var settings = jsonSerializer.DeserializeToDictionary<string, string>(entity.Settings);
+            TryGetSettings(settings, dto);
+
             var requirements = jsonSerializer.DeserializeToList<string>(entity.Requirements);
-            dto.Requirements = requirements.Where(HasPrefixKey(OpenIddictConstants.Requirements.Prefixes.Feature))
-                                           .Select(GetPrefixKey(OpenIddictConstants.Requirements.Prefixes.Feature))
-                                           .ToList();
+            TryGetRequirements(requirements, dto);
 
             var permissions = jsonSerializer.DeserializeToList<string>(entity.Permissions);
-            dto.Endpoints = permissions.Where(HasPrefixKey(OpenIddictConstants.Permissions.Prefixes.Endpoint))
-                                       .Select(GetPrefixKey(OpenIddictConstants.Permissions.Prefixes.Endpoint))
-                                       .ToList();
-            dto.GrantTypes = permissions.Where(HasPrefixKey(OpenIddictConstants.Permissions.Prefixes.GrantType))
-                                        .Select(GetPrefixKey(OpenIddictConstants.Permissions.Prefixes.GrantType))
-                                        .ToList();
-            dto.ResponseTypes = permissions.Where(HasPrefixKey(OpenIddictConstants.Permissions.Prefixes.ResponseType))
-                                           .Select(GetPrefixKey(OpenIddictConstants.Permissions.Prefixes.ResponseType))
-                                           .ToList();
-            dto.Scopes = permissions.Where(HasPrefixKey(OpenIddictConstants.Permissions.Prefixes.Scope))
-                                    .Select(GetPrefixKey(OpenIddictConstants.Permissions.Prefixes.Scope))
-                                    .ToList();
+
+            dto.Endpoints = permissions
+                .Where(HasPrefixKey(OpenIddictConstants.Permissions.Prefixes.Endpoint))
+                .Select(GetPrefixKey(OpenIddictConstants.Permissions.Prefixes.Endpoint))
+                .ToList();
+
+            dto.GrantTypes = permissions
+                .Where(HasPrefixKey(OpenIddictConstants.Permissions.Prefixes.GrantType))
+                .Select(GetPrefixKey(OpenIddictConstants.Permissions.Prefixes.GrantType))
+                .ToList();
+
+            dto.ResponseTypes = permissions
+                .Where(HasPrefixKey(OpenIddictConstants.Permissions.Prefixes.ResponseType))
+                .Select(GetPrefixKey(OpenIddictConstants.Permissions.Prefixes.ResponseType))
+                .ToList();
+
+            dto.Scopes = permissions
+                .Where(HasPrefixKey(OpenIddictConstants.Permissions.Prefixes.Scope))
+                .Select(GetPrefixKey(OpenIddictConstants.Permissions.Prefixes.Scope))
+                .ToList();
 
             foreach (var extraProperty in entity.ExtraProperties)
             {
@@ -139,8 +138,6 @@ namespace RuiChen.AbpPro.OpenIddict
             }
 
             return dto;
-
-
         }
 
         private static Func<string, bool> HasPrefixKey(string prefix)
@@ -151,6 +148,92 @@ namespace RuiChen.AbpPro.OpenIddict
         private static Func<string, string> GetPrefixKey(string prefix)
         {
             return p => p.RemovePreFix(prefix);
+        }
+        /// <summary>
+        /// 尝试获取应用要求
+        /// </summary>
+        /// <param name="requirements"></param>
+        /// <param name="dto"></param>
+        private static void TrySetRequirements(IJsonSerializer jsonSerializer, OpenIddictApplicationCreateOrUpdateDto dto, OpenIddictApplication entity)
+        {
+            var requirements = jsonSerializer.DeserializeToList<string>(entity.Requirements);
+            if (dto.Requirements?.Features?.RequirePkce == true)
+            {
+                requirements.Add(OpenIddictConstants.Requirements.Features.ProofKeyForCodeExchange);
+            }
+            else
+            {
+                requirements.RemoveAll(OpenIddictConstants.Requirements.Features.ProofKeyForCodeExchange.Equals);
+            }
+            entity.Requirements = jsonSerializer.Serialize(requirements);
+        }
+        /// <summary>
+        /// 尝试获取应用要求
+        /// </summary>
+        /// <param name="requirements"></param>
+        /// <param name="dto"></param>
+        private static void TryGetRequirements(List<string> requirements, OpenIddictApplicationDto dto)
+        {
+            if (requirements.Contains(OpenIddictConstants.Requirements.Features.ProofKeyForCodeExchange))
+            {
+                dto.Requirements.Features.RequirePkce = true;
+            }
+        }
+        private static void TrySetSettings(IJsonSerializer jsonSerializer, OpenIddictApplicationCreateOrUpdateDto dto, OpenIddictApplication entity)
+        {
+            var settings = entity.Settings.IsNullOrWhiteSpace() ? new Dictionary<string, string>()
+                : jsonSerializer.DeserializeToDictionary<string, string>(entity.Settings);
+
+            if (dto.Settings != null)
+            {
+                if (dto.Settings.TokenLifetime != null)
+                {
+                    void TryUpdateTokenLifetime(string key, long? value)
+                    {
+                        if (value.HasValue)
+                        {
+                            settings[key] = TimeSpan.FromSeconds(value.Value).ToString("c", CultureInfo.InvariantCulture);
+                        }
+                        else
+                        {
+                            settings.Remove(key);
+                        }
+                    }
+
+                    TryUpdateTokenLifetime(OpenIddictConstants.Settings.TokenLifetimes.AccessToken, dto.Settings.TokenLifetime.AccessToken);
+                    TryUpdateTokenLifetime(OpenIddictConstants.Settings.TokenLifetimes.AuthorizationCode, dto.Settings.TokenLifetime.AuthorizationCode);
+                    TryUpdateTokenLifetime(OpenIddictConstants.Settings.TokenLifetimes.DeviceCode, dto.Settings.TokenLifetime.DeviceCode);
+                    TryUpdateTokenLifetime(OpenIddictConstants.Settings.TokenLifetimes.IdentityToken, dto.Settings.TokenLifetime.IdentityToken);
+                    TryUpdateTokenLifetime(OpenIddictConstants.Settings.TokenLifetimes.RefreshToken, dto.Settings.TokenLifetime.RefreshToken);
+                    TryUpdateTokenLifetime(OpenIddictConstants.Settings.TokenLifetimes.UserCode, dto.Settings.TokenLifetime.UserCode);
+                }
+
+                entity.Settings = jsonSerializer.Serialize(settings);
+            }
+        }
+        /// <summary>
+        /// 尝试获取应用设置
+        /// </summary>
+        /// <param name="settings"></param>
+        /// <param name="dto"></param>
+        private static void TryGetSettings(Dictionary<string, string> settings, OpenIddictApplicationDto dto)
+        {
+            long? GetTokenLifetime(string key)
+            {
+                if (settings.TryGetValue(key, out var tokenLifetime) &&
+                    TimeSpan.TryParse(tokenLifetime, CultureInfo.InvariantCulture, out var tokenLifetimeValue))
+                {
+                    return (long)tokenLifetimeValue.TotalSeconds;
+                }
+                return null;
+            }
+
+            dto.Settings.TokenLifetime.AccessToken = GetTokenLifetime(OpenIddictConstants.Settings.TokenLifetimes.AccessToken);
+            dto.Settings.TokenLifetime.AuthorizationCode = GetTokenLifetime(OpenIddictConstants.Settings.TokenLifetimes.AuthorizationCode);
+            dto.Settings.TokenLifetime.DeviceCode = GetTokenLifetime(OpenIddictConstants.Settings.TokenLifetimes.DeviceCode);
+            dto.Settings.TokenLifetime.IdentityToken = GetTokenLifetime(OpenIddictConstants.Settings.TokenLifetimes.IdentityToken);
+            dto.Settings.TokenLifetime.RefreshToken = GetTokenLifetime(OpenIddictConstants.Settings.TokenLifetimes.RefreshToken);
+            dto.Settings.TokenLifetime.UserCode = GetTokenLifetime(OpenIddictConstants.Settings.TokenLifetimes.UserCode);
         }
     }
 }

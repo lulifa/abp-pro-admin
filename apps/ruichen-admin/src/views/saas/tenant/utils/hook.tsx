@@ -34,7 +34,6 @@ import type { TenantGetListInput } from "@/api/saas/saas-tenant/model";
 import type { EditionGetListInput } from "@/api/saas/saas-edition/model";
 
 export function useSaasTenant() {
-  // 租户
   const pagination = reactive<PaginationProps>({
     total: 0,
     pageSize: 10,
