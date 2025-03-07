@@ -51,13 +51,11 @@ namespace RuiChen.AbpPro.Saas
 
         public async virtual Task<PagedResultDto<EditionDto>> GetListAsync(EditionGetListInput input)
         {
-            var maxResultCount = input.IsPaged ? input.MaxResultCount : int.MaxValue;
-
             var totalCount = await editionRepository.GetCountAsync(input.Filter);
 
             var editions = await editionRepository.GetListAsync(
                 input.Sorting,
-                maxResultCount,
+                input.MaxResultCount,
                 input.SkipCount,
                 input.Filter
             );
