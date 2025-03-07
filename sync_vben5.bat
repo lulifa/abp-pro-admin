@@ -27,6 +27,7 @@ if %errorlevel% neq 0 (
 git -c core.quotepath=false subtree pull --prefix="%SUBDIR%" %REMOTE_NAME% %BRANCH% --squash
 if %errorlevel% equ 0 (
     echo [Success] 同步完成
+	pause
 ) else (
     echo [Error] 同步失败！代码：%errorlevel%
     pause
