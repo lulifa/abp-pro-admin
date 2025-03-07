@@ -4,6 +4,7 @@ git remote add vben5 https://github.com/vbenjs/vue-vben-admin.git 2> nul
 git log -1 --format='' -- apps/vben5 2> nul
 if %errorlevel% neq 0 (
     echo 正在初始化子仓库...
+	rmdir /s/q apps\vben5 2> nul
     git -c core.quotepath=false subtree add --prefix=apps/vben5 vben5 main --squash
     if %errorlevel% equ 0 (
         echo 子树初始化成功
