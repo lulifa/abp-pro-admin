@@ -1,6 +1,6 @@
 import { faker } from '@faker-js/faker';
 import { verifyAccessToken } from '~/utils/jwt-utils';
-import { unAuthorizedResponse, usePageResponseSuccess } from '~/utils/response';
+import { unAuthorizedResponse } from '~/utils/response';
 
 function generateMockDataList(count: number) {
   const dataList = [];

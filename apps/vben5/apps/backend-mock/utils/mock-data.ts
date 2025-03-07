@@ -377,14 +377,3 @@ export const MOCK_MENU_LIST = [
     path: '/about',
   },
 ];
-
-export function getMenuIds(menus: any[]) {
-  const ids: number[] = [];
-  menus.forEach((item) => {
-    ids.push(item.id);
-    if (item.children && item.children.length > 0) {
-      ids.push(...getMenuIds(item.children));
-    }
-  });
-  return ids;
-}
