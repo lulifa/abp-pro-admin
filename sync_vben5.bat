@@ -5,7 +5,7 @@ chcp 65001 > nul
 set "REMOTE_NAME=vben5"          :: 远程仓库别名
 set "UPSTREAM_URL=https://github.com/vbenjs/vue-vben-admin.git"  :: 仓库URL
 set "BRANCH=main"               :: 分支名称
-set "SUBDIR=apps/vben5"         :: 本地存放子仓库的目录
+set "SUBDIR=apps/ruichen-admin"         :: 本地存放子仓库的目录
 :: =====================================
 
 :: 配置远程仓库（静默模式）
