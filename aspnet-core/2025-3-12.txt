@@ -19,3 +19,7 @@ dotnet sln RuiChen.AbpPro.sln add modules/auditing/RuiChen.AbpPro.Logging
 dotnet new classlib -o framework/common/RuiChen.AbpPro.Location.IP
 
 dotnet sln RuiChen.AbpPro.sln add framework/common/RuiChen.AbpPro.Location.IP
+
+dotnet new classlib -o migrations/RuiChen.AbpPro.Admin.EntityFrameworkCore.MySql
+
+dotnet sln RuiChen.AbpPro.sln add migrations/RuiChen.AbpPro.Admin.EntityFrameworkCore.MySql

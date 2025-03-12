@@ -1,4 +1,5 @@
 ﻿using RuiChen.AbpPro.Account;
+using RuiChen.AbpPro.Admin.EntityFrameworkCore;
 using RuiChen.AbpPro.AspNetCore.HttpOverrides;
 using RuiChen.AbpPro.AspNetCore.Mvc.Wrapper;
 using RuiChen.AbpPro.Auditing;
@@ -16,7 +17,6 @@ using Volo.Abp.AspNetCore.MultiTenancy;
 using Volo.Abp.AspNetCore.Mvc.UI.Theme.Basic;
 using Volo.Abp.AspNetCore.Serilog;
 using Volo.Abp.Autofac;
-using Volo.Abp.EntityFrameworkCore.MySQL;
 using Volo.Abp.FeatureManagement.EntityFrameworkCore;
 using Volo.Abp.Modularity;
 using Volo.Abp.OpenIddict.EntityFrameworkCore;
@@ -68,10 +68,10 @@ namespace RuiChen.AbpPro.Admin.HttpApi.Host
         typeof(AbpAspNetCoreMvcWrapperModule),
         typeof(AbpAspNetCoreHttpOverridesModule),
         typeof(AbpAspNetCoreMvcUiBasicThemeModule),
+        typeof(RuiChenAbpProAdminMigrationEntityFrameworkCoreModule),
 
         typeof(AbpLocalizationCultureMapModule),
         typeof(AbpAspNetCoreMultiTenancyModule),
-        typeof(AbpEntityFrameworkCoreMySQLModule),
         typeof(AbpAspNetCoreSerilogModule),
         typeof(AbpAutofacModule)
     )]
