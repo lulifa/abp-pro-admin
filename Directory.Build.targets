@@ -5,11 +5,11 @@
 
   <PropertyGroup>
     <LangVersion>latest</LangVersion>
-    <Version>8.1.0</Version>
+    <Version>9.0.4</Version>
     <Authors>lulifa</Authors>
     <NoWarn>$(NoWarn);CS1591;CS0436;CS8618;NU1803</NoWarn>
     <PackageProjectUrl>https://github.com/lulifa/abp-pro-admin</PackageProjectUrl>
-    <PackageVersion>8.1.0</PackageVersion>
+    <PackageVersion>9.0.4</PackageVersion>
     <PackageIcon>icon.png</PackageIcon>
     <PackageReadmeFile>package-readme.md</PackageReadmeFile>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
@@ -17,11 +17,11 @@
     <RepositoryUrl>https://github.com/lulifa/abp-pro-admin</RepositoryUrl>
 
     <!-- Define versions for referenced packages -->
-    <VoloAbpPackageVersion>8.1.0</VoloAbpPackageVersion>
-    <MicrosoftExtensionsPackageVersion>8.0.0</MicrosoftExtensionsPackageVersion>
-    <MicrosoftAspNetCorePackageVersion>8.0.0</MicrosoftAspNetCorePackageVersion>
-    <MicrosoftEntityFrameworkCorePackageVersion>8.0.0</MicrosoftEntityFrameworkCorePackageVersion>
-    <DotNetCoreCAPPackageVersion>8.1.1</DotNetCoreCAPPackageVersion>
+    <VoloAbpPackageVersion>9.0.4</VoloAbpPackageVersion>
+    <MicrosoftExtensionsPackageVersion>9.0.0.0</MicrosoftExtensionsPackageVersion>
+    <MicrosoftAspNetCorePackageVersion>9.0.0.0</MicrosoftAspNetCorePackageVersion>
+    <MicrosoftEntityFrameworkCorePackageVersion>9.0.0.0</MicrosoftEntityFrameworkCorePackageVersion>
+    <DotNetCoreCAPPackageVersion>8.3.2</DotNetCoreCAPPackageVersion>
     <ElsaPackageVersion>2.14.1</ElsaPackageVersion>
     
   </PropertyGroup>

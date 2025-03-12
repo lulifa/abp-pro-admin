@@ -4,8 +4,10 @@ using Volo.Abp.Domain.Entities;
 namespace RuiChen.AbpPro.OpenIddict
 {
     [Serializable]
-    public class OpenIddictTokenDto : ExtensibleAuditedEntityDto<Guid>, IHasConcurrencyStamp
+    public class OpenIddictTokenDto : ExtensibleEntityDto<Guid>, IHasConcurrencyStamp
     {
+        public string ConcurrencyStamp { get; set; }
+
         public Guid? ApplicationId { get; set; }
 
         public Guid? AuthorizationId { get; set; }
@@ -27,8 +29,5 @@ namespace RuiChen.AbpPro.OpenIddict
         public string Subject { get; set; }
 
         public string Type { get; set; }
-
-        public string ConcurrencyStamp { get; set; }
-
     }
 }

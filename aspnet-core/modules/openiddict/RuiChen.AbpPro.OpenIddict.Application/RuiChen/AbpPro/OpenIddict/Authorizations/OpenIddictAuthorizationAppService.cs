@@ -43,63 +43,51 @@ namespace RuiChen.AbpPro.OpenIddict
         public async virtual Task<PagedResultDto<OpenIddictAuthorizationDto>> GetListAsync(OpenIddictAuthorizationGetListInput input)
         {
             var queryable = await authorizationRepository.GetQueryableAsync();
-
             if (input.ClientId.HasValue)
             {
-                queryable = queryable.Where(item => item.ApplicationId == input.ClientId);
+                queryable = queryable.Where(x => x.ApplicationId == input.ClientId);
             }
-
             if (input.BeginCreationTime.HasValue)
             {
-                queryable = queryable.Where(item => item.CreationTime >= input.BeginCreationTime);
+                queryable = queryable.Where(x => x.CreationDate >= input.BeginCreationTime);
             }
-
             if (input.EndCreationTime.HasValue)
             {
-                queryable = queryable.Where(item => item.CreationTime <= input.EndCreationTime);
+                queryable = queryable.Where(x => x.CreationDate <= input.EndCreationTime);
             }
-
             if (!input.Status.IsNullOrWhiteSpace())
             {
-                queryable = queryable.Where(item => item.Status == input.Status);
+                queryable = queryable.Where(x => x.Status == input.Status);
             }
-
             if (!input.Type.IsNullOrWhiteSpace())
             {
-                queryable = queryable.Where(item => item.Type == input.Type);
+                queryable = queryable.Where(x => x.Type == input.Type);
             }
-
             if (!input.Subject.IsNullOrWhiteSpace())
             {
-                queryable = queryable.Where(item => item.Subject == input.Subject);
+                queryable = queryable.Where(x => x.Subject == input.Subject);
             }
-
             if (!input.Filter.IsNullOrWhiteSpace())
             {
-                queryable = queryable.Where(item => item.Subject.Contains(input.Filter) ||
-                                                    item.Status.Contains(input.Filter) ||
-                                                    item.Type.Contains(input.Filter) ||
-                                                    item.Scopes.Contains(input.Filter) ||
-                                                    item.Properties.Contains(input.Filter));
+                queryable = queryable.Where(x => x.Subject.Contains(input.Filter) ||
+                    x.Status.Contains(input.Filter) || x.Type.Contains(input.Filter) ||
+                    x.Scopes.Contains(input.Filter) || x.Properties.Contains(input.Filter));
             }
 
             var totalCount = await AsyncExecuter.CountAsync(queryable);
 
             var sorting = input.Sorting;
-
             if (sorting.IsNullOrWhiteSpace())
             {
-                sorting = $"{nameof(OpenIddictAuthorization.CreationTime)} DESC";
+                sorting = $"{nameof(OpenIddictAuthorization.CreationDate)} DESC";
             }
+            queryable = queryable
+                .OrderBy(sorting)
+                .PageBy(input.SkipCount, input.MaxResultCount);
+            var entites = await AsyncExecuter.ToListAsync(queryable);
 
-            queryable = queryable.OrderBy(sorting).PageBy(input.SkipCount, input.MaxResultCount);
-
-            var entities = await AsyncExecuter.ToListAsync(queryable);
-
-            var items = entities.Select(item => item.ToDto(JsonSerializer)).ToList();
-
-            return new PagedResultDto<OpenIddictAuthorizationDto>(totalCount, items);
-
+            return new PagedResultDto<OpenIddictAuthorizationDto>(totalCount,
+                entites.Select(entity => entity.ToDto(JsonSerializer)).ToList());
         }
     }
 }

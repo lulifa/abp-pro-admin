@@ -41,79 +41,65 @@ namespace RuiChen.AbpPro.OpenIddict
         public async virtual Task<PagedResultDto<OpenIddictTokenDto>> GetListAsync(OpenIddictTokenGetListInput input)
         {
             var queryable = await tokenRepository.GetQueryableAsync();
-
             if (input.ClientId.HasValue)
             {
-                queryable = queryable.Where(item => item.ApplicationId == input.ClientId);
+                queryable = queryable.Where(x => x.ApplicationId == input.ClientId);
             }
-
             if (input.BeginCreationTime.HasValue)
             {
-                queryable = queryable.Where(item => item.CreationTime >= input.BeginCreationTime);
+                queryable = queryable.Where(x => x.CreationDate >= input.BeginCreationTime);
             }
-
             if (input.EndCreationTime.HasValue)
             {
-                queryable = queryable.Where(item => item.CreationTime <= input.EndCreationTime);
+                queryable = queryable.Where(x => x.CreationDate <= input.EndCreationTime);
             }
-
             if (input.BeginExpirationDate.HasValue)
             {
-                queryable = queryable.Where(item => item.ExpirationDate >= input.BeginExpirationDate);
+                queryable = queryable.Where(x => x.ExpirationDate >= input.BeginExpirationDate);
             }
-
             if (input.EndExpirationDate.HasValue)
             {
-                queryable = queryable.Where(item => item.ExpirationDate < input.EndExpirationDate);
+                queryable = queryable.Where(x => x.ExpirationDate <= input.EndExpirationDate);
             }
-
             if (!input.Status.IsNullOrWhiteSpace())
             {
-                queryable = queryable.Where(item => item.Status == input.Status);
+                queryable = queryable.Where(x => x.Status == input.Status);
             }
-
             if (!input.Type.IsNullOrWhiteSpace())
             {
-                queryable = queryable.Where(item => item.Type == input.Type);
+                queryable = queryable.Where(x => x.Type == input.Type);
             }
-
             if (!input.Subject.IsNullOrWhiteSpace())
             {
-                queryable = queryable.Where(item => item.Subject == input.Subject);
+                queryable = queryable.Where(x => x.Subject == input.Subject);
             }
-
             if (!input.ReferenceId.IsNullOrWhiteSpace())
             {
-                queryable = queryable.Where(item => item.ReferenceId == input.ReferenceId);
+                queryable = queryable.Where(x => x.ReferenceId == input.ReferenceId);
             }
-
             if (!input.Filter.IsNullOrWhiteSpace())
             {
-                queryable = queryable.Where(item => item.Subject.Contains(input.Filter) ||
-                                                item.Status.Contains(input.Filter) ||
-                                                item.Type.Contains(input.Filter) ||
-                                                item.Payload.Contains(input.Filter) ||
-                                                item.Properties.Contains(input.Filter) ||
-                                                item.ReferenceId.Contains(input.Filter));
+                queryable = queryable.Where(x => x.Subject.Contains(input.Filter) ||
+                    x.Status.Contains(input.Filter) || x.Type.Contains(input.Filter) ||
+                    x.Payload.Contains(input.Filter) || x.Properties.Contains(input.Filter) ||
+                    x.ReferenceId.Contains(input.ReferenceId));
             }
 
             var totalCount = await AsyncExecuter.CountAsync(queryable);
 
             var sorting = input.Sorting;
-
             if (sorting.IsNullOrWhiteSpace())
             {
-                sorting = $"{nameof(OpenIddictToken.CreationTime)} DESC";
+                sorting = $"{nameof(OpenIddictToken.CreationDate)} DESC";
             }
 
-            queryable = queryable.OrderBy(sorting).PageBy(input.SkipCount, input.MaxResultCount);
+            queryable = queryable
+                .OrderBy(sorting)
+                .PageBy(input.SkipCount, input.MaxResultCount);
+            var entites = await AsyncExecuter.ToListAsync(queryable);
 
-            var entities = await AsyncExecuter.ToListAsync(queryable);
-
-            var items = entities.Select(item => item.ToDto()).ToList();
-
-            return new PagedResultDto<OpenIddictTokenDto>(totalCount, items);
-
+            return new PagedResultDto<OpenIddictTokenDto>(totalCount,
+                entites.Select(entity => entity.ToDto()).ToList());
         }
     }
 }
