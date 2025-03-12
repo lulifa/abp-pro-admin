@@ -3,7 +3,20 @@
   <PropertyGroup>
     <TargetFramework>net9.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
+    <Nullable>disable</Nullable>
+    <RootNamespace />
   </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Volo.Abp.AutoMapper" />
+    <PackageReference Include="Volo.Abp.Ddd.Application" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\RuiChen.AbpPro.Auditing.Application.Contracts\RuiChen.AbpPro.Auditing.Application.Contracts.csproj" />
+    <ProjectReference Include="..\RuiChen.AbpPro.AuditLogging.Location\RuiChen.AbpPro.AuditLogging.Location.csproj" />
+    <ProjectReference Include="..\RuiChen.AbpPro.AuditLogging\RuiChen.AbpPro.AuditLogging.csproj" />
+    <ProjectReference Include="..\RuiChen.AbpPro.Logging\RuiChen.AbpPro.Logging.csproj" />
+  </ItemGroup>
 
 </Project>

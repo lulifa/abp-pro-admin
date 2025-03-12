@@ -4,10 +4,12 @@
     <TargetFramework>net9.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <RootNamespace />
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="RuiChen\AbpPro\AuditLogging\" />
+    <ProjectReference Include="..\..\..\framework\common\RuiChen.AbpPro.Location.IP\RuiChen.AbpPro.IP.Location.csproj" />
+    <ProjectReference Include="..\RuiChen.AbpPro.AuditLogging\RuiChen.AbpPro.AuditLogging.csproj" />
   </ItemGroup>
 
 </Project>

@@ -138,7 +138,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RuiChen.AbpPro.Auditing.App
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RuiChen.AbpPro.Auditing.Application.Contracts", "modules\auditing\RuiChen.AbpPro.Auditing.Application.Contracts\RuiChen.AbpPro.Auditing.Application.Contracts.csproj", "{6E516747-9918-453E-B911-1EBF7DF278EB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RuiChen.AbpPro.Auditing.Application.HttpApi", "modules\auditing\RuiChen.AbpPro.Auditing.Application.HttpApi\RuiChen.AbpPro.Auditing.Application.HttpApi.csproj", "{EF2B800B-2121-4A98-ABE9-A6F8AC35EB8A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RuiChen.AbpPro.Auditing.HttpApi", "modules\auditing\RuiChen.AbpPro.Auditing.HttpApi\RuiChen.AbpPro.Auditing.HttpApi.csproj", "{EF2B800B-2121-4A98-ABE9-A6F8AC35EB8A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RuiChen.AbpPro.AuditLogging", "modules\auditing\RuiChen.AbpPro.AuditLogging\RuiChen.AbpPro.AuditLogging.csproj", "{39142573-296D-4878-918A-0E1BAF3AB6E5}"
 EndProject
@@ -147,6 +147,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RuiChen.AbpPro.AuditLogging.Location", "modules\auditing\RuiChen.AbpPro.AuditLogging.Location\RuiChen.AbpPro.AuditLogging.Location.csproj", "{F763A89C-F394-4185-B8C1-FC890645114C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RuiChen.AbpPro.Logging", "modules\auditing\RuiChen.AbpPro.Logging\RuiChen.AbpPro.Logging.csproj", "{71C4A839-7CE4-487B-99F2-20C0B2109DBD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RuiChen.AbpPro.IP.Location", "framework\common\RuiChen.AbpPro.Location.IP\RuiChen.AbpPro.IP.Location.csproj", "{C2E32ED0-4B12-4B1B-9257-9420EB83DA20}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -358,6 +360,10 @@ Global
 		{71C4A839-7CE4-487B-99F2-20C0B2109DBD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{71C4A839-7CE4-487B-99F2-20C0B2109DBD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{71C4A839-7CE4-487B-99F2-20C0B2109DBD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C2E32ED0-4B12-4B1B-9257-9420EB83DA20}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C2E32ED0-4B12-4B1B-9257-9420EB83DA20}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C2E32ED0-4B12-4B1B-9257-9420EB83DA20}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C2E32ED0-4B12-4B1B-9257-9420EB83DA20}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -427,5 +433,6 @@ Global
 		{C5C9E670-A0A1-412A-822E-C4BB297D9F8A} = {AB6FF54E-67B4-4532-A766-48234E79A9EA}
 		{F763A89C-F394-4185-B8C1-FC890645114C} = {AB6FF54E-67B4-4532-A766-48234E79A9EA}
 		{71C4A839-7CE4-487B-99F2-20C0B2109DBD} = {AB6FF54E-67B4-4532-A766-48234E79A9EA}
+		{C2E32ED0-4B12-4B1B-9257-9420EB83DA20} = {49469916-6EAF-4F48-B67D-3239DC1D3B29}
 	EndGlobalSection
 EndGlobal

@@ -26,7 +26,11 @@
 
     <ProjectReference Include="..\..\modules\account\RuiChen.AbpPro.Account.HttpApi\RuiChen.AbpPro.Account.HttpApi.csproj" />
     <ProjectReference Include="..\..\modules\account\RuiChen.AbpPro.Account.Application\RuiChen.AbpPro.Account.Application.csproj" />
-    <PackageReference Include="Volo.Abp.Account.Web.OpenIddict"/>
+    <PackageReference Include="Volo.Abp.Account.Web.OpenIddict" />
+
+    <ProjectReference Include="..\..\modules\auditing\RuiChen.AbpPro.Auditing.HttpApi\RuiChen.AbpPro.Auditing.HttpApi.csproj" />
+    <ProjectReference Include="..\..\modules\auditing\RuiChen.AbpPro.Auditing.Application\RuiChen.AbpPro.Auditing.Application.csproj" />
+    <ProjectReference Include="..\..\modules\auditing\RuiChen.AbpPro.AuditLogging.EntityFrameworkCore\RuiChen.AbpPro.AuditLogging.EntityFrameworkCore.csproj" />
 
     <ProjectReference Include="..\..\modules\feature\RuiChen.AbpPro.FeatureManagement.HttpApi\RuiChen.AbpPro.FeatureManagement.HttpApi.csproj" />
     <ProjectReference Include="..\..\modules\feature\RuiChen.AbpPro.FeatureManagement.Application\RuiChen.AbpPro.FeatureManagement.Application.csproj" />

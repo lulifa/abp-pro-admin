@@ -1,7 +1,8 @@
-﻿using Microsoft.AspNetCore.Localization;
-using RuiChen.AbpPro.Account;
+﻿using RuiChen.AbpPro.Account;
 using RuiChen.AbpPro.AspNetCore.HttpOverrides;
 using RuiChen.AbpPro.AspNetCore.Mvc.Wrapper;
+using RuiChen.AbpPro.Auditing;
+using RuiChen.AbpPro.AuditLogging.EntityFrameworkCore;
 using RuiChen.AbpPro.FeatureManagement;
 using RuiChen.AbpPro.Identity;
 using RuiChen.AbpPro.Localization;
@@ -28,6 +29,11 @@ namespace RuiChen.AbpPro.Admin.HttpApi.Host
         typeof(AbpAccountHttpApiModule),
         typeof(AbpAccountApplicationModule),
         typeof(AbpAccountWebOpenIddictModule),
+
+        typeof(AbpAuditingHttpApiModule),
+        typeof(AbpAuditingApplicationModule),
+        typeof(AbpAuditLoggingEntityFrameworkCoreModule),
+
 
         typeof(AbpFeatureManagementHttpApiModule),
         typeof(AbpFeatureManagementApplicationModule),
