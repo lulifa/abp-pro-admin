@@ -8,6 +8,9 @@
     <GenerateDocumentationFile>True</GenerateDocumentationFile>
   </PropertyGroup>
 
+  <ItemGroup>
+	  <EmbeddedResource Include="RuiChen\AbpPro\OpenIddict\Localization\Resources\*.json" />
+	</ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Volo.Abp.Authorization.Abstractions" />

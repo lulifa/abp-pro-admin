@@ -8,6 +8,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <EmbeddedResource Include="RuiChen\AbpPro\Auditing\Localization\Resources\*.json" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Volo.Abp.Features" />
     <PackageReference Include="Volo.Abp.Authorization" />
     <PackageReference Include="Volo.Abp.AuditLogging.Domain.Shared" />

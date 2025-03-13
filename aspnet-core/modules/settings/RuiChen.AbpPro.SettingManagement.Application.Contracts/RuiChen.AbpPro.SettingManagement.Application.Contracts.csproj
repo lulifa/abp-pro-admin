@@ -9,7 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="RuiChen\AbpPro\SettingManagement\Localization\Resources\*.json" />
+    <EmbeddedResource Include="RuiChen\AbpPro\SettingManagement\Localization\ApplicationContracts\*.json" />
   </ItemGroup>
 
   <ItemGroup>

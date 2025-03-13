@@ -143,7 +143,7 @@ namespace RuiChen.AbpPro.Admin.HttpApi.Host
 
             app.UseCorrelationId();
 
-            app.UseStaticFiles();
+            app.MapAbpStaticAssets();
 
             app.UseRouting();
 

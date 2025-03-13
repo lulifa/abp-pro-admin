@@ -114,7 +114,7 @@ namespace RuiChen.AbpPro.Admin.HttpApi.Host
 
                 var nameValues = new List<NameValue>
                 {
-                    new NameValue("zh-CN","zh-Hans")
+                    new NameValue("zh_CN","zh-Hans")
                 };
                 var languageMap = new Dictionary<string, NameValue[]>
                 {

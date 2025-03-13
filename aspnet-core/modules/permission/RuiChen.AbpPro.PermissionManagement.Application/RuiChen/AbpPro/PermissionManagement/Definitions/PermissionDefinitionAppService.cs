@@ -86,6 +86,12 @@ namespace RuiChen.AbpPro.PermissionManagement
         [Authorize(PermissionManagementPermissionNames.Definition.Delete)]
         public async virtual Task DeleteAsync(string name)
         {
+            if (await staticPermissionDefinitionStore.GetOrNullAsync(name) != null)
+            {
+                throw new BusinessException(PermissionManagementErrorCodes.GroupDefinition.StaticGroupNotAllowedChanged)
+                  .WithData("Name", name);
+            }
+
             var definitionRecord = await FindByNameAsync(name);
 
             if (definitionRecord != null)
