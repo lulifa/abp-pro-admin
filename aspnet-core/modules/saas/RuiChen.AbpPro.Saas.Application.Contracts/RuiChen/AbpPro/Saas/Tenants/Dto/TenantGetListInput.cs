@@ -6,7 +6,5 @@ namespace RuiChen.AbpPro.Saas
     {
         public string Filter { get; set; }
 
-        public bool IsPaged { get; set; } = true;
-
     }
 }

@@ -27,6 +27,9 @@ using Volo.Abp;
 using RuiChen.AbpPro.Localization;
 using Volo.Abp.AspNetCore.Mvc.UI.Bundling;
 using Volo.Abp.AspNetCore.Mvc.Libs;
+using Volo.Abp.AspNetCore.Mvc.AntiForgery;
+using Microsoft.AspNetCore.Extensions.DependencyInjection;
+using OpenIddict.Validation.AspNetCore;
 
 namespace RuiChen.AbpPro.Admin.HttpApi.Host
 {
@@ -337,25 +340,29 @@ namespace RuiChen.AbpPro.Admin.HttpApi.Host
 
         private void ConfigureSecurity(IServiceCollection services, IConfiguration configuration, bool isDevelopment = false)
         {
+            Configure<AbpAntiForgeryOptions>(options =>
+            {
+                options.AutoValidate = false;
+            });
+
+            services.ForwardIdentityAuthenticationForBearer(OpenIddictValidationAspNetCoreDefaults.AuthenticationScheme);
+
             services.AddAuthentication()
-                    .AddJwtBearer(options =>
+                    .AddAbpJwtBearer(options =>
                     {
-                        options.Authority = configuration["AuthServer:Authority"];
-                        options.RequireHttpsMetadata = false;
-                        options.Audience = configuration["AuthServer:Scope"];
-                        options.Events = new JwtBearerEvents
+                        configuration.GetSection("AuthServer").Bind(options);
+
+                        options.Events ??= new JwtBearerEvents();
+                        options.Events.OnMessageReceived = context =>
                         {
-                            OnMessageReceived = context =>
+                            var accessToken = context.Request.Query["access_token"];
+                            var path = context.HttpContext.Request.Path;
+                            if (!string.IsNullOrEmpty(accessToken) &&
+                                (path.StartsWithSegments("/api/files")))
                             {
-                                var accessToken = context.Request.Query["access_token"];
-                                var path = context.HttpContext.Request.Path;
-                                if (!string.IsNullOrEmpty(accessToken) &&
-                                    (path.StartsWithSegments("/api/files")))
-                                {
-                                    context.Token = accessToken;
-                                }
-                                return Task.CompletedTask;
+                                context.Token = accessToken;
                             }
+                            return Task.CompletedTask;
                         };
                     });
 

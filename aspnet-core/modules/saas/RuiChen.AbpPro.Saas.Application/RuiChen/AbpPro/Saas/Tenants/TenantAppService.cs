@@ -56,16 +56,14 @@ namespace RuiChen.AbpPro.Saas
 
         public async virtual Task<PagedResultDto<TenantDto>> GetListAsync(TenantGetListInput input)
         {
-            var maxResultCount = input.IsPaged ? input.MaxResultCount : int.MaxValue;
 
             var count = await tenantRepository.GetCountAsync(input.Filter);
 
             var list = await tenantRepository.GetListAsync(
                 input.Sorting,
-                maxResultCount,
+                input.MaxResultCount,
                 input.SkipCount,
-                input.Filter,
-                true
+                input.Filter
             );
 
             return new PagedResultDto<TenantDto>(
@@ -84,7 +82,7 @@ namespace RuiChen.AbpPro.Saas
             tenant.SetDisableTime(input.DisableTime);
             input.MapExtraPropertiesTo(tenant);
 
-            if (!input.UseSharedDatabase && !input.DefaultConnectionString.IsNullOrWhiteSpace())
+            if (!input.UseSharedDatabase)
             {
                 await CheckConnectionString(input.DefaultConnectionString);
                 tenant.SetDefaultConnectionString(input.DefaultConnectionString);
@@ -94,8 +92,8 @@ namespace RuiChen.AbpPro.Saas
             {
                 foreach (var connectionString in input.ConnectionStrings)
                 {
-                    await CheckConnectionString(connectionString.Value, connectionString.Key);
-                    tenant.SetConnectionString(connectionString.Key, connectionString.Value);
+                    await CheckConnectionString(connectionString.Value, connectionString.Name);
+                    tenant.SetConnectionString(connectionString.Name, connectionString.Value);
                 }
             }
 
