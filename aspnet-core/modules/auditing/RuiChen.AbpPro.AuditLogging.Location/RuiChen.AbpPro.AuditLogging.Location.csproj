@@ -8,6 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\framework\common\RuiChen.AbpPro.IP2Region\RuiChen.AbpPro.IP2Region.csproj" />
     <ProjectReference Include="..\..\..\framework\common\RuiChen.AbpPro.Location.IP\RuiChen.AbpPro.IP.Location.csproj" />
     <ProjectReference Include="..\RuiChen.AbpPro.AuditLogging\RuiChen.AbpPro.AuditLogging.csproj" />
   </ItemGroup>

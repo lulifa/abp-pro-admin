@@ -112,6 +112,8 @@ namespace RuiChen.AbpPro.Admin.HttpApi.Host
 
             ConfigureSwagger(services);
 
+            ConfigureMvcUiTheme();
+
             ConfigureMultiTenancy(configuration);
 
             ConfigureJsonSerializer(configuration);

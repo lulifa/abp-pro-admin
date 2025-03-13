@@ -4,6 +4,7 @@ using RuiChen.AbpPro.Data.DbMigrator;
 using RuiChen.AbpPro.Identity;
 using RuiChen.AbpPro.Saas;
 using Volo.Abp.EntityFrameworkCore;
+using Volo.Abp.EntityFrameworkCore.MySQL;
 using Volo.Abp.FeatureManagement.EntityFrameworkCore;
 using Volo.Abp.Modularity;
 using Volo.Abp.OpenIddict.EntityFrameworkCore;
@@ -20,7 +21,8 @@ namespace RuiChen.AbpPro.Admin.EntityFrameworkCore
         typeof(AbpFeatureManagementEntityFrameworkCoreModule),
         typeof(AbpIdentityEntityFrameworkCoreModule),
         typeof(AbpOpenIddictEntityFrameworkCoreModule),
-        typeof(AbpDataDbMigratorModule)
+        typeof(AbpDataDbMigratorModule),
+        typeof(AbpEntityFrameworkCoreMySQLModule)
     )]
     public class RuiChenAbpProAdminMigrationEntityFrameworkCoreModule : AbpModule
     {

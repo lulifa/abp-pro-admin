@@ -17,28 +17,20 @@ namespace RuiChen.AbpPro.Saas
                 return;
             }
 
-            if (GlobalFeatureManager.Instance.IsEnabled<EditionFeature>())
+            builder.Entity<Edition>(b =>
             {
+                b.ToTable(AbpSaasDbProperties.DbTablePrefix + "Editions", AbpSaasDbProperties.DbSchema);
 
-                builder.Entity<Edition>(b =>
-                {
-                    b.ToTable(AbpSaasDbProperties.DbTablePrefix + "Editions", AbpSaasDbProperties.DbSchema);
+                b.ConfigureByConvention();
 
-                    b.ConfigureByConvention();
+                b.Property(t => t.DisplayName)
+                    .HasMaxLength(EditionConsts.MaxDisplayNameLength)
+                    .IsRequired();
 
-                    b.Property(t => t.DisplayName)
-                        .HasMaxLength(EditionConsts.MaxDisplayNameLength)
-                        .IsRequired();
+                b.HasIndex(u => u.DisplayName);
 
-                    b.HasIndex(u => u.DisplayName);
-
-                    b.ApplyObjectExtensionMappings();
-                });
-            }
-            else
-            {
-                builder.Ignore<Edition>();
-            }
+                b.ApplyObjectExtensionMappings();
+            });
 
             builder.Entity<Tenant>(b =>
             {

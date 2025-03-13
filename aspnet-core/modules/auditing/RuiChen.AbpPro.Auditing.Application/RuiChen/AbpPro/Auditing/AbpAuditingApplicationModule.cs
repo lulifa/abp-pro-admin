@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using RuiChen.AbpPro.AuditLogging;
 using RuiChen.AbpPro.AuditLogging.Location;
+using RuiChen.AbpPro.IP2Region;
 using RuiChen.AbpPro.Logging;
 using Volo.Abp.AutoMapper;
 using Volo.Abp.Modularity;

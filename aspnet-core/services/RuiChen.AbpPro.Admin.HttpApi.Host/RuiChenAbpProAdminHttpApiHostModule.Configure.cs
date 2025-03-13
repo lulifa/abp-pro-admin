@@ -25,6 +25,8 @@ using Volo.Abp.VirtualFileSystem;
 using Volo.Abp.Timing;
 using Volo.Abp;
 using RuiChen.AbpPro.Localization;
+using Volo.Abp.AspNetCore.Mvc.UI.Bundling;
+using Volo.Abp.AspNetCore.Mvc.Libs;
 
 namespace RuiChen.AbpPro.Admin.HttpApi.Host
 {
@@ -219,6 +221,25 @@ namespace RuiChen.AbpPro.Admin.HttpApi.Host
                     options.OperationFilter<LanguageHeaderParameter>();
 
                 });
+        }
+
+        private void ConfigureMvcUiTheme()
+        {
+            Configure<AbpBundlingOptions>(options =>
+            {
+                //options.StyleBundles.Configure(
+                //    LeptonXLiteThemeBundles.Styles.Global,
+                //    bundle =>
+                //    {
+                //        bundle.AddFiles("/global-styles.css");
+                //    }
+                //);
+            });
+
+            Configure<AbpMvcLibsOptions>(options =>
+            {
+                options.CheckLibs = false;
+            });
         }
 
         private void ConfigureMultiTenancy(IConfiguration configuration)

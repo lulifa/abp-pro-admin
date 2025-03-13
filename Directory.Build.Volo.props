@@ -121,5 +121,6 @@
     <PackageReference Update="Volo.Abp.Users.Abstractions" Version="$(VoloAbpPackageVersion)" />
     <PackageReference Update="Volo.Abp.Users.Domain.Shared" Version="$(VoloAbpPackageVersion)" />
     <PackageReference Update="Volo.Abp.Validation" Version="$(VoloAbpPackageVersion)" />
+    <PackageReference Update="Volo.Abp.VirtualFileSystem" Version="$(VoloAbpPackageVersion)" />
   </ItemGroup>
 </Project>

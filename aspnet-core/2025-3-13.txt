@@ -1,0 +1,5 @@
+
+
+dotnet new classlib -o framework/common/RuiChen.AbpPro.IP2Region
+
+dotnet sln RuiChen.AbpPro.sln add framework/common/RuiChen.AbpPro.IP2Region

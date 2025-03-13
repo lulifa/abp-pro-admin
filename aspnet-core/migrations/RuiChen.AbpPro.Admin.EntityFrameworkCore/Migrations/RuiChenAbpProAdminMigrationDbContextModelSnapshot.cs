@@ -24,6 +24,69 @@ namespace RuiChen.AbpPro.Admin.EntityFrameworkCore.Migrations
 
             MySqlModelBuilderExtensions.AutoIncrementColumns(modelBuilder);
 
+            modelBuilder.Entity("RuiChen.AbpPro.Saas.Edition", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("char(36)");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
+                        .IsRequired()
+                        .HasMaxLength(40)
+                        .HasColumnType("varchar(40)")
+                        .HasColumnName("ConcurrencyStamp");
+
+                    b.Property<DateTime>("CreationTime")
+                        .HasColumnType("datetime(6)")
+                        .HasColumnName("CreationTime");
+
+                    b.Property<Guid?>("CreatorId")
+                        .HasColumnType("char(36)")
+                        .HasColumnName("CreatorId");
+
+                    b.Property<Guid?>("DeleterId")
+                        .HasColumnType("char(36)")
+                        .HasColumnName("DeleterId");
+
+                    b.Property<DateTime?>("DeletionTime")
+                        .HasColumnType("datetime(6)")
+                        .HasColumnName("DeletionTime");
+
+                    b.Property<string>("DisplayName")
+                        .IsRequired()
+                        .HasMaxLength(64)
+                        .HasColumnType("varchar(64)");
+
+                    b.Property<int>("EntityVersion")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ExtraProperties")
+                        .IsRequired()
+                        .HasColumnType("longtext")
+                        .HasColumnName("ExtraProperties");
+
+                    b.Property<bool>("IsDeleted")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("tinyint(1)")
+                        .HasDefaultValue(false)
+                        .HasColumnName("IsDeleted");
+
+                    b.Property<DateTime?>("LastModificationTime")
+                        .HasColumnType("datetime(6)")
+                        .HasColumnName("LastModificationTime");
+
+                    b.Property<Guid?>("LastModifierId")
+                        .HasColumnType("char(36)")
+                        .HasColumnName("LastModifierId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DisplayName");
+
+                    b.ToTable("AbpEditions", (string)null);
+                });
+
             modelBuilder.Entity("RuiChen.AbpPro.Saas.Tenant", b =>
                 {
                     b.Property<Guid>("Id")
@@ -97,6 +160,8 @@ namespace RuiChen.AbpPro.Admin.EntityFrameworkCore.Migrations
                         .HasColumnType("varchar(64)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("EditionId");
 
                     b.HasIndex("Name");
 
@@ -1718,6 +1783,15 @@ namespace RuiChen.AbpPro.Admin.EntityFrameworkCore.Migrations
                         .IsUnique();
 
                     b.ToTable("AbpSettingDefinitions", (string)null);
+                });
+
+            modelBuilder.Entity("RuiChen.AbpPro.Saas.Tenant", b =>
+                {
+                    b.HasOne("RuiChen.AbpPro.Saas.Edition", "Edition")
+                        .WithMany()
+                        .HasForeignKey("EditionId");
+
+                    b.Navigation("Edition");
                 });
 
             modelBuilder.Entity("RuiChen.AbpPro.Saas.TenantConnectionString", b =>
