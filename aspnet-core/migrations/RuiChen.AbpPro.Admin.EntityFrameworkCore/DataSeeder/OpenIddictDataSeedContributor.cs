@@ -9,7 +9,7 @@ using Volo.Abp.PermissionManagement;
 
 namespace RuiChen.AbpPro.Admin.EntityFrameworkCore
 {
-    public class ClientDataSeederContributor : IDataSeedContributor, ITransientDependency
+    public class OpenIddictDataSeedContributor : IDataSeedContributor, ITransientDependency
     {
         private readonly IOpenIddictApplicationManager _applicationManager;
         private readonly IOpenIddictScopeManager _scopeManager;
@@ -18,7 +18,7 @@ namespace RuiChen.AbpPro.Admin.EntityFrameworkCore
         private readonly IConfiguration _configuration;
         private readonly ICurrentTenant _currentTenant;
 
-        public ClientDataSeederContributor(
+        public OpenIddictDataSeedContributor(
             IOpenIddictApplicationManager applicationManager,
             IOpenIddictScopeManager scopeManager,
             IPermissionDataSeeder permissionDataSeeder,

@@ -13,11 +13,11 @@ using Volo.Abp.Uow;
 
 namespace RuiChen.AbpPro.Admin.EntityFrameworkCore
 {
-    public class RuiChenAbpProAdminMigrationService : EfCoreRuntimeDatabaseMigratorBase<RuiChenAbpProAdminMigrationDbContext>, ITransientDependency
+    public class RuiChenMigrationService : EfCoreRuntimeDatabaseMigratorBase<RuiChenMigrationDbContext>, ITransientDependency
     {
         protected IDataSeeder DataSeeder { get; }
         protected ITenantRepository TenantRepository { get; }
-        public RuiChenAbpProAdminMigrationService(
+        public RuiChenMigrationService(
             IUnitOfWorkManager unitOfWorkManager,
             IServiceProvider serviceProvider,
             ICurrentTenant currentTenant,
@@ -26,7 +26,7 @@ namespace RuiChen.AbpPro.Admin.EntityFrameworkCore
             ILoggerFactory loggerFactory,
             IDataSeeder dataSeeder,
             ITenantRepository tenantRepository)
-            : base(ConnectionStringNameAttribute.GetConnStringName<RuiChenAbpProAdminMigrationDbContext>(), unitOfWorkManager, serviceProvider, currentTenant, abpDistributedLock, distributedEventBus, loggerFactory)
+            : base(ConnectionStringNameAttribute.GetConnStringName<RuiChenMigrationDbContext>(), unitOfWorkManager, serviceProvider, currentTenant, abpDistributedLock, distributedEventBus, loggerFactory)
         {
             DataSeeder = dataSeeder;
             TenantRepository = tenantRepository;
@@ -57,7 +57,7 @@ namespace RuiChen.AbpPro.Admin.EntityFrameworkCore
                         // Create database tables if needed
                         using var uow = UnitOfWorkManager.Begin(requiresNew: true, isTransactional: false);
                         var dbContext = await ServiceProvider
-                            .GetRequiredService<IDbContextProvider<RuiChenAbpProAdminMigrationDbContext>>()
+                            .GetRequiredService<IDbContextProvider<RuiChenMigrationDbContext>>()
                             .GetDbContextAsync();
 
                         var pendingMigrations = await dbContext

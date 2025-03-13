@@ -24,11 +24,11 @@ namespace RuiChen.AbpPro.Admin.EntityFrameworkCore
         typeof(AbpDataDbMigratorModule),
         typeof(AbpEntityFrameworkCoreMySQLModule)
     )]
-    public class RuiChenAbpProAdminMigrationEntityFrameworkCoreModule : AbpModule
+    public class RuiChenMigrationEntityFrameworkCoreModule : AbpModule
     {
         public override void ConfigureServices(ServiceConfigurationContext context)
         {
-            context.Services.AddAbpDbContext<RuiChenAbpProAdminMigrationDbContext>();
+            context.Services.AddAbpDbContext<RuiChenMigrationDbContext>();
 
             Configure<AbpDbContextOptions>(options =>
             {

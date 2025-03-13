@@ -12,9 +12,9 @@ using Volo.Abp.SettingManagement.EntityFrameworkCore;
 namespace RuiChen.AbpPro.Admin.EntityFrameworkCore
 {
     [ConnectionStringName("SingleDbMigrator")]
-    public class RuiChenAbpProAdminMigrationDbContext : AbpDbContext<RuiChenAbpProAdminMigrationDbContext>
+    public class RuiChenMigrationDbContext : AbpDbContext<RuiChenMigrationDbContext>
     {
-        public RuiChenAbpProAdminMigrationDbContext(DbContextOptions<RuiChenAbpProAdminMigrationDbContext> options)
+        public RuiChenMigrationDbContext(DbContextOptions<RuiChenMigrationDbContext> options)
             : base(options)
         {
 

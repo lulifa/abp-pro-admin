@@ -8,13 +8,13 @@ using Volo.Abp.Data;
 
 namespace RuiChen.AbpPro.Admin.DbMigrator
 {
-    public class RuiChenAbpProAdminDbMigratorHostedService : IHostedService
+    public class RuiChenDbMigratorHostedService : IHostedService
     {
 
         private readonly IHostApplicationLifetime _hostApplicationLifetime;
         private readonly IConfiguration _configuration;
 
-        public RuiChenAbpProAdminDbMigratorHostedService(
+        public RuiChenDbMigratorHostedService(
             IHostApplicationLifetime hostApplicationLifetime,
             IConfiguration configuration)
         {
@@ -25,7 +25,7 @@ namespace RuiChen.AbpPro.Admin.DbMigrator
         public async Task StartAsync(CancellationToken cancellationToken)
         {
             using var application = await AbpApplicationFactory
-                .CreateAsync<RuiChenAbpProAdminDbMigratorModule>(options =>
+                .CreateAsync<RuiChenDbMigratorModule>(options =>
                 {
                     options.Services.ReplaceConfiguration(_configuration);
                     options.UseAutofac();
@@ -36,7 +36,7 @@ namespace RuiChen.AbpPro.Admin.DbMigrator
 
             await application
                 .ServiceProvider
-                .GetRequiredService<RuiChenAbpProAdminMigrationService>()
+                .GetRequiredService<RuiChenMigrationService>()
                 .CheckAndApplyDatabaseMigrationsAsync();
 
             await application.ShutdownAsync();

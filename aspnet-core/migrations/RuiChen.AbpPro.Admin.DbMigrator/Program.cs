@@ -35,7 +35,7 @@ namespace RuiChen.AbpPro.Admin.DbMigrator
                 .ConfigureLogging((context, logging) => logging.ClearProviders())
                 .ConfigureServices((hostContext, services) =>
                 {
-                    services.AddHostedService<RuiChenAbpProAdminDbMigratorHostedService>();
+                    services.AddHostedService<RuiChenDbMigratorHostedService>();
                 });
         }
     }

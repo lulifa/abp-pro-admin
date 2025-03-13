@@ -4,17 +4,17 @@ using Microsoft.Extensions.Configuration;
 
 namespace RuiChen.AbpPro.Admin.EntityFrameworkCore
 {
-    public class RuiChenAbpProAdminMigrationDbContextFactory : IDesignTimeDbContextFactory<RuiChenAbpProAdminMigrationDbContext>
+    public class RuiChenMigrationDbContextFactory : IDesignTimeDbContextFactory<RuiChenMigrationDbContext>
     {
-        public RuiChenAbpProAdminMigrationDbContext CreateDbContext(string[] args)
+        public RuiChenMigrationDbContext CreateDbContext(string[] args)
         {
             var configuration = BuildConfiguration();
             var connectionString = configuration.GetConnectionString("Default");
 
-            var builder = new DbContextOptionsBuilder<RuiChenAbpProAdminMigrationDbContext>()
+            var builder = new DbContextOptionsBuilder<RuiChenMigrationDbContext>()
                 .UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
 
-            return new RuiChenAbpProAdminMigrationDbContext(builder!.Options);
+            return new RuiChenMigrationDbContext(builder!.Options);
         }
 
         private static IConfigurationRoot BuildConfiguration()

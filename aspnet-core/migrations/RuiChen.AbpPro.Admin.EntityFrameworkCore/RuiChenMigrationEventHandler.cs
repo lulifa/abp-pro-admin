@@ -17,14 +17,14 @@ using IdentityUser = Volo.Abp.Identity.IdentityUser;
 namespace RuiChen.AbpPro.Admin.EntityFrameworkCore
 {
 
-    public class RuiChenAbpProAdminMigrationEventHandler : EfCoreDatabaseMigrationEventHandlerBase<RuiChenAbpProAdminMigrationDbContext>
+    public class RuiChenMigrationEventHandler : EfCoreDatabaseMigrationEventHandlerBase<RuiChenMigrationDbContext>
     {
         protected IGuidGenerator GuidGenerator { get; }
         protected IdentityUserManager IdentityUserManager { get; }
         protected IdentityRoleManager IdentityRoleManager { get; }
         protected IPermissionDataSeeder PermissionDataSeeder { get; }
 
-        public RuiChenAbpProAdminMigrationEventHandler(
+        public RuiChenMigrationEventHandler(
             ICurrentTenant currentTenant,
             IUnitOfWorkManager unitOfWorkManager,
             ITenantStore tenantStore,
@@ -36,7 +36,7 @@ namespace RuiChen.AbpPro.Admin.EntityFrameworkCore
             IdentityRoleManager identityRoleManager,
             IPermissionDataSeeder permissionDataSeeder)
             : base(
-                ConnectionStringNameAttribute.GetConnStringName<RuiChenAbpProAdminMigrationDbContext>(),
+                ConnectionStringNameAttribute.GetConnStringName<RuiChenMigrationDbContext>(),
                 currentTenant, unitOfWorkManager, tenantStore, abpDistributedLock, distributedEventBus, loggerFactory)
         {
             GuidGenerator = guidGenerator;

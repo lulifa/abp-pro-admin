@@ -1,14 +1,15 @@
-﻿using Volo.Abp.DependencyInjection;
+﻿using Volo.Abp.Data;
+using Volo.Abp.DependencyInjection;
 using Volo.Abp.Guids;
 
 namespace RuiChen.AbpPro.Saas
 {
-    public class EditionDataSeeder : IEditionDataSeeder, ITransientDependency
+    public class EditionDataSeederContributor : IDataSeedContributor, ITransientDependency
     {
         protected IGuidGenerator GuidGenerator { get; }
         protected IEditionRepository EditionRepository { get; }
 
-        public EditionDataSeeder(
+        public EditionDataSeederContributor(
             IGuidGenerator guidGenerator,
             IEditionRepository editionRepository)
         {
@@ -16,7 +17,7 @@ namespace RuiChen.AbpPro.Saas
             EditionRepository = editionRepository;
         }
 
-        public async virtual Task SeedDefaultEditionsAsync()
+        public async virtual Task SeedAsync(DataSeedContext context)
         {
             await AddEditionIfNotExistsAsync("Free");
             await AddEditionIfNotExistsAsync("Standard");
@@ -38,5 +39,7 @@ namespace RuiChen.AbpPro.Saas
                 )
             );
         }
+
+
     }
 }

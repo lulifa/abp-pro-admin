@@ -11,8 +11,8 @@ using Volo.Abp.EntityFrameworkCore;
 
 namespace RuiChen.AbpPro.Admin.EntityFrameworkCore.Migrations
 {
-    [DbContext(typeof(RuiChenAbpProAdminMigrationDbContext))]
-    partial class RuiChenAbpProAdminMigrationDbContextModelSnapshot : ModelSnapshot
+    [DbContext(typeof(RuiChenMigrationDbContext))]
+    partial class RuiChenMigrationDbContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
         {

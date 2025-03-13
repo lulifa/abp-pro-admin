@@ -68,7 +68,7 @@ namespace RuiChen.AbpPro.Admin.HttpApi.Host
         typeof(AbpAspNetCoreMvcWrapperModule),
         typeof(AbpAspNetCoreHttpOverridesModule),
         typeof(AbpAspNetCoreMvcUiBasicThemeModule),
-        typeof(RuiChenAbpProAdminMigrationEntityFrameworkCoreModule),
+        typeof(RuiChenMigrationEntityFrameworkCoreModule),
 
         typeof(AbpLocalizationCultureMapModule),
         typeof(AbpAspNetCoreMultiTenancyModule),

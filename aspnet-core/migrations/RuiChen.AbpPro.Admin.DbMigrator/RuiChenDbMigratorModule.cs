@@ -8,10 +8,10 @@ using Volo.Abp.Timing;
 namespace RuiChen.AbpPro.Admin.DbMigrator
 {
     [DependsOn(
-        typeof(RuiChenAbpProAdminMigrationEntityFrameworkCoreModule),
+        typeof(RuiChenMigrationEntityFrameworkCoreModule),
         typeof(AbpAutofacModule)
     )]
-    public class RuiChenAbpProAdminDbMigratorModule : AbpModule
+    public class RuiChenDbMigratorModule : AbpModule
     {
         public override void ConfigureServices(ServiceConfigurationContext context)
         {
