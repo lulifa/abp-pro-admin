@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace RuiChen.AbpPro.Admin.HttpApi.Host;
+namespace RuiChen.Admin.HttpApi.Host;
 
 public class HomeController : Controller
 {

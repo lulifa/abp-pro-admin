@@ -4,7 +4,7 @@
     <TargetFramework>net9.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>disable</Nullable>
-    <RootNamespace>RuiChen.AbpPro.Admin.HttpApi.Host</RootNamespace>
+    <RootNamespace>RuiChen.Admin.HttpApi.Host</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>

@@ -4,7 +4,7 @@ using Swashbuckle.AspNetCore.SwaggerGen;
 using Volo.Abp.AspNetCore.MultiTenancy;
 using Volo.Abp.MultiTenancy;
 
-namespace RuiChen.AbpPro.Admin.HttpApi.Host
+namespace RuiChen.Admin.HttpApi.Host
 {
     public class TenantHeaderParameter : IOperationFilter
     {

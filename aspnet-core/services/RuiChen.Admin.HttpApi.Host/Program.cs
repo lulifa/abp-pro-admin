@@ -1,6 +1,6 @@
 using Serilog;
 
-namespace RuiChen.AbpPro.Admin.HttpApi.Host
+namespace RuiChen.Admin.HttpApi.Host
 {
     public class Program
     {
@@ -18,7 +18,7 @@ namespace RuiChen.AbpPro.Admin.HttpApi.Host
                     {
                         config.ReadFrom.Configuration(context.Configuration);
                     });
-                await builder.AddApplicationAsync<RuiChenAbpProAdminHttpApiHostModule>();
+                await builder.AddApplicationAsync<RuiChenAdminHttpApiHostModule>();
                 var app = builder.Build();
                 await app.InitializeApplicationAsync();
                 await app.RunAsync();

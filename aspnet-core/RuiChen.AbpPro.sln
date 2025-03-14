@@ -33,7 +33,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RuiChen.AbpPro.Identity.Htt
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "services", "services", "{93943D72-3C0B-44D0-984C-41D7CE75391B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RuiChen.AbpPro.Admin.HttpApi.Host", "services\RuiChen.AbpPro.Admin.HttpApi.Host\RuiChen.AbpPro.Admin.HttpApi.Host.csproj", "{9BA5A9FF-D9ED-45CD-BEDA-A4924064528F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RuiChen.Admin.HttpApi.Host", "services\RuiChen.Admin.HttpApi.Host\RuiChen.Admin.HttpApi.Host.csproj", "{9BA5A9FF-D9ED-45CD-BEDA-A4924064528F}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "0.Solution Items", "0.Solution Items", "{96206C7D-7FCE-4DAF-95BB-CC71B027A370}"
 	ProjectSection(SolutionItems) = preProject

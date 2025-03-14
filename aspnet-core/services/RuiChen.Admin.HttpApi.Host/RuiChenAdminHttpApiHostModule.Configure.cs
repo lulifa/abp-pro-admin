@@ -31,9 +31,9 @@ using Volo.Abp.AspNetCore.Mvc.AntiForgery;
 using Microsoft.AspNetCore.Extensions.DependencyInjection;
 using OpenIddict.Validation.AspNetCore;
 
-namespace RuiChen.AbpPro.Admin.HttpApi.Host
+namespace RuiChen.Admin.HttpApi.Host
 {
-    public partial class RuiChenAbpProAdminHttpApiHostModule
+    public partial class RuiChenAdminHttpApiHostModule
     {
 
         public static string ApplicationName = "RuiChen";
@@ -161,7 +161,7 @@ namespace RuiChen.AbpPro.Admin.HttpApi.Host
         {
             Configure<AbpVirtualFileSystemOptions>(options =>
             {
-                options.FileSets.AddEmbedded<RuiChenAbpProAdminHttpApiHostModule>();
+                options.FileSets.AddEmbedded<RuiChenAdminHttpApiHostModule>();
             });
         }
 

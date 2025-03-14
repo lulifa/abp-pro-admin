@@ -23,7 +23,7 @@ using Volo.Abp.OpenIddict.EntityFrameworkCore;
 using Volo.Abp.PermissionManagement.EntityFrameworkCore;
 using Volo.Abp.SettingManagement.EntityFrameworkCore;
 
-namespace RuiChen.AbpPro.Admin.HttpApi.Host
+namespace RuiChen.Admin.HttpApi.Host
 {
     [DependsOn(
         typeof(AbpAccountHttpApiModule),
@@ -75,7 +75,7 @@ namespace RuiChen.AbpPro.Admin.HttpApi.Host
         typeof(AbpAspNetCoreSerilogModule),
         typeof(AbpAutofacModule)
     )]
-    public partial class RuiChenAbpProAdminHttpApiHostModule : AbpModule
+    public partial class RuiChenAdminHttpApiHostModule : AbpModule
     {
 
         public override void PreConfigureServices(ServiceConfigurationContext context)
