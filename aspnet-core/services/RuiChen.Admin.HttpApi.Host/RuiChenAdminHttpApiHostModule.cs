@@ -54,8 +54,6 @@ namespace RuiChen.Admin.HttpApi.Host
 
         typeof(AbpPermissionManagementHttpApiModule),
         typeof(AbpPermissionManagementApplicationModule),
-        typeof(AbpPermissionManagementDomainIdentityModule),
-        typeof(AbpPermissionManagementDomainOpenIddictModule),
         typeof(AbpPermissionManagementEntityFrameworkCoreModule),
 
 
