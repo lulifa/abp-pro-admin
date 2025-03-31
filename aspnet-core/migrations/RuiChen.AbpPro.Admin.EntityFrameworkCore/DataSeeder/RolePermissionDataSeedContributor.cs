@@ -2,12 +2,13 @@
 using Microsoft.Extensions.Logging.Abstractions;
 using Volo.Abp.Authorization.Permissions;
 using Volo.Abp.Data;
+using Volo.Abp.DependencyInjection;
 using Volo.Abp.MultiTenancy;
 using Volo.Abp.PermissionManagement;
 
 namespace RuiChen.AbpPro.Admin.EntityFrameworkCore
 {
-    public class RolePermissionDataSeedContributor : IDataSeedContributor
+    public class RolePermissionDataSeedContributor : IDataSeedContributor, ITransientDependency
     {
         public ILogger<RolePermissionDataSeedContributor> Logger { protected get; set; }
 

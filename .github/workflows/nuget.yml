@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Install Dotnet 8.0.100
+      - name: Install Dotnet 9.0.100
         uses: actions/setup-dotnet@v1
         with:
           dotnet-version: 8.0.100
