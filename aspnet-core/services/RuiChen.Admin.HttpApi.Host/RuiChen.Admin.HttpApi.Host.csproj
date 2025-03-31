@@ -47,6 +47,8 @@
     <ProjectReference Include="..\..\modules\permission\RuiChen.AbpPro.PermissionManagement.HttpApi\RuiChen.AbpPro.PermissionManagement.HttpApi.csproj" />
     <ProjectReference Include="..\..\modules\permission\RuiChen.AbpPro.PermissionManagement.Application\RuiChen.AbpPro.PermissionManagement.Application.csproj" />
     <PackageReference Include="Volo.Abp.PermissionManagement.EntityFrameworkCore" />
+    <PackageReference Include="Volo.Abp.PermissionManagement.Domain.Identity" />
+    <PackageReference Include="Volo.Abp.PermissionManagement.Domain.OpenIddict" />
 
 
     <ProjectReference Include="..\..\modules\saas\RuiChen.AbpPro.Saas.HttpApi\RuiChen.AbpPro.Saas.HttpApi.csproj" />

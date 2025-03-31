@@ -21,6 +21,8 @@ using Volo.Abp.FeatureManagement.EntityFrameworkCore;
 using Volo.Abp.Modularity;
 using Volo.Abp.OpenIddict.EntityFrameworkCore;
 using Volo.Abp.PermissionManagement.EntityFrameworkCore;
+using Volo.Abp.PermissionManagement.Identity;
+using Volo.Abp.PermissionManagement.OpenIddict;
 using Volo.Abp.SettingManagement.EntityFrameworkCore;
 
 namespace RuiChen.Admin.HttpApi.Host
@@ -52,6 +54,8 @@ namespace RuiChen.Admin.HttpApi.Host
 
         typeof(AbpPermissionManagementHttpApiModule),
         typeof(AbpPermissionManagementApplicationModule),
+        typeof(AbpPermissionManagementDomainIdentityModule),
+        typeof(AbpPermissionManagementDomainOpenIddictModule),
         typeof(AbpPermissionManagementEntityFrameworkCoreModule),
 
 
