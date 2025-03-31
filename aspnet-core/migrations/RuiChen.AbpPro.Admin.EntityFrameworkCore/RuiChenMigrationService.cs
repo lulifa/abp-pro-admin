@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging.Abstractions;
 using RuiChen.AbpPro.Saas;
 using Volo.Abp.Data;
 using Volo.Abp.DependencyInjection;
@@ -33,9 +34,14 @@ namespace RuiChen.AbpPro.Admin.EntityFrameworkCore
         }
         protected async override Task LockAndApplyDatabaseMigrationsAsync()
         {
+            Logger.LogInformation("Started database migrations...");
+
             await base.LockAndApplyDatabaseMigrationsAsync();
 
+            Logger.LogInformation($"Successfully completed host database migrations.");
+
             var tenants = await TenantRepository.GetListAsync();
+
             foreach (var tenant in tenants.Where(x => x.IsActive))
             {
                 Logger.LogInformation($"Trying to acquire the distributed lock for database migration: {DatabaseName} with tenant: {tenant.Name}.");
@@ -89,6 +95,10 @@ namespace RuiChen.AbpPro.Admin.EntityFrameworkCore
 
                 Logger.LogInformation($"Distributed lock has been released for database migration: {DatabaseName} with tenant: {tenant.Name}...");
             }
+
+            Logger.LogInformation("Successfully completed all database migrations.");
+            Logger.LogInformation("You can safely end this process...");
+
         }
 
         protected async override Task SeedAsync()
