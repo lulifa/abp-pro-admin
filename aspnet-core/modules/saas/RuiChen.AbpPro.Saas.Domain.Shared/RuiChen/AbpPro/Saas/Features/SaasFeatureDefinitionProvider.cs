@@ -22,7 +22,7 @@ namespace RuiChen.AbpPro.Saas
 
             group.AddFeature(
                 name: SaasFeatures.Tenant.RecycleStrategy,
-                defaultValue: $"{RecycleStrategy.Reserve}",
+                defaultValue: $"{(int)RecycleStrategy.Reserve}",
                 displayName: L("Features:RecycleStrategy"),
                 description: L("Features:RecycleStrategyDesc"),
                 valueType: new SelectionStringValueType
