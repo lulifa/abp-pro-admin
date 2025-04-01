@@ -35,6 +35,14 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\modules\account\RuiChen.AbpPro.Account.Application.Contracts\RuiChen.AbpPro.Account.Application.Contracts.csproj" />
+    <ProjectReference Include="..\..\modules\auditing\RuiChen.AbpPro.Auditing.Application.Contracts\RuiChen.AbpPro.Auditing.Application.Contracts.csproj" />
+    <ProjectReference Include="..\..\modules\feature\RuiChen.AbpPro.FeatureManagement.Application.Contracts\RuiChen.AbpPro.FeatureManagement.Application.Contracts.csproj" />
+    <ProjectReference Include="..\..\modules\identity\RuiChen.AbpPro.Identity.Application.Contracts\RuiChen.AbpPro.Identity.Application.Contracts.csproj" />
+    <ProjectReference Include="..\..\modules\openiddict\RuiChen.AbpPro.OpenIddict.Application.Contracts\RuiChen.AbpPro.OpenIddict.Application.Contracts.csproj" />
+    <ProjectReference Include="..\..\modules\permission\RuiChen.AbpPro.PermissionManagement.Application.Contracts\RuiChen.AbpPro.PermissionManagement.Application.Contracts.csproj" />
+    <ProjectReference Include="..\..\modules\saas\RuiChen.AbpPro.Saas.Application.Contracts\RuiChen.AbpPro.Saas.Application.Contracts.csproj" />
+    <ProjectReference Include="..\..\modules\settings\RuiChen.AbpPro.SettingManagement.Application.Contracts\RuiChen.AbpPro.SettingManagement.Application.Contracts.csproj" />
     <ProjectReference Include="..\RuiChen.AbpPro.Admin.EntityFrameworkCore\RuiChen.AbpPro.Admin.EntityFrameworkCore.csproj" />
   </ItemGroup>
 

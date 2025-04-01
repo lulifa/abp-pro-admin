@@ -8,6 +8,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="DistributedLock.Redis" />
+    <PackageReference Include="Volo.Abp.Caching.StackExchangeRedis" />
     <PackageReference Include="Volo.Abp.Autofac" />
     <PackageReference Include="Serilog.AspNetCore" />
     <PackageReference Include="Volo.Abp.AspNetCore" />

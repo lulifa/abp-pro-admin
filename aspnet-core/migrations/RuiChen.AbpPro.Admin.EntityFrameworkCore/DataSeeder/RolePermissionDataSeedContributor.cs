@@ -8,7 +8,7 @@ using Volo.Abp.PermissionManagement;
 
 namespace RuiChen.AbpPro.Admin.EntityFrameworkCore
 {
-    public class RolePermissionDataSeedContributor : IDataSeedContributor, ITransientDependency
+    public class RolePermissionDataSeedContributor : IDataSeedContributor
     {
         public ILogger<RolePermissionDataSeedContributor> Logger { protected get; set; }
 

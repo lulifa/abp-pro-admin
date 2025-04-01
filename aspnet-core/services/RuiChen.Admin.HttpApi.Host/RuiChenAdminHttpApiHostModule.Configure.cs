@@ -30,6 +30,9 @@ using Volo.Abp.AspNetCore.Mvc.Libs;
 using Volo.Abp.AspNetCore.Mvc.AntiForgery;
 using Microsoft.AspNetCore.Extensions.DependencyInjection;
 using OpenIddict.Validation.AspNetCore;
+using StackExchange.Redis;
+using Medallion.Threading;
+using Medallion.Threading.Redis;
 
 namespace RuiChen.Admin.HttpApi.Host
 {
@@ -155,6 +158,16 @@ namespace RuiChen.Admin.HttpApi.Host
 
                 options.Limits.MaxRequestBufferSize = null;
             });
+        }
+
+        private void ConfigureDistributedLock(IServiceCollection services, IConfiguration configuration)
+        {
+            var distributedLockEnabled = configuration["DistributedLock:IsEnabled"];
+            if (distributedLockEnabled.IsNullOrEmpty() || bool.Parse(distributedLockEnabled))
+            {
+                var redis = ConnectionMultiplexer.Connect(configuration["DistributedLock:Redis:Configuration"]);
+                services.AddSingleton<IDistributedLockProvider>(_ => new RedisDistributedSynchronizationProvider(redis.GetDatabase()));
+            }
         }
 
         private void ConfigureVirtualFileSystem()
