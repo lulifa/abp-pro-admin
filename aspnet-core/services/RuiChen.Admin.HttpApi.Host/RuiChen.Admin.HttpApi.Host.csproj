@@ -31,6 +31,10 @@
     <ProjectReference Include="..\..\modules\auditing\RuiChen.AbpPro.Auditing.Application\RuiChen.AbpPro.Auditing.Application.csproj" />
     <ProjectReference Include="..\..\modules\auditing\RuiChen.AbpPro.AuditLogging.EntityFrameworkCore\RuiChen.AbpPro.AuditLogging.EntityFrameworkCore.csproj" />
 
+    <ProjectReference Include="..\..\modules\caching\RuiChen.AbpPro.CachingManagement.HttpApi\RuiChen.AbpPro.CachingManagement.HttpApi.csproj" />
+    <ProjectReference Include="..\..\modules\caching\RuiChen.AbpPro.CachingManagement.Application\RuiChen.AbpPro.CachingManagement.Application.csproj" />
+    <ProjectReference Include="..\..\modules\caching\RuiChen.AbpPro.CachingManagement.StackExchangeRedis\RuiChen.AbpPro.CachingManagement.StackExchangeRedis.csproj" />
+
     <ProjectReference Include="..\..\modules\feature\RuiChen.AbpPro.FeatureManagement.HttpApi\RuiChen.AbpPro.FeatureManagement.HttpApi.csproj" />
     <ProjectReference Include="..\..\modules\feature\RuiChen.AbpPro.FeatureManagement.Application\RuiChen.AbpPro.FeatureManagement.Application.csproj" />
     <PackageReference Include="Volo.Abp.FeatureManagement.EntityFrameworkCore" />

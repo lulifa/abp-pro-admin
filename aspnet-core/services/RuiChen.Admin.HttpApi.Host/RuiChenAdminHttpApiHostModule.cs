@@ -4,6 +4,7 @@ using RuiChen.AbpPro.AspNetCore.HttpOverrides;
 using RuiChen.AbpPro.AspNetCore.Mvc.Wrapper;
 using RuiChen.AbpPro.Auditing;
 using RuiChen.AbpPro.AuditLogging.EntityFrameworkCore;
+using RuiChen.AbpPro.CachingManagement;
 using RuiChen.AbpPro.FeatureManagement;
 using RuiChen.AbpPro.Identity;
 using RuiChen.AbpPro.Localization;
@@ -33,6 +34,11 @@ namespace RuiChen.Admin.HttpApi.Host
         typeof(AbpAuditingHttpApiModule),
         typeof(AbpAuditingApplicationModule),
         typeof(AbpAuditLoggingEntityFrameworkCoreModule),
+
+
+        typeof(AbpCachingManagementHttpApiModule),
+        typeof(AbpCachingManagementApplicationModule),
+        typeof(AbpCachingManagementStackExchangeRedisModule),
 
 
         typeof(AbpFeatureManagementHttpApiModule),
@@ -115,6 +121,8 @@ namespace RuiChen.Admin.HttpApi.Host
             ConfigureSwagger(services);
 
             ConfigureMvcUiTheme();
+
+            ConfigureCaching(configuration);
 
             ConfigureMultiTenancy(configuration);
 

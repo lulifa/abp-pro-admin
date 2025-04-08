@@ -33,6 +33,8 @@ using OpenIddict.Validation.AspNetCore;
 using StackExchange.Redis;
 using Medallion.Threading;
 using Medallion.Threading.Redis;
+using Microsoft.Extensions.Caching.StackExchangeRedis;
+using Volo.Abp.Caching;
 
 namespace RuiChen.Admin.HttpApi.Host
 {
@@ -255,6 +257,21 @@ namespace RuiChen.Admin.HttpApi.Host
             Configure<AbpMvcLibsOptions>(options =>
             {
                 options.CheckLibs = false;
+            });
+        }
+
+        private void ConfigureCaching(IConfiguration configuration)
+        {
+            Configure<AbpDistributedCacheOptions>(options =>
+            {
+                configuration.GetSection("DistributedCache").Bind(options);
+            });
+
+            Configure<RedisCacheOptions>(options =>
+            {
+                var redisConfig = ConfigurationOptions.Parse(options.Configuration);
+                options.ConfigurationOptions = redisConfig;
+                options.InstanceName = configuration["Redis:InstanceName"];
             });
         }
 

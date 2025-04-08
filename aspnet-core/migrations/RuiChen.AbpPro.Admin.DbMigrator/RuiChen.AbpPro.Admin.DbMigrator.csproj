@@ -26,9 +26,7 @@
     <EmbeddedResource Remove="Logs\**" />
     <None Remove="Logs\**" />
     <None Remove="appsettings.json" />
-    <Content Include="appsettings.Production.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
+    <None Remove="appsettings.Production.json" />
     <Content Include="appsettings.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -37,6 +35,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\modules\account\RuiChen.AbpPro.Account.Application.Contracts\RuiChen.AbpPro.Account.Application.Contracts.csproj" />
     <ProjectReference Include="..\..\modules\auditing\RuiChen.AbpPro.Auditing.Application.Contracts\RuiChen.AbpPro.Auditing.Application.Contracts.csproj" />
+    <ProjectReference Include="..\..\modules\caching\RuiChen.AbpPro.CachingManagement.Application.Contracts\RuiChen.AbpPro.CachingManagement.Application.Contracts.csproj" />
     <ProjectReference Include="..\..\modules\feature\RuiChen.AbpPro.FeatureManagement.Application.Contracts\RuiChen.AbpPro.FeatureManagement.Application.Contracts.csproj" />
     <ProjectReference Include="..\..\modules\identity\RuiChen.AbpPro.Identity.Application.Contracts\RuiChen.AbpPro.Identity.Application.Contracts.csproj" />
     <ProjectReference Include="..\..\modules\openiddict\RuiChen.AbpPro.OpenIddict.Application.Contracts\RuiChen.AbpPro.OpenIddict.Application.Contracts.csproj" />
