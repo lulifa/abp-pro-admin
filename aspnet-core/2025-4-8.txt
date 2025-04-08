@@ -1,0 +1,13 @@
+
+
+dotnet new classlib -o modules/caching/RuiChen.AbpPro.CachingManagement.Application
+dotnet new classlib -o modules/caching/RuiChen.AbpPro.CachingManagement.Application.Contracts
+dotnet new classlib -o modules/caching/RuiChen.AbpPro.CachingManagement.Domain
+dotnet new classlib -o modules/caching/RuiChen.AbpPro.CachingManagement.HttpApi
+dotnet new classlib -o modules/caching/RuiChen.AbpPro.CachingManagement.StackExchangeRedis
+
+dotnet sln RuiChen.AbpPro.sln add  modules/caching/RuiChen.AbpPro.CachingManagement.Application
+dotnet sln RuiChen.AbpPro.sln add  modules/caching/RuiChen.AbpPro.CachingManagement.Application.Contracts
+dotnet sln RuiChen.AbpPro.sln add  modules/caching/RuiChen.AbpPro.CachingManagement.Domain
+dotnet sln RuiChen.AbpPro.sln add  modules/caching/RuiChen.AbpPro.CachingManagement.HttpApi
+dotnet sln RuiChen.AbpPro.sln add  modules/caching/RuiChen.AbpPro.CachingManagement.StackExchangeRedis
