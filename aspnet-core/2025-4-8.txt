@@ -11,3 +11,18 @@ dotnet sln RuiChen.AbpPro.sln add  modules/caching/RuiChen.AbpPro.CachingManagem
 dotnet sln RuiChen.AbpPro.sln add  modules/caching/RuiChen.AbpPro.CachingManagement.Domain
 dotnet sln RuiChen.AbpPro.sln add  modules/caching/RuiChen.AbpPro.CachingManagement.HttpApi
 dotnet sln RuiChen.AbpPro.sln add  modules/caching/RuiChen.AbpPro.CachingManagement.StackExchangeRedis
+
+
+dotnet new classlib -o modules/localization/RuiChen.AbpPro.LocalizationManagement.Application
+dotnet new classlib -o modules/localization/RuiChen.AbpPro.LocalizationManagement.Application.Contracts
+dotnet new classlib -o modules/localization/RuiChen.AbpPro.LocalizationManagement.Domain
+dotnet new classlib -o modules/localization/RuiChen.AbpPro.LocalizationManagement.Domain.Shared
+dotnet new classlib -o modules/localization/RuiChen.AbpPro.LocalizationManagement.EntityFrameworkCore
+dotnet new classlib -o modules/localization/RuiChen.AbpPro.LocalizationManagement.HttpApi
+
+dotnet sln RuiChen.AbpPro.sln add  modules/localization/RuiChen.AbpPro.LocalizationManagement.Application
+dotnet sln RuiChen.AbpPro.sln add  modules/localization/RuiChen.AbpPro.LocalizationManagement.Application.Contracts
+dotnet sln RuiChen.AbpPro.sln add  modules/localization/RuiChen.AbpPro.LocalizationManagement.Domain
+dotnet sln RuiChen.AbpPro.sln add  modules/localization/RuiChen.AbpPro.LocalizationManagement.Domain.Shared
+dotnet sln RuiChen.AbpPro.sln add  modules/localization/RuiChen.AbpPro.LocalizationManagement.EntityFrameworkCore
+dotnet sln RuiChen.AbpPro.sln add  modules/localization/RuiChen.AbpPro.LocalizationManagement.HttpApi

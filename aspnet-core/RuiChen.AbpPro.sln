@@ -164,6 +164,20 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RuiChen.AbpPro.CachingManag
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RuiChen.AbpPro.CachingManagement.StackExchangeRedis", "modules\caching\RuiChen.AbpPro.CachingManagement.StackExchangeRedis\RuiChen.AbpPro.CachingManagement.StackExchangeRedis.csproj", "{7C04DDAC-F550-4EC1-A615-BABA5F6C0CC5}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "localization", "localization", "{BE9DB84F-FF19-4F0F-9163-A0D4D1650F43}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RuiChen.AbpPro.LocalizationManagement.Application", "modules\localization\RuiChen.AbpPro.LocalizationManagement.Application\RuiChen.AbpPro.LocalizationManagement.Application.csproj", "{DDA2093C-1C2C-44AF-BC23-99735553F7F8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RuiChen.AbpPro.LocalizationManagement.Application.Contracts", "modules\localization\RuiChen.AbpPro.LocalizationManagement.Application.Contracts\RuiChen.AbpPro.LocalizationManagement.Application.Contracts.csproj", "{B880D0A5-E922-4F53-B50D-E4FBB0194134}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RuiChen.AbpPro.LocalizationManagement.Domain", "modules\localization\RuiChen.AbpPro.LocalizationManagement.Domain\RuiChen.AbpPro.LocalizationManagement.Domain.csproj", "{8082D568-B5CD-49D4-8567-B042C55B8618}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RuiChen.AbpPro.LocalizationManagement.Domain.Shared", "modules\localization\RuiChen.AbpPro.LocalizationManagement.Domain.Shared\RuiChen.AbpPro.LocalizationManagement.Domain.Shared.csproj", "{AE9498A2-8A0A-4C66-841D-D7B899770775}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RuiChen.AbpPro.LocalizationManagement.EntityFrameworkCore", "modules\localization\RuiChen.AbpPro.LocalizationManagement.EntityFrameworkCore\RuiChen.AbpPro.LocalizationManagement.EntityFrameworkCore.csproj", "{9F922035-24EB-49B8-B898-169AEAEB93FA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RuiChen.AbpPro.LocalizationManagement.HttpApi", "modules\localization\RuiChen.AbpPro.LocalizationManagement.HttpApi\RuiChen.AbpPro.LocalizationManagement.HttpApi.csproj", "{CFB74BE8-A675-41D9-BE39-A8EABB238A88}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -402,6 +416,30 @@ Global
 		{7C04DDAC-F550-4EC1-A615-BABA5F6C0CC5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7C04DDAC-F550-4EC1-A615-BABA5F6C0CC5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7C04DDAC-F550-4EC1-A615-BABA5F6C0CC5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DDA2093C-1C2C-44AF-BC23-99735553F7F8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DDA2093C-1C2C-44AF-BC23-99735553F7F8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DDA2093C-1C2C-44AF-BC23-99735553F7F8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DDA2093C-1C2C-44AF-BC23-99735553F7F8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B880D0A5-E922-4F53-B50D-E4FBB0194134}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B880D0A5-E922-4F53-B50D-E4FBB0194134}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B880D0A5-E922-4F53-B50D-E4FBB0194134}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B880D0A5-E922-4F53-B50D-E4FBB0194134}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8082D568-B5CD-49D4-8567-B042C55B8618}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8082D568-B5CD-49D4-8567-B042C55B8618}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8082D568-B5CD-49D4-8567-B042C55B8618}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8082D568-B5CD-49D4-8567-B042C55B8618}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AE9498A2-8A0A-4C66-841D-D7B899770775}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AE9498A2-8A0A-4C66-841D-D7B899770775}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AE9498A2-8A0A-4C66-841D-D7B899770775}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AE9498A2-8A0A-4C66-841D-D7B899770775}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9F922035-24EB-49B8-B898-169AEAEB93FA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9F922035-24EB-49B8-B898-169AEAEB93FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9F922035-24EB-49B8-B898-169AEAEB93FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9F922035-24EB-49B8-B898-169AEAEB93FA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CFB74BE8-A675-41D9-BE39-A8EABB238A88}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CFB74BE8-A675-41D9-BE39-A8EABB238A88}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CFB74BE8-A675-41D9-BE39-A8EABB238A88}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CFB74BE8-A675-41D9-BE39-A8EABB238A88}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -479,5 +517,12 @@ Global
 		{B93D44CB-EB03-479F-AAD4-48984DC44BDD} = {34C6AC30-1510-4C94-90CC-93A78C3F7E09}
 		{FB33823B-859F-4296-8913-FF5CA03E9FBE} = {34C6AC30-1510-4C94-90CC-93A78C3F7E09}
 		{7C04DDAC-F550-4EC1-A615-BABA5F6C0CC5} = {34C6AC30-1510-4C94-90CC-93A78C3F7E09}
+		{BE9DB84F-FF19-4F0F-9163-A0D4D1650F43} = {D46B5DB7-EF85-45B6-9369-B0F87DB6EDC1}
+		{DDA2093C-1C2C-44AF-BC23-99735553F7F8} = {BE9DB84F-FF19-4F0F-9163-A0D4D1650F43}
+		{B880D0A5-E922-4F53-B50D-E4FBB0194134} = {BE9DB84F-FF19-4F0F-9163-A0D4D1650F43}
+		{8082D568-B5CD-49D4-8567-B042C55B8618} = {BE9DB84F-FF19-4F0F-9163-A0D4D1650F43}
+		{AE9498A2-8A0A-4C66-841D-D7B899770775} = {BE9DB84F-FF19-4F0F-9163-A0D4D1650F43}
+		{9F922035-24EB-49B8-B898-169AEAEB93FA} = {BE9DB84F-FF19-4F0F-9163-A0D4D1650F43}
+		{CFB74BE8-A675-41D9-BE39-A8EABB238A88} = {BE9DB84F-FF19-4F0F-9163-A0D4D1650F43}
 	EndGlobalSection
 EndGlobal
