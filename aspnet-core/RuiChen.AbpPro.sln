@@ -178,6 +178,24 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RuiChen.AbpPro.Localization
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RuiChen.AbpPro.LocalizationManagement.HttpApi", "modules\localization\RuiChen.AbpPro.LocalizationManagement.HttpApi\RuiChen.AbpPro.LocalizationManagement.HttpApi.csproj", "{CFB74BE8-A675-41D9-BE39-A8EABB238A88}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "oss", "oss", "{513978DB-A646-437C-B040-4CCF79644444}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RuiChen.AbpPro.OssManagement.Application", "modules\oss\RuiChen.AbpPro.OssManagement.Application\RuiChen.AbpPro.OssManagement.Application.csproj", "{6B9EBEB0-1A60-48F9-B422-1E28ED52D1D0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RuiChen.AbpPro.OssManagement.Application.Contracts", "modules\oss\RuiChen.AbpPro.OssManagement.Application.Contracts\RuiChen.AbpPro.OssManagement.Application.Contracts.csproj", "{848048B7-ED9B-4DE7-9392-9D581650201D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RuiChen.AbpPro.OssManagement.Domain", "modules\oss\RuiChen.AbpPro.OssManagement.Domain\RuiChen.AbpPro.OssManagement.Domain.csproj", "{8AEB08C0-CF92-49E2-A858-1F075FD9D6B2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RuiChen.AbpPro.OssManagement.Domain.Shared", "modules\oss\RuiChen.AbpPro.OssManagement.Domain.Shared\RuiChen.AbpPro.OssManagement.Domain.Shared.csproj", "{DBBC7232-39B0-405C-8E12-0CF08B76C037}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RuiChen.AbpPro.OssManagement.FileSystem", "modules\oss\RuiChen.AbpPro.OssManagement.FileSystem\RuiChen.AbpPro.OssManagement.FileSystem.csproj", "{6775891E-9A58-4F0E-9C26-CECC1AB6CAD1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RuiChen.AbpPro.OssManagement.HttpApi", "modules\oss\RuiChen.AbpPro.OssManagement.HttpApi\RuiChen.AbpPro.OssManagement.HttpApi.csproj", "{E521E365-5357-462F-B27A-6C9B8121ADA1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RuiChen.AbpPro.OssManagement.Imaging", "modules\oss\RuiChen.AbpPro.OssManagement.Imaging\RuiChen.AbpPro.OssManagement.Imaging.csproj", "{5035EFEA-3F50-424A-9132-764B53107708}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RuiChen.AbpPro.OssManagement.SettingManagement", "modules\oss\RuiChen.AbpPro.OssManagement.SettingManagement\RuiChen.AbpPro.OssManagement.SettingManagement.csproj", "{488CF854-0677-4C82-8038-2AD737F39D9C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -440,6 +458,38 @@ Global
 		{CFB74BE8-A675-41D9-BE39-A8EABB238A88}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CFB74BE8-A675-41D9-BE39-A8EABB238A88}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CFB74BE8-A675-41D9-BE39-A8EABB238A88}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6B9EBEB0-1A60-48F9-B422-1E28ED52D1D0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6B9EBEB0-1A60-48F9-B422-1E28ED52D1D0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6B9EBEB0-1A60-48F9-B422-1E28ED52D1D0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6B9EBEB0-1A60-48F9-B422-1E28ED52D1D0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{848048B7-ED9B-4DE7-9392-9D581650201D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{848048B7-ED9B-4DE7-9392-9D581650201D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{848048B7-ED9B-4DE7-9392-9D581650201D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{848048B7-ED9B-4DE7-9392-9D581650201D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8AEB08C0-CF92-49E2-A858-1F075FD9D6B2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8AEB08C0-CF92-49E2-A858-1F075FD9D6B2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8AEB08C0-CF92-49E2-A858-1F075FD9D6B2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8AEB08C0-CF92-49E2-A858-1F075FD9D6B2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DBBC7232-39B0-405C-8E12-0CF08B76C037}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DBBC7232-39B0-405C-8E12-0CF08B76C037}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DBBC7232-39B0-405C-8E12-0CF08B76C037}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DBBC7232-39B0-405C-8E12-0CF08B76C037}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6775891E-9A58-4F0E-9C26-CECC1AB6CAD1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6775891E-9A58-4F0E-9C26-CECC1AB6CAD1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6775891E-9A58-4F0E-9C26-CECC1AB6CAD1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6775891E-9A58-4F0E-9C26-CECC1AB6CAD1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E521E365-5357-462F-B27A-6C9B8121ADA1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E521E365-5357-462F-B27A-6C9B8121ADA1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E521E365-5357-462F-B27A-6C9B8121ADA1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E521E365-5357-462F-B27A-6C9B8121ADA1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5035EFEA-3F50-424A-9132-764B53107708}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5035EFEA-3F50-424A-9132-764B53107708}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5035EFEA-3F50-424A-9132-764B53107708}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5035EFEA-3F50-424A-9132-764B53107708}.Release|Any CPU.Build.0 = Release|Any CPU
+		{488CF854-0677-4C82-8038-2AD737F39D9C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{488CF854-0677-4C82-8038-2AD737F39D9C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{488CF854-0677-4C82-8038-2AD737F39D9C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{488CF854-0677-4C82-8038-2AD737F39D9C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -524,5 +574,14 @@ Global
 		{AE9498A2-8A0A-4C66-841D-D7B899770775} = {BE9DB84F-FF19-4F0F-9163-A0D4D1650F43}
 		{9F922035-24EB-49B8-B898-169AEAEB93FA} = {BE9DB84F-FF19-4F0F-9163-A0D4D1650F43}
 		{CFB74BE8-A675-41D9-BE39-A8EABB238A88} = {BE9DB84F-FF19-4F0F-9163-A0D4D1650F43}
+		{513978DB-A646-437C-B040-4CCF79644444} = {D46B5DB7-EF85-45B6-9369-B0F87DB6EDC1}
+		{6B9EBEB0-1A60-48F9-B422-1E28ED52D1D0} = {513978DB-A646-437C-B040-4CCF79644444}
+		{848048B7-ED9B-4DE7-9392-9D581650201D} = {513978DB-A646-437C-B040-4CCF79644444}
+		{8AEB08C0-CF92-49E2-A858-1F075FD9D6B2} = {513978DB-A646-437C-B040-4CCF79644444}
+		{DBBC7232-39B0-405C-8E12-0CF08B76C037} = {513978DB-A646-437C-B040-4CCF79644444}
+		{6775891E-9A58-4F0E-9C26-CECC1AB6CAD1} = {513978DB-A646-437C-B040-4CCF79644444}
+		{E521E365-5357-462F-B27A-6C9B8121ADA1} = {513978DB-A646-437C-B040-4CCF79644444}
+		{5035EFEA-3F50-424A-9132-764B53107708} = {513978DB-A646-437C-B040-4CCF79644444}
+		{488CF854-0677-4C82-8038-2AD737F39D9C} = {513978DB-A646-437C-B040-4CCF79644444}
 	EndGlobalSection
 EndGlobal

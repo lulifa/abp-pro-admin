@@ -1,0 +1,19 @@
+
+
+dotnet new classlib -o modules/oss/RuiChen.AbpPro.OssManagement.Application
+dotnet new classlib -o modules/oss/RuiChen.AbpPro.OssManagement.Application.Contracts
+dotnet new classlib -o modules/oss/RuiChen.AbpPro.OssManagement.Domain
+dotnet new classlib -o modules/oss/RuiChen.AbpPro.OssManagement.Domain.Shared
+dotnet new classlib -o modules/oss/RuiChen.AbpPro.OssManagement.FileSystem
+dotnet new classlib -o modules/oss/RuiChen.AbpPro.OssManagement.HttpApi
+dotnet new classlib -o modules/oss/RuiChen.AbpPro.OssManagement.Imaging
+dotnet new classlib -o modules/oss/RuiChen.AbpPro.OssManagement.SettingManagement
+
+dotnet sln RuiChen.AbpPro.sln add  modules/oss/RuiChen.AbpPro.OssManagement.Application
+dotnet sln RuiChen.AbpPro.sln add  modules/oss/RuiChen.AbpPro.OssManagement.Application.Contracts
+dotnet sln RuiChen.AbpPro.sln add  modules/oss/RuiChen.AbpPro.OssManagement.Domain
+dotnet sln RuiChen.AbpPro.sln add  modules/oss/RuiChen.AbpPro.OssManagement.Domain.Shared
+dotnet sln RuiChen.AbpPro.sln add  modules/oss/RuiChen.AbpPro.OssManagement.FileSystem
+dotnet sln RuiChen.AbpPro.sln add  modules/oss/RuiChen.AbpPro.OssManagement.HttpApi
+dotnet sln RuiChen.AbpPro.sln add  modules/oss/RuiChen.AbpPro.OssManagement.Imaging
+dotnet sln RuiChen.AbpPro.sln add  modules/oss/RuiChen.AbpPro.OssManagement.SettingManagement
