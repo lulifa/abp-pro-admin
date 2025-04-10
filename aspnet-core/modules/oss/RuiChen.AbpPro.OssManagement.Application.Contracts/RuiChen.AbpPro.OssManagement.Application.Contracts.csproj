@@ -3,11 +3,17 @@
   <PropertyGroup>
     <TargetFramework>net9.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
+    <Nullable>disable</Nullable>
+    <RootNamespace />
   </PropertyGroup>
 
+
   <ItemGroup>
-    <Folder Include="RuiChen\AbpPro\OssManagement\" />
+    <PackageReference Include="Volo.Abp.Ddd.Application.Contracts" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\RuiChen.AbpPro.OssManagement.Domain.Shared\RuiChen.AbpPro.OssManagement.Domain.Shared.csproj" />
   </ItemGroup>
 
 </Project>
