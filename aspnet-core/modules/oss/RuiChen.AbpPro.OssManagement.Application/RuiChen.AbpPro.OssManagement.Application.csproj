@@ -3,11 +3,20 @@
   <PropertyGroup>
     <TargetFramework>net9.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
+    <Nullable>disable</Nullable>
+    <RootNamespace />
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="RuiChen\AbpPro\OssManagement\" />
+    <PackageReference Include="Volo.Abp.AutoMapper" />
+    <PackageReference Include="Volo.Abp.Ddd.Application" />
+    <PackageReference Include="Volo.Abp.Caching" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\framework\settings\RuiChen.AbpPro.Settings\RuiChen.AbpPro.Settings.csproj" />
+    <ProjectReference Include="..\RuiChen.AbpPro.OssManagement.Application.Contracts\RuiChen.AbpPro.OssManagement.Application.Contracts.csproj" />
+    <ProjectReference Include="..\RuiChen.AbpPro.OssManagement.Domain\RuiChen.AbpPro.OssManagement.Domain.csproj" />
   </ItemGroup>
 
 </Project>
