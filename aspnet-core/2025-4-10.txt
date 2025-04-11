@@ -1,0 +1,5 @@
+
+
+dotnet new classlib -o framework/settings/RuiChen.AbpPro.Settings
+
+dotnet sln RuiChen.AbpPro.sln add  framework/settings/RuiChen.AbpPro.Settings

@@ -196,6 +196,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RuiChen.AbpPro.OssManagemen
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RuiChen.AbpPro.OssManagement.SettingManagement", "modules\oss\RuiChen.AbpPro.OssManagement.SettingManagement\RuiChen.AbpPro.OssManagement.SettingManagement.csproj", "{488CF854-0677-4C82-8038-2AD737F39D9C}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "settings", "settings", "{4622EA4B-54E7-4347-A601-BE3F96D59AAB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RuiChen.AbpPro.Settings", "framework\settings\RuiChen.AbpPro.Settings\RuiChen.AbpPro.Settings.csproj", "{B233E6A7-BA29-4080-8AE3-DE8425BF9CE9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -490,6 +494,10 @@ Global
 		{488CF854-0677-4C82-8038-2AD737F39D9C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{488CF854-0677-4C82-8038-2AD737F39D9C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{488CF854-0677-4C82-8038-2AD737F39D9C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B233E6A7-BA29-4080-8AE3-DE8425BF9CE9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B233E6A7-BA29-4080-8AE3-DE8425BF9CE9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B233E6A7-BA29-4080-8AE3-DE8425BF9CE9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B233E6A7-BA29-4080-8AE3-DE8425BF9CE9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -583,5 +591,7 @@ Global
 		{E521E365-5357-462F-B27A-6C9B8121ADA1} = {513978DB-A646-437C-B040-4CCF79644444}
 		{5035EFEA-3F50-424A-9132-764B53107708} = {513978DB-A646-437C-B040-4CCF79644444}
 		{488CF854-0677-4C82-8038-2AD737F39D9C} = {513978DB-A646-437C-B040-4CCF79644444}
+		{4622EA4B-54E7-4347-A601-BE3F96D59AAB} = {0BB834A0-9CB7-4E0E-89F4-5FDE8CB9BD87}
+		{B233E6A7-BA29-4080-8AE3-DE8425BF9CE9} = {4622EA4B-54E7-4347-A601-BE3F96D59AAB}
 	EndGlobalSection
 EndGlobal
