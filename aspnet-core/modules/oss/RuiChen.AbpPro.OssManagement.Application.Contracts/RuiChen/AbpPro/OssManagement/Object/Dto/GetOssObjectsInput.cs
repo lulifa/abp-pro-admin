@@ -1,9 +1,11 @@
-﻿using Volo.Abp.Application.Dtos;
+﻿using System.ComponentModel.DataAnnotations;
+using Volo.Abp.Application.Dtos;
 
 namespace RuiChen.AbpPro.OssManagement
 {
     public class GetOssObjectsInput : PagedAndSortedResultRequestDto
     {
+        [Required]
         public string Bucket { get; set; }
         public string Prefix { get; set; }
         public string Delimiter { get; set; }
