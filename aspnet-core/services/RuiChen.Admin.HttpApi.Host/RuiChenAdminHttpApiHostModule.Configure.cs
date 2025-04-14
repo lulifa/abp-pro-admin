@@ -35,6 +35,8 @@ using Medallion.Threading;
 using Medallion.Threading.Redis;
 using Microsoft.Extensions.Caching.StackExchangeRedis;
 using Volo.Abp.Caching;
+using Volo.Abp.BlobStoring;
+using Volo.Abp.BlobStoring.FileSystem;
 
 namespace RuiChen.Admin.HttpApi.Host
 {
@@ -133,7 +135,8 @@ namespace RuiChen.Admin.HttpApi.Host
                 foreach (var (app, mappings) in languageMap)
                 {
                     options.AddLanguagesMapOrUpdate(app, mappings);
-                };
+                }
+                ;
 
             });
 
@@ -160,6 +163,21 @@ namespace RuiChen.Admin.HttpApi.Host
 
                 options.Limits.MaxRequestBufferSize = null;
             });
+        }
+
+        private void ConfigureOssManagement(IServiceCollection services, IConfiguration configuration)
+        {
+            Configure<AbpBlobStoringOptions>(options =>
+            {
+                options.Containers.ConfigureAll((containerName, containerConfiguration) =>
+                {
+                    containerConfiguration.UseFileSystem(fileSystem =>
+                    {
+                        fileSystem.BasePath = Path.Combine(Directory.GetCurrentDirectory(), "blobs");
+                    });
+                });
+            });
+            services.AddFileSystemContainer();
         }
 
         private void ConfigureDistributedLock(IServiceCollection services, IConfiguration configuration)

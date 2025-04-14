@@ -116,6 +116,8 @@ namespace RuiChen.Admin.HttpApi.Host
 
             ConfigureKestrelServer();
 
+            ConfigureOssManagement(services, configuration);
+
             ConfigureDistributedLock(services, configuration);
 
             ConfigureVirtualFileSystem();
