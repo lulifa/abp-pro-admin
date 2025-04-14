@@ -33,7 +33,6 @@
 
     <ProjectReference Include="..\..\modules\caching\RuiChen.AbpPro.CachingManagement.HttpApi\RuiChen.AbpPro.CachingManagement.HttpApi.csproj" />
     <ProjectReference Include="..\..\modules\caching\RuiChen.AbpPro.CachingManagement.Application\RuiChen.AbpPro.CachingManagement.Application.csproj" />
-    <ProjectReference Include="..\..\modules\caching\RuiChen.AbpPro.CachingManagement.StackExchangeRedis\RuiChen.AbpPro.CachingManagement.StackExchangeRedis.csproj" />
 
     <ProjectReference Include="..\..\modules\feature\RuiChen.AbpPro.FeatureManagement.HttpApi\RuiChen.AbpPro.FeatureManagement.HttpApi.csproj" />
     <ProjectReference Include="..\..\modules\feature\RuiChen.AbpPro.FeatureManagement.Application\RuiChen.AbpPro.FeatureManagement.Application.csproj" />
@@ -48,6 +47,9 @@
     <ProjectReference Include="..\..\modules\openIddict\RuiChen.AbpPro.OpenIddict.HttpApi\RuiChen.AbpPro.OpenIddict.HttpApi.csproj" />
     <ProjectReference Include="..\..\modules\openIddict\RuiChen.AbpPro.OpenIddict.Application\RuiChen.AbpPro.OpenIddict.Application.csproj" />
     <PackageReference Include="Volo.Abp.OpenIddict.EntityFrameworkCore" />
+
+    <ProjectReference Include="..\..\modules\oss\RuiChen.AbpPro.OssManagement.HttpApi\RuiChen.AbpPro.OssManagement.HttpApi.csproj" />
+    <ProjectReference Include="..\..\modules\oss\RuiChen.AbpPro.OssManagement.Application\RuiChen.AbpPro.OssManagement.Application.csproj" />
 
 
     <ProjectReference Include="..\..\modules\permission\RuiChen.AbpPro.PermissionManagement.HttpApi\RuiChen.AbpPro.PermissionManagement.HttpApi.csproj" />

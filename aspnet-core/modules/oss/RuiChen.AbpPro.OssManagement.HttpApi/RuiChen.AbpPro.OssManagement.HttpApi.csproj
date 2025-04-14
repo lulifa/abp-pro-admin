@@ -13,6 +13,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\RuiChen.AbpPro.OssManagement.Application.Contracts\RuiChen.AbpPro.OssManagement.Application.Contracts.csproj" />
+    <ProjectReference Include="..\RuiChen.AbpPro.OssManagement.FileSystem\RuiChen.AbpPro.OssManagement.FileSystem.csproj" />
+    <ProjectReference Include="..\RuiChen.AbpPro.OssManagement.SettingManagement\RuiChen.AbpPro.OssManagement.SettingManagement.csproj" />
   </ItemGroup>
 
 </Project>

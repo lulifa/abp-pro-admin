@@ -9,6 +9,7 @@ using RuiChen.AbpPro.FeatureManagement;
 using RuiChen.AbpPro.Identity;
 using RuiChen.AbpPro.Localization;
 using RuiChen.AbpPro.OpenIddict;
+using RuiChen.AbpPro.OssManagement;
 using RuiChen.AbpPro.PermissionManagement;
 using RuiChen.AbpPro.Saas;
 using RuiChen.AbpPro.SettingManagement;
@@ -38,7 +39,6 @@ namespace RuiChen.Admin.HttpApi.Host
 
         typeof(AbpCachingManagementHttpApiModule),
         typeof(AbpCachingManagementApplicationModule),
-        typeof(AbpCachingManagementStackExchangeRedisModule),
 
 
         typeof(AbpFeatureManagementHttpApiModule),
@@ -54,6 +54,10 @@ namespace RuiChen.Admin.HttpApi.Host
         typeof(AbpOpenIddictHttpApiModule),
         typeof(AbpOpenIddictApplicationModule),
         typeof(AbpOpenIddictEntityFrameworkCoreModule),
+
+
+        typeof(AbpOssManagementHttpApiModule),
+        typeof(AbpOssManagementApplicationModule),
 
 
         typeof(AbpPermissionManagementHttpApiModule),

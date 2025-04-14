@@ -9,6 +9,7 @@ namespace RuiChen.AbpPro.CachingManagement
 {
     [DependsOn(
         typeof(AbpAspNetCoreMvcModule),
+        typeof(AbpCachingManagementStackExchangeRedisModule),
         typeof(AbpCachingManagementApplicationContractsModule)
         )]
     public class AbpCachingManagementHttpApiModule : AbpModule

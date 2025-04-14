@@ -7,6 +7,8 @@ namespace RuiChen.AbpPro.OssManagement
 {
     [DependsOn(
            typeof(AbpOssManagementApplicationContractsModule),
+           typeof(AbpOssManagementSettingManagementModule),
+           typeof(AbpOssManagementFileSystemModule),
            typeof(AbpAspNetCoreMvcModule))]
     public class AbpOssManagementHttpApiModule : AbpModule
     {
