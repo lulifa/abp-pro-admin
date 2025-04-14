@@ -3,11 +3,16 @@
   <PropertyGroup>
     <TargetFramework>net9.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
+    <Nullable>disable</Nullable>
+    <RootNamespace />
   </PropertyGroup>
+  
+  <ItemGroup>
+		<PackageReference Include="Volo.Abp.BlobStoring.FileSystem" />
+	</ItemGroup>
 
   <ItemGroup>
-    <Folder Include="RuiChen\AbpPro\OssManagement\" />
+    <ProjectReference Include="..\RuiChen.AbpPro.OssManagement.Domain\RuiChen.AbpPro.OssManagement.Domain.csproj" />
   </ItemGroup>
 
 </Project>
