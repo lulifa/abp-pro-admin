@@ -3,11 +3,18 @@
   <PropertyGroup>
     <TargetFramework>net9.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
+    <Nullable>disable</Nullable>
+    <RootNamespace />
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="RuiChen\AbpPro\OssManagement\" />
+    <PackageReference Include="Volo.Abp.AspNetCore.Mvc" />
+    <PackageReference Include="Volo.Abp.SettingManagement.Domain" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\settings\RuiChen.AbpPro.SettingManagement.Application.Contracts\RuiChen.AbpPro.SettingManagement.Application.Contracts.csproj" />
+    <ProjectReference Include="..\RuiChen.AbpPro.OssManagement.Application.Contracts\RuiChen.AbpPro.OssManagement.Application.Contracts.csproj" />
   </ItemGroup>
 
 </Project>
