@@ -7,11 +7,8 @@ using Volo.Abp.Identity;
 
 namespace RuiChen.AbpPro.Identity
 {
-    [Area("identity")]
     [ControllerName("identity-sessions")]
     [Route("api/identity/sessions")]
-    [RemoteService(Name = IdentityRemoteServiceConsts.RemoteServiceName)]
-    [Authorize(IdentityPermissions.IdentitySession.Default)]
     public class IdentitySessionController : IdentityControllerBase, IIdentitySessionAppService
     {
 
