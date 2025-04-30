@@ -15,6 +15,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\RuiChen.AbpPro.Identity.Application.Contracts\RuiChen.AbpPro.Identity.Application.Contracts.csproj" />
+    <ProjectReference Include="..\RuiChen.AbpPro.Identity.AspNetCore.Session\RuiChen.AbpPro.Identity.AspNetCore.Session.csproj" />
   </ItemGroup>
 
 </Project>

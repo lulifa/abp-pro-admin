@@ -11,6 +11,7 @@ namespace RuiChen.AbpPro.Identity
     [DependsOn(
         typeof(VoloAbpIdentityHttpApiModule),
         typeof(AbpIdentityApplicationContractsModule),
+        typeof(AbpIdentityAspNetCoreSessionModule),
         typeof(AbpIdentityAspNetCoreModule)
         )]
     public class AbpIdentityHttpApiModule : AbpModule

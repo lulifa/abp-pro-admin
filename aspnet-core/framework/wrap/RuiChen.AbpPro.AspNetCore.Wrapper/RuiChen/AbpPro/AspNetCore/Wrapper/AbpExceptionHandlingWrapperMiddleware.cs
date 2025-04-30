@@ -15,7 +15,6 @@ namespace RuiChen.AbpPro.AspNetCore.Wrapper
 {
     public class AbpExceptionHandlingWrapperMiddleware : IMiddleware, ITransientDependency
     {
-
         private readonly ILogger<AbpExceptionHandlingWrapperMiddleware> _logger;
 
         private readonly Func<object, Task> _clearCacheHeadersDelegate;
@@ -66,56 +65,68 @@ namespace RuiChen.AbpPro.AspNetCore.Wrapper
                     new ExceptionNotificationContext(exception)
                 );
 
+            var wrapOptions = httpContext.RequestServices.GetRequiredService<IOptions<AbpWrapperOptions>>().Value;
+
             if (exception is AbpAuthorizationException)
             {
                 await httpContext.RequestServices.GetRequiredService<IAbpAuthorizationExceptionHandler>()
                     .HandleAsync(exception.As<AbpAuthorizationException>(), httpContext);
+                if (!wrapOptions.IsWrapUnauthorizedEnabled)
+                {
+                    await httpContext.RequestServices.GetRequiredService<IAbpAuthorizationExceptionHandler>()
+                    .HandleAsync(exception.As<AbpAuthorizationException>(), httpContext);
+                    return;
+                }
+
+                var isAuthenticated = httpContext.User?.Identity?.IsAuthenticated ?? false;
+                if (isAuthenticated)
+                {
+                    await httpContext.RequestServices.GetRequiredService<IAbpAuthorizationExceptionHandler>()
+                        .HandleAsync(exception.As<AbpAuthorizationException>(), httpContext);
+                    return;
+                }
             }
-            else
+            var jsonSerializer = httpContext.RequestServices.GetRequiredService<IJsonSerializer>();
+            var httpResponseWrapper = httpContext.RequestServices.GetRequiredService<IHttpResponseWrapper>();
+            var statusCodFinder = httpContext.RequestServices.GetRequiredService<IHttpExceptionStatusCodeFinder>();
+            var exceptionWrapHandler = httpContext.RequestServices.GetRequiredService<IExceptionWrapHandlerFactory>();
+            var errorInfoConverter = httpContext.RequestServices.GetRequiredService<IExceptionToErrorInfoConverter>();
+            var exceptionHandlingOptions = httpContext.RequestServices.GetRequiredService<IOptions<AbpExceptionHandlingOptions>>().Value;
+
+            var remoteServiceErrorInfo = errorInfoConverter.Convert(exception, options =>
             {
-                var jsonSerializer = httpContext.RequestServices.GetRequiredService<IJsonSerializer>();
-                var wrapOptions = httpContext.RequestServices.GetRequiredService<IOptions<AbpWrapperOptions>>().Value;
-                var httpResponseWrapper = httpContext.RequestServices.GetRequiredService<IHttpResponseWrapper>();
-                var statusCodFinder = httpContext.RequestServices.GetRequiredService<IHttpExceptionStatusCodeFinder>();
-                var exceptionWrapHandler = httpContext.RequestServices.GetRequiredService<IExceptionWrapHandlerFactory>();
-                var errorInfoConverter = httpContext.RequestServices.GetRequiredService<IExceptionToErrorInfoConverter>();
-                var exceptionHandlingOptions = httpContext.RequestServices.GetRequiredService<IOptions<AbpExceptionHandlingOptions>>().Value;
+                options.SendExceptionsDetailsToClients = exceptionHandlingOptions.SendExceptionsDetailsToClients;
+                options.SendStackTraceToClients = exceptionHandlingOptions.SendStackTraceToClients;
+            });
 
-                var remoteServiceErrorInfo = errorInfoConverter.Convert(exception, options =>
-                {
-                    options.SendExceptionsDetailsToClients = exceptionHandlingOptions.SendExceptionsDetailsToClients;
-                    options.SendStackTraceToClients = exceptionHandlingOptions.SendStackTraceToClients;
-                });
+            var exceptionWrapContext = new ExceptionWrapContext(
+                exception,
+                remoteServiceErrorInfo,
+                httpContext.RequestServices,
+                statusCodFinder.GetStatusCode(httpContext, exception));
 
-                var exceptionWrapContext = new ExceptionWrapContext(
-                    exception,
-                    remoteServiceErrorInfo,
-                    httpContext.RequestServices,
-                    statusCodFinder.GetStatusCode(httpContext, exception));
+            exceptionWrapHandler.CreateFor(exceptionWrapContext).Wrap(exceptionWrapContext);
 
-                exceptionWrapHandler.CreateFor(exceptionWrapContext).Wrap(exceptionWrapContext);
+            var wrapperHeaders = new Dictionary<string, string>()
+            {
+                { AbpHttpWrapConsts.AbpWrapResult, "true" }
+            };
+            var responseWrapperContext = new HttpResponseWrapperContext(
+                httpContext,
+                (int)wrapOptions.HttpStatusCode,
+                wrapperHeaders);
 
-                var wrapperHeaders = new Dictionary<string, string>()
-                {
-                    { AbpHttpWrapConsts.AbpWrapResult, "true" }
-                };
-                var responseWrapperContext = new HttpResponseWrapperContext(
-                    httpContext,
-                    (int)wrapOptions.HttpStatusCode,
-                    wrapperHeaders);
+            httpResponseWrapper.Wrap(responseWrapperContext);
 
-                httpResponseWrapper.Wrap(responseWrapperContext);
+            httpContext.Response.Clear();
+            httpContext.Response.OnStarting(_clearCacheHeadersDelegate, httpContext.Response);
+            httpContext.Response.Headers.Append("Content-Type", "application/json");
 
-                httpContext.Response.Clear();
-                httpContext.Response.OnStarting(_clearCacheHeadersDelegate, httpContext.Response);
-                httpContext.Response.Headers.Append("Content-Type", "application/json");
-
-                var wrapResult = new WrapResult(
-                    exceptionWrapContext.ErrorInfo.Code,
-                    exceptionWrapContext.ErrorInfo.Message,
-                    exceptionWrapContext.ErrorInfo.Details);
-                await httpContext.Response.WriteAsync(jsonSerializer.Serialize(wrapResult));
-            }
+            var wrapResult = new WrapResult(
+                exceptionWrapContext.ErrorInfo.Code,
+                exceptionWrapContext.ErrorInfo.Message,
+                exceptionWrapContext.ErrorInfo.Details);
+            await httpContext.Response.WriteAsync(jsonSerializer.Serialize(wrapResult));
         }
 
         private Task ClearCacheHeaders(object state)
@@ -129,6 +140,5 @@ namespace RuiChen.AbpPro.AspNetCore.Wrapper
 
             return Task.CompletedTask;
         }
-
     }
 }

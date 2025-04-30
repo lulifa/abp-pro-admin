@@ -5,33 +5,6 @@ namespace RuiChen.AbpPro.Wrapper
 {
     public class AbpWrapperOptions
     {
-        public AbpWrapperOptions()
-        {
-
-            CodeWithUnhandled = "500";
-            CodeWithSuccess = "0";
-            HttpStatusCode = HttpStatusCode.OK;
-            ErrorWithEmptyResult = false;
-
-            IgnorePrefixUrls = new List<string>();
-            IgnoreNamespaces = new List<string>();
-
-            IgnoreControllers = new TypeList();
-            IgnoreReturnTypes = new TypeList();
-            IgnoredInterfaces = new TypeList()
-            {
-                typeof(IWrapDisabled)
-            };
-            IgnoreExceptions = new TypeList<Exception>();
-
-            CodeWithEmptyResult = (_) => "404";
-            MessageWithEmptyResult = (_) => "Not Found";
-
-            ExceptionHandles = new Dictionary<Type, IExceptionWrapHandler>();
-
-        }
-
-
         /// <summary>
         /// 未处理异常代码
         /// 默认: 500
@@ -39,6 +12,7 @@ namespace RuiChen.AbpPro.Wrapper
         public string CodeWithUnhandled { get; set; }
         /// <summary>
         /// 是否启用包装器
+        /// 默认: false
         /// </summary>
         public bool IsEnabled { get; set; }
         /// <summary>
@@ -51,6 +25,11 @@ namespace RuiChen.AbpPro.Wrapper
         /// 默认: false
         /// </summary>
         public bool ErrorWithEmptyResult { get; set; }
+        /// <summary>
+        /// 是否启用401错误包装
+        /// 默认: false
+        /// </summary>
+        public bool IsWrapUnauthorizedEnabled { get; set; }
         /// <summary>
         /// 资源为空时返回代码
         /// 默认：404
@@ -92,6 +71,30 @@ namespace RuiChen.AbpPro.Wrapper
 
         internal IDictionary<Type, IExceptionWrapHandler> ExceptionHandles { get; }
 
+        public AbpWrapperOptions()
+        {
+            CodeWithUnhandled = "500";
+            CodeWithSuccess = "0";
+            HttpStatusCode = HttpStatusCode.OK;
+            ErrorWithEmptyResult = false;
+
+            IgnorePrefixUrls = new List<string>();
+            IgnoreNamespaces = new List<string>();
+
+            IgnoreControllers = new TypeList();
+            IgnoreReturnTypes = new TypeList();
+            IgnoredInterfaces = new TypeList()
+        {
+            typeof(IWrapDisabled)
+        };
+            IgnoreExceptions = new TypeList<Exception>();
+
+            CodeWithEmptyResult = (_) => "404";
+            MessageWithEmptyResult = (_) => "Not Found";
+
+            ExceptionHandles = new Dictionary<Type, IExceptionWrapHandler>();
+        }
+
         public void AddHandler<TException>(IExceptionWrapHandler handler)
             where TException : Exception
         {
@@ -109,6 +112,5 @@ namespace RuiChen.AbpPro.Wrapper
 
             return handler;
         }
-
     }
 }

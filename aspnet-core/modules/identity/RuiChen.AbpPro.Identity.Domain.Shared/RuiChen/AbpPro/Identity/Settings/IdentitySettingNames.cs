@@ -29,5 +29,19 @@
             public const string SmsRepetInterval = UserPrefix + ".SmsRepetInterval";
         }
 
+        public static class Session
+        {
+            private const string SessionPrefix = Prefix + ".Session";
+            /// <summary>
+            /// 并发登录策略
+            /// see: https://github.com/abpio/abp-commercial-docs/blob/dev/en/modules/identity/session-management.md#prevent-concurrent-login
+            /// </summary>
+            public const string ConcurrentLoginStrategy = SessionPrefix + ".ConcurrentLoginStrategy";
+            /// <summary>
+            /// 限制相同设备登录数量
+            /// </summary>
+            public const string LogoutFromSameTypeDevicesLimit = SessionPrefix + ".LogoutFromSameTypeDevicesLimit";
+        }
+
     }
 }

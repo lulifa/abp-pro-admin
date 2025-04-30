@@ -18,6 +18,7 @@ namespace RuiChen.AbpPro.Identity
             {
                 options.AddRepository<IdentityRole, EfCoreIdentityRoleRepository>();
                 options.AddRepository<IdentityUser, EfCoreIdentityUserRepository>();
+                options.AddRepository<IdentitySession, EfCoreIdentitySessionRepository>();
                 options.AddRepository<OrganizationUnit, EfCoreOrganizationUnitRepository>();
             });
         }

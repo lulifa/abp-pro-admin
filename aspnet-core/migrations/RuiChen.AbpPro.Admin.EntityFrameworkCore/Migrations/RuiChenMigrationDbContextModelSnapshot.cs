@@ -19,7 +19,7 @@ namespace RuiChen.AbpPro.Admin.EntityFrameworkCore.Migrations
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("_Abp_DatabaseProvider", EfCoreDatabaseProvider.MySql)
-                .HasAnnotation("ProductVersion", "9.0.0")
+                .HasAnnotation("ProductVersion", "9.0.2")
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
             MySqlModelBuilderExtensions.AutoIncrementColumns(modelBuilder);
@@ -586,6 +586,10 @@ namespace RuiChen.AbpPro.Admin.EntityFrameworkCore.Migrations
                         .HasColumnType("varchar(40)")
                         .HasColumnName("ConcurrencyStamp");
 
+                    b.Property<DateTime>("CreationTime")
+                        .HasColumnType("datetime(6)")
+                        .HasColumnName("CreationTime");
+
                     b.Property<string>("Description")
                         .HasMaxLength(256)
                         .HasColumnType("varchar(256)");
@@ -660,6 +664,10 @@ namespace RuiChen.AbpPro.Admin.EntityFrameworkCore.Migrations
                         .HasMaxLength(40)
                         .HasColumnType("varchar(40)")
                         .HasColumnName("ConcurrencyStamp");
+
+                    b.Property<DateTime>("CreationTime")
+                        .HasColumnType("datetime(6)")
+                        .HasColumnName("CreationTime");
 
                     b.Property<int>("EntityVersion")
                         .HasColumnType("int");

@@ -12,6 +12,7 @@ namespace RuiChen.AbpPro.OpenIddict
     [DependsOn(
         typeof(AbpAspNetCoreMvcModule),
         typeof(AbpOpenIddictApplicationContractsModule),
+        typeof(AbpOpenIddictAspNetCoreSessionModule),
         typeof(AbpOpenIddictAspNetCoreModule)
         )]
     public class AbpOpenIddictHttpApiModule : AbpModule

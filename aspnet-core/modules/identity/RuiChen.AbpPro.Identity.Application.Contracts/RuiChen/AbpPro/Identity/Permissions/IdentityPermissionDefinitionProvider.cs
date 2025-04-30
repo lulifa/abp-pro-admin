@@ -27,6 +27,9 @@ namespace RuiChen.AbpPro.Identity
                     rolePermission.AddChild(IdentityPermissions.Roles.ManageOrganizationUnits, L("Permission:ManageOrganizationUnits"));
                 }
 
+                var sessionPermission = identityGroup.AddPermission(IdentityPermissions.IdentitySession.Default, L("Permission:IdentitySessions"));
+                sessionPermission.AddChild(IdentityPermissions.IdentitySession.Revoke, L("Permission:RevokeSession"));
+
                 var origanizationUnitPermission = identityGroup.AddPermission(IdentityPermissions.OrganizationUnits.Default, L("Permission:OrganizationUnitManagement"));
                 origanizationUnitPermission.AddChild(IdentityPermissions.OrganizationUnits.Create, L("Permission:Create"));
                 origanizationUnitPermission.AddChild(IdentityPermissions.OrganizationUnits.Update, L("Permission:Edit"));

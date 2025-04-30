@@ -3,6 +3,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Localization;
 using RuiChen.AbpPro.AspNetCore.Wrapper;
 using RuiChen.AbpPro.Wrapper;
+using Volo.Abp.AspNetCore.Mvc.ApiExploring;
 using Volo.Abp.AspNetCore.Mvc.ApplicationConfigurations;
 using Volo.Abp.AspNetCore.Mvc.ProxyScripting;
 using Volo.Abp.Content;
@@ -28,28 +29,29 @@ namespace RuiChen.AbpPro.AspNetCore.Mvc.Wrapper
 
             Configure<AbpLocalizationOptions>(options =>
             {
-                options.Resources.Add<AbpMvcWrapperResource>("en").AddVirtualJson("/RuiChen/AbpPro/AspNetCore/Mvc/Wrapper/Localization/Resources");
+                options.Resources
+                    .Add<AbpMvcWrapperResource>("en")
+                    .AddVirtualJson("/LINGYUN/Abp/AspNetCore/Mvc/Wrapper/Localization/Resources");
             });
 
-
-            Configure<MvcOptions>(options =>
+            Configure<MvcOptions>(mvcOptions =>
             {
                 // Wrap Result Filter
-                options.Filters.AddService(typeof(AbpWrapResultFilter));
+                mvcOptions.Filters.AddService(typeof(AbpWrapResultFilter));
             });
 
             Configure<AbpWrapperOptions>(options =>
             {
                 // 即使重写端点也不包装返回结果
                 // api/abp/api-definition
-                options.IgnoreReturnTypes.Add<ApplicationApiDescriptionModel>();
+                // options.IgnoreReturnTypes.Add<ApplicationApiDescriptionModel>();
                 // api/abp/application-configuration
-                options.IgnoreReturnTypes.Add<ApplicationConfigurationDto>();
+                //  options.IgnoreReturnTypes.Add<ApplicationConfigurationDto>();
                 // api/abp/application-localization
-                options.IgnoreReturnTypes.Add<ApplicationLocalizationDto>();
+                // options.IgnoreReturnTypes.Add<ApplicationLocalizationDto>(); 
                 // 文件流
                 options.IgnoreReturnTypes.Add<IRemoteStreamContent>();
-                options.IgnoreReturnTypes.Add<FileResult>();
+                // options.IgnoreReturnTypes.Add<FileResult>();
 
                 //options.IgnoreReturnTypes.Add<ViewResult>();
                 //options.IgnoreReturnTypes.Add<ViewEngineResult>();
@@ -63,13 +65,21 @@ namespace RuiChen.AbpPro.AspNetCore.Mvc.Wrapper
                 //options.IgnoreReturnTypes.Add<SignOutResult>();
                 //options.IgnoreReturnTypes.Add<ForbidResult>();
 
+                // options.IgnoreControllers.Add<AbpApplicationLocalizationController>();
+                // options.IgnoreControllers.Add<AbpApplicationConfigurationController>();
+
+                // Api Endpoints
+                options.IgnoreControllers.Add<AbpApiDefinitionController>();
+                // Abp/ServiceProxyScript
                 options.IgnoreControllers.Add<AbpServiceProxyScriptController>();
-                options.IgnoreControllers.Add<AbpApplicationLocalizationController>();
-                options.IgnoreControllers.Add<AbpApplicationConfigurationController>();
+                // Application Configuration Script
                 options.IgnoreControllers.Add<AbpApplicationConfigurationScriptController>();
 
                 // 官方模块不包装结果
-                options.IgnoreNamespaces.Add("Volo.Abp");
+                // options.IgnoreNamespaces.Add("Volo.Abp");
+
+                // oidc端点不包装结果
+                options.IgnorePrefixUrls.Add("/connect");
 
                 // 返回本地化的 404 错误消息
                 options.MessageWithEmptyResult = (serviceProvider) =>
@@ -78,7 +88,6 @@ namespace RuiChen.AbpPro.AspNetCore.Mvc.Wrapper
                     return localizer["Wrapper:NotFound"];
                 };
             });
-
         }
     }
 }

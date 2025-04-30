@@ -8,71 +8,85 @@ namespace RuiChen.AbpPro.Identity
     {
         public override void Define(ISettingDefinitionContext context)
         {
-            SettingDefinition[] settingDefinitions = [
-
+            context.Add(
                 new SettingDefinition(
                     name: IdentitySettingNames.User.SmsNewUserRegister,
-                    defaultValue: string.Empty,
+                    defaultValue: "",
                     displayName: L("DisplayName:Abp.Identity.User.SmsNewUserRegister"),
                     description: L("Description:Abp.Identity.User.SmsNewUserRegister"),
-                    isVisibleToClients: true)
+                    isVisibleToClients: false)
                 .WithProviders(
                     DefaultValueSettingValueProvider.ProviderName,
                     ConfigurationSettingValueProvider.ProviderName,
                     GlobalSettingValueProvider.ProviderName,
                     TenantSettingValueProvider.ProviderName),
-
                 new SettingDefinition(
                     name: IdentitySettingNames.User.SmsUserSignin,
-                    defaultValue: string.Empty,
+                    defaultValue: "",
                     displayName: L("DisplayName:Abp.Identity.User.SmsUserSignin"),
                     description: L("Description:Abp.Identity.User.SmsUserSignin"),
-                    isVisibleToClients: true)
+                    isVisibleToClients: false)
                 .WithProviders(
                     DefaultValueSettingValueProvider.ProviderName,
                     ConfigurationSettingValueProvider.ProviderName,
                     GlobalSettingValueProvider.ProviderName,
                     TenantSettingValueProvider.ProviderName),
-
                 new SettingDefinition(
                     name: IdentitySettingNames.User.SmsResetPassword,
-                    defaultValue: string.Empty,
+                    defaultValue: "",
                     displayName: L("DisplayName:Abp.Identity.User.SmsResetPassword"),
                     description: L("Description:Abp.Identity.User.SmsResetPassword"),
-                    isVisibleToClients: true)
+                    isVisibleToClients: false)
                 .WithProviders(
                     DefaultValueSettingValueProvider.ProviderName,
                     ConfigurationSettingValueProvider.ProviderName,
                     GlobalSettingValueProvider.ProviderName,
                     TenantSettingValueProvider.ProviderName),
-
                 new SettingDefinition(
                     name: IdentitySettingNames.User.SmsPhoneNumberConfirmed,
-                    defaultValue: string.Empty,
+                    defaultValue: "",
                     displayName: L("DisplayName:Abp.Identity.User.SmsPhoneNumberConfirmed"),
                     description: L("Description:Abp.Identity.User.SmsPhoneNumberConfirmed"),
-                    isVisibleToClients: true)
+                    isVisibleToClients: false)
                 .WithProviders(
                     DefaultValueSettingValueProvider.ProviderName,
                     ConfigurationSettingValueProvider.ProviderName,
                     GlobalSettingValueProvider.ProviderName,
                     TenantSettingValueProvider.ProviderName),
-
                 new SettingDefinition(
                     name: IdentitySettingNames.User.SmsRepetInterval,
-                    defaultValue: string.Empty,
+                    defaultValue: "5",
                     displayName: L("DisplayName:Abp.Identity.User.SmsRepetInterval"),
                     description: L("Description:Abp.Identity.User.SmsRepetInterval"),
-                    isVisibleToClients: true)
+                    isVisibleToClients: false)
+                .WithProviders(
+                    DefaultValueSettingValueProvider.ProviderName,
+                    ConfigurationSettingValueProvider.ProviderName,
+                    GlobalSettingValueProvider.ProviderName,
+                    TenantSettingValueProvider.ProviderName),
+                new SettingDefinition(
+                    name: IdentitySettingNames.Session.ConcurrentLoginStrategy,
+                    defaultValue: ConcurrentLoginStrategy.None.ToString(),
+                    displayName: L("DisplayName:Abp.Identity.Session.ConcurrentLoginStrategy"),
+                    description: L("Description:Abp.Identity.Session.ConcurrentLoginStrategy"),
+                    isVisibleToClients: false)
+                .WithProviders(
+                    DefaultValueSettingValueProvider.ProviderName,
+                    ConfigurationSettingValueProvider.ProviderName,
+                    GlobalSettingValueProvider.ProviderName,
+                    TenantSettingValueProvider.ProviderName),
+                new SettingDefinition(
+                    name: IdentitySettingNames.Session.LogoutFromSameTypeDevicesLimit,
+                    defaultValue: "1",
+                    displayName: L("DisplayName:Abp.Identity.Session.LogoutFromSameTypeDevicesLimit"),
+                    description: L("Description:Abp.Identity.Session.LogoutFromSameTypeDevicesLimit"),
+                    isVisibleToClients: false)
                 .WithProviders(
                     DefaultValueSettingValueProvider.ProviderName,
                     ConfigurationSettingValueProvider.ProviderName,
                     GlobalSettingValueProvider.ProviderName,
                     TenantSettingValueProvider.ProviderName)
-
-                ];
-
-            context.Add(settingDefinitions);
+            );
         }
 
         private static LocalizableString L(string name)

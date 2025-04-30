@@ -37,6 +37,14 @@ using Microsoft.Extensions.Caching.StackExchangeRedis;
 using Volo.Abp.Caching;
 using Volo.Abp.BlobStoring;
 using Volo.Abp.BlobStoring.FileSystem;
+using OpenIddict.Server;
+using RuiChen.AbpPro.Openiddict;
+using Microsoft.AspNetCore.Identity;
+using RuiChen.AbpPro.Identity;
+using Volo.Abp.Security.Claims;
+using Microsoft.Extensions.DependencyInjection.Extensions;
+using Volo.Abp.AspNetCore.Mvc;
+using Volo.Abp.Sms;
 
 namespace RuiChen.Admin.HttpApi.Host
 {
@@ -204,6 +212,22 @@ namespace RuiChen.Admin.HttpApi.Host
             {
                 options.DisableTransportSecurityRequirement = true;
             });
+
+            Configure<OpenIddictServerAspNetCoreOptions>(options =>
+            {
+                options.DisableTransportSecurityRequirement = true;
+            });
+
+            Configure<AbpOpenIddictAspNetCoreSessionOptions>(options =>
+            {
+
+            });
+
+            Configure<OpenIddictServerOptions>(options =>
+            {
+
+            });
+
         }
 
         private void ConfigureSwagger(IServiceCollection services)
@@ -257,6 +281,29 @@ namespace RuiChen.Admin.HttpApi.Host
                     options.OperationFilter<LanguageHeaderParameter>();
 
                 });
+        }
+
+        private void ConfigureIdentity(IConfiguration configuration)
+        {
+            // 增加配置文件定义,在新建租户时需要
+            Configure<IdentityOptions>(options =>
+            {
+                var identityConfiguration = configuration.GetSection("Identity");
+                if (identityConfiguration.Exists())
+                {
+                    identityConfiguration.Bind(options);
+                }
+            });
+            Configure<AbpClaimsPrincipalFactoryOptions>(options =>
+            {
+                options.IsDynamicClaimsEnabled = true;
+
+                options.DynamicClaims.AddIfNotContains(AbpClaimTypes.Picture);
+            });
+            Configure<IdentitySessionCleanupOptions>(options =>
+            {
+                options.IsCleanupEnabled = true;
+            });
         }
 
         private void ConfigureMvcUiTheme()
@@ -421,6 +468,16 @@ namespace RuiChen.Admin.HttpApi.Host
 
             services.AddSameSiteCookiePolicy();
 
+        }
+
+        private void ConfigureSingleModule(IServiceCollection services, bool isDevelopment)
+        {
+
+            Configure<AbpIdentitySessionAspNetCoreOptions>(options =>
+            {
+                // abp 9.0版本可存储登录IP地域, 开启IP解析
+                options.IsParseIpLocation = true;
+            });
         }
 
     }

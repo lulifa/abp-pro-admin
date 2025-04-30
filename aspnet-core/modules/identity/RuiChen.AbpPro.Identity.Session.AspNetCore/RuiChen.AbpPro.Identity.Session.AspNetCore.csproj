@@ -1,0 +1,19 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>disable</Nullable>
+    <RootNamespace />
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Volo.Abp.AspNetCore" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\framework\common\RuiChen.AbpPro.Location.IP\RuiChen.AbpPro.IP.Location.csproj" />
+    <ProjectReference Include="..\RuiChen.AbpPro.Identity.Session\RuiChen.AbpPro.Identity.Session.csproj" />
+  </ItemGroup>
+
+</Project>

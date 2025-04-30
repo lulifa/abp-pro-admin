@@ -36,6 +36,13 @@ namespace RuiChen.AbpPro.Identity
             public const string Delete = Default + ".Delete";
         }
 
+        public static class IdentitySession
+        {
+            public const string Default = Volo.Abp.Identity.IdentityPermissions.GroupName + ".IdentitySessions";
+
+            public const string Revoke = Default + ".Revoke";
+        }
+
         public static string[] GetAll()
         {
             return ReflectionHelper.GetPublicConstantsRecursively(typeof(IdentityPermissions));

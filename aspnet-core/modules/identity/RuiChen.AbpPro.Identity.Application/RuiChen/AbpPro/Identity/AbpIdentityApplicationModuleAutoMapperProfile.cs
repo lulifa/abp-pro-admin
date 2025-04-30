@@ -15,6 +15,8 @@ namespace RuiChen.AbpPro.Identity
 
             CreateMap<IdentityUser, IdentityUserDto>().MapExtraProperties();
 
+            CreateMap<IdentitySession, IdentitySessionDto>();
+
             CreateMap<IdentityRole, IdentityRoleDto>().MapExtraProperties();
 
             CreateMap<OrganizationUnit, OrganizationUnitDto>().MapExtraProperties();

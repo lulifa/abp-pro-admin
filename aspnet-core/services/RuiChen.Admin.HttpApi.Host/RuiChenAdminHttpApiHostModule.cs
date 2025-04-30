@@ -126,6 +126,8 @@ namespace RuiChen.Admin.HttpApi.Host
 
             ConfigureSwagger(services);
 
+            ConfigureIdentity(configuration);
+
             ConfigureMvcUiTheme();
 
             ConfigureCaching(configuration);
@@ -144,6 +146,8 @@ namespace RuiChen.Admin.HttpApi.Host
 
             ConfigureSecurity(services, configuration, hostingEnvironment.IsDevelopment());
 
+            ConfigureSingleModule(services, hostingEnvironment.IsDevelopment());
+
         }
 
         public override void OnApplicationInitialization(ApplicationInitializationContext context)
@@ -152,6 +156,8 @@ namespace RuiChen.Admin.HttpApi.Host
             var configuration = context.GetConfiguration();
 
             app.UseForwardedHeaders();
+
+            app.UseAbpSecurityHeaders();
 
             app.UseCookiePolicy();
 
@@ -166,6 +172,8 @@ namespace RuiChen.Admin.HttpApi.Host
             app.UseCors();
 
             app.UseAuthentication();
+
+            app.UseAbpSession();
 
             app.UseDynamicClaims();
 

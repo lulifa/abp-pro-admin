@@ -13,6 +13,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\RuiChen.AbpPro.Identity.Domain.Shared\RuiChen.AbpPro.Identity.Domain.Shared.csproj" />
+    <ProjectReference Include="..\RuiChen.AbpPro.Identity.Session\RuiChen.AbpPro.Identity.Session.csproj" />
   </ItemGroup>
 
 </Project>

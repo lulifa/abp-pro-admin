@@ -1,0 +1,12 @@
+
+dotnet new classlib -o modules/identity/RuiChen.AbpPro.Identity.AspNetCore.Session
+dotnet new classlib -o modules/identity/RuiChen.AbpPro.Identity.Session
+dotnet new classlib -o modules/identity/RuiChen.AbpPro.Identity.Session.AspNetCore
+
+dotnet sln RuiChen.AbpPro.sln add  modules/identity/RuiChen.AbpPro.Identity.AspNetCore.Session
+dotnet sln RuiChen.AbpPro.sln add  modules/identity/RuiChen.AbpPro.Identity.Session
+dotnet sln RuiChen.AbpPro.sln add  modules/identity/RuiChen.AbpPro.Identity.Session.AspNetCore
+
+
+dotnet new classlib -o modules/openiddict/RuiChen.AbpPro.Openiddict.AspNetCore.Session
+dotnet sln RuiChen.AbpPro.sln add  modules/openiddict/RuiChen.AbpPro.Openiddict.AspNetCore.Session
