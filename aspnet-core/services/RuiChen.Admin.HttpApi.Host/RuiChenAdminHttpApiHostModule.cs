@@ -175,11 +175,11 @@ namespace RuiChen.Admin.HttpApi.Host
 
             app.UseAuthentication();
 
+            app.UseAbpOpenIddictValidation();
+
             app.UseAbpSession();
 
             app.UseDynamicClaims();
-
-            app.UseAbpOpenIddictValidation();
 
             app.UseUnitOfWork();
 
