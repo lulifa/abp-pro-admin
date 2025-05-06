@@ -96,6 +96,8 @@ namespace RuiChen.Admin.HttpApi.Host
             PreConfigureFeature();
 
             PreConfigureAuthServer(configuration);
+
+            PreConfigureIdentity();
         }
 
         public override void ConfigureServices(ServiceConfigurationContext context)

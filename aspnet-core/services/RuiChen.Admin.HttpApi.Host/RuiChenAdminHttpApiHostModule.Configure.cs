@@ -110,6 +110,14 @@ namespace RuiChen.Admin.HttpApi.Host
             });
         }
 
+        private void PreConfigureIdentity()
+        {
+            PreConfigure<IdentityBuilder>(builder =>
+            {
+                builder.AddDefaultTokenProviders();
+            });
+        }
+
         private void ConfigureDbContext()
         {
             Configure<AbpDbContextOptions>(options =>
@@ -461,10 +469,10 @@ namespace RuiChen.Admin.HttpApi.Host
                         };
                     });
 
-            if (isDevelopment)
-            {
-                services.AddAlwaysAllowAuthorization();
-            }
+            //if (isDevelopment)
+            //{
+            //    services.AddAlwaysAllowAuthorization();
+            //}
 
             services.AddSameSiteCookiePolicy();
 

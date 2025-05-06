@@ -63,11 +63,12 @@ namespace RuiChen.AbpPro.Identity
 
         }
 
-        public async Task UpdateAsync(IdentitySession session, CancellationToken cancellationToken = default)
+        public async virtual Task UpdateAsync(
+        IdentitySession session,
+        CancellationToken cancellationToken = default)
         {
             await IdentitySessionRepository.UpdateAsync(session, cancellationToken: cancellationToken);
         }
-
 
         public async virtual Task<IdentitySession> GetAsync(
         Guid id,
@@ -174,7 +175,6 @@ namespace RuiChen.AbpPro.Identity
         {
             await IdentitySessionRepository.DeleteManyAsync(identitySessions, cancellationToken: cancellationToken);
         }
-
 
     }
 }

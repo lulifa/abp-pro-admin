@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.Logging;
 using System.Security.Claims;
 using System.Security.Principal;
+using Volo.Abp.Auditing;
 using Volo.Abp.Domain.Services;
 using Volo.Abp.Identity;
 
@@ -31,6 +32,7 @@ namespace RuiChen.AbpPro.Identity
             await IdentitySessionStore.RevokeAsync(sessionId, cancellation);
         }
 
+        [DisableAuditing]
         public async virtual Task SaveSessionAsync(ClaimsPrincipal claimsPrincipal, CancellationToken cancellationToken = default)
         {
             if (claimsPrincipal != null)
