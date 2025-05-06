@@ -12,7 +12,7 @@ namespace RuiChen.AbpPro.UI.Navigation
     {
         public override void PreConfigureServices(ServiceConfigurationContext context)
         {
-            base.PreConfigureServices(context);
+            AutoAddDefinitionProviders(context.Services);
         }
 
         private static void AutoAddDefinitionProviders(IServiceCollection services)
