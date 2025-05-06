@@ -1,0 +1,22 @@
+
+dotnet new classlib -o framework/navigation/RuiChen.AbpPro.UI.Navigation
+dotnet new classlib -o modules/platform/RuiChen.AbpPro.UI.Navigation.VueVbenAdmin
+dotnet new classlib -o modules/platform/RuiChen.Platform.Application
+dotnet new classlib -o modules/platform/RuiChen.Platform.Application.Contracts
+dotnet new classlib -o modules/platform/RuiChen.Platform.Domain
+dotnet new classlib -o modules/platform/RuiChen.Platform.Domain.Shared
+dotnet new classlib -o modules/platform/RuiChen.Platform.EntityFrameworkCore
+dotnet new classlib -o modules/platform/RuiChen.Platform.HttpApi
+dotnet new classlib -o modules/platform/RuiChen.Platform.Settings.VueVbenAdmin
+dotnet new classlib -o modules/platform/RuiChen.Platform.Theme.VueVbenAdmin
+
+dotnet sln RuiChen.AbpPro.sln add  framework/navigation/RuiChen.AbpPro.UI.Navigation
+dotnet sln RuiChen.AbpPro.sln add  modules/platform/RuiChen.AbpPro.UI.Navigation.VueVbenAdmin
+dotnet sln RuiChen.AbpPro.sln add  modules/platform/RuiChen.Platform.Application
+dotnet sln RuiChen.AbpPro.sln add  modules/platform/RuiChen.Platform.Application.Contracts
+dotnet sln RuiChen.AbpPro.sln add  modules/platform/RuiChen.Platform.Domain
+dotnet sln RuiChen.AbpPro.sln add  modules/platform/RuiChen.Platform.Domain.Shared
+dotnet sln RuiChen.AbpPro.sln add  modules/platform/RuiChen.Platform.EntityFrameworkCore
+dotnet sln RuiChen.AbpPro.sln add  modules/platform/RuiChen.Platform.HttpApi
+dotnet sln RuiChen.AbpPro.sln add  modules/platform/RuiChen.Platform.Settings.VueVbenAdmin
+dotnet sln RuiChen.AbpPro.sln add  modules/platform/RuiChen.Platform.Theme.VueVbenAdmin
