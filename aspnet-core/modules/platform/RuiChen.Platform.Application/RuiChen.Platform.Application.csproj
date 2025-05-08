@@ -3,7 +3,17 @@
   <PropertyGroup>
     <TargetFramework>net9.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
+    <Nullable>disable</Nullable>
+    <RootNamespace />
   </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Volo.Abp.Ddd.Application" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\RuiChen.Platform.Application.Contracts\RuiChen.Platform.Application.Contracts.csproj" />
+    <ProjectReference Include="..\RuiChen.Platform.Domain\RuiChen.Platform.Domain.csproj" />
+  </ItemGroup>
 
 </Project>

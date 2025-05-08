@@ -3,7 +3,19 @@
   <PropertyGroup>
     <TargetFramework>net9.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
+    <Nullable>disable</Nullable>
+    <RootNamespace />
   </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Volo.Abp.AspNetCore.Mvc" />
+    <PackageReference Include="Volo.Abp.Identity.Application.Contracts" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\RuiChen.AbpPro.UI.Navigation.VueVbenAdmin\RuiChen.AbpPro.UI.Navigation.VueVbenAdmin.csproj" />
+    <ProjectReference Include="..\RuiChen.Platform.Application.Contracts\RuiChen.Platform.Application.Contracts.csproj" />
+    <ProjectReference Include="..\RuiChen.Platform.Theme.VueVbenAdmin\RuiChen.Platform.Theme.VueVbenAdmin.csproj" />
+  </ItemGroup>
 
 </Project>

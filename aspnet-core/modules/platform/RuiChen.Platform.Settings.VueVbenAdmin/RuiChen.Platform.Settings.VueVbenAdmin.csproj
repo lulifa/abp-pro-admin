@@ -3,7 +3,21 @@
   <PropertyGroup>
     <TargetFramework>net9.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
+    <Nullable>disable</Nullable>
+    <RootNamespace />
   </PropertyGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="RuiChen\Platform\Settings\VueVbenAdmin\Localization\Resources\*.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Volo.Abp.Settings" />
+    <PackageReference Include="Volo.Abp.MultiTenancy" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\RuiChen.Platform.Application.Contracts\RuiChen.Platform.Application.Contracts.csproj" />
+  </ItemGroup>
 
 </Project>

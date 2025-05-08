@@ -3,7 +3,17 @@
   <PropertyGroup>
     <TargetFramework>net9.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
+    <Nullable>disable</Nullable>
+    <RootNamespace />
   </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Volo.Abp.Data" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\framework\navigation\RuiChen.AbpPro.UI.Navigation\RuiChen.AbpPro.UI.Navigation.csproj" />
+    <ProjectReference Include="..\RuiChen.Platform.Domain\RuiChen.Platform.Domain.csproj" />
+  </ItemGroup>
 
 </Project>

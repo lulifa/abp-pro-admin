@@ -13,6 +13,7 @@ using RuiChen.AbpPro.OssManagement;
 using RuiChen.AbpPro.PermissionManagement;
 using RuiChen.AbpPro.Saas;
 using RuiChen.AbpPro.SettingManagement;
+using RuiChen.Platform;
 using Volo.Abp;
 using Volo.Abp.Account.Web;
 using Volo.Abp.AspNetCore.MultiTenancy;
@@ -68,6 +69,11 @@ namespace RuiChen.Admin.HttpApi.Host
         typeof(AbpSaasHttpApiModule),
         typeof(AbpSaasApplicationModule),
         typeof(AbpSaasEntityFrameworkCoreModule),
+
+
+        typeof(PlatformHttpApiModule),
+        typeof(PlatformApplicationModule),
+        typeof(PlatformEntityFrameworkCoreModule),
 
 
         typeof(AbpSettingManagementHttpApiModule),

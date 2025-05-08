@@ -3,6 +3,7 @@ using RuiChen.AbpPro.AuditLogging.EntityFrameworkCore;
 using RuiChen.AbpPro.Data.DbMigrator;
 using RuiChen.AbpPro.Identity;
 using RuiChen.AbpPro.Saas;
+using RuiChen.Platform;
 using Volo.Abp.EntityFrameworkCore;
 using Volo.Abp.EntityFrameworkCore.MySQL;
 using Volo.Abp.FeatureManagement.EntityFrameworkCore;
@@ -19,6 +20,7 @@ namespace RuiChen.AbpPro.Admin.EntityFrameworkCore
         typeof(AbpSettingManagementEntityFrameworkCoreModule),
         typeof(AbpPermissionManagementEntityFrameworkCoreModule),
         typeof(AbpFeatureManagementEntityFrameworkCoreModule),
+        typeof(PlatformEntityFrameworkCoreModule),
         typeof(AbpIdentityEntityFrameworkCoreModule),
         typeof(AbpOpenIddictEntityFrameworkCoreModule),
         typeof(AbpDataDbMigratorModule),
@@ -29,6 +31,7 @@ namespace RuiChen.AbpPro.Admin.EntityFrameworkCore
         public override void ConfigureServices(ServiceConfigurationContext context)
         {
             context.Services.AddAbpDbContext<RuiChenMigrationDbContext>();
+            context.Services.AddHostedService<ApplicationSingleDataSeederWorker>();
 
             Configure<AbpDbContextOptions>(options =>
             {

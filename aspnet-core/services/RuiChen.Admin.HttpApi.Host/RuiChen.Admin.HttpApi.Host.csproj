@@ -61,6 +61,10 @@
     <ProjectReference Include="..\..\modules\saas\RuiChen.AbpPro.Saas.Application\RuiChen.AbpPro.Saas.Application.csproj" />
     <ProjectReference Include="..\..\modules\saas\RuiChen.AbpPro.Saas.EntityFrameworkCore\RuiChen.AbpPro.Saas.EntityFrameworkCore.csproj" />
 
+    <ProjectReference Include="..\..\modules\platform\RuiChen.Platform.HttpApi\RuiChen.Platform.HttpApi.csproj" />
+    <ProjectReference Include="..\..\modules\platform\RuiChen.Platform.Application\RuiChen.Platform.Application.csproj" />
+    <ProjectReference Include="..\..\modules\platform\RuiChen.Platform.EntityFrameworkCore\RuiChen.Platform.EntityFrameworkCore.csproj" />
+
     <ProjectReference Include="..\..\modules\settings\RuiChen.AbpPro.SettingManagement.HttpApi\RuiChen.AbpPro.SettingManagement.HttpApi.csproj" />
     <ProjectReference Include="..\..\modules\settings\RuiChen.AbpPro.SettingManagement.Application\RuiChen.AbpPro.SettingManagement.Application.csproj" />
     <PackageReference Include="Volo.Abp.SettingManagement.EntityFrameworkCore" />

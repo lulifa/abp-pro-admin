@@ -8,6 +8,7 @@ using Volo.Abp.Identity.EntityFrameworkCore;
 using Volo.Abp.OpenIddict.EntityFrameworkCore;
 using Volo.Abp.PermissionManagement.EntityFrameworkCore;
 using Volo.Abp.SettingManagement.EntityFrameworkCore;
+using RuiChen.Platform;
 
 namespace RuiChen.AbpPro.Admin.EntityFrameworkCore
 {
@@ -28,6 +29,7 @@ namespace RuiChen.AbpPro.Admin.EntityFrameworkCore
             modelBuilder.ConfigureIdentity();
             modelBuilder.ConfigureOpenIddict();
             modelBuilder.ConfigureSaas();
+            modelBuilder.ConfigurePlatform();
             modelBuilder.ConfigureFeatureManagement();
             modelBuilder.ConfigureSettingManagement();
             modelBuilder.ConfigurePermissionManagement();

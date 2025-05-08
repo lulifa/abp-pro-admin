@@ -15,6 +15,7 @@
     <PackageReference Include="Volo.Abp.EntityFrameworkCore.MySql" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" />
     <PackageReference Include="Volo.Abp.FeatureManagement.EntityFrameworkCore" />
+    <PackageReference Include="Volo.Abp.Identity.Application.Contracts" />
     <PackageReference Include="Volo.Abp.OpenIddict.EntityFrameworkCore" />
     <PackageReference Include="Volo.Abp.PermissionManagement.EntityFrameworkCore" />
     <PackageReference Include="Volo.Abp.SettingManagement.EntityFrameworkCore" />
@@ -23,13 +24,9 @@
   <ItemGroup>
     <ProjectReference Include="..\..\framework\common\RuiChen.AbpPro.Data.DbMigrator\RuiChen.AbpPro.Data.DbMigrator.csproj" />
     <ProjectReference Include="..\..\modules\auditing\RuiChen.AbpPro.AuditLogging.EntityFrameworkCore\RuiChen.AbpPro.AuditLogging.EntityFrameworkCore.csproj" />
-    <ProjectReference Include="..\..\modules\identity\RuiChen.AbpPro.Identity.Application.Contracts\RuiChen.AbpPro.Identity.Application.Contracts.csproj" /> 
     <ProjectReference Include="..\..\modules\identity\RuiChen.AbpPro.Identity.EntityFrameworkCore\RuiChen.AbpPro.Identity.EntityFrameworkCore.csproj" />   
     <ProjectReference Include="..\..\modules\saas\RuiChen.AbpPro.Saas.EntityFrameworkCore\RuiChen.AbpPro.Saas.EntityFrameworkCore.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Migrations\" />
+    <ProjectReference Include="..\..\modules\platform\RuiChen.Platform.EntityFrameworkCore\RuiChen.Platform.EntityFrameworkCore.csproj" />
   </ItemGroup>
 
 </Project>

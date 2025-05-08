@@ -5,6 +5,7 @@ using RuiChen.AbpPro.Identity;
 using System.Text;
 using Volo.Abp;
 using Volo.Abp.Caching;
+using Volo.Abp.Content;
 using Volo.Abp.Data;
 using Volo.Abp.Identity;
 using Volo.Abp.Settings;
@@ -19,12 +20,33 @@ namespace RuiChen.AbpPro.Account
         private readonly IdentitySecurityLogManager identitySecurityLogManager;
         private readonly IDistributedCache<SecurityTokenCacheItem> securityTokenCache;
 
+        protected IUserPictureProvider UserPictureProvider => LazyServiceProvider.LazyGetRequiredService<IUserPictureProvider>();
+
         public MyProfileAppService(Identity.IIdentityUserRepository userRepository, IAccountSmsSecurityCodeSender securityCodeSender, IdentitySecurityLogManager identitySecurityLogManager, IDistributedCache<SecurityTokenCacheItem> securityTokenCache)
         {
             this.userRepository = userRepository;
             this.securityCodeSender = securityCodeSender;
             this.identitySecurityLogManager = identitySecurityLogManager;
             this.securityTokenCache = securityTokenCache;
+        }
+
+        public async virtual Task ChangePictureAsync(ChangePictureInput input)
+        {
+            var user = await GetCurrentUserAsync();
+            var pictureId = input.File.FileName ?? $"{GuidGenerator.Create():n}.jpg";
+
+            await UserPictureProvider.SetPictureAsync(user, input.File.GetStream(), pictureId);
+
+            await CurrentUnitOfWork.SaveChangesAsync();
+        }
+
+        public async virtual Task<IRemoteStreamContent> GetPictureAsync()
+        {
+            var userId = CurrentUser.GetId().ToString("N");
+
+            var stream = await UserPictureProvider.GetPictureAsync(userId);
+
+            return new RemoteStreamContent(stream, contentType: "image/jpeg");
         }
 
         /// <summary>

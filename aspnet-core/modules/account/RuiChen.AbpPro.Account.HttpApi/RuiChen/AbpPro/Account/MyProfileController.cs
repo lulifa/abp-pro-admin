@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Volo.Abp.Account;
+using Volo.Abp.Content;
 
 namespace RuiChen.AbpPro.Account
 {
@@ -73,6 +75,20 @@ namespace RuiChen.AbpPro.Account
         public async virtual Task ResetAuthenticator()
         {
             await myProfileAppService.ResetAuthenticator();
+        }
+
+        [HttpPost]
+        [Route("picture")]
+        public virtual Task ChangePictureAsync([FromForm] ChangePictureInput input)
+        {
+            return myProfileAppService.ChangePictureAsync(input);
+        }
+
+        [HttpGet]
+        [Route("picture")]
+        public virtual Task<IRemoteStreamContent> GetPictureAsync()
+        {
+            return myProfileAppService.GetPictureAsync();
         }
 
     }
