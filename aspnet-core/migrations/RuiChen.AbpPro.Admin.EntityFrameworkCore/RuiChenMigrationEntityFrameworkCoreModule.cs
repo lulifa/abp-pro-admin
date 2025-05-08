@@ -15,17 +15,16 @@ using Volo.Abp.SettingManagement.EntityFrameworkCore;
 namespace RuiChen.AbpPro.Admin.EntityFrameworkCore
 {
     [DependsOn(
-        typeof(AbpSaasEntityFrameworkCoreModule),
+        typeof(AbpEntityFrameworkCoreMySQLModule),
         typeof(AbpAuditLoggingEntityFrameworkCoreModule),
+        typeof(AbpSaasEntityFrameworkCoreModule),
         typeof(AbpSettingManagementEntityFrameworkCoreModule),
         typeof(AbpPermissionManagementEntityFrameworkCoreModule),
         typeof(AbpFeatureManagementEntityFrameworkCoreModule),
         typeof(PlatformEntityFrameworkCoreModule),
         typeof(AbpIdentityEntityFrameworkCoreModule),
         typeof(AbpOpenIddictEntityFrameworkCoreModule),
-        typeof(AbpDataDbMigratorModule),
-        typeof(AbpEntityFrameworkCoreMySQLModule)
-    )]
+        typeof(AbpDataDbMigratorModule))]
     public class RuiChenMigrationEntityFrameworkCoreModule : AbpModule
     {
         public override void ConfigureServices(ServiceConfigurationContext context)

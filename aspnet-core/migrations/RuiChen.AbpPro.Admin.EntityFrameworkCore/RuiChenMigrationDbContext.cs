@@ -12,7 +12,6 @@ using RuiChen.Platform;
 
 namespace RuiChen.AbpPro.Admin.EntityFrameworkCore
 {
-    [ConnectionStringName("SingleDbMigrator")]
     public class RuiChenMigrationDbContext : AbpDbContext<RuiChenMigrationDbContext>
     {
         public RuiChenMigrationDbContext(DbContextOptions<RuiChenMigrationDbContext> options)

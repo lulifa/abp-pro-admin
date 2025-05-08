@@ -29,4 +29,8 @@
     <ProjectReference Include="..\..\modules\platform\RuiChen.Platform.EntityFrameworkCore\RuiChen.Platform.EntityFrameworkCore.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Migrations\" />
+  </ItemGroup>
+
 </Project>

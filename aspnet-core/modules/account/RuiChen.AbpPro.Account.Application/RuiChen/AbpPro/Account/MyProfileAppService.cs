@@ -16,16 +16,16 @@ namespace RuiChen.AbpPro.Account
     public class MyProfileAppService : AccountApplicationServiceBase, IMyProfileAppService
     {
         private readonly Identity.IIdentityUserRepository userRepository;
-        private readonly IAccountSmsSecurityCodeSender securityCodeSender;
+        //private readonly IAccountSmsSecurityCodeSender securityCodeSender;
         private readonly IdentitySecurityLogManager identitySecurityLogManager;
         private readonly IDistributedCache<SecurityTokenCacheItem> securityTokenCache;
 
         protected IUserPictureProvider UserPictureProvider => LazyServiceProvider.LazyGetRequiredService<IUserPictureProvider>();
 
-        public MyProfileAppService(Identity.IIdentityUserRepository userRepository, IAccountSmsSecurityCodeSender securityCodeSender, IdentitySecurityLogManager identitySecurityLogManager, IDistributedCache<SecurityTokenCacheItem> securityTokenCache)
+        public MyProfileAppService(Identity.IIdentityUserRepository userRepository, /*IAccountSmsSecurityCodeSender securityCodeSender,*/ IdentitySecurityLogManager identitySecurityLogManager, IDistributedCache<SecurityTokenCacheItem> securityTokenCache)
         {
             this.userRepository = userRepository;
-            this.securityCodeSender = securityCodeSender;
+            //this.securityCodeSender = securityCodeSender;
             this.identitySecurityLogManager = identitySecurityLogManager;
             this.securityTokenCache = securityTokenCache;
         }
@@ -229,7 +229,7 @@ namespace RuiChen.AbpPro.Account
             var token = await UserManager.GenerateChangePhoneNumberTokenAsync(user, input.NewPhoneNumber);
 
             // 发送验证码
-            await securityCodeSender.SendSmsCodeAsync(input.NewPhoneNumber, token, template);
+            //await securityCodeSender.SendSmsCodeAsync(input.NewPhoneNumber, token, template);
 
             securityTokenCacheItem = new SecurityTokenCacheItem(token, user.ConcurrencyStamp);
 
