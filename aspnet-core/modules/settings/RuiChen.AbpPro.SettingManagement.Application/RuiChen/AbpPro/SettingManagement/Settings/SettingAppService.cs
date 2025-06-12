@@ -1,28 +1,22 @@
 ﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.Extensions.Localization;
 using Microsoft.Extensions.Options;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using RuiChen.AbpPro.Identity;
+using Volo.Abp;
+using Volo.Abp.Account.Settings;
 using Volo.Abp.Application.Services;
+using Volo.Abp.AspNetCore.Mvc.ApplicationConfigurations;
 using Volo.Abp.Caching;
+using Volo.Abp.Emailing;
 using Volo.Abp.EventBus.Distributed;
-using Volo.Abp.EventBus;
+using Volo.Abp.Features;
 using Volo.Abp.Localization;
-using Volo.Abp.SettingManagement.Localization;
+using Volo.Abp.MultiTenancy;
 using Volo.Abp.SettingManagement;
+using Volo.Abp.SettingManagement.Localization;
 using Volo.Abp.Settings;
 using Volo.Abp.Timing;
-using Volo.Abp.AspNetCore.Mvc.ApplicationConfigurations;
-using Volo.Abp.Features;
 using Volo.Abp.Users;
-using Volo.Abp.Identity.Settings;
-using Volo.Abp.Account.Settings;
-using Volo.Abp.Emailing;
-using Volo.Abp.MultiTenancy;
-using Volo.Abp;
+using IdentitySettingNames = Volo.Abp.Identity.Settings.IdentitySettingNames;
 
 namespace RuiChen.AbpPro.SettingManagement
 {
@@ -282,6 +276,28 @@ namespace RuiChen.AbpPro.SettingManagement
                 StringLocalizerFactory,
                 await SettingManager.GetOrNullAsync(IdentitySettingNames.SignIn.RequireConfirmedPhoneNumber, providerName, providerKey),
                 ValueType.Boolean,
+                providerName);
+
+            #endregion
+
+            #region 会话
+
+            var sessionSetting = identitySetting.AddSetting(L["DisplayName:Identity.Session"], L["Description:Identity.Session"]);
+            sessionSetting.AddDetail(
+                await SettingDefinitionManager.GetAsync(RuiChen.AbpPro.Identity.IdentitySettingNames.Session.ConcurrentLoginStrategy),
+                StringLocalizerFactory,
+                await SettingManager.GetOrNullAsync(RuiChen.AbpPro.Identity.IdentitySettingNames.Session.ConcurrentLoginStrategy, providerName, providerKey),
+                ValueType.Option,
+                providerName)
+                .AddOption(L["ConcurrentLoginStrategy:None"], ConcurrentLoginStrategy.None.ToString())
+                .AddOption(L["ConcurrentLoginStrategy:LogoutFromSameTypeDevicesLimit"], ConcurrentLoginStrategy.LogoutFromSameTypeDevicesLimit.ToString())
+                .AddOption(L["ConcurrentLoginStrategy:LogoutFromSameTypeDevices"], ConcurrentLoginStrategy.LogoutFromSameTypeDevices.ToString())
+                .AddOption(L["ConcurrentLoginStrategy:LogoutFromAllDevices"], ConcurrentLoginStrategy.LogoutFromAllDevices.ToString());
+            sessionSetting.AddDetail(
+                await SettingDefinitionManager.GetAsync(RuiChen.AbpPro.Identity.IdentitySettingNames.Session.LogoutFromSameTypeDevicesLimit),
+                StringLocalizerFactory,
+                await SettingManager.GetOrNullAsync(RuiChen.AbpPro.Identity.IdentitySettingNames.Session.LogoutFromSameTypeDevicesLimit, providerName, providerKey),
+                ValueType.Number,
                 providerName);
 
             #endregion
