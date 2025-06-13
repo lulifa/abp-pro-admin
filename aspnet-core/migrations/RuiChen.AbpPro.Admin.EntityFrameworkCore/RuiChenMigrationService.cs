@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging.Abstractions;
 using RuiChen.AbpPro.Data.DbMigrator;
 using RuiChen.AbpPro.Saas;
 using Volo.Abp.Data;
@@ -12,6 +13,7 @@ namespace RuiChen.AbpPro.Admin.EntityFrameworkCore
 {
     public class RuiChenMigrationService : EfCoreRuntimeDbMigratorBase<RuiChenMigrationDbContext>, ITransientDependency
     {
+        public ILogger<RuiChenMigrationService> Log { get; set; }
         protected IDataSeeder DataSeeder { get; }
         protected ITenantRepository TenantRepository { get; }
         public RuiChenMigrationService(
@@ -27,10 +29,15 @@ namespace RuiChen.AbpPro.Admin.EntityFrameworkCore
         {
             DataSeeder = dataSeeder;
             TenantRepository = tenantRepository;
+            Log = NullLogger<RuiChenMigrationService>.Instance;
         }
         protected async override Task LockAndApplyDatabaseMigrationsAsync()
         {
+            Log.LogInformation("Started database migrations...");
+
             await base.LockAndApplyDatabaseMigrationsAsync();
+
+            Log.LogInformation($"Successfully completed host database migrations.");
 
             var tenants = await TenantRepository.GetListAsync();
 
@@ -38,6 +45,9 @@ namespace RuiChen.AbpPro.Admin.EntityFrameworkCore
             {
                 await LockAndApplyDatabaseWithTenantMigrationsAsync(tenant.Id);
             }
+
+            Log.LogInformation("Successfully completed all database migrations.");
+            Log.LogInformation("You can safely end this process...");
 
         }
 
