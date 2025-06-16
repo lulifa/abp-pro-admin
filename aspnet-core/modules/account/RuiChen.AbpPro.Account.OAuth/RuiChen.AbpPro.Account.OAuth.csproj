@@ -3,7 +3,18 @@
   <PropertyGroup>
     <TargetFramework>net9.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
+    <Nullable>disable</Nullable>
+    <RootNamespace />
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="RuiChen\AbpPro\Account\OAuth\Localization\Resources\*.json" />
+    <EmbeddedResource Include="RuiChen\AbpPro\Account\OAuth\Localization\Resources\*.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Volo.Abp.Features" />
+    <PackageReference Include="Volo.Abp.Settings" />
+  </ItemGroup>
 
 </Project>
