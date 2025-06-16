@@ -89,7 +89,7 @@ namespace RuiChen.AbpPro.Admin.EntityFrameworkCore
             {
                 var vueClientRootUrl = configurationSection["VueAdmin:RootUrl"].EnsureEndsWith('/');
 
-                if (await _applicationManager.FindByClientIdAsync(vueClientId) == null)
+                if (await _applicationRepository.FindByClientIdAsync(vueClientId) == null)
                 {
                     await _applicationManager.CreateAsync(new OpenIddictApplicationDescriptor
                     {
@@ -100,12 +100,12 @@ namespace RuiChen.AbpPro.Admin.EntityFrameworkCore
                         DisplayName = "Abp Vue Admin Client",
                         PostLogoutRedirectUris =
                     {
-                        new Uri(vueClientRootUrl + "signout-callback-oidc"),
+                        new Uri(vueClientRootUrl + "signout-callback"),
                         new Uri(vueClientRootUrl)
                     },
                         RedirectUris =
                     {
-                        new Uri(vueClientRootUrl + "/signin-oidc"),
+                        new Uri(vueClientRootUrl + "/signin-callback"),
                         new Uri(vueClientRootUrl)
                     },
                         Permissions =
