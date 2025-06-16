@@ -1,17 +1,13 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
 using RuiChen.AbpPro.Identity;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Security.Claims;
-using System.Text;
-using System.Threading.Tasks;
 using Volo.Abp.BlobStoring;
 using Volo.Abp.DependencyInjection;
 using Volo.Abp.Guids;
 using Volo.Abp.Identity;
 using Volo.Abp.Security.Claims;
+using IdentityUser = Volo.Abp.Identity.IdentityUser;
 
 namespace RuiChen.AbpPro.Account
 {

@@ -1,10 +1,10 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Options;
-using RuiChen.AbpPro.Identity;
 using Volo.Abp.Account.Localization;
 using Volo.Abp.Application.Services;
 using Volo.Abp.Identity;
 using Volo.Abp.Users;
+using IdentityUser = Volo.Abp.Identity.IdentityUser;
 
 namespace RuiChen.AbpPro.Account
 {

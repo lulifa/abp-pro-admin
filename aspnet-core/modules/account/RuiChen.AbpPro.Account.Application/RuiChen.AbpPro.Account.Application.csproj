@@ -19,6 +19,7 @@
     <ProjectReference Include="..\..\identity\RuiChen.AbpPro.Identity.Domain\RuiChen.AbpPro.Identity.Domain.csproj" />
     <ProjectReference Include="..\RuiChen.AbpPro.Account.Application.Contracts\RuiChen.AbpPro.Account.Application.Contracts.csproj" />
     <ProjectReference Include="..\RuiChen.AbpPro.Account.Emailing\RuiChen.AbpPro.Account.Emailing.csproj" />
+    <ProjectReference Include="..\RuiChen.AbpPro.Account.Web.OAuth\RuiChen.AbpPro.Account.Web.OAuth.csproj" />
   </ItemGroup>
 
 </Project>

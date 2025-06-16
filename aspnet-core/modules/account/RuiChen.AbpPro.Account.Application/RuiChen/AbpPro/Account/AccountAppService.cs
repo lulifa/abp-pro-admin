@@ -11,6 +11,7 @@ using Volo.Abp.Clients;
 using Volo.Abp.Identity;
 using Volo.Abp.Settings;
 using Volo.Abp.Validation;
+using IdentityUser = Volo.Abp.Identity.IdentityUser;
 using IIdentityUserRepository = RuiChen.AbpPro.Identity.IIdentityUserRepository;
 
 namespace RuiChen.AbpPro.Account

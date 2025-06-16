@@ -1,6 +1,9 @@
-﻿using RuiChen.AbpPro.Identity;
+﻿using RuiChen.AbpPro.Account.Web.OAuth;
+using RuiChen.AbpPro.Identity;
+using Volo.Abp.Account.Localization;
 using Volo.Abp.AutoMapper;
 using Volo.Abp.BlobStoring;
+using Volo.Abp.Localization;
 using Volo.Abp.Modularity;
 using Volo.Abp.UI.Navigation.Urls;
 using Volo.Abp.VirtualFileSystem;
@@ -11,7 +14,8 @@ namespace RuiChen.AbpPro.Account
     [DependsOn(
         typeof(VoloAbpAccountApplicationModule),
         typeof(AbpAccountApplicationContractsModule),
-        //typeof(AbpAccountEmailingModule),
+        typeof(AbpAccountEmailingModule),
+        typeof(AbpAccountWebOAuthModule),
         typeof(AbpIdentityDomainModule),
         typeof(AbpBlobStoringModule)
         )]
@@ -34,12 +38,12 @@ namespace RuiChen.AbpPro.Account
                 options.Applications["MVC"].Urls[AccountUrlNames.EmailConfirm] = "Account/EmailConfirm";
             });
 
-            //Configure<AbpLocalizationOptions>(options =>
-            //{
-            //    options.Resources
-            //        .Get<AccountResource>()
-            //        .AddBaseTypes(typeof(AccountEmailingResource));
-            //});
+            Configure<AbpLocalizationOptions>(options =>
+            {
+                options.Resources
+                    .Get<AccountResource>()
+                    .AddBaseTypes(typeof(AccountEmailingResource));
+            });
         }
     }
 }

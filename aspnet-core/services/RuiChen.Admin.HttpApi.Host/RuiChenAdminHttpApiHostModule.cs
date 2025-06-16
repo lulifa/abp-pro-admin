@@ -1,4 +1,5 @@
 ﻿using RuiChen.AbpPro.Account;
+using RuiChen.AbpPro.Account.Web.OpenIddict;
 using RuiChen.AbpPro.Admin.EntityFrameworkCore;
 using RuiChen.AbpPro.AspNetCore.HttpOverrides;
 using RuiChen.AbpPro.AspNetCore.Mvc.Wrapper;
@@ -15,7 +16,6 @@ using RuiChen.AbpPro.Saas;
 using RuiChen.AbpPro.SettingManagement;
 using RuiChen.Platform;
 using Volo.Abp;
-using Volo.Abp.Account.Web;
 using Volo.Abp.AspNetCore.MultiTenancy;
 using Volo.Abp.AspNetCore.Mvc.UI.Theme.Basic;
 using Volo.Abp.AspNetCore.Serilog;
