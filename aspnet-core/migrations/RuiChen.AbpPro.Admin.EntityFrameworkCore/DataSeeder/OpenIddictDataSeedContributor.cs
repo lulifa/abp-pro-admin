@@ -100,13 +100,13 @@ namespace RuiChen.AbpPro.Admin.EntityFrameworkCore
                         DisplayName = "Abp Vue Admin Client",
                         PostLogoutRedirectUris =
                     {
-                        new Uri(vueClientRootUrl + "signout-callback"),
+                        new Uri(vueClientRootUrl + "signout-callback-oidc"),
                         new Uri(vueClientRootUrl)
                     },
                         RedirectUris =
                     {
-                        new Uri(vueClientRootUrl + "/signin-callback"),
-                        new Uri(vueClientRootUrl)
+                        new Uri(vueClientRootUrl + "signin-callback"),
+                        new Uri(vueClientRootUrl + "signin-oidc")
                     },
                         Permissions =
                     {
@@ -171,7 +171,7 @@ namespace RuiChen.AbpPro.Admin.EntityFrameworkCore
                     },
                         RedirectUris =
                     {
-                        new Uri(oauthClientRootUrl + "/signin-callback"),
+                        new Uri(oauthClientRootUrl + "signin-callback"),
                         new Uri(oauthClientRootUrl)
                     },
                         Permissions =
