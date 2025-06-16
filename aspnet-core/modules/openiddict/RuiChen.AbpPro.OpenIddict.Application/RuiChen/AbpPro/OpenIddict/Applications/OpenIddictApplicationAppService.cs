@@ -12,19 +12,17 @@ namespace RuiChen.AbpPro.OpenIddict
     {
         private readonly IAbpApplicationManager applicationManager;
         private readonly IOpenIddictApplicationRepository applicationRepository;
-        private readonly AbpOpenIddictIdentifierConverter identifierConverter;
 
-        public OpenIddictApplicationAppService(IAbpApplicationManager applicationManager, IOpenIddictApplicationRepository applicationRepository, AbpOpenIddictIdentifierConverter identifierConverter)
+        public OpenIddictApplicationAppService(IAbpApplicationManager applicationManager, IOpenIddictApplicationRepository applicationRepository)
         {
             this.applicationManager = applicationManager;
             this.applicationRepository = applicationRepository;
-            this.identifierConverter = identifierConverter;
         }
 
         [Authorize(AbpOpenIddictPermissions.Applications.Create)]
         public async virtual Task<OpenIddictApplicationDto> CreateAsync(OpenIddictApplicationCreateDto input)
         {
-            if (await applicationManager.FindByClientIdAsync(input.ClientId) != null)
+            if (await applicationRepository.FindByClientIdAsync(input.ClientId) != null)
             {
                 throw new BusinessException(OpenIddictApplicationErrorCodes.Applications.ClientIdExisted)
                 .WithData(nameof(OpenIddictApplication.ClientId), input.ClientId);
@@ -48,7 +46,7 @@ namespace RuiChen.AbpPro.OpenIddict
         [Authorize(AbpOpenIddictPermissions.Applications.Delete)]
         public async virtual Task DeleteAsync(Guid id)
         {
-            var application = await applicationManager.FindByIdAsync(identifierConverter.ToString(id));
+            var application = await applicationRepository.GetAsync(id);
 
             await applicationManager.DeleteAsync(application);
         }
@@ -96,6 +94,6 @@ namespace RuiChen.AbpPro.OpenIddict
 
         }
 
-        
+
     }
 }
