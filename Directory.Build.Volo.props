@@ -9,6 +9,7 @@
     <PackageReference Update="Volo.Abp.Account.Domain.Shared" Version="$(VoloAbpPackageVersion)" />
     <PackageReference Update="Volo.Abp.Account.EntityFrameworkCore" Version="$(VoloAbpPackageVersion)" />
     <PackageReference Update="Volo.Abp.Account.HttpApi" Version="$(VoloAbpPackageVersion)" />
+    <PackageReference Update="Volo.Abp.Account.Web" Version="$(VoloAbpPackageVersion)" />
     <PackageReference Update="Volo.Abp.Account.Web.IdentityServer" Version="$(VoloAbpPackageVersion)" />
     <PackageReference Update="Volo.Abp.Account.Web.OpenIddict" Version="$(VoloAbpPackageVersion)" />
     <PackageReference Update="Volo.Abp.AspNetCore" Version="$(VoloAbpPackageVersion)" />
