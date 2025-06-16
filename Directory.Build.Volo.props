@@ -119,6 +119,7 @@
     <PackageReference Update="Volo.Abp.TextTemplating.Scriban" Version="$(VoloAbpPackageVersion)" />
     <PackageReference Update="Volo.Abp.Timing" Version="$(VoloAbpPackageVersion)" />
     <PackageReference Update="Volo.Abp.Threading" Version="$(VoloAbpPackageVersion)" />
+    <PackageReference Update="Volo.Abp.UI.Navigation" Version="$(VoloAbpPackageVersion)" />
     <PackageReference Update="Volo.Abp.Users.Abstractions" Version="$(VoloAbpPackageVersion)" />
     <PackageReference Update="Volo.Abp.Users.Domain.Shared" Version="$(VoloAbpPackageVersion)" />
     <PackageReference Update="Volo.Abp.Validation" Version="$(VoloAbpPackageVersion)" />

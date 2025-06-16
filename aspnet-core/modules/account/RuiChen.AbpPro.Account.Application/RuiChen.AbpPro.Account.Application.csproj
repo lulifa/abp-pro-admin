@@ -14,9 +14,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\framework\settings\RuiChen.AbpPro.Settings\RuiChen.AbpPro.Settings.csproj" />
+    <ProjectReference Include="..\..\auditing\RuiChen.AbpPro.AuditLogging\RuiChen.AbpPro.AuditLogging.csproj" />
     <ProjectReference Include="..\..\identity\RuiChen.AbpPro.Identity.Domain\RuiChen.AbpPro.Identity.Domain.csproj" />
     <ProjectReference Include="..\RuiChen.AbpPro.Account.Application.Contracts\RuiChen.AbpPro.Account.Application.Contracts.csproj" />
-    <ProjectReference Include="..\RuiChen.AbpPro.Account.Templates\RuiChen.AbpPro.Account.Templates.csproj" />
+    <ProjectReference Include="..\RuiChen.AbpPro.Account.Emailing\RuiChen.AbpPro.Account.Emailing.csproj" />
   </ItemGroup>
 
 </Project>

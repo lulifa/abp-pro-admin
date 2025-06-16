@@ -11,7 +11,7 @@ namespace RuiChen.AbpPro.Account
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
-        Task RegisterPhoneAsync(PhoneRegisterDto input);
+        Task RegisterAsync(PhoneRegisterDto input);
         /// <summary>
         /// 通过手机号重置用户密码
         /// </summary>

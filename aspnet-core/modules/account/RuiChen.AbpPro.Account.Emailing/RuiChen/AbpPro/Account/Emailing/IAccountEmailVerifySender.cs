@@ -2,11 +2,9 @@
 {
     public interface IAccountEmailVerifySender
     {
-
         Task SendMailLoginVerifyCodeAsync(
-        string code,
-        string userName,
-        string emailAddress);
-
+            string code,
+            string userName,
+            string emailAddress);
     }
 }

@@ -2,32 +2,46 @@
 using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.Options;
 using RuiChen.AbpPro.Identity;
+using System.Net;
 using System.Text;
+using System.Web;
 using Volo.Abp;
+using Volo.Abp.Account.Localization;
+using Volo.Abp.Application.Dtos;
 using Volo.Abp.Caching;
 using Volo.Abp.Content;
 using Volo.Abp.Data;
 using Volo.Abp.Identity;
 using Volo.Abp.Settings;
 using Volo.Abp.Users;
+using IIdentitySessionRepository = RuiChen.AbpPro.Identity.IIdentitySessionRepository;
 
 namespace RuiChen.AbpPro.Account
 {
     public class MyProfileAppService : AccountApplicationServiceBase, IMyProfileAppService
     {
-        private readonly Identity.IIdentityUserRepository userRepository;
-        //private readonly IAccountSmsSecurityCodeSender securityCodeSender;
-        private readonly IdentitySecurityLogManager identitySecurityLogManager;
-        private readonly IDistributedCache<SecurityTokenCacheItem> securityTokenCache;
+        protected IDistributedCache<SecurityTokenCacheItem> SecurityTokenCache { get; }
+        protected IAccountSmsSecurityCodeSender SecurityCodeSender { get; }
+        protected Identity.IIdentityUserRepository UserRepository { get; }
+        protected IdentitySecurityLogManager IdentitySecurityLogManager { get; }
+        protected IAuthenticatorUriGenerator AuthenticatorUriGenerator => LazyServiceProvider.LazyGetRequiredService<IAuthenticatorUriGenerator>();
 
+        protected IIdentitySessionManager IdentitySessionManager => LazyServiceProvider.LazyGetRequiredService<IIdentitySessionManager>();
+        protected IIdentitySessionRepository IdentitySessionRepository => LazyServiceProvider.LazyGetRequiredService<IIdentitySessionRepository>();
         protected IUserPictureProvider UserPictureProvider => LazyServiceProvider.LazyGetRequiredService<IUserPictureProvider>();
 
-        public MyProfileAppService(Identity.IIdentityUserRepository userRepository, /*IAccountSmsSecurityCodeSender securityCodeSender,*/ IdentitySecurityLogManager identitySecurityLogManager, IDistributedCache<SecurityTokenCacheItem> securityTokenCache)
+        public MyProfileAppService(
+            Identity.IIdentityUserRepository userRepository,
+            IAccountSmsSecurityCodeSender securityCodeSender,
+            IdentitySecurityLogManager identitySecurityLogManager,
+            IDistributedCache<SecurityTokenCacheItem> securityTokenCache)
         {
-            this.userRepository = userRepository;
-            //this.securityCodeSender = securityCodeSender;
-            this.identitySecurityLogManager = identitySecurityLogManager;
-            this.securityTokenCache = securityTokenCache;
+            UserRepository = userRepository;
+            SecurityCodeSender = securityCodeSender;
+            IdentitySecurityLogManager = identitySecurityLogManager;
+            SecurityTokenCache = securityTokenCache;
+
+            LocalizationResource = typeof(AccountResource);
         }
 
         public async virtual Task ChangePictureAsync(ChangePictureInput input)
@@ -49,37 +63,44 @@ namespace RuiChen.AbpPro.Account
             return new RemoteStreamContent(stream, contentType: "image/jpeg");
         }
 
-        /// <summary>
-        /// 更换手机号
-        /// </summary>
-        /// <param name="input"></param>
-        /// <returns></returns>
-        /// <exception cref="BusinessException"></exception>
-        public async virtual Task ChangePhoneNumberAsync(ChangePhoneNumberInput input)
+        public async virtual Task<PagedResultDto<IdentitySessionDto>> GetSessionsAsync(GetMySessionsInput input)
         {
-            // 是否已有用户使用手机号绑定
-            if (await userRepository.IsPhoneNumberConfirmedAsync(input.NewPhoneNumber))
-            {
-                throw new BusinessException(Identity.IdentityErrorCodes.DuplicatePhoneNumber);
-            }
-
             var user = await GetCurrentUserAsync();
+            var totalCount = await IdentitySessionRepository.GetCountAsync(
+                user.Id, input.Device, input.ClientId);
+            var identitySessions = await IdentitySessionRepository.GetListAsync(
+                input.Sorting, input.MaxResultCount, input.SkipCount,
+                user.Id, input.Device, input.ClientId);
 
-            // 更换手机号
-            (await UserManager.ChangePhoneNumberAsync(user, input.NewPhoneNumber, input.Code)).CheckErrors();
-
-            await CurrentUnitOfWork.SaveChangesAsync();
-
-            var securityTokenCacheKey = SecurityTokenCacheItem.CalculateSmsCacheKey(input.NewPhoneNumber, "SmsChangePhoneNumber");
-
-            await securityTokenCache.RemoveAsync(securityTokenCacheKey);
+            return new PagedResultDto<IdentitySessionDto>(totalCount,
+                identitySessions.Select(session => new IdentitySessionDto
+                {
+                    Id = session.Id,
+                    SessionId = session.SessionId,
+                    SignedIn = session.SignedIn,
+                    ClientId = session.ClientId,
+                    Device = session.Device,
+                    DeviceInfo = session.DeviceInfo,
+                    IpAddresses = session.IpAddresses,
+                    LastAccessed = session.LastAccessed,
+                }).ToList());
         }
 
-        /// <summary>
-        /// 启用双因素
-        /// </summary>
-        /// <param name="input"></param>
-        /// <returns></returns>
+        public async virtual Task RevokeSessionAsync(string sessionId)
+        {
+            await IdentitySessionManager.RevokeSessionAsync(sessionId);
+        }
+
+        public async virtual Task<TwoFactorEnabledDto> GetTwoFactorEnabledAsync()
+        {
+            var user = await GetCurrentUserAsync();
+
+            return new TwoFactorEnabledDto
+            {
+                Enabled = await UserManager.GetTwoFactorEnabledAsync(user),
+            };
+        }
+
         public async virtual Task ChangeTwoFactorEnabledAsync(TwoFactorEnabledDto input)
         {
             // Removed See: https://github.com/abpframework/abp/pull/7719
@@ -95,157 +116,54 @@ namespace RuiChen.AbpPro.Account
             await CurrentUnitOfWork.SaveChangesAsync();
         }
 
-        /// <summary>
-        /// 确认邮件地址
-        /// </summary>
-        /// <param name="input"></param>
-        /// <returns></returns>
-        public async virtual Task ConfirmEmailAsync(ConfirmEmailInput input)
-        {
-            await IdentityOptions.SetAsync();
-
-            var user = await UserManager.GetByIdAsync(CurrentUser.GetId());
-
-            (await UserManager.ConfirmEmailAsync(user, input.ConfirmToken)).CheckErrors();
-
-            await identitySecurityLogManager.SaveAsync(new IdentitySecurityLogContext
-            {
-                Identity = IdentitySecurityLogIdentityConsts.Identity,
-                Action = "ConfirmEmail"
-            });
-        }
-
-        /// <summary>
-        /// 获取验证器信息
-        /// </summary>
-        /// <returns></returns>
-        public async virtual Task<AuthenticatorDto> GetAuthenticator()
-        {
-            await IdentityOptions.SetAsync();
-
-            var user = await UserManager.GetByIdAsync(CurrentUser.GetId());
-
-            var hasAuthenticatorEnabled = user.GetProperty(UserManager.Options.Tokens.AuthenticatorTokenProvider, false);
-            if (hasAuthenticatorEnabled)
-            {
-                return new AuthenticatorDto
-                {
-                    IsAuthenticated = true,
-                };
-            }
-
-            var userEmail = await UserManager.GetEmailAsync(user);
-
-            var unformattedKey = await UserManager.GetAuthenticatorKeyAsync(user);
-
-            if (string.IsNullOrEmpty(unformattedKey))
-            {
-                await UserManager.ResetAuthenticatorKeyAsync(user);
-                unformattedKey = await UserManager.GetAuthenticatorKeyAsync(user);
-            }
-
-            var authenticatorUri = AuthenticatorUriGenerator.Generate(userEmail, unformattedKey);
-
-            return new AuthenticatorDto
-            {
-                SharedKey = FormatKey(unformattedKey),
-                AuthenticatorUri = authenticatorUri,
-            };
-        }
-
-        /// <summary>
-        /// 获取二次验证信息
-        /// </summary>
-        /// <returns></returns>
-        public async virtual Task<TwoFactorEnabledDto> GetTwoFactorEnabledAsync()
-        {
-            var user = await GetCurrentUserAsync();
-
-            return new TwoFactorEnabledDto
-            {
-                Enabled = await UserManager.GetTwoFactorEnabledAsync(user),
-            };
-        }
-
-        /// <summary>
-        /// 重置验证器
-        /// </summary>
-        /// <returns></returns>
-        public async virtual Task ResetAuthenticator()
-        {
-            await IdentityOptions.SetAsync();
-
-            var user = await UserManager.GetByIdAsync(CurrentUser.GetId());
-
-            user.RemoveProperty(UserManager.Options.Tokens.AuthenticatorTokenProvider);
-
-            await UserManager.ResetAuthenticatorKeyAsync(user);
-
-            await UserStore.ReplaceCodesAsync(user, Array.Empty<string>());
-
-            var validTwoFactorProviders = await UserManager.GetValidTwoFactorProvidersAsync(user);
-
-            if (!validTwoFactorProviders.Where(provider => provider != UserManager.Options.Tokens.AuthenticatorTokenProvider).Any())
-            {
-                // 如果用户没有任何双因素认证提供程序,则禁用二次认证,否则将造成无法登录
-                await UserManager.SetTwoFactorEnabledAsync(user, false);
-            }
-
-            (await UserManager.UpdateAsync(user)).CheckErrors();
-
-            await CurrentUnitOfWork.SaveChangesAsync();
-        }
-
-        /// <summary>
-        /// 发送重置手机号验证码
-        /// </summary>
-        /// <param name="input"></param>
-        /// <returns></returns>
-        /// <exception cref="UserFriendlyException"></exception>
-        /// <exception cref="BusinessException"></exception>
         public async virtual Task SendChangePhoneNumberCodeAsync(SendChangePhoneNumberCodeInput input)
         {
             var securityTokenCacheKey = SecurityTokenCacheItem.CalculateSmsCacheKey(input.NewPhoneNumber, "SmsChangePhoneNumber");
-
-            var securityTokenCacheItem = await securityTokenCache.GetAsync(securityTokenCacheKey);
-
+            var securityTokenCacheItem = await SecurityTokenCache.GetAsync(securityTokenCacheKey);
             var interval = await SettingProvider.GetAsync(IdentitySettingNames.User.SmsRepetInterval, 1);
-
             if (securityTokenCacheItem != null)
             {
                 throw new UserFriendlyException(L["SendRepeatPhoneVerifyCode", interval]);
             }
 
             // 是否已有用户使用手机号绑定
-            if (await userRepository.IsPhoneNumberConfirmedAsync(input.NewPhoneNumber))
+            if (await UserRepository.IsPhoneNumberConfirmedAsync(input.NewPhoneNumber))
             {
                 throw new BusinessException(Identity.IdentityErrorCodes.DuplicatePhoneNumber);
             }
-
             var user = await GetCurrentUserAsync();
 
-            var template = await SettingProvider.GetOrNullAsync(Identity.IdentitySettingNames.User.SmsPhoneNumberConfirmed);
-
+            var template = await SettingProvider.GetOrNullAsync(IdentitySettingNames.User.SmsPhoneNumberConfirmed);
             var token = await UserManager.GenerateChangePhoneNumberTokenAsync(user, input.NewPhoneNumber);
-
             // 发送验证码
-            //await securityCodeSender.SendSmsCodeAsync(input.NewPhoneNumber, token, template);
+            await SecurityCodeSender.SendSmsCodeAsync(input.NewPhoneNumber, token, template);
 
             securityTokenCacheItem = new SecurityTokenCacheItem(token, user.ConcurrencyStamp);
-
-            await securityTokenCache.SetAsync(securityTokenCacheKey, securityTokenCacheItem, new DistributedCacheEntryOptions
-            {
-                AbsoluteExpiration = DateTimeOffset.Now.AddMinutes(interval)
-            });
+            await SecurityTokenCache
+                .SetAsync(securityTokenCacheKey, securityTokenCacheItem,
+                    new DistributedCacheEntryOptions
+                    {
+                        AbsoluteExpiration = DateTimeOffset.Now.AddMinutes(interval)
+                    });
         }
 
-        /// <summary>
-        /// 发送确认邮件验证码
-        /// </summary>
-        /// <param name="input"></param>
-        /// <returns></returns>
-        /// <exception cref="UserFriendlyException"></exception>
-        /// <exception cref="BusinessException"></exception>
+        public async virtual Task ChangePhoneNumberAsync(ChangePhoneNumberInput input)
+        {
+            // 是否已有用户使用手机号绑定
+            if (await UserRepository.IsPhoneNumberConfirmedAsync(input.NewPhoneNumber))
+            {
+                throw new BusinessException(Identity.IdentityErrorCodes.DuplicatePhoneNumber);
+            }
+            var user = await GetCurrentUserAsync();
+            // 更换手机号
+            (await UserManager.ChangePhoneNumberAsync(user, input.NewPhoneNumber, input.Code)).CheckErrors();
+
+            await CurrentUnitOfWork.SaveChangesAsync();
+
+            var securityTokenCacheKey = SecurityTokenCacheItem.CalculateSmsCacheKey(input.NewPhoneNumber, "SmsChangePhoneNumber");
+            await SecurityTokenCache.RemoveAsync(securityTokenCacheKey);
+        }
+
         public async virtual Task SendEmailConfirmLinkAsync(SendEmailConfirmCodeDto input)
         {
             var user = await UserManager.FindByEmailAsync(input.Email);
@@ -261,24 +179,76 @@ namespace RuiChen.AbpPro.Account
             }
 
             var token = await UserManager.GenerateEmailConfirmationTokenAsync(user);
+            var confirmToken = WebUtility.UrlEncode(token);
+            var sender = LazyServiceProvider.LazyGetRequiredService<IAccountEmailConfirmSender>();
 
-            await AccountEmailConfirmSender.SendEmailConfirmLinkAsync(user, token, input.AppName, input.ReturnUrl, input.ReturnUrlHash);
+            await sender.SendEmailConfirmLinkAsync(
+                user.Id,
+                user.Email,
+                confirmToken,
+                input.AppName,
+                input.ReturnUrl,
+                input.ReturnUrlHash,
+                user.TenantId);
         }
 
-        /// <summary>
-        /// 验证验证器代码
-        /// </summary>
-        /// <param name="input"></param>
-        /// <returns></returns>
-        /// <exception cref="BusinessException"></exception>
-        public async virtual Task<AuthenticatorRecoveryCodeDto> VerifyAuthenticatorCode(VerifyAuthenticatorCodeInput input)
+        public async virtual Task ConfirmEmailAsync(ConfirmEmailInput input)
         {
             await IdentityOptions.SetAsync();
 
             var user = await UserManager.GetByIdAsync(CurrentUser.GetId());
 
-            var tokenValid = await UserManager.VerifyTwoFactorTokenAsync(user, UserManager.Options.Tokens.AuthenticatorTokenProvider, input.AuthenticatorCode);
+            // 字符编码错误
+            var confirmToken = HttpUtility.UrlDecode(input.ConfirmToken); ;
+            (await UserManager.ConfirmEmailAsync(user, confirmToken)).CheckErrors();
 
+            await IdentitySecurityLogManager.SaveAsync(new IdentitySecurityLogContext
+            {
+                Identity = IdentitySecurityLogIdentityConsts.Identity,
+                Action = "ConfirmEmail"
+            });
+        }
+
+        public async virtual Task<AuthenticatorDto> GetAuthenticatorAsync()
+        {
+            await IdentityOptions.SetAsync();
+
+            var user = await UserManager.GetByIdAsync(CurrentUser.GetId());
+
+            var hasAuthenticatorEnabled = user.GetProperty(UserManager.Options.Tokens.AuthenticatorTokenProvider, false);
+            if (hasAuthenticatorEnabled)
+            {
+                return new AuthenticatorDto
+                {
+                    IsAuthenticated = true,
+                };
+            }
+
+            var userEmail = await UserManager.GetEmailAsync(user);
+            var unformattedKey = await UserManager.GetAuthenticatorKeyAsync(user);
+            if (string.IsNullOrEmpty(unformattedKey))
+            {
+                await UserManager.ResetAuthenticatorKeyAsync(user);
+                unformattedKey = await UserManager.GetAuthenticatorKeyAsync(user);
+            }
+
+            var authenticatorUri = AuthenticatorUriGenerator.Generate(userEmail, unformattedKey);
+
+            return new AuthenticatorDto
+            {
+                SharedKey = FormatKey(unformattedKey),
+                AuthenticatorUri = authenticatorUri,
+            };
+        }
+
+        public async virtual Task<AuthenticatorRecoveryCodeDto> VerifyAuthenticatorCodeAsync(VerifyAuthenticatorCodeInput input)
+        {
+            await IdentityOptions.SetAsync();
+
+            var user = await UserManager.GetByIdAsync(CurrentUser.GetId());
+
+            var tokenValid = await UserManager.VerifyTwoFactorTokenAsync(user,
+                UserManager.Options.Tokens.AuthenticatorTokenProvider, input.AuthenticatorCode);
             if (!tokenValid)
             {
                 throw new BusinessException(Identity.IdentityErrorCodes.AuthenticatorTokenInValid);
@@ -298,6 +268,31 @@ namespace RuiChen.AbpPro.Account
             {
                 RecoveryCodes = recoveryCodes.ToList(),
             };
+        }
+
+        public async virtual Task ResetAuthenticatorAsync()
+        {
+            await IdentityOptions.SetAsync();
+
+            var user = await UserManager.GetByIdAsync(CurrentUser.GetId());
+
+            user.RemoveProperty(UserManager.Options.Tokens.AuthenticatorTokenProvider);
+
+            await UserManager.ResetAuthenticatorKeyAsync(user);
+            await UserStore.ReplaceCodesAsync(user, new string[0]);
+
+            var validTwoFactorProviders = await UserManager.GetValidTwoFactorProvidersAsync(user);
+            if (!validTwoFactorProviders
+                .Where(provider => provider != UserManager.Options.Tokens.AuthenticatorTokenProvider)
+                .Any())
+            {
+                // 如果用户没有任何双因素认证提供程序,则禁用二次认证,否则将造成无法登录
+                await UserManager.SetTwoFactorEnabledAsync(user, false);
+            }
+
+            (await UserManager.UpdateAsync(user)).CheckErrors();
+
+            await CurrentUnitOfWork.SaveChangesAsync();
         }
 
         private static string FormatKey(string unformattedKey)

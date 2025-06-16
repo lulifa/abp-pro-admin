@@ -1,0 +1,12 @@
+
+dotnet new classlib -o modules/account/RuiChen.AbpPro.Account.Emailing
+dotnet new classlib -o modules/account/RuiChen.AbpPro.Account.OAuth
+dotnet new web -o modules/account/RuiChen.AbpPro.Account.Web
+dotnet new web -o modules/account/RuiChen.AbpPro.Account.Web.OAuth
+dotnet new web -o modules/account/RuiChen.AbpPro.Account.Web.OpenIddict
+
+dotnet sln RuiChen.AbpPro.sln add  modules/account/RuiChen.AbpPro.Account.Emailing
+dotnet sln RuiChen.AbpPro.sln add  modules/account/RuiChen.AbpPro.Account.OAuth
+dotnet sln RuiChen.AbpPro.sln add  modules/account/RuiChen.AbpPro.Account.Web
+dotnet sln RuiChen.AbpPro.sln add  modules/account/RuiChen.AbpPro.Account.Web.OAuth
+dotnet sln RuiChen.AbpPro.sln add  modules/account/RuiChen.AbpPro.Account.Web.OpenIddict

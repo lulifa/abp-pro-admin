@@ -13,13 +13,11 @@ namespace RuiChen.AbpPro.Account
         protected IOptions<IdentityOptions> IdentityOptions => LazyServiceProvider.LazyGetRequiredService<IOptions<IdentityOptions>>();
         protected IdentityUserStore UserStore => LazyServiceProvider.LazyGetRequiredService<IdentityUserStore>();
         protected IdentityUserManager UserManager => LazyServiceProvider.LazyGetRequiredService<IdentityUserManager>();
-        protected IAccountEmailVerifySender AccountEmailVerifySender => LazyServiceProvider.LazyGetRequiredService<IAccountEmailVerifySender>();
-        protected IAccountEmailConfirmSender AccountEmailConfirmSender => LazyServiceProvider.LazyGetRequiredService<IAccountEmailConfirmSender>();
-        protected IAuthenticatorUriGenerator AuthenticatorUriGenerator => LazyServiceProvider.LazyGetRequiredService<IAuthenticatorUriGenerator>();
 
         protected AccountApplicationServiceBase()
         {
             LocalizationResource = typeof(AccountResource);
+            ObjectMapperContext = typeof(AbpAccountApplicationModule);
         }
 
         protected async virtual Task<IdentityUser> GetCurrentUserAsync()
