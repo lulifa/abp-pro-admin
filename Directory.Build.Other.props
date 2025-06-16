@@ -70,6 +70,11 @@
 
   <!-- Other -->
   <ItemGroup>
+    <PackageReference Update="AspNet.Security.OAuth.Bilibili" Version="9.4.0" />
+    <PackageReference Update="AspNet.Security.OAuth.GitHub" Version="9.4.0" />
+    <PackageReference Update="AspNet.Security.OAuth.QQ" Version="9.4.0" />
+    <PackageReference Update="AspNet.Security.OAuth.Weixin" Version="9.4.0" />
+    <PackageReference Update="AspNet.Security.OAuth.WorkWeixin" Version="9.4.0" />
     <PackageReference Update="aliyun-net-sdk-core" Version="1.5.10" />
     <PackageReference Update="Aliyun.OSS.SDK.NetCore" Version="2.13.0" />
     <PackageReference Update="AgileConfig.Client" Version="1.6.9" />

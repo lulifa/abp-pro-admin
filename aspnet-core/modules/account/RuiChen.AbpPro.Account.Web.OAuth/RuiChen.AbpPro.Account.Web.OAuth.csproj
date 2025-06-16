@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net9.0</TargetFramework>
@@ -8,5 +8,24 @@
     <OutputType>Library</OutputType>
     <IsPackable>true</IsPackable>
   </PropertyGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="wwwroot\**\*.js" />
+    <EmbeddedResource Include="wwwroot\**\*.css" />
+    <EmbeddedResource Include="wwwroot\**\*.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AspNet.Security.OAuth.Bilibili" />
+    <PackageReference Include="AspNet.Security.OAuth.GitHub" />
+    <PackageReference Include="AspNet.Security.OAuth.QQ" />
+    <PackageReference Include="AspNet.Security.OAuth.Weixin" />
+    <PackageReference Include="AspNet.Security.OAuth.WorkWeixin" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\RuiChen.AbpPro.Account.OAuth\RuiChen.AbpPro.Account.OAuth.csproj" />
+    <ProjectReference Include="..\RuiChen.AbpPro.Account.Web\RuiChen.AbpPro.Account.Web.csproj" />
+  </ItemGroup>
 
 </Project>
