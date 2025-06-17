@@ -21,6 +21,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\account\RuiChen.AbpPro.Account.Application.Contracts\RuiChen.AbpPro.Account.Application.Contracts.csproj" />
+    <ProjectReference Include="..\..\account\RuiChen.AbpPro.Account.OAuth\RuiChen.AbpPro.Account.OAuth.csproj" />
     <ProjectReference Include="..\..\identity\RuiChen.AbpPro.Identity.Domain.Shared\RuiChen.AbpPro.Identity.Domain.Shared.csproj" />
     <ProjectReference Include="..\RuiChen.AbpPro.SettingManagement.Application.Contracts\RuiChen.AbpPro.SettingManagement.Application.Contracts.csproj" />
   </ItemGroup>

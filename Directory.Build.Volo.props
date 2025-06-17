@@ -19,7 +19,7 @@
     <PackageReference Update="Volo.Abp.AspNetCore.Mvc.Contracts" Version="$(VoloAbpPackageVersion)" />
     <PackageReference Update="Volo.Abp.AspNetCore.Mvc.NewtonsoftJson" Version="$(VoloAbpPackageVersion)" />
     <PackageReference Update="Volo.Abp.AspNetCore.Mvc.UI.MultiTenancy" Version="$(VoloAbpPackageVersion)" />
-    <PackageReference Update="Volo.Abp.AspNetCore.Mvc.UI.Theme.Basic" Version="$(VoloAbpPackageVersion)" />
+    <!--<PackageReference Update="Volo.Abp.AspNetCore.Mvc.UI.Theme.Basic" Version="$(VoloAbpPackageVersion)" />-->
     <PackageReference Update="Volo.Abp.AspNetCore.Mvc.UI.Theme.LeptonXLite" Version="4.1.0" />
     <PackageReference Update="Volo.Abp.AspNetCore.Serilog" Version="$(VoloAbpPackageVersion)" />
     <PackageReference Update="Volo.Abp.AspNetCore.SignalR" Version="$(VoloAbpPackageVersion)" />
@@ -57,6 +57,7 @@
     <PackageReference Update="Volo.Abp.FeatureManagement.Domain.Shared" Version="$(VoloAbpPackageVersion)" />
     <PackageReference Update="Volo.Abp.FeatureManagement.EntityFrameworkCore" Version="$(VoloAbpPackageVersion)" />
     <PackageReference Update="Volo.Abp.FeatureManagement.HttpApi" Version="$(VoloAbpPackageVersion)" />
+    <PackageReference Update="Volo.Abp.FeatureManagement.Web" Version="$(VoloAbpPackageVersion)" />
     <PackageReference Update="Volo.Abp.Emailing" Version="$(VoloAbpPackageVersion)" />
     <PackageReference Update="Volo.Abp.EventBus" Version="$(VoloAbpPackageVersion)" />
     <PackageReference Update="Volo.Abp.EventBus.Abstractions" Version="$(VoloAbpPackageVersion)" />
@@ -73,6 +74,7 @@
     <PackageReference Update="Volo.Abp.Identity.Domain.Shared" Version="$(VoloAbpPackageVersion)" />
     <PackageReference Update="Volo.Abp.Identity.EntityFrameworkCore" Version="$(VoloAbpPackageVersion)" />
     <PackageReference Update="Volo.Abp.Identity.HttpApi" Version="$(VoloAbpPackageVersion)" />
+    <PackageReference Update="Volo.Abp.Identity.Web" Version="$(VoloAbpPackageVersion)" />
     <PackageReference Update="Volo.Abp.IdentityServer.Application" Version="$(VoloAbpPackageVersion)" />
     <PackageReference Update="Volo.Abp.IdentityServer.Application.Contracts" Version="$(VoloAbpPackageVersion)" />
     <PackageReference Update="Volo.Abp.IdentityServer.Domain" Version="$(VoloAbpPackageVersion)" />
@@ -104,6 +106,7 @@
     <PackageReference Update="Volo.Abp.PermissionManagement.Domain.Shared" Version="$(VoloAbpPackageVersion)" />
     <PackageReference Update="Volo.Abp.PermissionManagement.EntityFrameworkCore" Version="$(VoloAbpPackageVersion)" />
     <PackageReference Update="Volo.Abp.PermissionManagement.HttpApi" Version="$(VoloAbpPackageVersion)" />
+    <PackageReference Update="Volo.Abp.PermissionManagement.Web" Version="$(VoloAbpPackageVersion)" />
     <PackageReference Update="Volo.Abp.Quartz" Version="$(VoloAbpPackageVersion)" />
     <PackageReference Update="Volo.Abp.Security" Version="$(VoloAbpPackageVersion)" />
     <PackageReference Update="Volo.Abp.Settings" Version="$(VoloAbpPackageVersion)" />
@@ -113,6 +116,7 @@
     <PackageReference Update="Volo.Abp.SettingManagement.Domain.Shared" Version="$(VoloAbpPackageVersion)" />
     <PackageReference Update="Volo.Abp.SettingManagement.EntityFrameworkCore" Version="$(VoloAbpPackageVersion)" />
     <PackageReference Update="Volo.Abp.SettingManagement.HttpApi" Version="$(VoloAbpPackageVersion)" />
+    <PackageReference Update="Volo.Abp.SettingManagement.Web" Version="$(VoloAbpPackageVersion)" />
     <PackageReference Update="Volo.Abp.Swashbuckle" Version="$(VoloAbpPackageVersion)" />
     <PackageReference Update="Volo.Abp.Sms" Version="$(VoloAbpPackageVersion)" />
     <PackageReference Update="Volo.Abp.TestBase" Version="$(VoloAbpPackageVersion)" />
@@ -125,5 +129,6 @@
     <PackageReference Update="Volo.Abp.Users.Domain.Shared" Version="$(VoloAbpPackageVersion)" />
     <PackageReference Update="Volo.Abp.Validation" Version="$(VoloAbpPackageVersion)" />
     <PackageReference Update="Volo.Abp.VirtualFileSystem" Version="$(VoloAbpPackageVersion)" />
+    <PackageReference Update="Volo.Abp.VirtualFileExplorer.Web" Version="$(VoloAbpPackageVersion)" />
   </ItemGroup>
 </Project>

@@ -20,11 +20,16 @@ using Volo.Abp.AspNetCore.MultiTenancy;
 using Volo.Abp.AspNetCore.Mvc.UI.Theme.LeptonXLite;
 using Volo.Abp.AspNetCore.Serilog;
 using Volo.Abp.Autofac;
+using Volo.Abp.FeatureManagement;
 using Volo.Abp.FeatureManagement.EntityFrameworkCore;
+using Volo.Abp.Identity.Web;
 using Volo.Abp.Modularity;
 using Volo.Abp.OpenIddict.EntityFrameworkCore;
 using Volo.Abp.PermissionManagement.EntityFrameworkCore;
+using Volo.Abp.PermissionManagement.Web;
 using Volo.Abp.SettingManagement.EntityFrameworkCore;
+using Volo.Abp.SettingManagement.Web;
+using Volo.Abp.VirtualFileExplorer.Web;
 
 namespace RuiChen.Admin.HttpApi.Host
 {
@@ -42,14 +47,18 @@ namespace RuiChen.Admin.HttpApi.Host
         typeof(AbpCachingManagementApplicationModule),
 
 
-        typeof(AbpFeatureManagementHttpApiModule),
-        typeof(AbpFeatureManagementApplicationModule),
+        typeof(AbpPro.FeatureManagement.AbpFeatureManagementHttpApiModule),
+        typeof(AbpPro.FeatureManagement.AbpFeatureManagementApplicationModule),
         typeof(AbpFeatureManagementEntityFrameworkCoreModule),
+        // 功能管理模块 Mvc视图
+        typeof(AbpFeatureManagementWebModule),
 
 
         typeof(AbpIdentityHttpApiModule),
         typeof(AbpIdentityApplicationModule),
         typeof(AbpIdentityEntityFrameworkCoreModule),
+        // 身份认证模块 Mvc视图
+        typeof(AbpIdentityWebModule),
 
 
         typeof(AbpOpenIddictHttpApiModule),
@@ -64,6 +73,8 @@ namespace RuiChen.Admin.HttpApi.Host
         typeof(AbpPermissionManagementHttpApiModule),
         typeof(AbpPermissionManagementApplicationModule),
         typeof(AbpPermissionManagementEntityFrameworkCoreModule),
+        // 权限管理模块 Mvc视图
+        typeof(AbpPermissionManagementWebModule),
 
 
         typeof(AbpSaasHttpApiModule),
@@ -79,6 +90,8 @@ namespace RuiChen.Admin.HttpApi.Host
         typeof(AbpSettingManagementHttpApiModule),
         typeof(AbpSettingManagementApplicationModule),
         typeof(AbpSettingManagementEntityFrameworkCoreModule),
+        // 设置管理模块 Mvc视图
+        typeof(AbpSettingManagementWebModule),
 
 
         typeof(AbpAspNetCoreMvcWrapperModule),
@@ -86,6 +99,8 @@ namespace RuiChen.Admin.HttpApi.Host
         typeof(AbpAspNetCoreMvcUiLeptonXLiteThemeModule),
         typeof(RuiChenMigrationEntityFrameworkCoreModule),
 
+        // 虚拟文件浏览器 Mvc视图
+        typeof(AbpVirtualFileExplorerWebModule),
         typeof(AbpLocalizationCultureMapModule),
         typeof(AbpAspNetCoreMultiTenancyModule),
         typeof(AbpAspNetCoreSerilogModule),

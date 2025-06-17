@@ -1,50 +1,49 @@
-﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+﻿using Medallion.Threading;
+using Medallion.Threading.Redis;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Cors;
+using Microsoft.AspNetCore.Extensions.DependencyInjection;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Server.Kestrel.Core;
+using Microsoft.Extensions.Caching.StackExchangeRedis;
 using Microsoft.OpenApi.Models;
+using OpenIddict.Server;
 using OpenIddict.Server.AspNetCore;
+using OpenIddict.Validation.AspNetCore;
+using RuiChen.AbpPro.Identity;
+using RuiChen.AbpPro.Localization;
+using RuiChen.AbpPro.Openiddict;
 using RuiChen.AbpPro.OpenIddict;
 using RuiChen.AbpPro.Saas;
 using RuiChen.AbpPro.Wrapper;
+using RuiChen.Admin.HttpApi.Host.Bundling;
+using StackExchange.Redis;
 using System.Text.Encodings.Web;
 using System.Text.Unicode;
+using Volo.Abp;
+using Volo.Abp.AspNetCore.Mvc.AntiForgery;
+using Volo.Abp.AspNetCore.Mvc.Libs;
+using Volo.Abp.AspNetCore.Mvc.UI.Bundling;
+using Volo.Abp.AspNetCore.Mvc.UI.Theme.Shared.Bundling;
 using Volo.Abp.Auditing;
 using Volo.Abp.Authorization.Permissions;
+using Volo.Abp.BlobStoring;
+using Volo.Abp.BlobStoring.FileSystem;
+using Volo.Abp.Caching;
 using Volo.Abp.EntityFrameworkCore;
 using Volo.Abp.FeatureManagement;
 using Volo.Abp.Features;
 using Volo.Abp.GlobalFeatures;
-using Volo.Abp.Json.SystemTextJson;
 using Volo.Abp.Json;
+using Volo.Abp.Json.SystemTextJson;
 using Volo.Abp.Localization;
 using Volo.Abp.MultiTenancy;
 using Volo.Abp.PermissionManagement;
+using Volo.Abp.Security.Claims;
 using Volo.Abp.SettingManagement;
 using Volo.Abp.Threading;
-using Volo.Abp.VirtualFileSystem;
 using Volo.Abp.Timing;
-using Volo.Abp;
-using RuiChen.AbpPro.Localization;
-using Volo.Abp.AspNetCore.Mvc.UI.Bundling;
-using Volo.Abp.AspNetCore.Mvc.Libs;
-using Volo.Abp.AspNetCore.Mvc.AntiForgery;
-using Microsoft.AspNetCore.Extensions.DependencyInjection;
-using OpenIddict.Validation.AspNetCore;
-using StackExchange.Redis;
-using Medallion.Threading;
-using Medallion.Threading.Redis;
-using Microsoft.Extensions.Caching.StackExchangeRedis;
-using Volo.Abp.Caching;
-using Volo.Abp.BlobStoring;
-using Volo.Abp.BlobStoring.FileSystem;
-using OpenIddict.Server;
-using RuiChen.AbpPro.Openiddict;
-using Microsoft.AspNetCore.Identity;
-using RuiChen.AbpPro.Identity;
-using Volo.Abp.Security.Claims;
-using Microsoft.Extensions.DependencyInjection.Extensions;
-using Volo.Abp.AspNetCore.Mvc;
-using Volo.Abp.Sms;
+using Volo.Abp.VirtualFileSystem;
 
 namespace RuiChen.Admin.HttpApi.Host
 {
@@ -329,7 +328,7 @@ namespace RuiChen.Admin.HttpApi.Host
 
             Configure<AbpMvcLibsOptions>(options =>
             {
-                options.CheckLibs = false;
+                options.CheckLibs = true;
             });
         }
 
@@ -485,6 +484,15 @@ namespace RuiChen.Admin.HttpApi.Host
             {
                 // abp 9.0版本可存储登录IP地域, 开启IP解析
                 options.IsParseIpLocation = true;
+            });
+
+            Configure<AbpBundlingOptions>(options =>
+            {
+                options.ScriptBundles
+                    .Configure(StandardBundles.Styles.Global, bundle =>
+                    {
+                        bundle.AddContributors(typeof(SingleGlobalScriptContributor));
+                    });
             });
         }
 

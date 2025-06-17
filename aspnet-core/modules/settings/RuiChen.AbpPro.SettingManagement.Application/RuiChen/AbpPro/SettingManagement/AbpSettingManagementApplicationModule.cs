@@ -1,4 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using RuiChen.AbpPro.Account;
+using RuiChen.AbpPro.Account.OAuth;
 using Volo.Abp.Application;
 using Volo.Abp.Localization;
 using Volo.Abp.Modularity;
@@ -10,10 +12,12 @@ using VoloAbpSettingManagementApplicationContractsModule = Volo.Abp.SettingManag
 namespace RuiChen.AbpPro.SettingManagement
 {
     [DependsOn(
-        typeof(VoloAbpSettingManagementApplicationContractsModule),
-        typeof(AbpDddApplicationModule),
         typeof(AbpSettingManagementDomainModule),
-        typeof(AbpSettingManagementApplicationContractsModule)
+        typeof(AbpSettingManagementApplicationContractsModule),
+        typeof(VoloAbpSettingManagementApplicationContractsModule),
+        typeof(AbpAccountApplicationContractsModule),
+        typeof(AbpAccountOAuthModule),
+        typeof(AbpDddApplicationModule)
         )]
     public class AbpSettingManagementApplicationModule : AbpModule
     {
@@ -28,7 +32,9 @@ namespace RuiChen.AbpPro.SettingManagement
 
             Configure<AbpLocalizationOptions>(options =>
             {
-                options.Resources.Get<AbpSettingManagementResource>().AddVirtualJson("/RuiChen/AbpPro/SettingManagement/Localization/Resources");
+                options.Resources.Get<AbpSettingManagementResource>()
+                       .AddVirtualJson("/RuiChen/AbpPro/SettingManagement/Localization/Resources")
+                       .AddBaseTypes(typeof(AccountOAuthResource));
             });
 
         }

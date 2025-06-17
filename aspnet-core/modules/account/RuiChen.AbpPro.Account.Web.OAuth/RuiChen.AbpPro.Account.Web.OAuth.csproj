@@ -13,6 +13,9 @@
     <EmbeddedResource Include="wwwroot\**\*.js" />
     <EmbeddedResource Include="wwwroot\**\*.css" />
     <EmbeddedResource Include="wwwroot\**\*.png" />
+    <Content Remove="wwwroot\**\*.js" />
+    <Content Remove="wwwroot\**\*.css" />
+    <Content Remove="wwwroot\**\*.png" />
   </ItemGroup>
 
   <ItemGroup>

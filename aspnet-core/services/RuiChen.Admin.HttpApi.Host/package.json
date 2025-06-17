@@ -1,0 +1,9 @@
+{
+  "version": "9.1.0",
+  "name": "my-app-single",
+  "private": true,
+  "dependencies": {
+    "@abp/aspnetcore.mvc.ui.theme.leptonxlite": "4.1.0",
+    "@abp/qrcode": "9.1.0"
+  }
+}

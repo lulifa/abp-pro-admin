@@ -16,6 +16,11 @@
     <PackageReference Include="Swashbuckle.AspNetCore" />
     <PackageReference Include="Volo.Abp.AspNetCore.Serilog" />
     <PackageReference Include="Volo.Abp.AspNetCore.Authentication.JwtBearer" />
+    <PackageReference Include="Volo.Abp.FeatureManagement.Web" />
+    <PackageReference Include="Volo.Abp.PermissionManagement.Web" />
+    <PackageReference Include="Volo.Abp.SettingManagement.Web" />
+    <PackageReference Include="Volo.Abp.Identity.Web" />
+    <PackageReference Include="Volo.Abp.VirtualFileExplorer.Web" />
   </ItemGroup>
 
 
