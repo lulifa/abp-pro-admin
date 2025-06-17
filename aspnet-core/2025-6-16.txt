@@ -14,3 +14,6 @@ dotnet sln RuiChen.AbpPro.sln add  modules/account/RuiChen.AbpPro.Account.Web.Op
 
 dotnet new classlib -o modules/identity/RuiChen.AbpPro.Identity.QrCode
 dotnet sln RuiChen.AbpPro.sln add  modules/identity/RuiChen.AbpPro.Identity.QrCode
+
+dotnet new classlib -o modules/identity/RuiChen.AbpPro.Identity.AspNetCore.QrCode
+dotnet sln RuiChen.AbpPro.sln add  modules/identity/RuiChen.AbpPro.Identity.AspNetCore.QrCode
