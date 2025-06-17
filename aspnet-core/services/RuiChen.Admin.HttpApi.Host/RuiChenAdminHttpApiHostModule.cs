@@ -17,7 +17,7 @@ using RuiChen.AbpPro.SettingManagement;
 using RuiChen.Platform;
 using Volo.Abp;
 using Volo.Abp.AspNetCore.MultiTenancy;
-using Volo.Abp.AspNetCore.Mvc.UI.Theme.Basic;
+using Volo.Abp.AspNetCore.Mvc.UI.Theme.LeptonXLite;
 using Volo.Abp.AspNetCore.Serilog;
 using Volo.Abp.Autofac;
 using Volo.Abp.FeatureManagement.EntityFrameworkCore;
@@ -83,7 +83,7 @@ namespace RuiChen.Admin.HttpApi.Host
 
         typeof(AbpAspNetCoreMvcWrapperModule),
         typeof(AbpAspNetCoreHttpOverridesModule),
-        typeof(AbpAspNetCoreMvcUiBasicThemeModule),
+        typeof(AbpAspNetCoreMvcUiLeptonXLiteThemeModule),
         typeof(RuiChenMigrationEntityFrameworkCoreModule),
 
         typeof(AbpLocalizationCultureMapModule),

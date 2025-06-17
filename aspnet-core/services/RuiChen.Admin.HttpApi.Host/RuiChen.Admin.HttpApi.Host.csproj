@@ -69,7 +69,7 @@
     <ProjectReference Include="..\..\modules\settings\RuiChen.AbpPro.SettingManagement.Application\RuiChen.AbpPro.SettingManagement.Application.csproj" />
     <PackageReference Include="Volo.Abp.SettingManagement.EntityFrameworkCore" />
 
-    <PackageReference Include="Volo.Abp.AspNetCore.Mvc.UI.Theme.Basic" />
+    <PackageReference Include="Volo.Abp.AspNetCore.Mvc.UI.Theme.LeptonXLite" />
     <ProjectReference Include="..\..\framework\wrap\RuiChen.AbpPro.AspNetCore.Mvc.Wrapper\RuiChen.AbpPro.AspNetCore.Mvc.Wrapper.csproj" />
     <ProjectReference Include="..\..\framework\common\RuiChen.AbpPro.AspNetCore.HttpOverrides\RuiChen.AbpPro.AspNetCore.HttpOverrides.csproj" />
 

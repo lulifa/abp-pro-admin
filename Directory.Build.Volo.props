@@ -1,7 +1,6 @@
 ﻿<Project>
 
   <ItemGroup>
-    <PackageReference Update="Volo.Abp.AspNetCore.Mvc.UI.Theme.LeptonXLite" Version="3.0.5" />
     <PackageReference Update="Volo.Abp.Core" Version="$(VoloAbpPackageVersion)" />
     <PackageReference Update="Volo.Abp.Account.Application" Version="$(VoloAbpPackageVersion)" />
     <PackageReference Update="Volo.Abp.Account.Application.Contracts" Version="$(VoloAbpPackageVersion)" />
@@ -21,6 +20,7 @@
     <PackageReference Update="Volo.Abp.AspNetCore.Mvc.NewtonsoftJson" Version="$(VoloAbpPackageVersion)" />
     <PackageReference Update="Volo.Abp.AspNetCore.Mvc.UI.MultiTenancy" Version="$(VoloAbpPackageVersion)" />
     <PackageReference Update="Volo.Abp.AspNetCore.Mvc.UI.Theme.Basic" Version="$(VoloAbpPackageVersion)" />
+    <PackageReference Update="Volo.Abp.AspNetCore.Mvc.UI.Theme.LeptonXLite" Version="4.1.0" />
     <PackageReference Update="Volo.Abp.AspNetCore.Serilog" Version="$(VoloAbpPackageVersion)" />
     <PackageReference Update="Volo.Abp.AspNetCore.SignalR" Version="$(VoloAbpPackageVersion)" />
     <PackageReference Update="Volo.Abp.AspNetCore.TestBase" Version="$(VoloAbpPackageVersion)" />
