@@ -5,11 +5,11 @@
 
   <PropertyGroup>
     <LangVersion>latest</LangVersion>
-    <Version>9.1.1</Version>
+    <Version>9.2.0</Version>
     <Authors>lulifa</Authors>
     <NoWarn>$(NoWarn);CS1591;CS0436;CS8618;NU1803</NoWarn>
     <PackageProjectUrl>https://github.com/lulifa/abp-pro-admin</PackageProjectUrl>
-    <PackageVersion>9.1.1</PackageVersion>
+    <PackageVersion>9.2.0</PackageVersion>
     <PackageIcon>icon.png</PackageIcon>
     <PackageReadmeFile>package-readme.md</PackageReadmeFile>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
